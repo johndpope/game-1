@@ -1,0 +1,163 @@
+{
+  "weapon": [
+    {
+      "name":"10방검",
+      "weaponATK":5,
+      "weaponPrice":100,
+      "weaponDurability":10,
+	  "weaponExplain":"10번 일반 공격 가능"
+    },
+     {
+      "name":"50방검",
+      "weaponATK":50,
+      "weaponPrice":500,
+      "weaponDurability":50,
+	  "weaponExplain":"50번 일반 공격 가능"
+    },
+     {
+      "name":"3방검",
+      "weaponATK":500,
+      "weaponPrice":1000,
+      "weaponDurability":3,
+	  "weaponExplain":"3번 일반 공격 가능"
+    }
+  ],
+  "armor": [
+    {
+      "name":"갑옷",
+      "armorDef":1,
+      "armorPrice":100
+    },
+    {
+      "name":"고급갑옷",
+      "armorDef":2,
+      "armorPrice":300
+    },
+    {
+      "name":"최고급갑옷",
+      "armorDef":3,
+      "armorPrice":500
+    }
+    ],
+    "boots":[
+      {
+        "name":"부츠",
+        "bootsSpd":1.0,
+        "bootsPrice": 100
+      },
+      {
+        "name":"레아부츠",
+        "bootsSpd":1.0,
+        "bootsPrice": 100
+      },
+      {
+        "name":"우니크부츠",
+        "bootsSpd":1.0,
+        "bootsPrice": 100
+      }
+     ],
+    "potion":[
+      {
+        "name":"하급회복포션",
+        "hpUp":20,
+        "potionPrice": 50
+      },
+      {
+        "name":"상급회복포션",
+        "hpUp":50,
+        "potionPrice": 100
+      },
+      {
+        "name":"돌가죽물약",
+        "DefUp":2,
+        "potionPrice": 50
+      },
+      {
+        "name":"신속의물약",
+        "SpdUp":2,
+        "potionPrice": 50
+      }
+    ],
+    "skillScroll": [
+      {
+        "name":"강격",
+        "atk:":1.5,
+        "ScrollPrice": 100
+      },
+      {
+        "name":"회전베기",
+        "atk:":0.9,
+        "ScrollPrice": 100
+      },
+      {
+        "name":"무자비한돌진",
+        "atk:":0.5,
+        "stun":3,
+        "ScrollPrice": 150
+      },
+      {
+        "name":"가르기",
+        "atk:":0.5,
+        "defDown":0.5,
+        "ScrollPrice": 200
+      },
+      {
+        "name":"얼음화살",
+        "atk:":1.0,
+        "spdDown":0.5,
+        "ScrollPrice": 200
+      },
+      {
+        "name":"화염구",
+        "atk:":2.0,
+        "ScrollPrice": 250
+      },
+      {
+        "name":"불기둥",
+        "atk:":1.2,
+        "ScrollPrice": 300
+      },
+      {
+        "name":"대지의화살",
+        "atk:":0.5,
+        "atkDown":0.5,
+        "ScrollPrice":200
+      },
+      {
+        "name":"고대의치유서",
+        "hpUp":0.3,
+        "ScrollPrice":400
+      },
+      {
+        "name":"힘의스크롤",
+        "atkUp:":0.3,
+        "ScrollPrice": 100
+      },
+      {
+        "name":"인내의스크롤",
+        "defUp:":0.3,
+        "ScrollPrice": 100
+      },
+      {
+        "name":"신속의스크롤",
+        "spdUp:":2,
+        "ScrollPrice": 100
+      },
+      {
+        "name":"기원의서",
+        "atkUp:":0.2,
+        "defUp:":0.2,
+        "spdUp:":2,
+        "ScrollPrice": 300
+      },
+      {
+        "name":"광폭의서",
+        "atkUp:":3,
+        "defDown":3,
+        "ScrollPrice": 250
+      }
+      
+    ]
+}
+
+
