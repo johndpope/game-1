@@ -142,11 +142,11 @@ public class Inven : MonoBehaviour
                 break;
             case 1:
                 weaponSet(num);
-                ynPop.SetActive(false);
+                //ynPop.SetActive(false);
                 break;
             case 2:
                 weaponSet(num);
-                ynPop.SetActive(false);
+                //ynPop.SetActive(false);
                 break;
         }
     }

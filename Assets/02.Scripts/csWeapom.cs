@@ -39,6 +39,7 @@ public class csWeapom : MonoBehaviour
             else if (gameObject.name == "Weapon3"+i)
             {
                 _useWeapon(2);
+                StateManager.Instance.bagNum = i;
 
             }
         }
@@ -61,6 +62,13 @@ public class csWeapom : MonoBehaviour
 
                 itemUsePopBool = true;
                 weaponNum = 1;
+                break;
+
+            case 2:
+                Debug.Log("클릭됨     50");
+
+                itemUsePopBool = true;
+                weaponNum = 2;
                 break;
         }
     }

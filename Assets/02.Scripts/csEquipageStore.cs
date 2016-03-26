@@ -275,6 +275,19 @@ public class csEquipageStore : MonoBehaviour
 
                 }
                 break;
+            case 3:
+                for (wNum = 0; wNum < 5; wNum++)
+                {
+                    if (StateManager.Instance.weaponSpace[wNum] == null)
+                    {
+                        gameObj.name = "Weapon3" + wNum;
+                        StateManager.Instance.weaponDurability[wNum] = item.Durability;
+                        StateManager.Instance.weaponSpace[wNum] = gameObj;
+                        return;
+                    }
+
+                }
+                break;
         }
         //wNum++;
     }
@@ -345,15 +358,5 @@ public class csEquipageStore : MonoBehaviour
                 return;
             }
         }
-        switch (itemIndex)
-        {
-            case 0:
-               
-                break;
-            case 1:
-             
-                break;
-        }
-        //wNum++;
     }
 }
