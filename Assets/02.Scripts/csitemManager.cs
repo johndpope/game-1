@@ -73,12 +73,21 @@ class MagicItem : HMItem
 public class csitemManager : MonoBehaviour
 {
     public TextAsset textAsset;
-    private ArrayList potionItems;
+
+    public GameObject itemPool;
+
+    public GameObject itemGrid;
+
+    public GameObject itemNameText;
+    public GameObject itemExplainText;
+    public GameObject itemPriceText;
+    public GameObject itemImageText;
+    public GameObject itemCutText;
 
     void Start()
     {
 
-        potionItems = new ArrayList();
+        StateManager.Instance.potionItems = new ArrayList();
         StateManager.Instance.skillScrollItems = new ArrayList();
         //StateManager.Instance.magicScrollItems = new ArrayList();
         //StateManager.Instance.buffScrollItems = new ArrayList();
@@ -108,7 +117,7 @@ public class csitemManager : MonoBehaviour
                 potionItem.Image = image;
                 potionItem.Explain = explain;
 
-                potionItems.Add(potionItem);
+                StateManager.Instance.potionItems.Add(potionItem);
             }
 
             foreach (Hashtable itemInfo in itemInfosS)
@@ -128,8 +137,6 @@ public class csitemManager : MonoBehaviour
                 skillItem.Image = image;
                 skillItem.Explain = explain;
                 StateManager.Instance.skillScrollItems.Add(skillItem);
-                Debug.Log(skillItem.Name);
-                Debug.Log(skillItem.SpecialAbility);
             }
         }
 
