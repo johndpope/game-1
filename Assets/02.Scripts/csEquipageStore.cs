@@ -179,7 +179,6 @@ public class csEquipageStore : MonoBehaviour
     void Update()
     {
         playerGoldText.GetComponent<Text>().text = ": " + playerGold;
-        StateManager.Instance.playGold = playerGold;
     }
 
     public void equipageWeapon()
@@ -222,11 +221,13 @@ public class csEquipageStore : MonoBehaviour
             if (num >= 0 && num <= 2)
             {
                 playerGold -= (num + 1) * 100;
+                StateManager.Instance.playGold = playerGold;
                 this._itemWeapon(weaponSetObj, num, weaponPoolSet[num].name);
             }
             else if (num >= 3 && num <= 5)
             {
                 playerGold -= ((num * 2) + 1) * 100;
+                StateManager.Instance.playGold = playerGold;
                 this._itemWeapon(weaponSetObj, num, weaponPoolSet[num].name);
             }
 
@@ -242,7 +243,7 @@ public class csEquipageStore : MonoBehaviour
 
     private void _itemWeapon(GameObject gameObj, int itemIndex, String weaponName)
     {
-        if(StateManager.Instance.bagSize == 6)
+        if (StateManager.Instance.bagSize == 6)
         {
             return;
         }
@@ -256,18 +257,18 @@ public class csEquipageStore : MonoBehaviour
         gameObj.transform.SetParent(grid.transform);
         gameObj.transform.localScale = new Vector3(1, 1, 1);
 
-       
-                for (wNum = 0; wNum < 5; wNum++)
-                {
-                    if (StateManager.Instance.weaponSpace[wNum] == null)
-                    {
-                        gameObj.name = weaponName + wNum;
-                        StateManager.Instance.weaponDurability[wNum] = item.Durability;
-                        StateManager.Instance.weaponSpace[wNum] = gameObj;
-                        return;
-                    }
-                }
-           
+
+        for (wNum = 0; wNum < 5; wNum++)
+        {
+            if (StateManager.Instance.weaponSpace[wNum] == null)
+            {
+                gameObj.name = weaponName + wNum;
+                StateManager.Instance.weaponDurability[wNum] = item.Durability;
+                StateManager.Instance.weaponSpace[wNum] = gameObj;
+                return;
+            }
+        }
+
     }
 
     private void _setupWeapon(int itemIndex)
