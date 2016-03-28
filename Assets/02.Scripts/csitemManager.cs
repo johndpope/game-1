@@ -78,13 +78,15 @@ public class csitemManager : MonoBehaviour
 
     public GameObject itemGrid;
 
+    GameObject[] itemPoolSet = new GameObject[15];
+
     public GameObject itemNameText;
     public GameObject itemExplainText;
     public GameObject itemPriceText;
     public GameObject itemImageText;
     public GameObject itemCutText;
 
-    void Start()
+    void LoadAssetfromJson()
     {
 
         StateManager.Instance.potionItems = new ArrayList();
@@ -141,9 +143,48 @@ public class csitemManager : MonoBehaviour
         }
 
     }
-	
-	void Update ()
+
+    void Start()
+    {
+        LoadAssetfromJson();
+        for (int i = 0; i < 3; i++)
+        {
+
+            this._setupPontion(i);
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            //this._setupWeapon(i);
+        }
+    }
+
+    void Update ()
     {
 	    
 	}
+
+    private void _setupPontion(int itemIndex)
+    {
+        HMWeaponItem item = (HMWeaponItem)StateManager.Instance.potionItems[itemIndex];
+        itemPriceText.GetComponent<Text>().text = item.Price.ToString() + "\n" + "골드";
+        itemNameText.GetComponent<Text>().text = "이름: " + item.Name + "\n" + "설명: " + item.Explain + "\n" + "공격력: " + item.AttackPoint.ToString();
+        itemPoolSet[itemIndex] = Instantiate(itemPool) as GameObject;
+
+        itemPoolSet[itemIndex].transform.SetParent(itemGrid.transform);
+        itemPoolSet[itemIndex].transform.localScale = new Vector3(1, 1, 1);
+
+        itemPoolSet[itemIndex].name = "Weapon" + (10 * itemIndex + 10);
+        //itemPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClickWeaponButton(itemIndex); });
+
+        if (itemIndex == 4)
+        {
+            itemPoolSet[itemIndex].name = "Weapon" + 55;
+        }
+
+        if (itemIndex == 5)
+        {
+            itemPoolSet[itemIndex].name = "Weapon" + 3;
+        }
+        itemPoolSet[itemIndex].SetActive(false);
+    }
 }
