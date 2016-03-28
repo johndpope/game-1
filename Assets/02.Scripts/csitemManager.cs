@@ -57,17 +57,51 @@ class MagicItem : HMItem
         set { mAtkDownPoint = value; }
     }
 }
-//제으슨 파일 수정수 할것
-//class BuffItem : HMItem
-//{
-//    private int mUpPoint;
 
-//    public int UpPoint
-//    {
-//        get { return mUpPoint; }
-//        set { mUpPoint = value; }
-//    }
-//}
+class BuffItem : HMItem
+{
+    private float mHpUp_Mul;
+    private bool mRestoration;
+    private float mAtkUp;
+    private float mDefUp;
+    private float mSpdUp;
+    private float mDefDown;
+
+    public float HpUp_Mul
+    {
+        get { return mHpUp_Mul; }
+        set { mHpUp_Mul = value; }
+    }
+    public bool Restoration
+    {
+        get { return mRestoration; }
+        set { mRestoration = value; }
+    }
+    public float AtkUp
+    {
+        get { return mAtkUp; }
+        set { mAtkUp = value; }
+    }
+    public float DefUp
+    {
+        get { return mDefUp; }
+        set { mDefUp = value; }
+
+    }
+    public float SpdUp
+    {
+        get { return mSpdUp; }
+        set { mSpdUp = value; }
+
+    }
+    public float DefDown
+    {
+        get { return mDefDown; }
+        set { mDefDown = value; }
+
+    }
+}
+
 
 
 public class csitemManager : MonoBehaviour
@@ -91,8 +125,8 @@ public class csitemManager : MonoBehaviour
 
         StateManager.Instance.potionItems = new ArrayList();
         StateManager.Instance.skillScrollItems = new ArrayList();
-       // StateManager.Instance.magicScrollItems = new ArrayList();
-        //StateManager.Instance.buffScrollItems = new ArrayList();
+        StateManager.Instance.magicScrollItems = new ArrayList();
+        StateManager.Instance.buffScrollItems = new ArrayList();
 
         Hashtable itemTable = (Hashtable)HMJson.objectFromJsonString(textAsset.text);
 
@@ -100,8 +134,8 @@ public class csitemManager : MonoBehaviour
         {
             ArrayList itemInfosP = (ArrayList)itemTable["potion"];         //포션 ArrayList
             ArrayList itemInfosS = (ArrayList)itemTable["skillScroll"];   //기술 ArrayList
-            //ArrayList itemInfosM = (ArrayList)itemTable["magicScroll"];   //마법 ArrayList
-            //ArrayList itemInfosB = (ArrayList)itemTable["buffScroll"];    //보조 ArrayList
+            ArrayList itemInfosM = (ArrayList)itemTable["magicScroll"];   //마법 ArrayList
+            ArrayList itemInfosB = (ArrayList)itemTable["buffScroll"];    //보조 ArrayList
             //Debug.Log("[Item " + itemName + "]" + "\n");
 
             foreach (Hashtable itemInfo in itemInfosP)
@@ -141,43 +175,54 @@ public class csitemManager : MonoBehaviour
                 StateManager.Instance.skillScrollItems.Add(skillItem);
             }
 
-            //foreach (Hashtable itemInfo in itemInfosM)
-            //{
-            //    String name = (String)itemInfo["name"];
-            //    String price = (String)itemInfo["price"];
-            //    String atkPoint = (String)itemInfo["atk"];
-            //    String specialAbility = (String)itemInfo["specialAbility"];
-            //    String image = (String)itemInfo["skillScrollImage"];
-            //    String explain = (String)itemInfo["Explain"];
+            foreach (Hashtable itemInfo in itemInfosM)
+            {
+                String name = (String)itemInfo["name"];
+                String price = (String)itemInfo["price"];
+                String atkPoint = (String)itemInfo["atk"];
+                String spdDown = (String)itemInfo["spdDown"];
+                String atkDown = (String)itemInfo["atkDown"];
+                String image = (String)itemInfo["magicScrollImage"];
+                String explain = (String)itemInfo["Explain"];
 
-            //    SkillItem skillItem = new SkillItem();
-            //    skillItem.Name = name;
-            //    skillItem.Price = Int32.Parse(price);
-            //    skillItem.AttackUpPoint = float.Parse(atkPoint);
-            //    skillItem.SpecialAbility = float.Parse(specialAbility);
-            //    skillItem.Image = image;
-            //    skillItem.Explain = explain;
-            //    StateManager.Instance.skillScrollItems.Add(skillItem);
-            //}
+                MagicItem magicItem = new MagicItem();
+                magicItem.Name = name;
+                magicItem.Price = Int32.Parse(price);
+                magicItem.AttactPoint = float.Parse(atkPoint);
+                magicItem.AtkDownPoint = float.Parse(atkDown);
+                magicItem.SpdDownPoint = float.Parse(spdDown);
+                magicItem.Image = image;
+                magicItem.Explain = explain;
+                StateManager.Instance.magicScrollItems.Add(magicItem);
+            }
 
-            //foreach (Hashtable itemInfo in itemInfosB)
-            //{
-            //    String name = (String)itemInfo["name"];
-            //    String price = (String)itemInfo["price"];
-            //    String atkPoint = (String)itemInfo["atk"];
-            //    String specialAbility = (String)itemInfo["specialAbility"];
-            //    String image = (String)itemInfo["skillScrollImage"];
-            //    String explain = (String)itemInfo["Explain"];
+            foreach (Hashtable itemInfo in itemInfosB)
+            {
+                
+                String name = (String)itemInfo["name"];
+                String price = (String)itemInfo["price"];
+                String HpUp_Mul = (String)itemInfo["hpUp_Mul"];
+                String AtkUp = (String)itemInfo["atkUp"];
+                String DefUp = (String)itemInfo["defUp"];
+                String SpdUp = (String)itemInfo["spdUp"];
+                String DefDown = (String)itemInfo["defDown"];
+                String Restoration = (String)itemInfo["restoration"];
+                String image = (String)itemInfo["buffScrollImage"];
+                String explain = (String)itemInfo["Explain"];
 
-            //    SkillItem skillItem = new SkillItem();
-            //    skillItem.Name = name;
-            //    skillItem.Price = Int32.Parse(price);
-            //    skillItem.AttackUpPoint = float.Parse(atkPoint);
-            //    skillItem.SpecialAbility = float.Parse(specialAbility);
-            //    skillItem.Image = image;
-            //    skillItem.Explain = explain;
-            //    StateManager.Instance.skillScrollItems.Add(skillItem);
-            //}
+                BuffItem buffItem = new BuffItem();
+                buffItem.Name = name;
+                buffItem.Price = Int32.Parse(price);
+                buffItem.HpUp_Mul = float.Parse(HpUp_Mul);
+                buffItem.AtkUp = float.Parse(AtkUp);
+                buffItem.DefUp = float.Parse(DefUp);
+                buffItem.SpdUp = float.Parse(SpdUp);
+                buffItem.DefDown = float.Parse(DefDown);
+                buffItem.Restoration = bool.Parse(Restoration);
+                buffItem.Image = image;
+                buffItem.Explain = explain;
+                StateManager.Instance.buffScrollItems.Add(buffItem);
+            }
         }
 
     }
@@ -186,16 +231,9 @@ public class csitemManager : MonoBehaviour
     {
         LoadAssetfromJson();
 
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 19; i++)
         {
-           
                 this._setupPontion(i);
-         
-           
-        }
-        for (int i = 0; i < 6; i++)
-        {
-            //this._setupWeapon(i);
         }
     }
 
@@ -206,11 +244,23 @@ public class csitemManager : MonoBehaviour
 
     public void onPontion()
     {
-        for(int i=0; i<5; i++)
+        for (int i = 0; i < 5; i++)
         {
             itemPoolSet[i].SetActive(true);
         }
-        
+        for (int i = 5; i < 9; i++)
+        {
+            itemPoolSet[i].SetActive(false);
+        }
+
+        for (int i = 9; i < 13; i++)
+        {
+            itemPoolSet[i].SetActive(false);
+        }
+        for (int i = 13; i < 19; i++)
+        {
+            itemPoolSet[i].SetActive(false);
+        }
     }
 
     public void onSkill()
@@ -220,6 +270,57 @@ public class csitemManager : MonoBehaviour
             itemPoolSet[i].SetActive(false);
         }
         for (int i = 5; i < 9; i++)
+        {
+            itemPoolSet[i].SetActive(true);
+        }
+        for (int i = 9; i < 13; i++)
+        {
+            itemPoolSet[i].SetActive(false);
+        }
+        for (int i = 13; i < 19; i++)
+        {
+            itemPoolSet[i].SetActive(false);
+        }
+
+    }
+
+    public void onMagic()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            itemPoolSet[i].SetActive(false);
+        }
+        for (int i = 5; i < 9; i++)
+        {
+            itemPoolSet[i].SetActive(false);
+        }
+
+        for (int i = 9; i < 13; i++)
+        {
+            itemPoolSet[i].SetActive(true);
+        }
+        for (int i = 13; i < 19; i++)
+        {
+            itemPoolSet[i].SetActive(false);
+        }
+    }
+
+    public void onBuff()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            itemPoolSet[i].SetActive(false);
+        }
+        for (int i = 5; i < 9; i++)
+        {
+            itemPoolSet[i].SetActive(false);
+        }
+
+        for (int i = 9; i < 13; i++)
+        {
+            itemPoolSet[i].SetActive(false);
+        }
+        for (int i = 13; i < 19; i++)
         {
             itemPoolSet[i].SetActive(true);
         }
@@ -263,20 +364,34 @@ public class csitemManager : MonoBehaviour
             itemPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClockPotion(itemIndex); });
         }
 
-        //else if (itemIndex >= 9 && itemIndex <= 12)
-        //{
-        //    MagicItem item = (MagicItem)StateManager.Instance.skillScrollItems[itemIndex];
-        //    itemPriceText.GetComponent<Text>().text = item.Price.ToString() + "\n" + "골드";
-        //    itemNameText.GetComponent<Text>().text = "이 름: " + item.Name;
-        //    //itemExplainText.GetComponent<Text>().text = "설명: " + item.AttackUpPoint * 100 + "% 공 격 력 " + item.Explain;
-        //    itemPoolSet[itemIndex] = Instantiate(itemPool) as GameObject;
+        else if (itemIndex >= 9 && itemIndex <= 12)
+        {
+            MagicItem item = (MagicItem)StateManager.Instance.magicScrollItems[itemIndex];
+            itemPriceText.GetComponent<Text>().text = item.Price.ToString() + "\n" + "골드";
+            itemNameText.GetComponent<Text>().text = "이 름: " + item.Name;
+            itemExplainText.GetComponent<Text>().text = "설명: " + item.AttactPoint * 100 + "% 공 격 력 " + item.Explain;
+            itemPoolSet[itemIndex] = Instantiate(itemPool) as GameObject;
 
-        //    itemPoolSet[itemIndex].transform.SetParent(itemGrid.transform);
-        //    itemPoolSet[itemIndex].transform.localScale = new Vector3(1, 1, 1);
+            itemPoolSet[itemIndex].transform.SetParent(itemGrid.transform);
+            itemPoolSet[itemIndex].transform.localScale = new Vector3(1, 1, 1);
 
-        //    itemPoolSet[itemIndex].name = "SkillScroll" + (itemIndex + 1);
-        //    itemPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClockPotion(itemIndex); });
-        //}
+            itemPoolSet[itemIndex].name = "MagicScroll" + (itemIndex + 1);
+            itemPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClockPotion(itemIndex); });
+        }
+        else if (itemIndex >= 13 && itemIndex <= 18)
+        {
+            BuffItem item = (BuffItem)StateManager.Instance.buffScrollItems[itemIndex];
+            itemPriceText.GetComponent<Text>().text = item.Price.ToString() + "\n" + "골드";
+            itemNameText.GetComponent<Text>().text = "이 름: " + item.Name;
+            itemExplainText.GetComponent<Text>().text = "설명: " + item.Explain;
+            itemPoolSet[itemIndex] = Instantiate(itemPool) as GameObject;
+
+            itemPoolSet[itemIndex].transform.SetParent(itemGrid.transform);
+            itemPoolSet[itemIndex].transform.localScale = new Vector3(1, 1, 1);
+
+            itemPoolSet[itemIndex].name = "BuffScroll" + (itemIndex + 1);
+            itemPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClockPotion(itemIndex); });
+        }
         itemPoolSet[itemIndex].SetActive(false);
     }
 }
