@@ -27,7 +27,12 @@ public class StateManager : MonoBehaviour
 
     // 멤버 변수
     public int State;
-    
+
+    public ArrayList potionItems;
+    public ArrayList skillScrollItems;
+    public ArrayList magicScrollItems;
+    public ArrayList buffScrollItems;
+
     public GameObject[] weaponSpace = new GameObject[5];
     public int weaponATKUse;
     public GameObject[] bag = new GameObject[10];

@@ -9,6 +9,7 @@ class HMItem
     private string mName;
     private int mPrice;
     private string mImage;
+    private string mExplain;
 
     public string Name
     {
@@ -27,25 +28,22 @@ class HMItem
         get { return mImage; }
         set { mImage = value; }
     }
-
+    public string Explain
+    {
+        get { return mExplain; }
+        set { mExplain = value; }
+    }
 }
 
 class HMWeaponItem : HMItem
 {
     private int mAttackPoint;
-    private string mExplain;
     private int mDurability;
 
     public int AttackPoint
     {
         get { return mAttackPoint; }
         set { mAttackPoint = value; }
-    }
-
-    public string Explain
-    {
-        get { return mExplain; }
-        set { mExplain = value; }
     }
 
     public int Durability
@@ -123,7 +121,7 @@ public class csEquipageStore : MonoBehaviour
             ArrayList itemInfos = (ArrayList)itemTable["weapon"];
             ArrayList itemInfosA = (ArrayList)itemTable["armor"];
 
-            Debug.Log("[Item " + itemName + "]" + "\n");
+            //Debug.Log("[Item " + itemName + "]" + "\n");
 
             foreach (Hashtable itemInfo in itemInfos)
             {
@@ -213,6 +211,7 @@ public class csEquipageStore : MonoBehaviour
             weaponPoolSet[i].SetActive(false);
         }
     }
+
     //무기 사기 위한 버튼
     public void onClickWeaponButton(int num)
     {
@@ -230,7 +229,6 @@ public class csEquipageStore : MonoBehaviour
                 StateManager.Instance.playGold = playerGold;
                 this._itemWeapon(weaponSetObj, num, weaponPoolSet[num].name);
             }
-
         }
     }
 

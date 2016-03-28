@@ -74,123 +74,136 @@
        "armorImage": "Armor03"
     }
     ],
-    "boots":[
+
+    "boots": [
       {
         "name":"부츠",
         "bootsSpd":1,
-        "price": 100,
+        "price":100,
         "Explain":"속도+1",
         "bootsImage":"Boots01"
       },
       {
         "name":"레아부츠",
         "bootsSpd":2,
-        "price": 200,
+        "price":200,
         "Explain":"속도+2",
         "bootsImage":"Boots02"
       },
       {
         "name":"우니크부츠",
         "bootsSpd":3,
-        "price": 500,
+        "price":500,
         "Explain":"속도+3",
         "bootsImage":"Boots03"
       }
      ],
-    "potion":[
+
+    "potion": [
       {
         "name":"하급회복포션",
-        "hpUp":20,
-        "price": 50,
+        "up":20,
+        "price":50,
         "Explain":"체력20 회복",
         "potionImage":"hp20Potion"
       },
       {
         "name":"상급회복포션",
-        "hpUp":50,
-        "price": 100,
+        "up":50,
+        "price":100,
         "Explain":"체력50 회복",
         "potionImage":"hp50Potion"
       },
       {
         "name":"돌가죽물약",
-        "DefUp":10,
-        "price": 50,
+        "up":10,
+        "price":50,
         "Explain":"방어 10증가",
         "potionImage":"defPotion"
         
       },
       {
         "name":"신속의물약",
-        "SpdUp":2,
-        "price": 50,
+        "up":2,
+        "price":50,
         "Explain":"속도 2증가",
         "potionImage":"spdPotion"
       }
     ],
+
     "skillScroll": [
       {
         "name":"강격",
-        "atk:":1.5,
-        "price": 100,
-        "Explain":"데미지를 준다.",
+        "atk":1.5,
+		"specialAbility":2.0,
+        "price":100,
+        "Explain":"데미지 크리",
         "skillScrollImage":"smash"
       },
       {
         "name":"회전베기",
-        "atk:":0.9,
-        "price": 100,
-        "Explain":"광역데미지를 준다.",
+        "atk":0.9,
+		"specialAbility":2.0,
+        "price":100,
+        "Explain":"광역데미지 출혈.",
         "skillScrollImage":"clive"
       },
       {
         "name":"무자비한돌진",
-        "atk:":0.5,
-        "stun":3,
-        "price": 150,
+        "atk":0.5,
+		"specialAbility":3.0,
+        "price":150,
         "Explain":"데미지주고 기절.",
         "skillScrollImage":"charge"
       },
       {
         "name":"가르기",
-        "atk:":0.5,
-        "defDown":0.5,
-        "price": 200,
+        "atk":0.5,
+		"specialAbility":0.5,
+        "price":200,
         "Explain":"데미지주고 방어력감소.",
         "skillScrollImage":"cut"
       }
     ],
+
     "magicScroll":[
       {
         "name":"얼음화살",
-        "atk:":1.0,
+        "atk":1.0,
         "spdDown":0.5,
-        "price": 200,
+		"atkDown":0,
+        "price":200,
         "Explain":"데미지주고 감속.",
         "magicScrollImage":"iceArrow"
       },
       {
         "name":"화염구",
-        "atk:":2.0,
-        "price": 250,
+        "atk":2.0,
+		"spdDown":0,
+		"atkDown":0,
+        "price":250,
         "Explain":"데미지를 준다.",
         "magicScrollImage":"fireBall"
       },
       {
         "name":"불기둥",
-        "atk:":1.2,
-        "price": 300,
-        "Explain":"광역데미지를 준다."
+        "atk":1.2,
+		"spdDown":0,
+		"atkDown":0,
+        "price":300,
+        "Explain":"광역데미지를 준다.",
+		"magicScrollImage":"firePillar"
       },
       {
         "name":"대지의화살",
-        "atk:":0.5,
+        "atk":0.5,
         "atkDown":0.5,
         "price":200,
         "Explain":"데미지주고 공격력감소.",
         "magicScrollImage":"earthArrow"
       }
     ],
+
     "buffScroll":[
       {
         "name":"고대의치유서",
@@ -201,40 +214,40 @@
       },
       {
         "name":"힘의스크롤",
-        "atkUp:":0.3,
-        "price": 100,
+        "atkUp":0.3,
+        "price":100,
         "Explain":"공격력증가.",
         "buffScrollImage":"atkScroll"
       },
       {
         "name":"인내의스크롤",
-        "defUp:":0.3,
-        "price": 100,
+        "defUp":0.3,
+        "price":100,
         "Explain":"방어력 증가.",
         "buffScrollImage":"defScroll"
       },
       {
         "name":"신속의스크롤",
-        "spdUp:":2,
-        "price": 100,
+        "spdUp":2,
+        "price":100,
         "Explain":"속도 증가.",
         "buffScrollImage":"spdScroll"
         
       },
       {
         "name":"기원의서",
-        "atkUp:":0.2,
-        "defUp:":0.2,
-        "spdUp:":2,
-        "price": 300,
+        "atkUp":0.2,
+        "defUp":0.2,
+        "spdUp":2,
+        "price":300,
         "Explain":"공,방,속도 증가.",
         "buffScrollImage":"prayScroll"
       },
       {
         "name":"광폭의서",
-        "atkUp:":2.0,
+        "atkUp":2.0,
         "defDown":1.0,
-        "price": 250,
+        "price":250,
         "Explain":"방어력감소 되지만 공격력증가",
         "buffScrollImage":"berserkScroll"
       }
