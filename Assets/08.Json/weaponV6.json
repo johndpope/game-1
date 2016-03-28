@@ -141,33 +141,33 @@
       {
         "name":"강격",
         "atk":1.5,
-		"specialAbility":2.0,
+		    "specialAbility":2.0,
         "price":100,
-        "Explain":"데미지 크리",
+        "Explain":"큰 피해를 줌.",
         "skillScrollImage":"smash"
       },
       {
         "name":"회전베기",
         "atk":0.9,
-		"specialAbility":2.0,
+		    "specialAbility":2.0,
         "price":100,
-        "Explain":"광역 출혈.",
+        "Explain":"광역피해 줌.",
         "skillScrollImage":"clive"
       },
       {
         "name":"무자비한돌진",
         "atk":0.5,
-		"specialAbility":3.0,
+		    "specialAbility":3.0,
         "price":150,
-        "Explain":" 기절.",
+        "Explain":"피해와 기절.",
         "skillScrollImage":"charge"
       },
       {
         "name":"가르기",
         "atk":0.5,
-		"specialAbility":0.5,
+		    "specialAbility":0.5,
         "price":200,
-        "Explain":" 방어력감소.",
+        "Explain":"피해와 방어력감소.",
         "skillScrollImage":"cut"
       }
     ],
@@ -177,35 +177,36 @@
         "name":"얼음화살",
         "atk":1.0,
         "spdDown":0.5,
-		"atkDown":0,
+		    "atkDown":0,
         "price":200,
-        "Explain":"데미지주고 감속.",
+        "Explain":"피해와 감속.",
         "magicScrollImage":"iceArrow"
       },
       {
         "name":"화염구",
         "atk":2.0,
-		"spdDown":0,
-		"atkDown":0,
+		    "spdDown":0,
+		    "atkDown":0,
         "price":250,
-        "Explain":"데미지를 준다.",
+        "Explain":"큰 피해를 줌.",
         "magicScrollImage":"fireBall"
       },
       {
         "name":"불기둥",
         "atk":1.2,
-		"spdDown":0,
-		"atkDown":0,
+		    "spdDown":0,
+		    "atkDown":0,
         "price":300,
-        "Explain":"광역데미지를 준다.",
-		"magicScrollImage":"firePillar"
+        "Explain":"광역피해 줌.",
+		    "magicScrollImage":"firePillar"
       },
       {
         "name":"대지의화살",
         "atk":0.5,
+        "spdDown":0,
         "atkDown":0.5,
         "price":200,
-        "Explain":"데미지주고 공격력감소.",
+        "Explain":"피해와 공격력감소.",
         "magicScrollImage":"earthArrow"
       }
     ],
@@ -214,27 +215,47 @@
       {
         "name":"고대의치유서",
         "hpUp_Mul":0.3,
+        "restoration":1,
+        "atkUp":0,
+        "defUp":0,
+        "spdUp":0,
+        "defDown":0,
         "price":400,
         "Explain":"체력,모든상태이상 회복.",
         "buffScrollImage":"ancientHealScroll"
       },
       {
         "name":"힘의스크롤",
+        "hpUp_Mul":0,
+        "restoration":0,
         "atkUp":0.3,
+        "defUp":0,
+        "spdUp":0,
+        "defDown":0,
         "price":100,
         "Explain":"공격력증가.",
         "buffScrollImage":"atkScroll"
       },
       {
         "name":"인내의스크롤",
+        "hpUp_Mul":0,
+        "restoration":0,
+        "atkUp":0,
         "defUp":0.3,
+        "spdUp":0,
+        "defDown":0,
         "price":100,
         "Explain":"방어력 증가.",
         "buffScrollImage":"defScroll"
       },
       {
         "name":"신속의스크롤",
+        "hpUp_Mul":0,
+        "restoration":0,
+        "atkUp":0,
+        "defUp":0,
         "spdUp":2,
+        "defDown":0,
         "price":100,
         "Explain":"속도 증가.",
         "buffScrollImage":"spdScroll"
@@ -242,16 +263,23 @@
       },
       {
         "name":"기원의서",
+        "hpUp_Mul":0,
+        "restoration":0,
         "atkUp":0.2,
         "defUp":0.2,
         "spdUp":2,
+        "defDown":0,
         "price":300,
         "Explain":"공,방,속도 증가.",
         "buffScrollImage":"prayScroll"
       },
       {
         "name":"광폭의서",
+        "hpUp_Mul":0,
+        "restoration":0,
         "atkUp":2.0,
+        "defUp":0,
+        "spdUp":0,
         "defDown":1.0,
         "price":250,
         "Explain":"방어력감소 되지만 공격력증가",
