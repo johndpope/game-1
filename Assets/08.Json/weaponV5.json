@@ -14,7 +14,7 @@
       "price":200,
       "weaponDurability":20,
 	    "Explain":"20번 일반 공격 가능",
-	    "weaponImage":"Weapon01"
+	    "weaponImage":"Weapon02"
     },
     {
       "name":"30방검",
@@ -22,7 +22,7 @@
       "price":300,
       "weaponDurability":30,
 	    "Explain":"30번 일반 공격 가능",
-	    "weaponImage":"Weapon02"
+	    "weaponImage":"Weapon03"
     },
      {
       "name":"50방검",
@@ -30,7 +30,7 @@
       "price":500,
       "weaponDurability":50,
 	    "Explain":"50번 일반 공격 가능",
-	    "weaponImage":"Weapon02"
+	    "weaponImage":"Weapon04"
     },
     {
       "name":"개선된 50방검",
@@ -38,7 +38,7 @@
       "price":700,
       "weaponDurability":50,
 	    "Explain":"50번 일반 공격 가능",
-	    "weaponImage":"Weapon03"
+	    "weaponImage":"Weapon05"
     },
      {
       "name":"3방검",
@@ -46,7 +46,7 @@
       "price":1000,
       "weaponDurability":3,
 	    "Explain":"3번 일반 공격 가능",
-	    "weaponImage":"Weapon03"
+	    "weaponImage":"Weapon06"
     }
   ],
   
