@@ -17,7 +17,7 @@ public class csAbillityStore : MonoBehaviour {
     public int cntHp;
     public int cntAtk;
     public int cntDef;
-    public double cntSpd;
+    public int cntSpd;
   
     ///////////////////////스크립트와 변수 위치 검토///////////////////
     public int playerHp;//피해를 받았을때
@@ -38,60 +38,74 @@ public class csAbillityStore : MonoBehaviour {
     public GameObject goldDefText;
     public GameObject goldSpdText;
 
+    public GameObject popClose;
+
 
     // Use this for initialization
     void Start ()
     {
-	    
-	}
+        goldHpText.GetComponent<Text>().text = (cntHp * 100) + 100 + "골드";
+        goldAtkText.GetComponent<Text>().text = (cntAtk * 100) + 100 + "골드";
+        goldDefText.GetComponent<Text>().text = (cntDef * 100) + 100 + "골드";
+        goldSpdText.GetComponent<Text>().text = (cntSpd * 100) + 100 + "골드";
+
+        
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
         //상태창 능력치 표시
+        playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
+
         playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
         playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk;
         playerDefText.GetComponent<Text>().text = "" + StateManager.Instance.playDef;
         playerSpdText.GetComponent<Text>().text = "" + StateManager.Instance.playSpd;
-        playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
-        StateManager.Instance.playHp = firstHp + upNumHp+ playerHp;
-        StateManager.Instance.playAtk = firstAtk + upNumAtk+ playerAtk;
-        StateManager.Instance.playDef = firstDef + upNumDef+ playerDef;
-        StateManager.Instance.playSpd = firstSpd + upNumSpd+ playerSpd;
 
-        //소모 골드량 표시
-        goldHpText.GetComponent<Text>().text = (cntHp * 100) + 100 + "\nGold";
-        goldAtkText.GetComponent<Text>().text = (cntAtk * 100) + 100 + "\nGold";
-        goldDefText.GetComponent<Text>().text = (cntDef * 100) + 100 + "\nGold";
-        goldSpdText.GetComponent<Text>().text = (cntSpd * 100) + 100 + "\nGold";
-        if (cntHp >= 20)
-           goldHpText.GetComponent<Text>().text = "Sold Out";
-        if (cntAtk >= 20)
-            goldAtkText.GetComponent<Text>().text = "Sold Out";
-        if (cntDef >= 20)
-            goldDefText.GetComponent<Text>().text = "Sold Out";
-        if (cntSpd >= 20)
-            goldSpdText.GetComponent<Text>().text = "Sold Out";
+        StateManager.Instance.playHp = firstHp + upNumHp + playerHp;
+        StateManager.Instance.playAtk = firstAtk + upNumAtk + playerAtk;
+        StateManager.Instance.playDef = firstDef + upNumDef + playerDef;
+        StateManager.Instance.playSpd = firstSpd + upNumSpd + playerSpd;
+
     }
     public void up_Hp()
     {
-        if (cntHp >= 20)        
-            return;
+        if (cntHp >= 20)
+            return;        
         
-        upNumHp += 20;
+        if (StateManager.Instance.playGold < (cntHp * 100) + 100){
+            popClose.SetActive(true);
+            return;
+        }
+        StateManager.Instance.playGold -= (cntHp * 100) + 100;
         cntHp++;
-        StateManager.Instance.playGold -= 100;
+        upNumHp += 20;
+        goldHpText.GetComponent<Text>().text = (cntHp * 100) + 100 + "골드";
+        //playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
         Debug.Log(upNumHp);
         Debug.Log(cntHp);
+        if (cntHp >= 20)
+            goldHpText.GetComponent<Text>().text = "최고 달성";
+
     }
-    
+
     public void up_Atk()
     {
         if (cntAtk >= 20)        
             return;
-        
+
+        if (StateManager.Instance.playGold < (cntAtk * 100) + 100){
+            popClose.SetActive(true);
+            return;
+        }
+        StateManager.Instance.playGold -= (cntAtk * 100) + 100;
         upNumAtk += 5;
         cntAtk++;
+        goldAtkText.GetComponent<Text>().text = (cntAtk * 100) + 100 + "골드";
+       // playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk;
+        if (cntAtk >= 20)
+            goldAtkText.GetComponent<Text>().text = "최고 달성";
         Debug.Log(upNumAtk);
         Debug.Log(cntHp);
         
@@ -100,9 +114,19 @@ public class csAbillityStore : MonoBehaviour {
     {
         if (cntDef >= 20)       
             return;
-        
+
+        if (StateManager.Instance.playGold < (cntDef * 100) + 100){
+            popClose.SetActive(true);
+            return;
+        }
+
+        StateManager.Instance.playGold -= (cntDef * 100) + 100;
         upNumDef += 3;
         cntDef++;
+        goldDefText.GetComponent<Text>().text = (cntDef * 100) + 100 + "골드";
+        //playerDefText.GetComponent<Text>().text = "" + StateManager.Instance.playDef;
+        if (cntDef >= 20)
+            goldDefText.GetComponent<Text>().text = "최고 달성";
         Debug.Log(upNumDef);
         Debug.Log(cntDef);
         
@@ -111,11 +135,26 @@ public class csAbillityStore : MonoBehaviour {
     {
         if (cntSpd >= 20)
            return;
-        
+
+        //if (StateManager.Instance.playGold < (cntSpd * 100) + 100)
+        //{
+        //    popClose.SetActive(true);
+        //    return;
+        //}
+
+        StateManager.Instance.playGold -= (cntSpd * 100) + 100;
         upNumSpd -= 0.5;
         cntSpd++;
+        goldSpdText.GetComponent<Text>().text = (cntSpd * 100) + 100 + "골드";
+       // StateManager.Instance.playSpd = firstSpd + upNumSpd + playerSpd;
+        if (cntSpd >= 20)
+            goldSpdText.GetComponent<Text>().text = "최고 달성";
         Debug.Log(upNumSpd);
         Debug.Log(cntSpd);
     }
 
+    public void offPopClose()
+    {
+        popClose.SetActive(false);
+    }
 }
