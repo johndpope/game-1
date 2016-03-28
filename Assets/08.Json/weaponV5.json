@@ -1,0 +1,245 @@
+{
+  "weapon": [
+    {
+      "name":"10방검",
+      "weaponATK":5,
+      "price":100,
+      "weaponDurability":10,
+	    "Explain":"10번 일반 공격 가능",
+	    "weaponImage":"Weapon01"
+    },
+    {
+      "name":"20방검",
+      "weaponATK":5,
+      "price":200,
+      "weaponDurability":20,
+	    "Explain":"20번 일반 공격 가능",
+	    "weaponImage":"Weapon01"
+    },
+    {
+      "name":"30방검",
+      "weaponATK":10,
+      "price":300,
+      "weaponDurability":30,
+	    "Explain":"30번 일반 공격 가능",
+	    "weaponImage":"Weapon02"
+    },
+     {
+      "name":"50방검",
+      "weaponATK":20,
+      "price":500,
+      "weaponDurability":50,
+	    "Explain":"50번 일반 공격 가능",
+	    "weaponImage":"Weapon02"
+    },
+    {
+      "name":"개선된 50방검",
+      "weaponATK":30,
+      "price":700,
+      "weaponDurability":50,
+	    "Explain":"50번 일반 공격 가능",
+	    "weaponImage":"Weapon03"
+    },
+     {
+      "name":"3방검",
+      "weaponATK":500,
+      "price":1000,
+      "weaponDurability":3,
+	    "Explain":"3번 일반 공격 가능",
+	    "weaponImage":"Weapon03"
+    }
+  ],
+  
+  "armor": [
+    {
+      "name":"갑옷",
+      "armorDef":5,
+      "price":100,
+      "Explain":"방어+5",
+      "armorImage": "Armor01"
+      
+    },
+    {
+      "name":"고굽갑옷",
+      "armorDef":10,
+      "price":300,
+      "Explain":"방어+10",
+       "armorImage": "Armor02"
+    },
+    {
+      "name":"취고굽갑옷",
+      "armorDef":20,
+      "price":500,
+      "Explain":"방어+20",
+       "armorImage": "Armor03"
+    }
+    ],
+    "boots":[
+      {
+        "name":"부츠",
+        "bootsSpd":1,
+        "price": 100,
+        "Explain":"속도+1",
+        "bootsImage":"Boots01"
+      },
+      {
+        "name":"레아부츠",
+        "bootsSpd":2,
+        "price": 200,
+        "Explain":"속도+2",
+        "bootsImage":"Boots02"
+      },
+      {
+        "name":"우니크부츠",
+        "bootsSpd":3,
+        "price": 500,
+        "Explain":"속도+3",
+        "bootsImage":"Boots03"
+      }
+     ],
+    "potion":[
+      {
+        "name":"하급회복포션",
+        "hpUp":20,
+        "price": 50,
+        "Explain":"체력20 회복",
+        "potionImage":"hp20Potion"
+      },
+      {
+        "name":"상급회복포션",
+        "hpUp":50,
+        "price": 100,
+        "Explain":"체력50 회복",
+        "potionImage":"hp50Potion"
+      },
+      {
+        "name":"돌가죽물약",
+        "DefUp":10,
+        "price": 50,
+        "Explain":"방어 10증가",
+        "potionImage":"defPotion"
+        
+      },
+      {
+        "name":"신속의물약",
+        "SpdUp":2,
+        "price": 50,
+        "Explain":"속도 2증가",
+        "potionImage":"spdPotion"
+      }
+    ],
+    "skillScroll": [
+      {
+        "name":"강격",
+        "atk:":1.5,
+        "price": 100,
+        "Explain":"데미지를 준다.",
+        "skillScrollImage":"smash"
+      },
+      {
+        "name":"회전베기",
+        "atk:":0.9,
+        "price": 100,
+        "Explain":"광역데미지를 준다.",
+        "skillScrollImage":"clive"
+      },
+      {
+        "name":"무자비한돌진",
+        "atk:":0.5,
+        "stun":3,
+        "price": 150,
+        "Explain":"데미지주고 기절.",
+        "skillScrollImage":"charge"
+      },
+      {
+        "name":"가르기",
+        "atk:":0.5,
+        "defDown":0.5,
+        "price": 200,
+        "Explain":"데미지주고 방어력감소.",
+        "skillScrollImage":"cut"
+      }
+    ],
+    "magicScroll":[
+      {
+        "name":"얼음화살",
+        "atk:":1.0,
+        "spdDown":0.5,
+        "price": 200,
+        "Explain":"데미지주고 감속.",
+        "magicScrollImage":"iceArrow"
+      },
+      {
+        "name":"화염구",
+        "atk:":2.0,
+        "price": 250,
+        "Explain":"데미지를 준다.",
+        "magicScrollImage":"fireBall"
+      },
+      {
+        "name":"불기둥",
+        "atk:":1.2,
+        "price": 300,
+        "Explain":"광역데미지를 준다."
+      },
+      {
+        "name":"대지의화살",
+        "atk:":0.5,
+        "atkDown":0.5,
+        "price":200,
+        "Explain":"데미지주고 공격력감소.",
+        "magicScrollImage":"earthArrow"
+      }
+    ],
+    "buffScroll":[
+      {
+        "name":"고대의치유서",
+        "hpUp_Mul":0.3,
+        "price":400,
+        "Explain":"체력,모든상태이상 회복.",
+        "buffScrollImage":"ancientHealScroll"
+      },
+      {
+        "name":"힘의스크롤",
+        "atkUp:":0.3,
+        "price": 100,
+        "Explain":"공격력증가.",
+        "buffScrollImage":"atkScroll"
+      },
+      {
+        "name":"인내의스크롤",
+        "defUp:":0.3,
+        "price": 100,
+        "Explain":"방어력 증가.",
+        "buffScrollImage":"defScroll"
+      },
+      {
+        "name":"신속의스크롤",
+        "spdUp:":2,
+        "price": 100,
+        "Explain":"속도 증가.",
+        "buffScrollImage":"spdScroll"
+        
+      },
+      {
+        "name":"기원의서",
+        "atkUp:":0.2,
+        "defUp:":0.2,
+        "spdUp:":2,
+        "price": 300,
+        "Explain":"공,방,속도 증가.",
+        "buffScrollImage":"prayScroll"
+      },
+      {
+        "name":"광폭의서",
+        "atkUp:":2.0,
+        "defDown":1.0,
+        "price": 250,
+        "Explain":"방어력감소 되지만 공격력증가",
+        "buffScrollImage":"berserkScroll"
+      }
+      
+    ]
+}
+
+
