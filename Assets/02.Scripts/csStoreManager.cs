@@ -30,12 +30,17 @@ public class csStoreManager : MonoBehaviour
     //장비 상점 메뉴 
     public GameObject equipageMenu;
 
+    //능력치 상점 메뉴
+    public GameObject abilityScroll;
+    public GameObject equInven;
+
     //던전 입장 메뉴
     public GameObject dungeonMaun;
 
     //상점 오픈시 인벤토리 오브젝트
     public GameObject equipageScroll;
     public GameObject buttons;
+
 
     //상점 팝업 설정 값
     public int storeNum;
@@ -100,6 +105,7 @@ public class csStoreManager : MonoBehaviour
                     dir2_1.y = 0.0f; //높이                
                     dir2_1.Normalize(); // Normalize()백터3함수 x,z를  정규화
                     maincamera.rotation = Quaternion.Lerp(maincamera.rotation, Quaternion.LookRotation(dir2_1), rotationSpeed * Time.deltaTime);
+                    StartCoroutine("abilityStorePop");
                 }
                 else
                 {
@@ -162,9 +168,13 @@ public class csStoreManager : MonoBehaviour
                 buttons.SetActive(true);
                 break;
             case 2:
+          
+                abilityScroll.SetActive(true);
+                equInven.SetActive(true);
+
                 break;
             case 3:
-                equipageMenu.SetActive(true);
+                //equipageMenu.SetActive(true);
                 break;
             case 4:
                 dungeonMaun.SetActive(true);
@@ -180,6 +190,8 @@ public class csStoreManager : MonoBehaviour
         equipageScroll.SetActive(false);
         buttons.SetActive(false);
         dungeonMaun.SetActive(false);
+        equInven.SetActive(false);
+        abilityScroll.SetActive(false);
 
     }
 
@@ -191,6 +203,8 @@ public class csStoreManager : MonoBehaviour
         equipageScroll.SetActive(false);
         buttons.SetActive(false);
         dungeonMaun.SetActive(false);
+        equInven.SetActive(false);
+        abilityScroll.SetActive(false);
 
     }
 
@@ -202,6 +216,8 @@ public class csStoreManager : MonoBehaviour
         equipageScroll.SetActive(false);
         buttons.SetActive(false);
         dungeonMaun.SetActive(false);
+        equInven.SetActive(false);
+        abilityScroll.SetActive(false);
 
     }
 
@@ -213,6 +229,8 @@ public class csStoreManager : MonoBehaviour
         equipageScroll.SetActive(false);
         buttons.SetActive(false);
         dungeonMaun.SetActive(false);
+        equInven.SetActive(false);
+        abilityScroll.SetActive(false);
     }
 
     IEnumerator equipageStorePop()
@@ -222,6 +240,12 @@ public class csStoreManager : MonoBehaviour
         storeNumMove = 0;
     }
 
+    IEnumerator abilityStorePop()
+    {
+        storeNum = 2;
+        yield return new WaitForSeconds(0.3f);
+        storeNumMove = 0;
+    }
     IEnumerator dungeonPop()
     {
         storeNum = 4;

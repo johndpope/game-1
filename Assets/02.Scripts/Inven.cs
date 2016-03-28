@@ -59,6 +59,8 @@ public class Inven : MonoBehaviour
             StateManager.Instance.weaponDurability[wNum] -= 1;
             dText.text = StateManager.Instance.weaponDurability[wNum].ToString();
         }
+        
+
     }
 
     public void onInven()//인벤토리 열기
@@ -92,13 +94,9 @@ public class Inven : MonoBehaviour
     }
 
 
-    public void PlayerHp()
+    public void playerState()
     {
-        //GameObject.Find("Hp_On").GetComponent<Image>().fillAmount -= Time.deltaTime;
-        //if(GameObject.Find("Hp_On").GetComponent<Image>().fillAmount == 0)
-        //{
-        //    GameObject.Find("Hp_On").GetComponent<Image>().fillAmount = 1;
-        //}
+
     }
     public void onItem()
     {

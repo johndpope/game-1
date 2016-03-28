@@ -27,14 +27,23 @@ public class StateManager : MonoBehaviour
 
     // 멤버 변수
     public int State;
-    public int playerHp;
+    
     public GameObject[] weaponSpace = new GameObject[5];
-    public int playGold;
+    
     public GameObject[] bag = new GameObject[10];
+
+    public int playGold;
+    public int playHp;
+    public int playAtk;
+    public int playDef;
+    public double playSpd;
+    
+    
+
     //다른곳에서 사용할때.
     //StateManager.Instance.hp = 100;
 
-    
+
 
     public int bagNum;
     
