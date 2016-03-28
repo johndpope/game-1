@@ -43,8 +43,6 @@ public class StateManager : MonoBehaviour
     //다른곳에서 사용할때.
     //StateManager.Instance.hp = 100;
 
-
-
     public int bagNum;
     
     public int[] weaponDurability = new int[10];

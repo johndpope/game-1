@@ -18,9 +18,7 @@ public class csAbillityStore : MonoBehaviour {
     public int cntAtk;
     public int cntDef;
     public double cntSpd;
-    //돈
-    public int playerGlod;
-
+  
     ///////////////////////스크립트와 변수 위치 검토///////////////////
     public int playerHp;//피해를 받았을때
     public int playerAtk;//다른 방법으로 능력치가 바뀔경우
