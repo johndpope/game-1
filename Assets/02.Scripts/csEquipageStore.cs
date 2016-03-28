@@ -171,7 +171,8 @@ public class csEquipageStore : MonoBehaviour
             this._setupWeapon(i);
         }
         playerGold += 900;
-        
+        StateManager.Instance.playGold = playerGold;
+
     }
 
     void Update()
