@@ -101,32 +101,38 @@
 
     "potion": [
       {
-        "name":"하급회복포션",
+        "name":"하 회 물",
         "up":20,
         "price":50,
-        "Explain":"체력20 회복",
+        "Explain":"체 력 20  회 복",
         "potionImage":"hp20Potion"
       },
       {
-        "name":"상급회복포션",
+        "name":"상 회 물",
         "up":50,
         "price":100,
-        "Explain":"체력50 회복",
+        "Explain":"체 력 50  회 복",
+        "potionImage":"hp50Potion"
+      },
+	  {
+        "name":"공 증 물",
+        "up":20,
+        "price":100,
+        "Explain":"공 격 력  20 증 가",
         "potionImage":"hp50Potion"
       },
       {
-        "name":"돌가죽물약",
+        "name":"돌 물",
         "up":10,
         "price":50,
-        "Explain":"방어 10증가",
+        "Explain":"방 어  10 증 가",
         "potionImage":"defPotion"
-        
       },
       {
-        "name":"신속의물약",
+        "name":"속 물",
         "up":2,
         "price":50,
-        "Explain":"속도 2증가",
+        "Explain":"속 도  2 증 가",
         "potionImage":"spdPotion"
       }
     ],

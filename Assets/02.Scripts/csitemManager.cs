@@ -147,7 +147,8 @@ public class csitemManager : MonoBehaviour
     void Start()
     {
         LoadAssetfromJson();
-        for (int i = 0; i < 3; i++)
+
+        for (int i = 0; i < 5; i++)
         {
 
             this._setupPontion(i);
@@ -163,28 +164,38 @@ public class csitemManager : MonoBehaviour
 	    
 	}
 
+    public void onPontion()
+    {
+        for(int i=0; i<5; i++)
+        {
+            itemPoolSet[i].SetActive(true);
+        }
+        
+    }
+
     private void _setupPontion(int itemIndex)
     {
-        HMWeaponItem item = (HMWeaponItem)StateManager.Instance.potionItems[itemIndex];
+        PotionItem item = (PotionItem)StateManager.Instance.potionItems[itemIndex];
         itemPriceText.GetComponent<Text>().text = item.Price.ToString() + "\n" + "골드";
-        itemNameText.GetComponent<Text>().text = "이름: " + item.Name + "\n" + "설명: " + item.Explain + "\n" + "공격력: " + item.AttackPoint.ToString();
+        itemNameText.GetComponent<Text>().text = "이 름: " + item.Name;
+        itemExplainText.GetComponent<Text>().text = "설명: " + item.Explain;
         itemPoolSet[itemIndex] = Instantiate(itemPool) as GameObject;
 
         itemPoolSet[itemIndex].transform.SetParent(itemGrid.transform);
         itemPoolSet[itemIndex].transform.localScale = new Vector3(1, 1, 1);
 
-        itemPoolSet[itemIndex].name = "Weapon" + (10 * itemIndex + 10);
+        //itemPoolSet[itemIndex].name = "Weapon" + (10 * itemIndex + 10);
         //itemPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClickWeaponButton(itemIndex); });
 
-        if (itemIndex == 4)
-        {
-            itemPoolSet[itemIndex].name = "Weapon" + 55;
-        }
+        //if (itemIndex == 4)
+        //{
+        //    itemPoolSet[itemIndex].name = "Weapon" + 55;
+        //}
 
-        if (itemIndex == 5)
-        {
-            itemPoolSet[itemIndex].name = "Weapon" + 3;
-        }
+        //if (itemIndex == 5)
+        //{
+        //    itemPoolSet[itemIndex].name = "Weapon" + 3;
+        //}
         itemPoolSet[itemIndex].SetActive(false);
     }
 }
