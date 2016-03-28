@@ -40,12 +40,14 @@ public class csAbillityStore : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         //상태창 능력치 표시
         playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
         playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk;

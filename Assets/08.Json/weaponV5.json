@@ -3,50 +3,50 @@
     {
       "name":"10방검",
       "weaponATK":5,
-      "price":100,
+      "weaponPrice":100,
       "weaponDurability":10,
-	    "Explain":"10번 일반 공격 가능",
-	    "weaponImage":"Weapon01"
+	  "weaponExplain":"10번 일반 공격 가능",
+	  "weaponImage":"Weapon01"
     },
     {
       "name":"20방검",
       "weaponATK":5,
-      "price":200,
+      "weaponPrice":200,
       "weaponDurability":20,
-	    "Explain":"20번 일반 공격 가능",
-	    "weaponImage":"Weapon02"
+	  "weaponExplain":"20번 일반 공격 가능",
+	  "weaponImage":"Weapon02"
     },
     {
       "name":"30방검",
       "weaponATK":10,
-      "price":300,
+      "weaponPrice":300,
       "weaponDurability":30,
-	    "Explain":"30번 일반 공격 가능",
-	    "weaponImage":"Weapon03"
+	  "weaponExplain":"30번 일반 공격 가능",
+	  "weaponImage":"Weapon03"
     },
      {
       "name":"50방검",
       "weaponATK":20,
-      "price":500,
+      "weaponPrice":700,
       "weaponDurability":50,
-	    "Explain":"50번 일반 공격 가능",
-	    "weaponImage":"Weapon04"
+	  "weaponExplain":"50번 일반 공격 가능",
+	  "weaponImage":"Weapon04"
     },
     {
       "name":"개선된 50방검",
       "weaponATK":30,
-      "price":700,
+      "weaponPrice":900,
       "weaponDurability":50,
-	    "Explain":"50번 일반 공격 가능",
-	    "weaponImage":"Weapon05"
+	  "weaponExplain":"50번 일반 공격 가능",
+	  "weaponImage":"Weapon05"
     },
      {
       "name":"3방검",
       "weaponATK":500,
-      "price":1000,
+      "weaponPrice":1100,
       "weaponDurability":3,
-	    "Explain":"3번 일반 공격 가능",
-	    "weaponImage":"Weapon06"
+	  "weaponExplain":"3번 일반 공격 가능",
+	  "weaponImage":"Weapon06"
     }
   ],
   

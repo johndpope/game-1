@@ -21,24 +21,38 @@ public class csWeapom : MonoBehaviour
 	
 	}
 
-    public void Equip1(int itemIndex)
+    public void Equip1()
     {
         for (int i = 0; i < 10; i++)
         {
             if (gameObject.name == "Weapon10"+i)
             {
-                _useWeapon(0);
+                _useWeapon();
                 StateManager.Instance.bagNum = i;
             }
-            else if (gameObject.name == "Weapon50"+i)
+            else if (gameObject.name == "Weapon20"+i)
             {
-                _useWeapon(1);
+                _useWeapon();
                 StateManager.Instance.bagNum = i;
-
+            }
+            else if (gameObject.name == "Weapon30" + i)
+            {
+                _useWeapon();
+                StateManager.Instance.bagNum = i;
+            }
+            else if (gameObject.name == "Weapon50" + i)
+            {
+                _useWeapon();
+                StateManager.Instance.bagNum = i;
+            }
+            else if (gameObject.name == "Weapon55" + i)
+            {
+                _useWeapon();
+                StateManager.Instance.bagNum = i;
             }
             else if (gameObject.name == "Weapon3"+i)
             {
-                _useWeapon(2);
+                _useWeapon();
                 StateManager.Instance.bagNum = i;
 
             }
@@ -46,30 +60,8 @@ public class csWeapom : MonoBehaviour
 
     }
 
-    public void _useWeapon(int itemIndex)
+    public void _useWeapon()
     {
-        switch(itemIndex)
-        {
-            case 0:
-                Debug.Log("클릭됨     10");
-
-                itemUsePopBool = true;
-                weaponNum = 0;
-
-                break;
-            case 1:
-                Debug.Log("클릭됨     50");
-
-                itemUsePopBool = true;
-                weaponNum = 1;
-                break;
-
-            case 2:
-                Debug.Log("클릭됨     50");
-
-                itemUsePopBool = true;
-                weaponNum = 2;
-                break;
-        }
+        itemUsePopBool = true;
     }
 }

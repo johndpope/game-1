@@ -146,7 +146,7 @@ public class csEquipageStore : MonoBehaviour
             foreach (Hashtable itemInfo in itemInfosA)
             {
                 String name = (String)itemInfo["name"];
-                String price = (String)itemInfo["armorPrice"];
+                String price = (String)itemInfo["price"];
                 String defPoint = (String)itemInfo["armorDef"];
 
                 HMArmorItem armorItem = new HMArmorItem();
@@ -165,29 +165,31 @@ public class csEquipageStore : MonoBehaviour
         LoadAssetfromJson();
         for (int i = 0; i < 3; i++)
         {
-            this._setupWeapon(i);
+            
             this._setupArmor(i);
         }
-
-        playerGold += 500;
-        playerGoldText.GetComponent<Text>().text = ": " + playerGold;
+        for (int i = 0; i < 6; i++)
+        {
+            this._setupWeapon(i);
+        }
+        playerGold += 900;
+        
     }
 
     void Update()
     {
+        playerGoldText.GetComponent<Text>().text = ": " + playerGold;
         StateManager.Instance.playGold = playerGold;
-
-
     }
 
     public void equipageWeapon()
     {
         equipageNum = 1;
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 6; i++)
         {
             weaponPoolSet[i].SetActive(true);
-            armorPoolSet[i].SetActive(false);
+            //armorPoolSet[i].SetActive(false);
             //bootPoolSet[i].SetActive(false);
         }
     }
@@ -195,9 +197,9 @@ public class csEquipageStore : MonoBehaviour
     public void equipageArmor()
     {
         equipageNum = 2;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 6; i++)
         {
-            armorPoolSet[i].SetActive(true);
+            //armorPoolSet[i].SetActive(true);
             //bootPoolSet[i].SetActive(false);
             weaponPoolSet[i].SetActive(false);
         }
@@ -205,31 +207,32 @@ public class csEquipageStore : MonoBehaviour
     public void equipageBoot()
     {
         equipageNum = 3;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 6; i++)
         {
-            armorPoolSet[i].SetActive(false);
+            //armorPoolSet[i].SetActive(false);
             //bootPoolSet[i].SetActive(false);
             weaponPoolSet[i].SetActive(false);
         }
     }
+    //무기 사기 위한 버튼
+    public void onClickWeaponButton(int num)
+    {
+        if (playerGold >= ((num * 2) + 1) * 100)
+        {
+            if (num >= 0 && num <= 2)
+            {
+                playerGold -= (num + 1) * 100;
+                this._itemWeapon(weaponSetObj, num, weaponPoolSet[num].name);
+            }
+            else if (num >= 3 && num <= 5)
+            {
+                playerGold -= ((num * 2) + 1) * 100;
+                this._itemWeapon(weaponSetObj, num, weaponPoolSet[num].name);
+            }
 
-    public void onClickWeaponButton()
-    {
-        this._itemWeapon(weaponSetObj, 0);
-    }
-    public void onClickWeaponButton50()
-    {
-        this._itemWeapon(weaponSetObj, 1);
-    }
-    public void onClickWeaponButton3()
-    {
-        this._itemWeapon(weaponSetObj, 2);
+        }
     }
 
-    //public void onClickWeaponButton(int num)
-    //{
-    //    this._itemWeapon(weaponSetObj, num);
-    //}
     public void onClickArmorButton(int num)
     {
         Debug.Log(num);
@@ -237,8 +240,13 @@ public class csEquipageStore : MonoBehaviour
         this._itemArmor(armorSetObj, num, armorPoolSet[num].name);
     }
 
-    private void _itemWeapon(GameObject gameObj, int itemIndex)
+    private void _itemWeapon(GameObject gameObj, int itemIndex, String weaponName)
     {
+        if(StateManager.Instance.bagSize == 6)
+        {
+            return;
+        }
+        StateManager.Instance.bagSize++;
         StateManager.Instance.bagNum = wNum;
         HMWeaponItem item = (HMWeaponItem)mItems[itemIndex];
         weaponDurabilityText.GetComponent<Text>().text = "내구도: " + item.Durability.ToString();
@@ -248,48 +256,18 @@ public class csEquipageStore : MonoBehaviour
         gameObj.transform.SetParent(grid.transform);
         gameObj.transform.localScale = new Vector3(1, 1, 1);
 
-        switch (itemIndex)
-        {
-            case 0:
+       
                 for (wNum = 0; wNum < 5; wNum++)
                 {
                     if (StateManager.Instance.weaponSpace[wNum] == null)
                     {
-                        gameObj.name = "Weapon10" + wNum;
+                        gameObj.name = weaponName + wNum;
                         StateManager.Instance.weaponDurability[wNum] = item.Durability;
                         StateManager.Instance.weaponSpace[wNum] = gameObj;
                         return;
                     }
                 }
-                break;
-            case 1:
-                for (wNum = 0; wNum < 5; wNum++)
-                {
-                    if (StateManager.Instance.weaponSpace[wNum] == null)
-                    {
-                        gameObj.name = "Weapon50" + wNum;
-                        StateManager.Instance.weaponDurability[wNum] = item.Durability;
-                        StateManager.Instance.weaponSpace[wNum] = gameObj;
-                        return;
-                    }
-
-                }
-                break;
-            case 3:
-                for (wNum = 0; wNum < 5; wNum++)
-                {
-                    if (StateManager.Instance.weaponSpace[wNum] == null)
-                    {
-                        gameObj.name = "Weapon3" + wNum;
-                        StateManager.Instance.weaponDurability[wNum] = item.Durability;
-                        StateManager.Instance.weaponSpace[wNum] = gameObj;
-                        return;
-                    }
-
-                }
-                break;
-        }
-        //wNum++;
+           
     }
 
     private void _setupWeapon(int itemIndex)
@@ -300,28 +278,22 @@ public class csEquipageStore : MonoBehaviour
         weaponPoolSet[itemIndex] = Instantiate(weaponPool) as GameObject;
         weaponPoolSet[itemIndex].transform.SetParent(gridPool.transform);
         weaponPoolSet[itemIndex].transform.localScale = new Vector3(1, 1, 1);
+        
+        weaponPoolSet[itemIndex].name = "Weapon" + (10 * itemIndex + 10);
+        weaponPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClickWeaponButton(itemIndex); });
 
-        //weaponPoolSet[itemIndex].name = "Weapon" + (10 * itemIndex + 10);
-        //weaponPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClickWeaponButton(itemIndex); });
+        if (itemIndex == 4)
+        {
+            weaponPoolSet[itemIndex].name = "Weapon" + 55;
+        }
 
-        // UnityAction onClickAction = new UnityAction(onClickWeaponButton10);
-        if (itemIndex == 0)
-        {
-            weaponPoolSet[itemIndex].name = "Weapon" + 10;
-            weaponPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(onClickWeaponButton);
-        }
-        if (itemIndex == 1)
-        {
-            weaponPoolSet[itemIndex].name = "Weapon" + 50;
-            weaponPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(onClickWeaponButton50);
-        }
-        if (itemIndex == 2)
+        if (itemIndex == 5)
         {
             weaponPoolSet[itemIndex].name = "Weapon" + 3;
-            weaponPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(onClickWeaponButton3);
         }
         weaponPoolSet[itemIndex].SetActive(false);
     }
+
     private void _setupArmor(int itemIndex)
     {
         HMArmorItem item = (HMArmorItem)aItems[itemIndex];

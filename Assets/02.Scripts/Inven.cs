@@ -130,23 +130,7 @@ public class Inven : MonoBehaviour
 
     public void useItem()
     {
-        int num = csWeapom.weaponNum;
-
-        switch (num)
-        {
-            case 0:
-                weaponSet(num);
-                //ynPop.SetActive(false);
-                break;
-            case 1:
-                weaponSet(num);
-                //ynPop.SetActive(false);
-                break;
-            case 2:
-                weaponSet(num);
-                //ynPop.SetActive(false);
-                break;
-        }
+        weaponSet();
     }
 
     public void noUseItem(int i)
@@ -168,7 +152,7 @@ public class Inven : MonoBehaviour
         ynPop.SetActive(false);
     }
 
-    private void weaponSet(int num)
+    private void weaponSet()
     {
         
         wNum = StateManager.Instance.bagNum;

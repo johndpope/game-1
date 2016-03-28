@@ -29,8 +29,9 @@ public class StateManager : MonoBehaviour
     public int State;
     
     public GameObject[] weaponSpace = new GameObject[5];
-    
+    public int weaponATKUse;
     public GameObject[] bag = new GameObject[10];
+    public int bagSize;
 
     public int playGold;
     public int playHp;
