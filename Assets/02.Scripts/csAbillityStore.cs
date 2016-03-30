@@ -47,9 +47,7 @@ public class csAbillityStore : MonoBehaviour {
         goldHpText.GetComponent<Text>().text = (cntHp * 100) + 100 + "골드";
         goldAtkText.GetComponent<Text>().text = (cntAtk * 100) + 100 + "골드";
         goldDefText.GetComponent<Text>().text = (cntDef * 100) + 100 + "골드";
-        goldSpdText.GetComponent<Text>().text = (cntSpd * 100) + 100 + "골드";
-
-        
+        goldSpdText.GetComponent<Text>().text = (cntSpd * 100) + 100 + "골드";     
     }
 	
 	// Update is called once per frame

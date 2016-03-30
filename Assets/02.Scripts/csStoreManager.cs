@@ -34,6 +34,9 @@ public class csStoreManager : MonoBehaviour
     public GameObject abilityScroll;
     public GameObject equInven;
 
+    //아이템 상점 메뉴
+    public GameObject itemMenu;
+
     //던전 입장 메뉴
     public GameObject dungeonMaun;
 
@@ -128,6 +131,7 @@ public class csStoreManager : MonoBehaviour
                     dir3_1.y = 0.0f; //높이                
                     dir3_1.Normalize(); // Normalize()백터3함수 x,z를  정규화
                     maincamera.rotation = Quaternion.Lerp(maincamera.rotation, Quaternion.LookRotation(dir3_1), rotationSpeed * Time.deltaTime);
+                    StartCoroutine("itemStorePop");
                 }
                 else
                 {
@@ -174,7 +178,7 @@ public class csStoreManager : MonoBehaviour
 
                 break;
             case 3:
-                //equipageMenu.SetActive(true);
+                itemMenu.SetActive(true);
                 break;
             case 4:
                 dungeonMaun.SetActive(true);
@@ -192,6 +196,7 @@ public class csStoreManager : MonoBehaviour
         dungeonMaun.SetActive(false);
         equInven.SetActive(false);
         abilityScroll.SetActive(false);
+        itemMenu.SetActive(false);
 
     }
 
@@ -205,6 +210,8 @@ public class csStoreManager : MonoBehaviour
         dungeonMaun.SetActive(false);
         equInven.SetActive(false);
         abilityScroll.SetActive(false);
+        itemMenu.SetActive(false);
+
 
     }
 
@@ -218,6 +225,7 @@ public class csStoreManager : MonoBehaviour
         dungeonMaun.SetActive(false);
         equInven.SetActive(false);
         abilityScroll.SetActive(false);
+        itemMenu.SetActive(false);
 
     }
 
@@ -231,6 +239,7 @@ public class csStoreManager : MonoBehaviour
         dungeonMaun.SetActive(false);
         equInven.SetActive(false);
         abilityScroll.SetActive(false);
+        itemMenu.SetActive(false);
     }
 
     IEnumerator equipageStorePop()
@@ -243,6 +252,12 @@ public class csStoreManager : MonoBehaviour
     IEnumerator abilityStorePop()
     {
         storeNum = 2;
+        yield return new WaitForSeconds(0.3f);
+        storeNumMove = 0;
+    }
+    IEnumerator itemStorePop()
+    {
+        storeNum = 3;
         yield return new WaitForSeconds(0.3f);
         storeNumMove = 0;
     }

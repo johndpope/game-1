@@ -32,9 +32,15 @@ public class StateManager : MonoBehaviour
     public ArrayList skillScrollItems;
     public ArrayList magicScrollItems;
     public ArrayList buffScrollItems;
+    public int[] scrollNum = new int[20];
+    public GameObject[] itemSpace = new GameObject[15];
 
+    public ArrayList weaponItems;
+    public ArrayList armorItems;
+    public ArrayList bootItems;
     public GameObject[] weaponSpace = new GameObject[5];
     public int weaponATKUse;
+
     public GameObject[] bag = new GameObject[10];
     public int bagSize;
 

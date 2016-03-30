@@ -61,7 +61,7 @@ class MagicItem : HMItem
 class BuffItem : HMItem
 {
     private float mHpUp_Mul;
-    private bool mRestoration;
+    private int mRestoration;
     private float mAtkUp;
     private float mDefUp;
     private float mSpdUp;
@@ -72,7 +72,7 @@ class BuffItem : HMItem
         get { return mHpUp_Mul; }
         set { mHpUp_Mul = value; }
     }
-    public bool Restoration
+    public int Restoration
     {
         get { return mRestoration; }
         set { mRestoration = value; }
@@ -112,13 +112,37 @@ public class csitemManager : MonoBehaviour
 
     public GameObject itemGrid;
 
-    GameObject[] itemPoolSet = new GameObject[15];
-
+    GameObject[] itemPoolSet = new GameObject[19];
+    //아이템 상점 셋팅 오브젝트
     public GameObject itemNameText;
     public GameObject itemExplainText;
     public GameObject itemPriceText;
-    public GameObject itemImageText;
+    public GameObject itemImage;
     public GameObject itemCutText;
+
+    //아이템 구입시 인벤토리 셋팅 오브젝트
+    public GameObject itemUseGrid;  //아이템 그리드
+    public GameObject skillUseGrid; //스킬 그리드
+
+    public GameObject itemUseSetObj;
+    public GameObject itemUseName;
+    public GameObject itemUseExplain;
+    public GameObject itemUseImage;
+   
+
+    GameObject itemUse;
+
+    Text itemUseNameText;
+    Text itemUseExplainText;
+    
+
+
+    public GameObject goldTextObj;
+    Text goldText;
+
+    int playGold;
+
+    public GameObject popClose;
 
     void LoadAssetfromJson()
     {
@@ -218,9 +242,11 @@ public class csitemManager : MonoBehaviour
                 buffItem.DefUp = float.Parse(DefUp);
                 buffItem.SpdUp = float.Parse(SpdUp);
                 buffItem.DefDown = float.Parse(DefDown);
-                buffItem.Restoration = bool.Parse(Restoration);
+                buffItem.Restoration = Int32.Parse(Restoration);
                 buffItem.Image = image;
                 buffItem.Explain = explain;
+
+
                 StateManager.Instance.buffScrollItems.Add(buffItem);
             }
         }
@@ -235,12 +261,23 @@ public class csitemManager : MonoBehaviour
         {
                 this._setupPontion(i);
         }
+        playGold = StateManager.Instance.playGold;
+
+        goldText = goldTextObj.GetComponent<Text>();
+ 
+        itemUseNameText = itemUseName.GetComponent<Text>();
+        itemUseExplainText = itemUseExplain.GetComponent<Text>();
     }
 
     void Update ()
     {
-	    
-	}
+        goldText.text = ": " + StateManager.Instance.playGold.ToString();
+    }
+
+    public void offPopClose()
+    {
+        popClose.SetActive(false);
+    }
 
     public void onPontion()
     {
@@ -329,7 +366,7 @@ public class csitemManager : MonoBehaviour
 
     public void onClockPotion(int num)
     {
-        Debug.Log(num);
+        BuyItem(num, itemUse);
     }
 
     private void _setupPontion(int itemIndex)
@@ -340,8 +377,8 @@ public class csitemManager : MonoBehaviour
             itemPriceText.GetComponent<Text>().text = item.Price.ToString() + "\n" + "골드";
             itemNameText.GetComponent<Text>().text = "이 름: " + item.Name;
             itemExplainText.GetComponent<Text>().text = "설명: " + item.Explain;
-            itemPoolSet[itemIndex] = Instantiate(itemPool) as GameObject;
 
+            itemPoolSet[itemIndex] = Instantiate(itemPool) as GameObject;
             itemPoolSet[itemIndex].transform.SetParent(itemGrid.transform);
             itemPoolSet[itemIndex].transform.localScale = new Vector3(1, 1, 1);
 
@@ -384,8 +421,8 @@ public class csitemManager : MonoBehaviour
             itemPriceText.GetComponent<Text>().text = item.Price.ToString() + "\n" + "골드";
             itemNameText.GetComponent<Text>().text = "이 름: " + item.Name;
             itemExplainText.GetComponent<Text>().text = "설명: " + item.Explain;
-            itemPoolSet[itemIndex] = Instantiate(itemPool) as GameObject;
 
+            itemPoolSet[itemIndex] = Instantiate(itemPool) as GameObject;
             itemPoolSet[itemIndex].transform.SetParent(itemGrid.transform);
             itemPoolSet[itemIndex].transform.localScale = new Vector3(1, 1, 1);
 
@@ -393,5 +430,125 @@ public class csitemManager : MonoBehaviour
             itemPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClockPotion(itemIndex); });
         }
         itemPoolSet[itemIndex].SetActive(false);
+    }
+
+    private void BuyItem(int itemIndex, GameObject itemUseSet)
+    {
+        if (itemIndex >= 0 && itemIndex <= 4)
+        {
+            //포션
+            PotionItem item = (PotionItem)StateManager.Instance.potionItems[itemIndex];
+            
+            if(StateManager.Instance.playGold >= item.Price)
+            {
+                if (StateManager.Instance.scrollNum[itemIndex] == 0)
+                {
+                    itemUseNameText.text = "이 름: " + item.Name;
+                    itemUseExplainText.text = "설 명: " + item.Explain;
+                    
+
+                    itemUseSet = Instantiate(itemUseSetObj) as GameObject;
+                    itemUseSet.transform.SetParent(itemUseGrid.transform);
+                    itemUseSet.transform.localScale = new Vector3(1, 1, 1);
+                    itemUseSet.name = "Potion" + itemIndex;
+                    StateManager.Instance.itemSpace[itemIndex] = itemUseSet;
+                }
+                StateManager.Instance.playGold -= item.Price;
+                StateManager.Instance.scrollNum[itemIndex]++;
+                itemPoolSet[itemIndex].transform.FindChild("Scrollcnt").GetComponent<Text>().text = "보 유 갯 수:" + StateManager.Instance.scrollNum[itemIndex] + " 개";
+                StateManager.Instance.itemSpace[itemIndex].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" +"\n"+ StateManager.Instance.scrollNum[itemIndex] + " 개";
+            }
+            else
+            {
+                popClose.SetActive(true);
+            }
+        }
+
+        else if (itemIndex >= 5 && itemIndex <= 8)
+        {
+            //스킬
+            SkillItem item = (SkillItem)StateManager.Instance.skillScrollItems[itemIndex];
+            if (StateManager.Instance.playGold >= item.Price)
+            {
+                if (StateManager.Instance.scrollNum[itemIndex] == 0)
+                {
+                    itemUseNameText.text = "이 름: " + item.Name;
+                    itemUseExplainText.text = "설 명: " + item.Explain;
+                    
+                    itemUseSet = Instantiate(itemUseSetObj) as GameObject;
+                    itemUseSet.transform.SetParent(skillUseGrid.transform);
+                    itemUseSet.transform.localScale = new Vector3(1, 1, 1);
+                    itemUseSet.name = "Skill" + itemIndex;
+                    StateManager.Instance.itemSpace[itemIndex] = itemUseSet;
+                }
+                StateManager.Instance.playGold -= item.Price;
+                StateManager.Instance.scrollNum[itemIndex]++;
+                itemPoolSet[itemIndex].transform.FindChild("Scrollcnt").GetComponent<Text>().text = "보 유 갯 수:" + StateManager.Instance.scrollNum[itemIndex] + " 개";
+                StateManager.Instance.itemSpace[itemIndex].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.scrollNum[itemIndex] + " 개";
+            }
+            else
+            {
+                popClose.SetActive(true);
+            }
+
+
+        }
+
+        else if (itemIndex >= 9 && itemIndex <= 12)
+        {
+            //마법
+            MagicItem item = (MagicItem)StateManager.Instance.magicScrollItems[itemIndex];
+            if (StateManager.Instance.playGold >= item.Price)
+            {
+                if (StateManager.Instance.scrollNum[itemIndex] == 0)
+                {
+                    itemUseNameText.text = "이 름: " + item.Name;
+                    itemUseExplainText.text = "설 명: " + item.Explain;
+                    
+                    itemUseSet = Instantiate(itemUseSetObj) as GameObject;
+                    itemUseSet.transform.SetParent(skillUseGrid.transform);
+                    itemUseSet.transform.localScale = new Vector3(1, 1, 1);
+                    itemUseSet.name = "Magic" + itemIndex;
+                    StateManager.Instance.itemSpace[itemIndex] = itemUseSet;
+                }
+                StateManager.Instance.playGold -= item.Price;
+                StateManager.Instance.scrollNum[itemIndex]++;
+                itemPoolSet[itemIndex].transform.FindChild("Scrollcnt").GetComponent<Text>().text = "보 유 갯 수:" + StateManager.Instance.scrollNum[itemIndex] + " 개";
+                StateManager.Instance.itemSpace[itemIndex].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.scrollNum[itemIndex] + " 개";
+            }
+            else
+            {
+                popClose.SetActive(true);
+            }
+
+
+        }
+        else if (itemIndex >= 13 && itemIndex <= 18)
+        {
+            //보조 마법
+            BuffItem item = (BuffItem)StateManager.Instance.buffScrollItems[itemIndex];
+            if (StateManager.Instance.playGold >= item.Price)
+            {
+                if (StateManager.Instance.scrollNum[itemIndex] == 0)
+                {
+                    itemUseNameText.text = "이 름: " + item.Name;
+                    itemUseExplainText.text = "설 명: " + item.Explain;
+                    
+                    itemUseSet = Instantiate(itemUseSetObj) as GameObject;
+                    itemUseSet.transform.SetParent(skillUseGrid.transform);
+                    itemUseSet.transform.localScale = new Vector3(1, 1, 1);
+                    itemUseSet.name = "Buff" + itemIndex;
+                    StateManager.Instance.itemSpace[itemIndex] = itemUseSet;
+                }
+                StateManager.Instance.playGold -= item.Price;
+                StateManager.Instance.scrollNum[itemIndex]++;
+                itemPoolSet[itemIndex].transform.FindChild("Scrollcnt").GetComponent<Text>().text = "보 유 갯 수:" + StateManager.Instance.scrollNum[itemIndex] + " 개";
+                StateManager.Instance.itemSpace[itemIndex].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.scrollNum[itemIndex] + " 개";
+            }
+            else
+            {
+                popClose.SetActive(true);
+            }
+        }
     }
 }

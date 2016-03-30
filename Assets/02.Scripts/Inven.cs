@@ -56,8 +56,10 @@ public class Inven : MonoBehaviour
                 dText.text = "0";
                 DestroyObject(StateManager.Instance.weaponSpace[wNum]);
             }
+            else if(StateManager.Instance.weaponDurability[wNum] > 0)
+            { 
             StateManager.Instance.weaponDurability[wNum] -= 1;
-            dText.text = StateManager.Instance.weaponDurability[wNum].ToString();
+            dText.text = StateManager.Instance.weaponDurability[wNum].ToString();}
         }
         
 
