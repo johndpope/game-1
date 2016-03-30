@@ -25,6 +25,7 @@ public class Inven : MonoBehaviour
     Text uText;
 
     private int wNum;
+    private int aNum;
 
     int d;
 
@@ -177,8 +178,8 @@ public class Inven : MonoBehaviour
             dText.text = StateManager.Instance.weaponDurability[wNum].ToString();
             StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
             StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
+            StateManager.Instance.playUseAtk = csUseEquip.attackPoint;
             use = wNum;
-            Debug.Log(use);
         }
 
          else if(d > 0)
@@ -198,27 +199,18 @@ public class Inven : MonoBehaviour
         DestroyObject(StateManager.Instance.weaponSpace[use]);
         StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
         StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
+        StateManager.Instance.playUseAtk = csUseEquip.attackPoint;
         use = wNum;
     }
 
     private void armoeSet()
     {
-        wNum = StateManager.Instance.bagNum;
+        aNum = StateManager.Instance.bagNum;
 
-        if (d == 0)
-        {
-            ynPop.SetActive(false);
-            dText.text = StateManager.Instance.weaponDurability[wNum].ToString();
-            StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
-            StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
-            use = wNum;
-        }
-
-        else if (d > 0)
-        {
-            ynPop.SetActive(false);
-            rPop.SetActive(true);
-            uText.text = "내 구 가 " + d + "\n" + "사 용 하 시 겠 습 니 까?";
-        }
+        ynPop.SetActive(false);
+        StateManager.Instance.weaponSpace[aNum].GetComponent<Button>().enabled = false;
+        StateManager.Instance.weaponSpace[aNum].transform.FindChild("armorUseIcon").GetComponentInChildren<Image>().enabled = true;
+        StateManager.Instance.playUseDef = csUseEquip.defPoint;
+        
     }
 }

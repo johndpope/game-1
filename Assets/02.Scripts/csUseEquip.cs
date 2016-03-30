@@ -9,6 +9,11 @@ public class csUseEquip : MonoBehaviour
     public static bool itemUsePopBool;
     public static int equipNum;
 
+    public static int attackPoint;
+    public static int defPoint;
+    public static int spdPoint;
+
+
     private ArrayList wItems;
     private ArrayList aItems;
     private ArrayList bItems;
@@ -40,6 +45,7 @@ public class csUseEquip : MonoBehaviour
                     equipNum = 1;
                     itemUsePopBool = true;
                     StateManager.Instance.bagNum = i;
+                    attackPoint = item.AttackPoint;
                 }
             }
         }
@@ -47,9 +53,9 @@ public class csUseEquip : MonoBehaviour
 
     public void EquipArmor()
     {
-        for (int j = 0; j < wItems.Count; j++)
+        for (int j = 0; j < aItems.Count; j++)
         {
-            HMArmorItem item = (HMArmorItem)wItems[j];
+            HMArmorItem item = (HMArmorItem)aItems[j];
             for (int i = 0; i < 10; i++)
             {
                 if (gameObject.name == item.ArmorName + i)
@@ -57,6 +63,7 @@ public class csUseEquip : MonoBehaviour
                     equipNum = 2;
                     itemUsePopBool = true;
                     StateManager.Instance.bagNum = i;
+                    defPoint = item.Def;
                 }
             }
         }
@@ -64,9 +71,9 @@ public class csUseEquip : MonoBehaviour
 
     public void EquipBoots()
     {
-        for (int j = 0; j < wItems.Count; j++)
+        for (int j = 0; j < bItems.Count; j++)
         {
-            HMBootsItem item = (HMBootsItem)wItems[j];
+            HMBootsItem item = (HMBootsItem)bItems[j];
             for (int i = 0; i < 10; i++)
             {
                 if (gameObject.name == item.BootsName + i)
@@ -74,6 +81,7 @@ public class csUseEquip : MonoBehaviour
                     equipNum = 3;
                     itemUsePopBool = true;
                     StateManager.Instance.bagNum = i;
+                    spdPoint = item.Spd;
                 }
             }
         }

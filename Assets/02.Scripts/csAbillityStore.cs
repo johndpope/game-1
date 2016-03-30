@@ -7,12 +7,12 @@ public class csAbillityStore : MonoBehaviour {
     public int firstHp = 20;
     public int firstAtk = 5;
     public int firstDef = 3;
-    public int firstSpd = 10;
+    public float firstSpd = 10.0f;
     //능력치 강화로 얼마나 오르는지
     public int upNumHp;
     public int upNumAtk;
     public int upNumDef;
-    public double upNumSpd;
+    public float upNumSpd;
     //능력치 강화를 몇회 했는지
     public int cntHp;
     public int cntAtk;
@@ -23,7 +23,7 @@ public class csAbillityStore : MonoBehaviour {
     public int playerHp;//피해를 받았을때
     public int playerAtk;//다른 방법으로 능력치가 바뀔경우
     public int playerDef;//다른 방법으로 능력치가 바뀔경우
-    public double playerSpd;//다른 방법으로 능력치가 바뀔경우
+    public float playerSpd;//다른 방법으로 능력치가 바뀔경우
     //////////////////////////////////////////////////////////////////
     //상태창
     //public GameObject equInven;
@@ -57,9 +57,9 @@ public class csAbillityStore : MonoBehaviour {
         playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
 
         playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
-        playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk;
-        playerDefText.GetComponent<Text>().text = "" + StateManager.Instance.playDef;
-        playerSpdText.GetComponent<Text>().text = "" + StateManager.Instance.playSpd;
+        playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk + " + " + StateManager.Instance.playUseAtk;
+        playerDefText.GetComponent<Text>().text = "" + StateManager.Instance.playDef + " + " + StateManager.Instance.playUseDef;
+        playerSpdText.GetComponent<Text>().text = "" + StateManager.Instance.playSpd + " + " + StateManager.Instance.playUseSpd;
 
         StateManager.Instance.playHp = firstHp + upNumHp + playerHp;
         StateManager.Instance.playAtk = firstAtk + upNumAtk + playerAtk;
@@ -141,7 +141,7 @@ public class csAbillityStore : MonoBehaviour {
         //}
 
         StateManager.Instance.playGold -= (cntSpd * 100) + 100;
-        upNumSpd -= 0.5;
+        upNumSpd -= 0.5f;
         cntSpd++;
         goldSpdText.GetComponent<Text>().text = (cntSpd * 100) + 100 + "골드";
        // StateManager.Instance.playSpd = firstSpd + upNumSpd + playerSpd;

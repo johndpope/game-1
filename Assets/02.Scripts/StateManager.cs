@@ -48,9 +48,11 @@ public class StateManager : MonoBehaviour
     public int playHp;
     public int playAtk;
     public int playDef;
-    public double playSpd;
-    
-    
+    public float playSpd;
+
+    public int playUseAtk;
+    public int playUseDef;
+    public float playUseSpd;
 
     //다른곳에서 사용할때.
     //StateManager.Instance.hp = 100;
