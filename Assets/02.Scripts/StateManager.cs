@@ -34,6 +34,7 @@ public class StateManager : MonoBehaviour
     public ArrayList buffScrollItems;
     public int[] scrollNum = new int[20];
     public GameObject[] itemSpace = new GameObject[15];
+    public GameObject[] scrollSpace = new GameObject[15];
 
     public ArrayList weaponItems;
     public ArrayList armorItems;

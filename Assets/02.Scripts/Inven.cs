@@ -17,6 +17,7 @@ public class Inven : MonoBehaviour
 
     public GameObject ynPop;
     public GameObject rPop;
+    public GameObject changePop;
 
     public GameObject durabilityText;
     Text dText;
@@ -26,16 +27,28 @@ public class Inven : MonoBehaviour
 
     private int wNum;
     private int aNum;
+    private int bNum;
+
+    bool armorItemUse;
+    bool bootsItemUse;
 
     int d;
 
-    int use;
+    int wUse;
+    int bUse;
+    int aUse;
+
+    int changeNum;
+
     void Start()
     {
+
+        armorItemUse = false;
+        bootsItemUse = false;
         timestop = false;
         dText = durabilityText.GetComponent<Text>();
         uText = useText.GetComponent<Text>();
-        dText.text = StateManager.Instance.weaponDurability[use].ToString();
+        dText.text = StateManager.Instance.weaponDurability[wUse].ToString();
     }
 
     // Update is called once per frame
@@ -140,14 +153,21 @@ public class Inven : MonoBehaviour
                 break;
             case 2:
                 armorSet();
+                if(armorItemUse==true)
+                {
+                    changeNum = 1;
+                }
                 csUseEquip.equipNum = 0;
                 break;
             case 3:
                 bootsSet();
+                if (bootsItemUse == true)
+                {
+                    changeNum = 2;
+                }
                 csUseEquip.equipNum = 0;
                 break;
         }
-        
     }
 
     public void noUseItem(int i)
@@ -160,7 +180,6 @@ public class Inven : MonoBehaviour
         {
             rPop.SetActive(false);
         }
-
     }
 
     public void mUseItem()
@@ -168,6 +187,32 @@ public class Inven : MonoBehaviour
         weaponSet2();
         ynPop.SetActive(false);
     }
+
+    public void changeItem()
+    {
+        switch(changeNum)
+        {
+            case 1:
+                DestroyObject(StateManager.Instance.weaponSpace[aUse]);
+                armorItemUse = false;
+                armorSet();
+                changePop.SetActive(false);
+                break;
+            case 2:
+                DestroyObject(StateManager.Instance.weaponSpace[bUse]);
+                bootsItemUse = false;
+                bootsSet();
+                changePop.SetActive(false);
+                break;
+        }
+       
+    }
+
+    public void noChangeItem()
+    {
+        changePop.SetActive(false);
+    }
+
 
     private void weaponSet()
     {
@@ -181,7 +226,7 @@ public class Inven : MonoBehaviour
             StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
             StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
             StateManager.Instance.playUseAtk = csUseEquip.attackPoint;
-            use = wNum;
+            wUse = wNum;
         }
 
          else if(d > 0)
@@ -197,31 +242,49 @@ public class Inven : MonoBehaviour
         wNum = StateManager.Instance.bagNum;
         rPop.SetActive(false);
         dText.text = StateManager.Instance.weaponDurability[wNum].ToString();
-        DestroyObject(StateManager.Instance.weaponSpace[use]);
+        DestroyObject(StateManager.Instance.weaponSpace[wUse]);
         StateManager.Instance.bagSize--;
         StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
         StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
         StateManager.Instance.playUseAtk = csUseEquip.attackPoint;
-        use = wNum;
+        wUse = wNum;
     }
 
     private void armorSet()
     {
-        aNum = StateManager.Instance.bagNum;
-
-        ynPop.SetActive(false);
-        StateManager.Instance.weaponSpace[aNum].GetComponent<Button>().enabled = false;
-        StateManager.Instance.weaponSpace[aNum].transform.FindChild("armorUseIcon").GetComponentInChildren<Image>().enabled = true;
-        StateManager.Instance.playUseDef = csUseEquip.defPoint;
+        if (armorItemUse == false)
+        {
+            aNum = StateManager.Instance.bagNum;
+            ynPop.SetActive(false);
+            StateManager.Instance.weaponSpace[aNum].GetComponent<Button>().enabled = false;
+            StateManager.Instance.weaponSpace[aNum].transform.FindChild("armorUseIcon").GetComponentInChildren<Image>().enabled = true;
+            StateManager.Instance.playUseDef = csUseEquip.defPoint;
+            armorItemUse = true;
+            aUse = aNum;
+        }
+        else if(armorItemUse == true)
+        {
+            ynPop.SetActive(false);
+            changePop.SetActive(true);
+        }
     }
 
     private void bootsSet()
     {
-        aNum = StateManager.Instance.bagNum;
-
-        ynPop.SetActive(false);
-        StateManager.Instance.weaponSpace[aNum].GetComponent<Button>().enabled = false;
-        StateManager.Instance.weaponSpace[aNum].transform.FindChild("bootsUseIcon").GetComponentInChildren<Image>().enabled = true;
-        StateManager.Instance.playUseSpd = csUseEquip.spdPoint;
+        if (bootsItemUse == false)
+        {
+            bNum = StateManager.Instance.bagNum;
+            ynPop.SetActive(false);
+            StateManager.Instance.weaponSpace[bNum].GetComponent<Button>().enabled = false;
+            StateManager.Instance.weaponSpace[bNum].transform.FindChild("bootsUseIcon").GetComponentInChildren<Image>().enabled = true;
+            StateManager.Instance.playUseSpd = csUseEquip.spdPoint;
+            bootsItemUse = true;
+            bUse = bNum;
+        }
+        else if (bootsItemUse == true)
+        {
+            ynPop.SetActive(false);
+            changePop.SetActive(true);
+        }
     }
 }
