@@ -44,7 +44,6 @@ public class Inven : MonoBehaviour
 
         if (csUseEquip.itemUsePopBool == true)
         {
-            Debug.Log("들어옴");
             ynPop.SetActive(true);
             csUseEquip.itemUsePopBool = false;
         }
@@ -127,12 +126,25 @@ public class Inven : MonoBehaviour
         _SkillScroll.SetActive(false);
         _ItemScroll.SetActive(false);
         _QuestScroll.SetActive(false);
-        //껏다 켜기
     }
 
     public void useItem()
     {
-        weaponSet();
+        switch(csUseEquip.equipNum)
+        {
+            case 1:
+                weaponSet();
+                csUseEquip.equipNum = 0;
+                break;
+            case 2:
+                armoeSet();
+                csUseEquip.equipNum = 0;
+                break;
+            case 3:
+                csUseEquip.equipNum = 0;
+                break;
+        }
+        
     }
 
     public void noUseItem(int i)
@@ -141,7 +153,7 @@ public class Inven : MonoBehaviour
         {
             ynPop.SetActive(false);
         }
-       else if (i == 1)
+        else if (i == 1)
         {
             rPop.SetActive(false);
         }
@@ -187,5 +199,26 @@ public class Inven : MonoBehaviour
         StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
         StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
         use = wNum;
+    }
+
+    private void armoeSet()
+    {
+        wNum = StateManager.Instance.bagNum;
+
+        if (d == 0)
+        {
+            ynPop.SetActive(false);
+            dText.text = StateManager.Instance.weaponDurability[wNum].ToString();
+            StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
+            StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
+            use = wNum;
+        }
+
+        else if (d > 0)
+        {
+            ynPop.SetActive(false);
+            rPop.SetActive(true);
+            uText.text = "내 구 가 " + d + "\n" + "사 용 하 시 겠 습 니 까?";
+        }
     }
 }

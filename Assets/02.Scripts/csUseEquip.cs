@@ -7,7 +7,7 @@ public class csUseEquip : MonoBehaviour
 {
 
     public static bool itemUsePopBool;
-    public static int weaponNum;
+    public static int equipNum;
 
     private ArrayList wItems;
     private ArrayList aItems;
@@ -15,6 +15,7 @@ public class csUseEquip : MonoBehaviour
    
     void Start()
     {
+        equipNum = 0;
         itemUsePopBool = false;
         wItems = StateManager.Instance.weaponItems;
         aItems = StateManager.Instance.armorItems;
@@ -36,6 +37,7 @@ public class csUseEquip : MonoBehaviour
             {
                 if (gameObject.name == item.WeaponName + i)
                 {
+                    equipNum = 1;
                     itemUsePopBool = true;
                     StateManager.Instance.bagNum = i;
                 }
@@ -52,6 +54,7 @@ public class csUseEquip : MonoBehaviour
             {
                 if (gameObject.name == item.ArmorName + i)
                 {
+                    equipNum = 2;
                     itemUsePopBool = true;
                     StateManager.Instance.bagNum = i;
                 }
@@ -68,6 +71,7 @@ public class csUseEquip : MonoBehaviour
             {
                 if (gameObject.name == item.BootsName + i)
                 {
+                    equipNum = 3;
                     itemUsePopBool = true;
                     StateManager.Instance.bagNum = i;
                 }
