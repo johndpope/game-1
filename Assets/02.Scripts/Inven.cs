@@ -54,6 +54,7 @@ public class Inven : MonoBehaviour
             if(StateManager.Instance.weaponDurability[wNum] == 0)
             {
                 dText.text = "0";
+                StateManager.Instance.bagSize--;
                 DestroyObject(StateManager.Instance.weaponSpace[wNum]);
             }
             else if(StateManager.Instance.weaponDurability[wNum] > 0)
@@ -138,10 +139,11 @@ public class Inven : MonoBehaviour
                 csUseEquip.equipNum = 0;
                 break;
             case 2:
-                armoeSet();
+                armorSet();
                 csUseEquip.equipNum = 0;
                 break;
             case 3:
+                bootsSet();
                 csUseEquip.equipNum = 0;
                 break;
         }
@@ -193,17 +195,17 @@ public class Inven : MonoBehaviour
     private void weaponSet2()
     {
         wNum = StateManager.Instance.bagNum;
-        Debug.Log("들어옴");
         rPop.SetActive(false);
         dText.text = StateManager.Instance.weaponDurability[wNum].ToString();
         DestroyObject(StateManager.Instance.weaponSpace[use]);
+        StateManager.Instance.bagSize--;
         StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
         StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
         StateManager.Instance.playUseAtk = csUseEquip.attackPoint;
         use = wNum;
     }
 
-    private void armoeSet()
+    private void armorSet()
     {
         aNum = StateManager.Instance.bagNum;
 
@@ -211,6 +213,15 @@ public class Inven : MonoBehaviour
         StateManager.Instance.weaponSpace[aNum].GetComponent<Button>().enabled = false;
         StateManager.Instance.weaponSpace[aNum].transform.FindChild("armorUseIcon").GetComponentInChildren<Image>().enabled = true;
         StateManager.Instance.playUseDef = csUseEquip.defPoint;
-        
+    }
+
+    private void bootsSet()
+    {
+        aNum = StateManager.Instance.bagNum;
+
+        ynPop.SetActive(false);
+        StateManager.Instance.weaponSpace[aNum].GetComponent<Button>().enabled = false;
+        StateManager.Instance.weaponSpace[aNum].transform.FindChild("bootsUseIcon").GetComponentInChildren<Image>().enabled = true;
+        StateManager.Instance.playUseSpd = csUseEquip.spdPoint;
     }
 }

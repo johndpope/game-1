@@ -109,7 +109,8 @@ public class csEquipageStore : MonoBehaviour
     public GameObject armorPool;
     public GameObject armorPoolNameText;
     public GameObject armorPoolPriceText;
-    
+
+   
 
     public GameObject[] weaponPoolSet = new GameObject[5];
     public GameObject[] armorPoolSet = new GameObject[5];
@@ -134,6 +135,10 @@ public class csEquipageStore : MonoBehaviour
     public GameObject armorUse;
     public GameObject armorNameText;
     public GameObject armorImage;
+
+    public GameObject bootsUse;
+    public GameObject bootsNameText;
+    public GameObject bootsImage;
 
     int wNum;
     ArrayList itemInfos;
@@ -300,11 +305,14 @@ public class csEquipageStore : MonoBehaviour
         {
             return;
         }
+
         HMArmorItem item = (HMArmorItem)aItems[num];
         if (StateManager.Instance.playGold >= item.Price)
         {
             StateManager.Instance.playGold -= item.Price;
             this._itemArmor(setObj, num, armorPoolSet[num].name);
+            armorPoolSet[num].transform.FindChild("soldOut").GetComponentInChildren<Image>().enabled = true;
+            armorPoolSet[num].GetComponentInChildren<Button>().enabled = false;
         }
     }
 
@@ -319,6 +327,8 @@ public class csEquipageStore : MonoBehaviour
         {
             StateManager.Instance.playGold -= item.Price;
             this._itemBoots(setObj, num, bootPoolSet[num].name);
+            bootPoolSet[num].transform.FindChild("soldOut").GetComponentInChildren<Image>().enabled = true;
+            bootPoolSet[num].GetComponentInChildren<Button>().enabled = false;
         }
     }
 
@@ -415,7 +425,6 @@ public class csEquipageStore : MonoBehaviour
         str = String.Format(itemDescFormat, str1, str2, str3, str4);
 
         armorPoolPriceText.GetComponent<Text>().text = strGold;
-
         armorPoolNameText.GetComponent<Text>().text = str;
 
         armorPoolSet[itemIndex] = Instantiate(armorPool) as GameObject;
@@ -476,7 +485,6 @@ public class csEquipageStore : MonoBehaviour
         str = String.Format(itemDescFormat, str1, str2, str3, str4);
 
         armorPoolPriceText.GetComponent<Text>().text = strGold;
-
         armorPoolNameText.GetComponent<Text>().text = str;
 
         bootPoolSet[itemIndex] = Instantiate(armorPool) as GameObject;
@@ -497,12 +505,12 @@ public class csEquipageStore : MonoBehaviour
         }
         StateManager.Instance.bagSize++;
         //StateManager.Instance.bagNum = wNum;
-        HMBootsItem item = (HMBootsItem)bItems[itemIndex];
 
-        armorNameText.GetComponent<Text>().text = item.Name + "\n" + " 속도: " + item.Spd.ToString();
+        HMBootsItem item = (HMBootsItem)bItems[itemIndex];
+        bootsNameText.GetComponent<Text>().text = item.Name + "\n" + " 속도: " + item.Spd.ToString();
 
         //armorImage.GetComponent<Image>().sprite = (Sprite)Resources.Load("WeaponBase", typeof(Sprite));
-        gameObj = Instantiate(armorUse) as GameObject;
+        gameObj = Instantiate(bootsUse) as GameObject;
         gameObj.transform.SetParent(grid.transform);
         gameObj.transform.localScale = new Vector3(1, 1, 1);
         for (wNum = 0; wNum < 5; wNum++)
