@@ -42,11 +42,11 @@ public class Inven : MonoBehaviour
     {
         d = Int32.Parse(dText.text);
 
-        if (csWeapom.itemUsePopBool == true)
+        if (csUseEquip.itemUsePopBool == true)
         {
             Debug.Log("들어옴");
             ynPop.SetActive(true);
-            csWeapom.itemUsePopBool = false;
+            csUseEquip.itemUsePopBool = false;
         }
 
         if(Input.GetButtonDown("Jump"))

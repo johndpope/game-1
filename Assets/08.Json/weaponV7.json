@@ -6,7 +6,8 @@
       "weaponPrice":100,
       "weaponDurability":10,
 	  "weaponExplain":"10번 일반 공격 가능",
-	  "weaponImage":"Weapon01"
+	  "weaponImage":"Weapon01",
+	  "weaponName":"Weapon10"
     },
     {
       "name":"20방검",
@@ -14,7 +15,8 @@
       "weaponPrice":200,
       "weaponDurability":20,
 	  "weaponExplain":"20번 일반 공격 가능",
-	  "weaponImage":"Weapon02"
+	  "weaponImage":"Weapon02",
+	  "weaponName":"Weapon20"
     },
     {
       "name":"30방검",
@@ -22,7 +24,8 @@
       "weaponPrice":300,
       "weaponDurability":30,
 	  "weaponExplain":"30번 일반 공격 가능",
-	  "weaponImage":"Weapon03"
+	  "weaponImage":"Weapon03",
+	  "weaponName":"Weapon30"
     },
      {
       "name":"50방검",
@@ -30,7 +33,8 @@
       "weaponPrice":700,
       "weaponDurability":50,
 	  "weaponExplain":"50번 일반 공격 가능",
-	  "weaponImage":"Weapon04"
+	  "weaponImage":"Weapon04",
+	  "weaponName":"Weapon50"
     },
     {
       "name":"개선된 50방검",
@@ -38,7 +42,8 @@
       "weaponPrice":900,
       "weaponDurability":50,
 	  "weaponExplain":"50번 일반 공격 가능",
-	  "weaponImage":"Weapon05"
+	  "weaponImage":"Weapon05",
+	  "weaponName":"Weapon55"
     },
      {
       "name":"3방검",
@@ -46,7 +51,8 @@
       "weaponPrice":1100,
       "weaponDurability":3,
 	  "weaponExplain":"3번 일반 공격 가능",
-	  "weaponImage":"Weapon06"
+	  "weaponImage":"Weapon06",
+	  "weaponName":"Weapon3"
     }
   ],
   
@@ -56,7 +62,8 @@
       "armorDef":5,
       "price":100,
       "Explain":"방어+5",
-      "armorImage": "Armor01"
+      "armorImage": "Armor01",
+	  "armorName":"Armor10"
       
     },
     {
@@ -64,21 +71,24 @@
       "armorDef":10,
       "price":300,
       "Explain":"방어+10",
-       "armorImage": "Armor02"
+       "armorImage": "Armor02",
+	  "armorName":"Armor20"
     },
     {
       "name":"취고굽갑옷",
       "armorDef":20,
       "price":500,
       "Explain":"방어+20",
-       "armorImage": "Armor03"
+      "armorImage": "Armor03",
+	  "armorName":"Armor30"
     },
     {
       "name":"장인의 갑옷",
       "armorDef":15,
       "price":200,
       "Explain":"방어+15",
-      "armorImage": "Armor04"
+      "armorImage": "Armor04",
+	  "armorName":"Armor40"
       
     },
     {
@@ -86,14 +96,16 @@
       "armorDef":25,
       "price":700,
       "Explain":"방어+25",
-       "armorImage": "Armor05"
+      "armorImage": "Armor05",
+	  "armorName":"Armor50"
     },
     {
       "name":"수퍼취고굽갑옷",
       "armorDef":50,
       "price":3000,
       "Explain":"방어+50",
-      "armorImage": "Armor06"
+      "armorImage": "Armor06",
+	  "armorName":"Armor60"
     }
     ],
 
@@ -103,42 +115,49 @@
         "bootsSpd":1,
         "price":100,
         "Explain":"속도+1",
-        "bootsImage":"Boots01"
+        "bootsImage":"Boots01",
+	  "bootsName":"Boots10"
+		
       },
       {
         "name":"레아부츠",
         "bootsSpd":2,
         "price":200,
         "Explain":"속도+2",
-        "bootsImage":"Boots02"
+        "bootsImage":"Boots02",
+	  "bootsName":"Boots20"
       },
       {
         "name":"우니크부츠",
         "bootsSpd":3,
         "price":500,
         "Explain":"속도+3",
-        "bootsImage":"Boots03"
+        "bootsImage":"Boots03",
+	  "bootsName":"Boots30"
       },
       {
         "name":"고대부츠",
         "bootsSpd":4,
         "price":700,
         "Explain":"속도+4",
-        "bootsImage":"Boots04"
+        "bootsImage":"Boots04",
+	  "bootsName":"Boots40"
       },
       {
         "name":"고대레아부츠",
         "bootsSpd":5,
         "price":1000,
         "Explain":"속도+5",
-        "bootsImage":"Boots05"
+        "bootsImage":"Boots05",
+	  "bootsName":"Boots50"
       },
       {
         "name":"고대우니크부츠",
         "bootsSpd":10,
         "price":2000,
         "Explain":"속도+10",
-        "bootsImage":"Boots06"
+        "bootsImage":"Boots06",
+	 "bootsName":"Boots60"
       }
      ],
 

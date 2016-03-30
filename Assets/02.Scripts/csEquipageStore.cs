@@ -39,7 +39,12 @@ class HMWeaponItem : HMItem
 {
     private int mAttackPoint;
     private int mDurability;
-
+    private string mWeaponName;
+    public string WeaponName
+    {
+        get { return mWeaponName; }
+        set { mWeaponName = value; }
+    }
     public int AttackPoint
     {
         get { return mAttackPoint; }
@@ -51,12 +56,19 @@ class HMWeaponItem : HMItem
         get { return mDurability; }
         set { mDurability = value; }
     }
+  
 }
 
 class HMArmorItem : HMItem
 {
     private int mDef;
-   
+    private string mArmorName;
+
+    public string ArmorName
+    {
+        get { return mArmorName; }
+        set { mArmorName = value; }
+    }
     public int Def
     {
         get { return mDef; }
@@ -67,7 +79,13 @@ class HMArmorItem : HMItem
 class HMBootsItem : HMItem
 {
     private int mSpd;
+    private string mBootsName;
 
+    public string BootsName
+    {
+        get { return mBootsName; }
+        set { mBootsName = value; }
+    }
     public int Spd
     {
         get { return mSpd; }
@@ -150,6 +168,7 @@ public class csEquipageStore : MonoBehaviour
                 String atkPoint = (String)itemInfo["weaponATK"];
                 String durability = (String)itemInfo["weaponDurability"];
                 String explain = (String)itemInfo["weaponExplain"];
+                String weaponName = (String)itemInfo["weaponName"];
 
                 HMWeaponItem weaponItem = new HMWeaponItem();
                 weaponItem.Name = name;
@@ -157,6 +176,7 @@ public class csEquipageStore : MonoBehaviour
                 weaponItem.AttackPoint = Int32.Parse(atkPoint);
                 weaponItem.Durability = Int32.Parse(durability);
                 weaponItem.Explain = explain;
+                weaponItem.WeaponName = weaponName;
 
                 wItems.Add(weaponItem);
             }
@@ -166,11 +186,13 @@ public class csEquipageStore : MonoBehaviour
                 String name = (String)itemInfo["name"];
                 String price = (String)itemInfo["price"];
                 String defPoint = (String)itemInfo["armorDef"];
+                String armorName = (String)itemInfo["armorName"];
 
                 HMArmorItem armorItem = new HMArmorItem();
                 armorItem.Name = name;
                 armorItem.Price = Int32.Parse(price);
                 armorItem.Def = Int32.Parse(defPoint);
+                armorItem.ArmorName = armorName;
                 aItems.Add(armorItem);
             }
 
@@ -179,11 +201,13 @@ public class csEquipageStore : MonoBehaviour
                 String name = (String)itemInfo["name"];
                 String price = (String)itemInfo["price"];
                 String bootsSpd = (String)itemInfo["bootsSpd"];
+                String bootsName = (String)itemInfo["bootsName"];
 
                 HMBootsItem bootsItem = new HMBootsItem();
                 bootsItem.Name = name;
                 bootsItem.Price = Int32.Parse(price);
                 bootsItem.Spd = Int32.Parse(bootsSpd);
+                bootsItem.BootsName = bootsName;
                 bItems.Add(bootsItem);
             }
         }
@@ -258,31 +282,44 @@ public class csEquipageStore : MonoBehaviour
     //무기 사기 위한 버튼
     public void onClickWeaponButton(int num)
     {
-        //ArrayList 싱글톤으로 값을 저장후 비교할것
-        if (StateManager.Instance.playGold >= ((num * 2) + 1) * 100)
+        if (StateManager.Instance.bagSize == 5)
         {
-            if (num >= 0 && num <= 2)
-            {
-                StateManager.Instance.playGold -= (num + 1) * 100;
-                this._itemWeapon(weaponSetObj, num, weaponPoolSet[num].name);
-            }
-            else if (num >= 3 && num <= 5)
-            {
-                StateManager.Instance.playGold -= ((num * 2) + 1) * 100;
-                this._itemWeapon(weaponSetObj, num, weaponPoolSet[num].name);
-            }
+            return;
+        }
+        HMWeaponItem item = (HMWeaponItem)wItems[num];
+        if (StateManager.Instance.playGold >= item.Price)
+        {
+            StateManager.Instance.playGold -= item.Price;
+            this._itemWeapon(weaponSetObj, num, weaponPoolSet[num].name);
         }
     }
 
     public void onClickArmorButton(int num)
     {
-        this._itemArmor(setObj, num, armorPoolSet[num].name);
+        if (StateManager.Instance.bagSize == 5)
+        {
+            return;
+        }
+        HMArmorItem item = (HMArmorItem)aItems[num];
+        if (StateManager.Instance.playGold >= item.Price)
+        {
+            StateManager.Instance.playGold -= item.Price;
+            this._itemArmor(setObj, num, armorPoolSet[num].name);
+        }
     }
 
     public void onClickBootsButton(int num)
     {
-        Debug.Log(num);
-        this._itemBoots(setObj, num, bootPoolSet[num].name);
+        if (StateManager.Instance.bagSize == 5)
+        {
+            return;
+        }
+        HMBootsItem item = (HMBootsItem)bItems[num];
+        if (StateManager.Instance.playGold >= item.Price)
+        {
+            StateManager.Instance.playGold -= item.Price;
+            this._itemBoots(setObj, num, bootPoolSet[num].name);
+        }
     }
 
     private void _itemWeapon(GameObject gameObj, int itemIndex, String weaponName)
@@ -292,7 +329,7 @@ public class csEquipageStore : MonoBehaviour
             return;
         }
         StateManager.Instance.bagSize++;
-        StateManager.Instance.bagNum = wNum;
+        //StateManager.Instance.bagNum = wNum;
         HMWeaponItem item = (HMWeaponItem)wItems[itemIndex];
         weaponDurabilityText.GetComponent<Text>().text = "내구도: " + item.Durability.ToString();
         weaponNameText.GetComponent<Text>().text = item.Name + " 공격력: " + item.AttackPoint.ToString();
@@ -398,8 +435,11 @@ public class csEquipageStore : MonoBehaviour
         {
             return;
         }
+
         StateManager.Instance.bagSize++;
-        StateManager.Instance.bagNum = wNum;
+
+        //StateManager.Instance.bagNum = wNum;
+
         HMArmorItem item = (HMArmorItem)aItems[itemIndex];
 
         armorNameText.GetComponent<Text>().text = item.Name + "\n" + " 방어력: " + item.Def.ToString();
@@ -456,10 +496,10 @@ public class csEquipageStore : MonoBehaviour
             return;
         }
         StateManager.Instance.bagSize++;
-        StateManager.Instance.bagNum = wNum;
-        HMArmorItem item = (HMArmorItem)aItems[itemIndex];
+        //StateManager.Instance.bagNum = wNum;
+        HMBootsItem item = (HMBootsItem)bItems[itemIndex];
 
-        armorNameText.GetComponent<Text>().text = item.Name + "\n" + " 방어력: " + item.Def.ToString();
+        armorNameText.GetComponent<Text>().text = item.Name + "\n" + " 속도: " + item.Spd.ToString();
 
         //armorImage.GetComponent<Image>().sprite = (Sprite)Resources.Load("WeaponBase", typeof(Sprite));
         gameObj = Instantiate(armorUse) as GameObject;
