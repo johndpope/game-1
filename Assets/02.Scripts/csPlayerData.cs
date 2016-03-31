@@ -46,7 +46,6 @@ public class csPlayerData : MonoBehaviour
             {
 
             }
-
             else if (StateManager.Instance.scrollSpace[i] != null)
             {
                 itemObj = StateManager.Instance.scrollSpace[i];
