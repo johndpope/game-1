@@ -11,4 +11,15 @@ public class csGizmoView : MonoBehaviour {
         Gizmos.color = _color;
         Gizmos.DrawSphere(transform.position, _radius);
     }
+
+    void Start()
+    {
+        //Debug.Log(transform.position + name);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+       
+    }
 }

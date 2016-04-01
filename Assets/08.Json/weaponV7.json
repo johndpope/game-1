@@ -347,7 +347,33 @@
         "Explain":"방어력감소 되지만 공격력증가",
         "buffScrollImage":"bufScroll_berserkScroll"
       }
-    ]
+    ],
+	  "map":[
+      {
+       "mapName":"4x4_1",
+       "wRoad_":2,
+       "hRoad_":1,
+       "rRoad_":9,
+       "room_":2,
+       "cRoad_":1,
+       "tRoad_":1
+      },
+       {
+       "mapName":"4x4_2",
+       "wRoad_":0,
+       "hRoad_":1,
+       "rRoad_":6,
+       "room_":3,
+       "cRoad_":2,
+       "tRoad_":4
+      }
+    ],
+	   "leval":[
+      {
+        "rock":2,
+        "boxs":2
+      }
+      ]
 }
 
 
