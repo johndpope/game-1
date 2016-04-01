@@ -368,8 +368,9 @@
        "tRoad_":4
       }
     ],
-	   "leval":[
+	   "Level":[
       {
+		"level":"Lv1",
         "rock":2,
         "boxs":2
       }

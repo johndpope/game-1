@@ -4,9 +4,8 @@ using System;
 using UnityEngine.UI;
 using itemPool;
 
-class Maps
+class Maps : HMItem
 {
-    private string mName;
     private int mWidthRoad;
     private int mHeightRoad;
     private int mRotationRoad;
@@ -14,12 +13,6 @@ class Maps
     private int mTcrossRoad;
     private int mRoom;
     
-    public string Name
-    {
-        get { return mName; }
-        set { mName = value; }
-    }
-
     public int WidthRoad
     {
         get { return mWidthRoad; }
@@ -53,14 +46,32 @@ class Maps
     }
 }
 
+class Level : HMItem
+{
+    private int mRock;
+    private int mBoxs;
+
+    public int Rock
+    {
+        get { return mRock; }
+        set { mRock = value; }
+    }
+    public int Boxs
+    {
+        get { return mBoxs; }
+        set { mBoxs = value; }
+    }
+}
+
 public class csDungeon : MonoBehaviour
 {
 
     private ArrayList nMaps;
+    private ArrayList nLevel;
     public TextAsset textAsset;
 
     GameObject map;
-
+    int levelRock;
     public GameObject rock;
 
     public Transform[] map1 = new Transform[16];
@@ -68,12 +79,13 @@ public class csDungeon : MonoBehaviour
     void LoadAssetfromJson()
     {
         nMaps = new ArrayList();
-      
+        nLevel = new ArrayList();
         Hashtable itemTable = (Hashtable)HMJson.objectFromJsonString(textAsset.text);
 
         foreach (String itemName in itemTable.Keys)
         {
             ArrayList itemInfoMaps = (ArrayList)itemTable["map"];
+            ArrayList itemInfoLevel = (ArrayList)itemTable["Level"];
 
             foreach (Hashtable itemInfo in itemInfoMaps)
             {
@@ -96,7 +108,21 @@ public class csDungeon : MonoBehaviour
 
                 nMaps.Add(mapValue);
             }
-          
+
+            foreach (Hashtable itemInfo in itemInfoLevel)
+            {
+     
+                String levelName = (String)itemInfo["level"];
+                String rocks = (String)itemInfo["rock"];
+                String boxs = (String)itemInfo["boxs"];
+
+                Level levelValue = new Level();
+                levelValue.Name = levelName;
+                levelValue.Rock = Int32.Parse(rocks);
+                levelValue.Boxs = Int32.Parse(boxs);
+
+                nLevel.Add(levelValue);
+            }
         }
     }
 
@@ -105,29 +131,53 @@ public class csDungeon : MonoBehaviour
     {
         LoadAssetfromJson();
         Maps maps = (Maps)nMaps[0];
+        Level level = (Level)nLevel[0];
+        levelRock = level.Rock;
+        
         map = GameObject.Find(maps.Name);
 
-        int f = UnityEngine.Random.Range(1, maps.RotationRoad);
-        Debug.Log(f);
+
+        int j=1;
+        for (int i = 0; i < map.transform.childCount; ++i)
+        {
+            //if (map.transform.GetChild(i).name == "rRoad_" + j)
+            //{
+               // map1[j-1] = map.transform.GetChild(i);
+            map1[i] = map.transform.GetChild(i);
+            // j++;
+            //}
+        }
+
         for (int i = 0; i < map.transform.childCount; i++)
         {
-            map1[i] = map.transform.GetChild(i);
-            if (map1[i].name == "rRoad_" + f)
-            {
-                rock.transform.parent = map1[i];
-                rock.transform.position = map1[i].transform.position;
-                Debug.Log("들어옴");
-            }
+            int f = UnityEngine.Random.Range(1, (maps.RotationRoad + 1));
+
+            Debug.Log("랜덤 값"+f);
+            Debug.Log("i 값" + i);
+
+            Rocks(i, f);
 
         }
-        
-        //Debug.Log(f);
-
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
 
+    }
+
+    public void Rocks(int num, int random)
+    {
+        if (map1[random+2].name == "rRoad_" + random)
+        {
+            if (levelRock > 0)
+            {
+                GameObject gameObj = Instantiate(rock) as GameObject;
+                gameObj.transform.parent = map1[random + 2];
+                gameObj.transform.position = map1[random + 2].transform.position;
+                Debug.Log("들어옴");
+                levelRock--; Debug.Log("남은 돌 갯수" + levelRock);
+            }
+        }
     }
 }
