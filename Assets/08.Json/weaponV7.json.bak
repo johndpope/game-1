@@ -105,7 +105,7 @@
       "price":3000,
       "Explain":"방어+50",
       "armorImage": "Armor06",
-      "armorName":"Armor60"
+	  "armorName":"Armor60"
     }
     ],
 
@@ -116,7 +116,7 @@
         "price":100,
         "Explain":"속도+1",
         "bootsImage":"Boots01",
-	"bootsName":"Boots10"
+	  "bootsName":"Boots10"
 		
       },
       {
@@ -133,7 +133,7 @@
         "price":500,
         "Explain":"속도+3",
         "bootsImage":"Boots03",
-	"bootsName":"Boots30"
+	  "bootsName":"Boots30"
       },
       {
         "name":"고대부츠",
@@ -141,7 +141,7 @@
         "price":700,
         "Explain":"속도+4",
         "bootsImage":"Boots04",
-	"bootsName":"Boots40"
+	  "bootsName":"Boots40"
       },
       {
         "name":"고대레아부츠",
@@ -149,7 +149,7 @@
         "price":1000,
         "Explain":"속도+5",
         "bootsImage":"Boots05",
-	"bootsName":"Boots50"
+	  "bootsName":"Boots50"
       },
       {
         "name":"고대우니크부츠",
@@ -157,7 +157,7 @@
         "price":2000,
         "Explain":"속도+10",
         "bootsImage":"Boots06",
-	"bootsName":"Boots60"
+	 "bootsName":"Boots60"
       }
      ],
 
@@ -167,35 +167,35 @@
         "up":20,
         "price":50,
         "Explain":"체 력 20  회 복",
-        "potionImage":"Potion_hp20"
+        "potionImage":"hp20Potion"
       },
       {
         "name":"상 회 물",
         "up":50,
         "price":100,
         "Explain":"체 력 50  회 복",
-        "potionImage":"Potion_hp50"
+        "potionImage":"hp50Potion"
       },
 	  {
         "name":"공 증 물",
         "up":20,
         "price":100,
         "Explain":"공 격 력  20 증 가",
-        "potionImage":"Potion_atk20"
+        "potionImage":"hp50Potion"
       },
       {
         "name":"돌 물",
         "up":10,
         "price":50,
         "Explain":"방 어  10 증 가",
-        "potionImage":"Potion_def10"
+        "potionImage":"defPotion"
       },
       {
         "name":"속 물",
         "up":2,
         "price":50,
         "Explain":"속 도  2 증 가",
-        "potionImage":"Potion_spd2"
+        "potionImage":"spdPotion"
       }
     ],
 
@@ -203,34 +203,34 @@
       {
         "name":"강격",
         "atk":1.5,
-	"specialAbility":2.0,
+		    "specialAbility":2.0,
         "price":100,
         "Explain":"큰 피해를 줌.",
-        "skillScrollImage":"skScroll_smash"
+        "skillScrollImage":"smash"
       },
       {
         "name":"회전베기",
         "atk":0.9,
-	"specialAbility":0,
+		    "specialAbility":2.0,
         "price":100,
         "Explain":"광역피해 줌.",
-        "skillScrollImage":"skScroll_clive"
+        "skillScrollImage":"clive"
       },
       {
         "name":"무자비한돌진",
         "atk":0.5,
-	"specialAbility":3.0,
+		    "specialAbility":3.0,
         "price":150,
         "Explain":"피해와 기절.",
-        "skillScrollImage":"skScroll_charge"
+        "skillScrollImage":"charge"
       },
       {
         "name":"가르기",
         "atk":0.5,
-	"specialAbility":0.5,
+		    "specialAbility":0.5,
         "price":200,
         "Explain":"피해와 방어력감소.",
-        "skillScrollImage":"skScroll_cut"
+        "skillScrollImage":"cut"
       }
     ],
 
@@ -239,28 +239,28 @@
         "name":"얼음화살",
         "atk":1.0,
         "spdDown":0.5,
-	"atkDown":0,
+		    "atkDown":0,
         "price":200,
         "Explain":"피해와 감속.",
-        "magicScrollImage":"mgScroll_iceArrow"
+        "magicScrollImage":"iceArrow"
       },
       {
         "name":"화염구",
         "atk":2.0,
-	"spdDown":0,
-	"atkDown":0,
+		    "spdDown":0,
+		    "atkDown":0,
         "price":250,
         "Explain":"큰 피해를 줌.",
-        "magicScrollImage":"mgScroll_fireBall"
+        "magicScrollImage":"fireBall"
       },
       {
         "name":"불기둥",
         "atk":1.2,
-	"spdDown":0,
-	"atkDown":0,
+		    "spdDown":0,
+		    "atkDown":0,
         "price":300,
         "Explain":"광역피해 줌.",
-	"magicScrollImage":"mgScroll_firePillar"
+		    "magicScrollImage":"firePillar"
       },
       {
         "name":"대지의화살",
@@ -269,7 +269,7 @@
         "atkDown":0.5,
         "price":200,
         "Explain":"피해와 공격력감소.",
-        "magicScrollImage":"mgScroll_earthArrow"
+        "magicScrollImage":"earthArrow"
       }
     ],
 
@@ -284,7 +284,7 @@
         "defDown":0,
         "price":400,
         "Explain":"체력,모든상태이상 회복.",
-        "buffScrollImage":"bufScroll_ancientHealScroll"
+        "buffScrollImage":"ancientHealScroll"
       },
       {
         "name":"힘의스크롤",
@@ -296,7 +296,7 @@
         "defDown":0,
         "price":100,
         "Explain":"공격력증가.",
-        "buffScrollImage":"bufScroll_atkScroll"
+        "buffScrollImage":"atkScroll"
       },
       {
         "name":"인내의스크롤",
@@ -308,7 +308,7 @@
         "defDown":0,
         "price":100,
         "Explain":"방어력 증가.",
-        "buffScrollImage":"bufScroll_defScroll"
+        "buffScrollImage":"defScroll"
       },
       {
         "name":"신속의스크롤",
@@ -320,7 +320,7 @@
         "defDown":0,
         "price":100,
         "Explain":"속도 증가.",
-        "buffScrollImage":"bufScroll_spdScroll"
+        "buffScrollImage":"spdScroll"
         
       },
       {
@@ -333,7 +333,7 @@
         "defDown":0,
         "price":300,
         "Explain":"공,방,속도 증가.",
-        "buffScrollImage":"bufScroll_prayScroll"
+        "buffScrollImage":"prayScroll"
       },
       {
         "name":"광폭의서",
@@ -345,7 +345,7 @@
         "defDown":1.0,
         "price":250,
         "Explain":"방어력감소 되지만 공격력증가",
-        "buffScrollImage":"bufScroll_berserkScroll"
+        "buffScrollImage":"berserkScroll"
       }
     ]
 }
