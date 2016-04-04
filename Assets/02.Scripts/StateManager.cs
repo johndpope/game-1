@@ -76,9 +76,6 @@ public class StateManager : MonoBehaviour
     //무기의 내구도를 저장하는 integer형 배열
     public int[] weaponDurability = new int[10];
 
-    public ArrayList dungeonMapList;
-    public ArrayList dungeonLevelList;
-
     public int dungeonMap;
     public int dungeonLevel;
 
