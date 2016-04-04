@@ -101,11 +101,11 @@ public class csDungeon : MonoBehaviour
     int tRoadPool;
 
     //cRoad의 위치 값을 저장하는 배열
-    Transform[] cRoad;
+    public Transform[] cRoad;
     int cRoadPool;
 
     //room의 위치 값을 저장하는 배열
-    Transform[] room;
+    public Transform[] room;
     int roomPool;
 
     Maps mapObj;
@@ -113,6 +113,9 @@ public class csDungeon : MonoBehaviour
 
     int randomSetRock = 0;
     int randomSetTreasure = 0;
+
+    ArrayList itemInfoMaps;
+    ArrayList itemInfoLevel;
 
     void LoadAssetfromJson()
     {
@@ -122,8 +125,8 @@ public class csDungeon : MonoBehaviour
 
         foreach (String itemName in itemTable.Keys)
         {
-            ArrayList itemInfoMaps = (ArrayList)itemTable["map"];
-            ArrayList itemInfoLevel = (ArrayList)itemTable["Level"];
+            itemInfoMaps = (ArrayList)itemTable["map"];
+            itemInfoLevel = (ArrayList)itemTable["Level"];
 
             foreach (Hashtable itemInfo in itemInfoMaps)
             {
@@ -170,26 +173,29 @@ public class csDungeon : MonoBehaviour
 
         LoadAssetfromJson();
 
-        //StateManager.Instance.dungeonMapList = nMaps;
-        //StateManager.Instance.dungeonLevelList = nLevel;
+        StateManager.Instance.dungeonMapList = itemInfoMaps;
+        StateManager.Instance.dungeonLevelList = itemInfoLevel;
 
-        if(Application.loadedLevel == 0)
+     
+        if (Application.loadedLevel == 0)
         {
             return;
         }
-
-        mapObj = (Maps)nMaps[0];
+     
+        mapObj = (Maps)nMaps[StateManager.Instance.dungeonMap];
+        //level = (Level)nLevel[StateManager.Instance.dungeonLevel];
         level = (Level)nLevel[0];
 
         //래벨에 따른 돌의 겟수를 저장한다.
         levelRock = level.Rock;
+        Debug.Log(levelRock);
         //래벨에 따른 보물의 겟수를 저장한다.
         levelTreasure = level.Boxs;
-
+        Debug.Log(levelTreasure);
         //json데이터의 RotationRoad의 게수를 가져와서 pool의 겟수를 정한다.
         rRoadPool = mapObj.RotationRoad;
         rRoad = new Transform[rRoadPool];
-
+        Debug.Log(rRoadPool);
         //json데이터의 WidthRoad의 게수를 가져와서 pool의 겟수를 정한다.
         wRoadPool = mapObj.WidthRoad;
         wRoad = new Transform[wRoadPool];
@@ -211,9 +217,11 @@ public class csDungeon : MonoBehaviour
         room = new Transform[roomPool];
 
         //json데이터의 맵이름을 가져와서 찾는다.
-        map = GameObject.Find(mapObj.Name);
-        //map = Resources.Load("Prefab명.prefab");
-
+        //map = GameObject.Find(mapObj.Name);
+        map = (GameObject)Resources.Load(mapObj.Name, typeof(GameObject));
+        GameObject mapCap = Instantiate(map) as GameObject;
+        mapCap.transform.position = new Vector3(0, 0, 0);
+        
         int r = 1;
         int w = 1;
         int h = 1;
@@ -222,49 +230,54 @@ public class csDungeon : MonoBehaviour
         int rm = 1;
 
         for (int i = 0; i < map.transform.childCount; ++i)
-        { 
+        {
+            Debug.Log(map.transform.childCount);
             if (map.transform.GetChild(i).tag == "Start")
             {
-                Debug.Log("들어옴 플레이어");
                 Transform point = map.transform.GetChild(i).transform.FindChild("startPoint");
                 player.transform.position = point.position;
                 player.transform.rotation = point.rotation;
             }
-            if (map.transform.GetChild(i).name == "rRoad_" + r)
+
+            if (map.transform.GetChild(i).name == "rRoad_" + r && mapObj.RotationRoad !=0)
             {
+                Debug.Log("들어옴 플레이어");
                 rRoad[r - 1] = map.transform.GetChild(i);
                 r++;
             }
 
-            else if (map.transform.GetChild(i).name == "wRoad_" + w)
+            else if (map.transform.GetChild(i).name == "wRoad_" + w && mapObj.WidthRoad != 0)
             {
+                Debug.Log("들어옴 플레이어");
                 wRoad[w - 1] = map.transform.GetChild(i);
                 w++;
             }
 
-            else if (map.transform.GetChild(i).name == "hRoad_" + h)
+            else if (map.transform.GetChild(i).name == "hRoad_" + h && mapObj.HeightRoad != 0)
             {
+                Debug.Log("들어옴 플레이어");
                 hRoad[h - 1] = map.transform.GetChild(i);
                 h++;
             }
 
-            else if (map.transform.GetChild(i).name == "tRoad_" + t)
+            else if (map.transform.GetChild(i).name == "tRoad_" + t && mapObj.TcrossRoad != 0)
             {
                 tRoad[t - 1] = map.transform.GetChild(i);
                 t++;
             }
 
-            else if (map.transform.GetChild(i).name == "cRoad_" + c)
+            else if (map.transform.GetChild(i).name == "cRoad_" + c && mapObj.CrossRoad != 0)
             {
                 cRoad[c - 1] = map.transform.GetChild(i);
                 c++;
             }
 
-            else if (map.transform.GetChild(i).name == "room_" + rm)
+            else if (map.transform.GetChild(i).name == "room_" + rm && mapObj.Room != 0)
             {
                 room[rm - 1] = map.transform.GetChild(i);
                 rm++;
             }
+
            
         }
 
@@ -286,6 +299,10 @@ public class csDungeon : MonoBehaviour
             int roomNum = UnityEngine.Random.Range(1, (mapObj.Room + 1));
             for (int i = 0; i < room.Length; i++)
             {
+                if (room.Length == 0)
+                {
+                    return;
+                }
                 Treasure(room, i, roomNum, "room_");
             }
         }
@@ -301,6 +318,10 @@ public class csDungeon : MonoBehaviour
                     int rRoadNum = UnityEngine.Random.Range(1, (mapObj.RotationRoad + 1));
                     for (int i = 0; i < rRoad.Length; i++)
                     {
+                        if (rRoad.Length == 0)
+                        {
+                            return;
+                        }
                         Rocks(rRoad, i, rRoadNum, "rRoad_");
                     }
                     break;
@@ -309,6 +330,10 @@ public class csDungeon : MonoBehaviour
                     int wRoadNum = UnityEngine.Random.Range(1, (mapObj.WidthRoad + 1));
                     for (int i = 0; i < wRoad.Length; i++)
                     {
+                        if (wRoad.Length == 0)
+                        {
+                            return;
+                        }
                         Rocks(wRoad, i, wRoadNum, "wRoad_");
                     }
                     break;
@@ -317,6 +342,10 @@ public class csDungeon : MonoBehaviour
                     int hRoadNum = UnityEngine.Random.Range(1, (mapObj.HeightRoad + 1));
                     for (int i = 0; i < hRoad.Length; i++)
                     {
+                        if (hRoad.Length == 0)
+                        {
+                            return;
+                        }
                         Rocks(hRoad, i, hRoadNum, "hRoad_");
                     }
                     break;
@@ -324,6 +353,10 @@ public class csDungeon : MonoBehaviour
                     int cRoadNum = UnityEngine.Random.Range(1, (mapObj.CrossRoad + 1));
                     for (int i = 0; i < cRoad.Length; i++)
                     {
+                        if (cRoad.Length == 0)
+                        {
+                            return;
+                        }
                         Rocks(cRoad, i, cRoadNum, "cRoad_");
                     }
                     break;
@@ -331,6 +364,10 @@ public class csDungeon : MonoBehaviour
                     int tRoadNum = UnityEngine.Random.Range(1, (mapObj.TcrossRoad + 1));
                     for (int i = 0; i < tRoad.Length; i++)
                     {
+                        if (tRoad.Length == 0)
+                        {
+                            return;
+                        }
                         Rocks(tRoad, i, tRoadNum, "tRoad_");
                     }
                     break;
@@ -348,8 +385,7 @@ public class csDungeon : MonoBehaviour
             if (levelRock > 0)
             {
                 GameObject gameObj = Instantiate(rock) as GameObject;
-                gameObj.transform.parent = road[num];
-                gameObj.transform.position = road[num].transform.position;
+                gameObj.transform.localPosition = road[num].transform.localPosition;
                 Debug.Log("들어옴");
                 levelRock--;
                 Debug.Log("남은 돌 갯수" + levelRock);
@@ -367,8 +403,7 @@ public class csDungeon : MonoBehaviour
             if (levelTreasure > 0)
             {
                 GameObject gameObj = Instantiate(treasure) as GameObject;
-                gameObj.transform.parent = road[num];
-                gameObj.transform.position = road[num].transform.position;
+                gameObj.transform.localPosition = road[num].transform.localPosition;
                 gameObj.transform.rotation = road[num].transform.rotation;
                 Debug.Log("들어옴");
                 levelTreasure--;

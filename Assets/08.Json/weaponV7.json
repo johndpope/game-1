@@ -350,7 +350,7 @@
     ],
 	  "map":[
       {
-       "mapName":"4x4_1",
+       "mapName":"4x4/4x4_1",
        "wRoad_":2,
        "hRoad_":1,
        "rRoad_":8,
@@ -359,7 +359,7 @@
        "tRoad_":1
       },
        {
-       "mapName":"4x4_2",
+       "mapName":"4x4/4x4_2",
        "wRoad_":0,
        "hRoad_":1,
        "rRoad_":6,
@@ -368,7 +368,7 @@
        "tRoad_":4
       },
       {
-       "mapName":"4x4_3",
+       "mapName":"4x4/4x4_3",
        "wRoad_":0,
        "hRoad_":0,
        "rRoad_":6,
@@ -377,7 +377,7 @@
        "tRoad_":4
       },
       {
-       "mapName":"4x4_4",
+       "mapName":"4x4/4x4_4",
        "wRoad_":5,
        "hRoad_":1,
        "rRoad_":5,
@@ -386,7 +386,7 @@
        "tRoad_":3
       },
       {
-       "mapName":"4x4_5",
+       "mapName":"4x4/4x4_5",
        "wRoad_":3,
        "hRoad_":0,
        "rRoad_":6,
@@ -395,7 +395,7 @@
        "tRoad_":4
       },
       {
-       "mapName":"4x4_6",
+       "mapName":"4x4/4x4_6",
        "wRoad_":3,
        "hRoad_":0,
        "rRoad_":5,
@@ -404,7 +404,7 @@
        "tRoad_":5
       },
       {
-       "mapName":"4x4_7",
+       "mapName":"4x4/4x4_7",
        "wRoad_":2,
        "hRoad_":2,
        "rRoad_":6,
@@ -413,7 +413,7 @@
        "tRoad_":3
       },
       {
-       "mapName":"4x4_8",
+       "mapName":"4x4/4x4_8",
        "wRoad_":1,
        "hRoad_":0,
        "rRoad_":7,
@@ -422,7 +422,7 @@
        "tRoad_":6
       },
       {
-       "mapName":"4x4_9",
+       "mapName":"4x4/4x4_9",
        "wRoad_":1,
        "hRoad_":2,
        "rRoad_":5,

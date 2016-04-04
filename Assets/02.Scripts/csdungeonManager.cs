@@ -15,9 +15,9 @@ public class csdungeonManager : MonoBehaviour
         nMaps = StateManager.Instance.dungeonMapList;
         nLevel = StateManager.Instance.dungeonLevelList;
 
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < nMaps.Count; i++)
         {
-            _setupFloor();
+            _setupFloor(i,i);
         }
     }
 	
@@ -34,11 +34,13 @@ public class csdungeonManager : MonoBehaviour
         Application.LoadLevel(1);
     }
 
-    private void _setupFloor()
+    private void _setupFloor(int mapNum, int levelNum)
     {
         Debug.Log("들어옴");
         GameObject gameObj = Instantiate(floor) as GameObject;
         gameObj.transform.SetParent(levelgrid.transform);
         gameObj.transform.localScale = new Vector3(1, 1, 1);
+
+        gameObj.GetComponent<Button>().onClick.AddListener(delegate { Floor(mapNum, levelNum); });
     }
 }
