@@ -1,0 +1,15 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"model.moc",
+	"textures":[
+		"model.256/texture_00.png"
+	],
+	"motions":{
+		"":[
+			{"file":"motions/m_sl.mtn"},
+			{"file":"motions/m_sl2.mtn"}
+		]
+	},
+	"project_settings":"model.settings.json",
+	"name":"model"
+}

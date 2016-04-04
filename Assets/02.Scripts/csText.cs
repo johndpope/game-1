@@ -23,7 +23,7 @@ public class csText : MonoBehaviour
     void Start()
     {
         // JSON을로드
-        //Json_Read();
+        Json_Read();
         // Live2D 초기화
         Live2D.init();
         live2DModel = Live2DModelUnity.loadModel(mocFile.bytes);      
@@ -48,19 +48,19 @@ public class csText : MonoBehaviour
         string model = (string)itemTable["model"];
         Debug.Log(itemTable["model"].GetType());
 
-        //mocFile = new TextAsset();
-        //mocFile = (Resources.Load(model, typeof(TextAsset)) as TextAsset);
+        mocFile = new TextAsset();
+        mocFile = (Resources.Load(model, typeof(TextAsset)) as TextAsset);
         // 텍스처 읽기
         ArrayList textureList = (ArrayList)itemTable["textures"];        
        
         foreach (string txtNm in textureList)
         {
-            // 불필요한 확장자를 제거
-           
-            //string pngNm = Regex.Replace(txtNm, ".png $", "");
-            //Debug.Log(pngNm);
-            //texture = (Resources.Load(pngNm, typeof(Texture2D)) as Texture2D);
-            //Debug.Log(texture);
+            //불필요한 확장자를 제거
+
+            string pngNm = Regex.Replace(txtNm, ".png$", "");
+            Debug.Log(pngNm);
+            texture = (Resources.Load(pngNm, typeof(Texture2D)) as Texture2D);
+            Debug.Log(texture);
         }
         // 모션 읽기
         //ArrayList motions = (ArrayList)itemTable["motions"];
@@ -74,29 +74,29 @@ public class csText : MonoBehaviour
         //    i++;
         //}
     }
-    //void Update()
-    //{
-    //    // a 키 누를 때 모션 전환
-    //    if (Input.GetKeyDown("a"))
-    //    {
-    //        if (cnt >= mtnFile.Length - 1)
-    //        {
-    //            cnt = 0;
-    //        }
-    //        cnt++;
-    //        // 모션를 로딩하는
-    //        motion = Live2DMotion.loadMotion(mtnFile[cnt].bytes);
-    //        // 페이드 아웃은 0
-    //        motion.setFadeOut(0);
-    //        // 모션 시작
-    //        motionManager.startMotion(motion, false);
-    //    }
-    //}
+    void Update()
+    {
+        //// a 키 누를 때 모션 전환
+        //if (Input.GetKeyDown("a"))
+        //{
+        //    if (cnt >= mtnFile.Length - 1)
+        //    {
+        //        cnt = 0;
+        //    }
+        //    cnt++;
+        //    // 모션를 로딩하는
+        //    motion = Live2DMotion.loadMotion(mtnFile[cnt].bytes);
+        //    // 페이드 아웃은 0
+        //    motion.setFadeOut(0);
+        //    // 모션 시작
+        //    motionManager.startMotion(motion, false);
+        //}
+    }
 
 
-    ///// <summary>
-    ///// 카메라가 장면 렌더링에 불리는
-    ///// </ summary>
+    /// <summary>
+    /// 카메라가 장면 렌더링에 불리는
+    /// </ summary>
     //void OnRenderObject()
     //{
     //    // 묘화 위치를 지정
