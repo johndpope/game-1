@@ -7,40 +7,75 @@ public class csdungeonManager : MonoBehaviour
     public GameObject levelgrid;
     public GameObject floor;
 
-    public GameObject[] floorPoolSet = new GameObject[30];
-    private ArrayList nMaps;
-    private ArrayList nLevel;
+    GameObject[] floorPoolSet = new GameObject[30];
+
+
+    //private ArrayList nMaps;
+    //private ArrayList nLevel;
     void Start ()
     {
-        nMaps = StateManager.Instance.dungeonMapList;
-        nLevel = StateManager.Instance.dungeonLevelList;
+        //nMaps = StateManager.Instance.dungeonMapList;
+        //nLevel = StateManager.Instance.dungeonLevelList;
 
-        for (int i = 0; i < nMaps.Count; i++)
+        for (int i = 0; i < 30; i++)
         {
-            _setupFloor(i,i);
+            _setupFloor(i);
         }
     }
 	
 	void Update ()
     {
 
-        
     }
 
-    public void Floor(int floorNum, int level)
+    public void Floor(int level)
     {
-        StateManager.Instance.dungeonMap= floorNum;
+
+        //StateManager.Instance.dungeonMap= ;
         StateManager.Instance.dungeonLevel = level;
         Application.LoadLevel(1);
     }
 
-    private void _setupFloor(int mapNum, int levelNum)
+    private void _setupFloor(int levelNum)
     {
-        Debug.Log("들어옴");
-        GameObject gameObj = Instantiate(floor) as GameObject;
-        gameObj.transform.SetParent(levelgrid.transform);
-        gameObj.transform.localScale = new Vector3(1, 1, 1);
+        floorPoolSet[levelNum] = Instantiate(floor) as GameObject;
+        floorPoolSet[levelNum].transform.SetParent(levelgrid.transform);
+        floorPoolSet[levelNum].transform.localScale = new Vector3(1, 1, 1);
 
-        gameObj.GetComponent<Button>().onClick.AddListener(delegate { Floor(mapNum, levelNum); });
+        floorPoolSet[levelNum].GetComponent<Button>().onClick.AddListener(delegate { Floor(levelNum); });
+
+        floorPoolSet[levelNum].SetActive(false);
+    }
+
+    public void firstFloor()
+    {
+        int i = 0;
+        for (i = 0; i < 9; i++)
+        {
+            floorPoolSet[i].SetActive(true);
+            floorPoolSet[i+9].SetActive(false);
+            floorPoolSet[i+18].SetActive(false);
+        }
+        
+    }
+    public void secondFloor()
+    {
+        int i = 0;
+        for (i = 0; i < 9; i++)
+        {
+            floorPoolSet[i].SetActive(false);
+            floorPoolSet[i + 9].SetActive(true);
+            floorPoolSet[i + 18].SetActive(false);
+        }
+    }
+    public void thirdFloor()
+    {
+        int i = 0;
+        for (i = 0; i < 9; i++)
+        {
+            floorPoolSet[i].SetActive(false);
+            floorPoolSet[i + 9].SetActive(false);
+            floorPoolSet[i + 18].SetActive(true);
+        }
     }
 }
