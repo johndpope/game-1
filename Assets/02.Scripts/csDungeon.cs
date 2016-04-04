@@ -170,8 +170,8 @@ public class csDungeon : MonoBehaviour
 
         LoadAssetfromJson();
 
-        StateManager.Instance.dungeonMapList = nMaps;
-        StateManager.Instance.dungeonLevelList = nLevel;
+        //StateManager.Instance.dungeonMapList = nMaps;
+        //StateManager.Instance.dungeonLevelList = nLevel;
 
         if(Application.loadedLevel == 0)
         {
