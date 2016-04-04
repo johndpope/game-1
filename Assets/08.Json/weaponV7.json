@@ -6,7 +6,7 @@
       "weaponPrice":100,
       "weaponDurability":10,
 	  "weaponExplain":"10번 일반 공격 가능",
-	  "weaponImage":"Weapon01",
+	  "weaponImage":"Weapon/Weapon01",
 	  "weaponName":"Weapon10"
     },
     {
@@ -15,7 +15,7 @@
       "weaponPrice":200,
       "weaponDurability":20,
 	  "weaponExplain":"20번 일반 공격 가능",
-	  "weaponImage":"Weapon02",
+	  "weaponImage":"Weapon/Weapon02",
 	  "weaponName":"Weapon20"
     },
     {
@@ -24,7 +24,7 @@
       "weaponPrice":300,
       "weaponDurability":30,
 	  "weaponExplain":"30번 일반 공격 가능",
-	  "weaponImage":"Weapon03",
+	  "weaponImage":"Weapon/Weapon03",
 	  "weaponName":"Weapon30"
     },
      {
@@ -33,7 +33,7 @@
       "weaponPrice":700,
       "weaponDurability":50,
 	  "weaponExplain":"50번 일반 공격 가능",
-	  "weaponImage":"Weapon04",
+	  "weaponImage":"Weapon/Weapon04",
 	  "weaponName":"Weapon50"
     },
     {
@@ -42,7 +42,7 @@
       "weaponPrice":900,
       "weaponDurability":50,
 	  "weaponExplain":"50번 일반 공격 가능",
-	  "weaponImage":"Weapon05",
+	  "weaponImage":"Weapon/Weapon05",
 	  "weaponName":"Weapon55"
     },
      {
@@ -51,7 +51,7 @@
       "weaponPrice":1100,
       "weaponDurability":3,
 	  "weaponExplain":"3번 일반 공격 가능",
-	  "weaponImage":"Weapon06",
+	  "weaponImage":"Weapon/Weapon06",
 	  "weaponName":"Weapon3"
     }
   ],
@@ -62,7 +62,7 @@
       "armorDef":5,
       "price":100,
       "Explain":"방어+5",
-      "armorImage": "Armor01",
+      "armorImage": "Armor/Armor01",
 	  "armorName":"Armor10"
       
     },
@@ -71,7 +71,7 @@
       "armorDef":10,
       "price":300,
       "Explain":"방어+10",
-       "armorImage": "Armor02",
+       "armorImage": "Armor/Armor02",
 	  "armorName":"Armor20"
     },
     {
@@ -79,7 +79,7 @@
       "armorDef":20,
       "price":500,
       "Explain":"방어+20",
-      "armorImage": "Armor03",
+      "armorImage": "Armor/Armor03",
 	  "armorName":"Armor30"
     },
     {
@@ -87,7 +87,7 @@
       "armorDef":15,
       "price":200,
       "Explain":"방어+15",
-      "armorImage": "Armor04",
+      "armorImage": "Armor/Armor04",
 	  "armorName":"Armor40"
       
     },
@@ -96,7 +96,7 @@
       "armorDef":25,
       "price":700,
       "Explain":"방어+25",
-      "armorImage": "Armor05",
+      "armorImage": "Armor/Armor05",
 	  "armorName":"Armor50"
     },
     {
@@ -104,7 +104,7 @@
       "armorDef":50,
       "price":3000,
       "Explain":"방어+50",
-      "armorImage": "Armor06",
+      "armorImage": "Armor/Armor06",
       "armorName":"Armor60"
     }
     ],
@@ -115,7 +115,7 @@
         "bootsSpd":1,
         "price":100,
         "Explain":"속도+1",
-        "bootsImage":"Boots01",
+        "bootsImage":"Boots/Boots01",
 	"bootsName":"Boots10"
 		
       },
@@ -124,7 +124,7 @@
         "bootsSpd":2,
         "price":200,
         "Explain":"속도+2",
-        "bootsImage":"Boots02",
+        "bootsImage":"Boots/Boots02",
 	  "bootsName":"Boots20"
       },
       {
@@ -132,7 +132,7 @@
         "bootsSpd":3,
         "price":500,
         "Explain":"속도+3",
-        "bootsImage":"Boots03",
+        "bootsImage":"Boots/Boots03",
 	"bootsName":"Boots30"
       },
       {
@@ -140,7 +140,7 @@
         "bootsSpd":4,
         "price":700,
         "Explain":"속도+4",
-        "bootsImage":"Boots04",
+        "bootsImage":"Boots/Boots04",
 	"bootsName":"Boots40"
       },
       {
@@ -148,7 +148,7 @@
         "bootsSpd":5,
         "price":1000,
         "Explain":"속도+5",
-        "bootsImage":"Boots05",
+        "bootsImage":"Boots/Boots05",
 	"bootsName":"Boots50"
       },
       {
@@ -156,7 +156,7 @@
         "bootsSpd":10,
         "price":2000,
         "Explain":"속도+10",
-        "bootsImage":"Boots06",
+        "bootsImage":"Boots/Boots06",
 	"bootsName":"Boots60"
       }
      ],
@@ -167,35 +167,35 @@
         "up":20,
         "price":50,
         "Explain":"체 력 20  회 복",
-        "potionImage":"Potion_hp20"
+        "potionImage":"Potion/Potion_hp20"
       },
       {
         "name":"상 회 물",
         "up":50,
         "price":100,
         "Explain":"체 력 50  회 복",
-        "potionImage":"Potion_hp50"
+        "potionImage":"Potion/Potion_hp50"
       },
 	  {
         "name":"공 증 물",
         "up":20,
         "price":100,
         "Explain":"공 격 력  20 증 가",
-        "potionImage":"Potion_atk20"
+        "potionImage":"Potion/Potion_atk20"
       },
       {
         "name":"돌 물",
         "up":10,
         "price":50,
         "Explain":"방 어  10 증 가",
-        "potionImage":"Potion_def10"
+        "potionImage":"Potion/Potion_def10"
       },
       {
         "name":"속 물",
         "up":2,
         "price":50,
         "Explain":"속 도  2 증 가",
-        "potionImage":"Potion_spd2"
+        "potionImage":"Potion/Potion_spd2"
       }
     ],
 
@@ -206,7 +206,7 @@
 	"specialAbility":2.0,
         "price":100,
         "Explain":"큰 피해를 줌.",
-        "skillScrollImage":"skScroll_smash"
+        "skillScrollImage":"SkScroll/skScroll_smash"
       },
       {
         "name":"회전베기",
@@ -214,7 +214,7 @@
 	"specialAbility":0,
         "price":100,
         "Explain":"광역피해 줌.",
-        "skillScrollImage":"skScroll_clive"
+        "skillScrollImage":"SkScroll/skScroll_clive"
       },
       {
         "name":"무자비한돌진",
@@ -222,7 +222,7 @@
 	"specialAbility":3.0,
         "price":150,
         "Explain":"피해와 기절.",
-        "skillScrollImage":"skScroll_charge"
+        "skillScrollImage":"SkScroll/skScroll_charge"
       },
       {
         "name":"가르기",
@@ -230,7 +230,7 @@
 	"specialAbility":0.5,
         "price":200,
         "Explain":"피해와 방어력감소.",
-        "skillScrollImage":"skScroll_cut"
+        "skillScrollImage":"SkScroll/skScroll_cut"
       }
     ],
 
@@ -242,7 +242,7 @@
 	"atkDown":0,
         "price":200,
         "Explain":"피해와 감속.",
-        "magicScrollImage":"mgScroll_iceArrow"
+        "magicScrollImage":"MgScroll/mgScroll_iceArrow"
       },
       {
         "name":"화염구",
@@ -251,7 +251,7 @@
 	"atkDown":0,
         "price":250,
         "Explain":"큰 피해를 줌.",
-        "magicScrollImage":"mgScroll_fireBall"
+        "magicScrollImage":"MgScroll/mgScroll_fireBall"
       },
       {
         "name":"불기둥",
@@ -260,7 +260,7 @@
 	"atkDown":0,
         "price":300,
         "Explain":"광역피해 줌.",
-	"magicScrollImage":"mgScroll_firePillar"
+	"magicScrollImage":"MgScroll/mgScroll_firePillar"
       },
       {
         "name":"대지의화살",
@@ -269,7 +269,7 @@
         "atkDown":0.5,
         "price":200,
         "Explain":"피해와 공격력감소.",
-        "magicScrollImage":"mgScroll_earthArrow"
+        "magicScrollImage":"MgScroll/mgScroll_earthArrow"
       }
     ],
 
@@ -284,7 +284,7 @@
         "defDown":0,
         "price":400,
         "Explain":"체력,모든상태이상 회복.",
-        "buffScrollImage":"bufScroll_ancientHealScroll"
+        "buffScrollImage":"BufScroll/bufScroll_ancientHealScroll"
       },
       {
         "name":"힘의스크롤",
@@ -296,7 +296,7 @@
         "defDown":0,
         "price":100,
         "Explain":"공격력증가.",
-        "buffScrollImage":"bufScroll_atkScroll"
+        "buffScrollImage":"BufScroll/bufScroll_atkScroll"
       },
       {
         "name":"인내의스크롤",
@@ -308,7 +308,7 @@
         "defDown":0,
         "price":100,
         "Explain":"방어력 증가.",
-        "buffScrollImage":"bufScroll_defScroll"
+        "buffScrollImage":"BufScroll/bufScroll_defScroll"
       },
       {
         "name":"신속의스크롤",
@@ -320,7 +320,7 @@
         "defDown":0,
         "price":100,
         "Explain":"속도 증가.",
-        "buffScrollImage":"bufScroll_spdScroll"
+        "buffScrollImage":"BufScroll/bufScroll_spdScroll"
         
       },
       {
@@ -333,7 +333,7 @@
         "defDown":0,
         "price":300,
         "Explain":"공,방,속도 증가.",
-        "buffScrollImage":"bufScroll_prayScroll"
+        "buffScrollImage":"BufScroll/bufScroll_prayScroll"
       },
       {
         "name":"광폭의서",
@@ -345,7 +345,7 @@
         "defDown":1.0,
         "price":250,
         "Explain":"방어력감소 되지만 공격력증가",
-        "buffScrollImage":"bufScroll_berserkScroll"
+        "buffScrollImage":"BufScroll/bufScroll_berserkScroll"
       }
     ],
 	  "map":[
@@ -353,8 +353,8 @@
        "mapName":"4x4_1",
        "wRoad_":2,
        "hRoad_":1,
-       "rRoad_":9,
-       "room_":2,
+       "rRoad_":8,
+       "room_":3,
        "cRoad_":1,
        "tRoad_":1
       },

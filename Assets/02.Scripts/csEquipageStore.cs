@@ -104,13 +104,15 @@ public class csEquipageStore : MonoBehaviour
     public GameObject weaponPool;
     public GameObject weaponPoolNameText;
     public GameObject weaponPoolPriceText;
+    public GameObject weaponBackgroundImage;
    
     //상점칸에 갑옷 생성 필요 오브젝트
     public GameObject armorPool;
     public GameObject armorPoolNameText;
     public GameObject armorPoolPriceText;
+    public GameObject armorBackgroundImage;
 
-   
+
 
     public GameObject[] weaponPoolSet = new GameObject[5];
     public GameObject[] armorPoolSet = new GameObject[5];
@@ -174,6 +176,7 @@ public class csEquipageStore : MonoBehaviour
                 String durability = (String)itemInfo["weaponDurability"];
                 String explain = (String)itemInfo["weaponExplain"];
                 String weaponName = (String)itemInfo["weaponName"];
+                String weaponImage = (String)itemInfo["weaponImage"];
 
                 HMWeaponItem weaponItem = new HMWeaponItem();
                 weaponItem.Name = name;
@@ -182,7 +185,7 @@ public class csEquipageStore : MonoBehaviour
                 weaponItem.Durability = Int32.Parse(durability);
                 weaponItem.Explain = explain;
                 weaponItem.WeaponName = weaponName;
-
+                weaponItem.Image = weaponImage;
                 wItems.Add(weaponItem);
             }
 
@@ -192,12 +195,14 @@ public class csEquipageStore : MonoBehaviour
                 String price = (String)itemInfo["price"];
                 String defPoint = (String)itemInfo["armorDef"];
                 String armorName = (String)itemInfo["armorName"];
+                String armorImage = (String)itemInfo["armorImage"];
 
                 HMArmorItem armorItem = new HMArmorItem();
                 armorItem.Name = name;
                 armorItem.Price = Int32.Parse(price);
                 armorItem.Def = Int32.Parse(defPoint);
                 armorItem.ArmorName = armorName;
+                armorItem.Image = armorImage;
                 aItems.Add(armorItem);
             }
 
@@ -207,12 +212,14 @@ public class csEquipageStore : MonoBehaviour
                 String price = (String)itemInfo["price"];
                 String bootsSpd = (String)itemInfo["bootsSpd"];
                 String bootsName = (String)itemInfo["bootsName"];
+                String bootsImage = (String)itemInfo["bootsImage"];
 
                 HMBootsItem bootsItem = new HMBootsItem();
                 bootsItem.Name = name;
                 bootsItem.Price = Int32.Parse(price);
                 bootsItem.Spd = Int32.Parse(bootsSpd);
                 bootsItem.BootsName = bootsName;
+                bootsItem.Image = bootsImage;
                 bItems.Add(bootsItem);
             }
         }
@@ -343,8 +350,9 @@ public class csEquipageStore : MonoBehaviour
         HMWeaponItem item = (HMWeaponItem)wItems[itemIndex];
         weaponDurabilityText.GetComponent<Text>().text = "내구도: " + item.Durability.ToString();
         weaponNameText.GetComponent<Text>().text = item.Name + " 공격력: " + item.AttackPoint.ToString();
-        //리소스에 이미지 추가되면 주석 지울것 
-        //weaponImage.GetComponent<Image>().sprite = (Sprite)Resources.Load( item.Image, typeof(Sprite));
+
+        weaponImage.GetComponent<Image>().sprite = (Sprite)Resources.Load( item.Image, typeof(Sprite));
+
         gameObj = Instantiate(WeaponUse) as GameObject;
         gameObj.transform.SetParent(grid.transform);
         gameObj.transform.localScale = new Vector3(1, 1, 1);
@@ -382,13 +390,14 @@ public class csEquipageStore : MonoBehaviour
         
 
         weaponPoolPriceText.GetComponent<Text>().text = strGold;
-
         weaponPoolNameText.GetComponent<Text>().text = str;
+
+        weaponBackgroundImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
 
         weaponPoolSet[itemIndex] = Instantiate(weaponPool) as GameObject;
         weaponPoolSet[itemIndex].transform.SetParent(gridPool.transform);
         weaponPoolSet[itemIndex].transform.localScale = new Vector3(1, 1, 1);
-        
+
         weaponPoolSet[itemIndex].name = "Weapon" + (10 * itemIndex + 10);
         weaponPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClickWeaponButton(itemIndex); });
         if (itemIndex == 3)
@@ -426,6 +435,7 @@ public class csEquipageStore : MonoBehaviour
 
         armorPoolPriceText.GetComponent<Text>().text = strGold;
         armorPoolNameText.GetComponent<Text>().text = str;
+        armorBackgroundImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
 
         armorPoolSet[itemIndex] = Instantiate(armorPool) as GameObject;
         armorPoolSet[itemIndex].transform.SetParent(gridPool.transform);
@@ -452,8 +462,8 @@ public class csEquipageStore : MonoBehaviour
         HMArmorItem item = (HMArmorItem)aItems[itemIndex];
 
         armorNameText.GetComponent<Text>().text = item.Name + "\n" + " 방어력: " + item.Def.ToString();
+        armorImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
 
-        //armorImage.GetComponent<Image>().sprite = (Sprite)Resources.Load("WeaponBase", typeof(Sprite));
         gameObj = Instantiate(armorUse) as GameObject;
         gameObj.transform.SetParent(grid.transform);
         gameObj.transform.localScale = new Vector3(1, 1, 1);
@@ -486,6 +496,7 @@ public class csEquipageStore : MonoBehaviour
 
         armorPoolPriceText.GetComponent<Text>().text = strGold;
         armorPoolNameText.GetComponent<Text>().text = str;
+        armorBackgroundImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
 
         bootPoolSet[itemIndex] = Instantiate(armorPool) as GameObject;
         bootPoolSet[itemIndex].transform.SetParent(gridPool.transform);
@@ -507,9 +518,11 @@ public class csEquipageStore : MonoBehaviour
         //StateManager.Instance.bagNum = wNum;
 
         HMBootsItem item = (HMBootsItem)bItems[itemIndex];
+
         bootsNameText.GetComponent<Text>().text = item.Name + "\n" + " 속도: " + item.Spd.ToString();
 
-        //armorImage.GetComponent<Image>().sprite = (Sprite)Resources.Load("WeaponBase", typeof(Sprite));
+        bootsImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+
         gameObj = Instantiate(bootsUse) as GameObject;
         gameObj.transform.SetParent(grid.transform);
         gameObj.transform.localScale = new Vector3(1, 1, 1);

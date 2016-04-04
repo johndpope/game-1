@@ -66,15 +66,53 @@ class Level : HMItem
 public class csDungeon : MonoBehaviour
 {
 
+    public GameObject player;
+
     private ArrayList nMaps;
     private ArrayList nLevel;
+
     public TextAsset textAsset;
 
+    //현제 맵
     GameObject map;
+    //래벨의 돌겟수를 저장하는 integer
     int levelRock;
+    //생성할 돌 GameObject
     public GameObject rock;
+    //래벨의 보물 겟수를 저장하는 integer
+    int levelTreasure;
+    //생성할 보물 GameObject
+    public GameObject treasure;
 
-    public Transform[] map1 = new Transform[16];
+    //rRoad의 위치 값을 저장하는 배열
+    public Transform[] rRoad;
+    int rRoadPool;
+
+    //wRoad의 위치 값을 저장하는 배열
+    public Transform[] wRoad;
+    int wRoadPool;
+
+    //hRoad의 위치 값을 저장하는 배열
+    public Transform[] hRoad;
+    int hRoadPool;
+
+    //tRoad의 위치 값을 저장하는 배열
+    public Transform[] tRoad;
+    int tRoadPool;
+
+    //cRoad의 위치 값을 저장하는 배열
+    Transform[] cRoad;
+    int cRoadPool;
+
+    //room의 위치 값을 저장하는 배열
+    Transform[] room;
+    int roomPool;
+
+    Maps mapObj;
+    Level level;
+
+    int randomSetRock = 0;
+    int randomSetTreasure = 0;
 
     void LoadAssetfromJson()
     {
@@ -129,54 +167,212 @@ public class csDungeon : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+
         LoadAssetfromJson();
-        Maps maps = (Maps)nMaps[0];
-        Level level = (Level)nLevel[0];
+
+        StateManager.Instance.dungeonMapList = nMaps;
+        StateManager.Instance.dungeonLevelList = nLevel;
+
+        if(Application.loadedLevel == 0)
+        {
+            return;
+        }
+
+        mapObj = (Maps)nMaps[0];
+        level = (Level)nLevel[0];
+
+        //래벨에 따른 돌의 겟수를 저장한다.
         levelRock = level.Rock;
-        
-        map = GameObject.Find(maps.Name);
+        //래벨에 따른 보물의 겟수를 저장한다.
+        levelTreasure = level.Boxs;
 
+        //json데이터의 RotationRoad의 게수를 가져와서 pool의 겟수를 정한다.
+        rRoadPool = mapObj.RotationRoad;
+        rRoad = new Transform[rRoadPool];
 
-        int j=1;
+        //json데이터의 WidthRoad의 게수를 가져와서 pool의 겟수를 정한다.
+        wRoadPool = mapObj.WidthRoad;
+        wRoad = new Transform[wRoadPool];
+
+        //json데이터의 HeightRoad의 게수를 가져와서 pool의 겟수를 정한다.
+        hRoadPool = mapObj.HeightRoad;
+        hRoad = new Transform[hRoadPool];
+
+        //json데이터의 TcrossRoad의 게수를 가져와서 pool의 겟수를 정한다.
+        tRoadPool = mapObj.TcrossRoad;
+        tRoad = new Transform[tRoadPool];
+
+        //json데이터의 CrossRoad의 게수를 가져와서 pool의 겟수를 정한다.
+        cRoadPool = mapObj.CrossRoad;
+        cRoad = new Transform[cRoadPool];
+
+        //json데이터의 Room의 게수를 가져와서 pool의 겟수를 정한다.
+        roomPool = mapObj.Room;
+        room = new Transform[roomPool];
+
+        //json데이터의 맵이름을 가져와서 찾는다.
+        map = GameObject.Find(mapObj.Name);
+        //map = Resources.Load("Prefab명.prefab");
+
+        int r = 1;
+        int w = 1;
+        int h = 1;
+        int c = 1;
+        int t = 1;
+        int rm = 1;
+
         for (int i = 0; i < map.transform.childCount; ++i)
-        {
-            //if (map.transform.GetChild(i).name == "rRoad_" + j)
-            //{
-               // map1[j-1] = map.transform.GetChild(i);
-            map1[i] = map.transform.GetChild(i);
-            // j++;
-            //}
+        { 
+            if (map.transform.GetChild(i).tag == "Start")
+            {
+                Debug.Log("들어옴 플레이어");
+                Transform point = map.transform.GetChild(i).transform.FindChild("startPoint");
+                player.transform.position = point.position;
+                player.transform.rotation = point.rotation;
+            }
+            if (map.transform.GetChild(i).name == "rRoad_" + r)
+            {
+                rRoad[r - 1] = map.transform.GetChild(i);
+                r++;
+            }
+
+            else if (map.transform.GetChild(i).name == "wRoad_" + w)
+            {
+                wRoad[w - 1] = map.transform.GetChild(i);
+                w++;
+            }
+
+            else if (map.transform.GetChild(i).name == "hRoad_" + h)
+            {
+                hRoad[h - 1] = map.transform.GetChild(i);
+                h++;
+            }
+
+            else if (map.transform.GetChild(i).name == "tRoad_" + t)
+            {
+                tRoad[t - 1] = map.transform.GetChild(i);
+                t++;
+            }
+
+            else if (map.transform.GetChild(i).name == "cRoad_" + c)
+            {
+                cRoad[c - 1] = map.transform.GetChild(i);
+                c++;
+            }
+
+            else if (map.transform.GetChild(i).name == "room_" + rm)
+            {
+                room[rm - 1] = map.transform.GetChild(i);
+                rm++;
+            }
+           
         }
 
-        for (int i = 0; i < map.transform.childCount; i++)
-        {
-            int f = UnityEngine.Random.Range(1, (maps.RotationRoad + 1));
 
-            Debug.Log("랜덤 값"+f);
-            Debug.Log("i 값" + i);
-
-            Rocks(i, f);
-
-        }
+        
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
 
+        if (Application.loadedLevel == 0)
+        {
+            return;
+        }
+
+        if (levelTreasure > 0)
+        {
+            int roomNum = UnityEngine.Random.Range(1, (mapObj.Room + 1));
+            for (int i = 0; i < room.Length; i++)
+            {
+                Treasure(room, i, roomNum, "room_");
+            }
+        }
+
+
+        if (levelRock > 0)
+        {
+            int num = UnityEngine.Random.Range(0, 4);
+            
+            switch(num)
+            {
+                case 0:
+                    int rRoadNum = UnityEngine.Random.Range(1, (mapObj.RotationRoad + 1));
+                    for (int i = 0; i < rRoad.Length; i++)
+                    {
+                        Rocks(rRoad, i, rRoadNum, "rRoad_");
+                    }
+                    break;
+
+                case 1:
+                    int wRoadNum = UnityEngine.Random.Range(1, (mapObj.WidthRoad + 1));
+                    for (int i = 0; i < wRoad.Length; i++)
+                    {
+                        Rocks(wRoad, i, wRoadNum, "wRoad_");
+                    }
+                    break;
+
+                case 2:
+                    int hRoadNum = UnityEngine.Random.Range(1, (mapObj.HeightRoad + 1));
+                    for (int i = 0; i < hRoad.Length; i++)
+                    {
+                        Rocks(hRoad, i, hRoadNum, "hRoad_");
+                    }
+                    break;
+                case 3:
+                    int cRoadNum = UnityEngine.Random.Range(1, (mapObj.CrossRoad + 1));
+                    for (int i = 0; i < cRoad.Length; i++)
+                    {
+                        Rocks(cRoad, i, cRoadNum, "cRoad_");
+                    }
+                    break;
+                case 4:
+                    int tRoadNum = UnityEngine.Random.Range(1, (mapObj.TcrossRoad + 1));
+                    for (int i = 0; i < tRoad.Length; i++)
+                    {
+                        Rocks(tRoad, i, tRoadNum, "tRoad_");
+                    }
+                    break;
+            }
+        }
     }
 
-    public void Rocks(int num, int random)
+    public void Rocks(Transform[] road,int num, int random, string roadName)
     {
-        if (map1[random+2].name == "rRoad_" + random)
+       
+        if (road[num].name == roadName + (random) && randomSetRock!= random && road[num].tag != "Start")
         {
+            randomSetRock = random;
+
             if (levelRock > 0)
             {
                 GameObject gameObj = Instantiate(rock) as GameObject;
-                gameObj.transform.parent = map1[random + 2];
-                gameObj.transform.position = map1[random + 2].transform.position;
+                gameObj.transform.parent = road[num];
+                gameObj.transform.position = road[num].transform.position;
                 Debug.Log("들어옴");
-                levelRock--; Debug.Log("남은 돌 갯수" + levelRock);
+                levelRock--;
+                Debug.Log("남은 돌 갯수" + levelRock);
+            }
+        }
+    }
+
+    public void Treasure(Transform[] road, int num, int random, string roadName)
+    {
+
+        if (road[num].name == roadName + (random) && randomSetTreasure != random)
+        {
+            randomSetTreasure = random;
+
+            if (levelTreasure > 0)
+            {
+                GameObject gameObj = Instantiate(treasure) as GameObject;
+                gameObj.transform.parent = road[num];
+                gameObj.transform.position = road[num].transform.position;
+                gameObj.transform.rotation = road[num].transform.rotation;
+                Debug.Log("들어옴");
+                levelTreasure--;
+                Debug.Log("남은 보물 갯수" + levelTreasure);
             }
         }
     }

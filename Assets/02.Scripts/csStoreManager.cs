@@ -42,9 +42,7 @@ public class csStoreManager : MonoBehaviour
 
     //상점 오픈시 인벤토리 오브젝트
     public GameObject equipageScroll;
-    public GameObject buttons;
-
-
+    
     //상점 팝업 설정 값
     public int storeNum;
 
@@ -168,14 +166,11 @@ public class csStoreManager : MonoBehaviour
         {
             case 1:
                 equipageMenu.SetActive(true);
-                equipageScroll.SetActive(true);
-                buttons.SetActive(true);
+                equipageScroll.SetActive(true);               
                 break;
-            case 2:
-          
+            case 2:          
                 abilityScroll.SetActive(true);
                 equInven.SetActive(true);
-
                 break;
             case 3:
                 itemMenu.SetActive(true);
@@ -192,7 +187,6 @@ public class csStoreManager : MonoBehaviour
         storeNum = 0;
         equipageMenu.SetActive(false);
         equipageScroll.SetActive(false);
-        buttons.SetActive(false);
         dungeonMaun.SetActive(false);
         equInven.SetActive(false);
         abilityScroll.SetActive(false);
@@ -206,13 +200,10 @@ public class csStoreManager : MonoBehaviour
         storeNum = 0;
         equipageMenu.SetActive(false);
         equipageScroll.SetActive(false);
-        buttons.SetActive(false);
         dungeonMaun.SetActive(false);
         equInven.SetActive(false);
         abilityScroll.SetActive(false);
         itemMenu.SetActive(false);
-
-
     }
 
     public void itemStoreMove()
@@ -221,7 +212,6 @@ public class csStoreManager : MonoBehaviour
         storeNum = 0;
         equipageMenu.SetActive(false);
         equipageScroll.SetActive(false);
-        buttons.SetActive(false);
         dungeonMaun.SetActive(false);
         equInven.SetActive(false);
         abilityScroll.SetActive(false);
@@ -235,7 +225,6 @@ public class csStoreManager : MonoBehaviour
         storeNum = 0;
         equipageMenu.SetActive(false);
         equipageScroll.SetActive(false);
-        buttons.SetActive(false);
         dungeonMaun.SetActive(false);
         equInven.SetActive(false);
         abilityScroll.SetActive(false);
