@@ -154,6 +154,7 @@ public class csitemManager : MonoBehaviour
     int playGold;
 
     public GameObject popClose;
+    public GameObject scrollbar;
 
     ArrayList itemInfosP;
     ArrayList itemInfosS;
@@ -273,6 +274,8 @@ public class csitemManager : MonoBehaviour
     {
         LoadAssetfromJson();
 
+        scrollbar.SetActive(false);
+
 
         potionNum = new int[itemInfosP.Count];
         SkscrollNum = new int[itemInfosS.Count];
@@ -321,7 +324,7 @@ public class csitemManager : MonoBehaviour
 
     void Update()
     {
-        goldText.text = ": " + StateManager.Instance.playGold.ToString();
+        goldText.text = "" + StateManager.Instance.playGold.ToString();
         StateManager.Instance.potionNum = potionNum;
         StateManager.Instance.SkscrollNum = SkscrollNum;
         StateManager.Instance.MgscrollNum = MgscrollNum;
@@ -342,24 +345,28 @@ public class csitemManager : MonoBehaviour
     {
         for (int i = 0; i < potionPoolSet.Length; i++)
         {
-            potionPoolSet[i].SetActive(true);
+            potionPoolSet[i].SetActive(true);         
         }
 
         for (int i = 0; i < SkScrollPoolSet.Length; i++)
         {
-            SkScrollPoolSet[i].SetActive(false);
+            SkScrollPoolSet[i].SetActive(false);          
         }
 
         for (int i = 0; i < MgscrollPoolSet.Length; i++)
         {
-            MgscrollPoolSet[i].SetActive(false);
+            MgscrollPoolSet[i].SetActive(false);        
         }
 
         for (int i = 0; i < BufScrollPoolSet.Length; i++)
         {
-            BufScrollPoolSet[i].SetActive(false);
+            BufScrollPoolSet[i].SetActive(false);          
         }
+<<<<<<< HEAD
         
+=======
+        scrollbar.SetActive(true);
+>>>>>>> origin/master
     }
 
     public void onSkill()
@@ -383,7 +390,7 @@ public class csitemManager : MonoBehaviour
         {
             BufScrollPoolSet[i].SetActive(false);
         }
-
+        scrollbar.SetActive(true);
     }
 
     public void onMagic()
@@ -407,6 +414,7 @@ public class csitemManager : MonoBehaviour
         {
             BufScrollPoolSet[i].SetActive(false);
         }
+        scrollbar.SetActive(true);
     }
 
     public void onBuff()
@@ -430,12 +438,12 @@ public class csitemManager : MonoBehaviour
         {
             BufScrollPoolSet[i].SetActive(true);
         }
-
+        scrollbar.SetActive(true);
     }
 
     public void onClockPotion(int num)
-    {
-        BuyPotionItem(num, itemUse);
+    {        
+        BuyPotionItem(num, itemUse);       
     }
 
     public void onClockSkScroll(int num)
@@ -455,8 +463,7 @@ public class csitemManager : MonoBehaviour
 
 
     private void _setupPontion(int itemIndex)
-    {
-
+    {               
         PotionItem item = (PotionItem)StateManager.Instance.potionItems[itemIndex];
         itemPriceText.GetComponent<Text>().text = item.Price.ToString() + "\n" + "골 드";
         itemNameText.GetComponent<Text>().text = "이 름: " + item.Name;
@@ -474,8 +481,7 @@ public class csitemManager : MonoBehaviour
     }
 
     private void _setupSkScroll(int itemIndex)
-    {
-
+    {      
         SkillItem item = (SkillItem)StateManager.Instance.skillScrollItems[itemIndex];
         itemPriceText.GetComponent<Text>().text = item.Price.ToString() + "\n" + "골 드";
         itemNameText.GetComponent<Text>().text = "이 름: " + item.Name;
@@ -491,11 +497,10 @@ public class csitemManager : MonoBehaviour
 
         SkScrollPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClockSkScroll(itemIndex); });
 
-        SkScrollPoolSet[itemIndex].SetActive(false);
+        SkScrollPoolSet[itemIndex].SetActive(false);        
     }
     private void _setupMgScroll(int itemIndex)
     {
-
         MagicItem item = (MagicItem)StateManager.Instance.magicScrollItems[itemIndex];
         itemPriceText.GetComponent<Text>().text = item.Price.ToString() + "\n" + "골 드";
         itemNameText.GetComponent<Text>().text = "이 름: " + item.Name;
@@ -514,7 +519,6 @@ public class csitemManager : MonoBehaviour
     }
     private void _setupBufScroll(int itemIndex)
     {
-
         BuffItem item = (BuffItem)StateManager.Instance.buffScrollItems[itemIndex];
         itemPriceText.GetComponent<Text>().text = item.Price.ToString() + "\n" + "골 드";
         itemNameText.GetComponent<Text>().text = "이 름: " + item.Name;
@@ -625,8 +629,7 @@ public class csitemManager : MonoBehaviour
 
     }
     private void BuyBufScrollItem(int itemIndex, GameObject itemUseSet)
-    {
-
+    {       
         //보조 마법
         BuffItem item = (BuffItem)StateManager.Instance.buffScrollItems[itemIndex];
         if (StateManager.Instance.playGold >= item.Price)

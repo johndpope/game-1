@@ -174,7 +174,7 @@ public class csEquipageStore : MonoBehaviour
                 String price = (String)itemInfo["weaponPrice"];
                 String atkPoint = (String)itemInfo["weaponATK"];
                 String durability = (String)itemInfo["weaponDurability"];
-                String explain = (String)itemInfo["weaponExplain"];
+                String weaponExplain = (String)itemInfo["weaponExplain"];
                 String weaponName = (String)itemInfo["weaponName"];
                 String weaponImage = (String)itemInfo["weaponImage"];
 
@@ -183,7 +183,7 @@ public class csEquipageStore : MonoBehaviour
                 weaponItem.Price = Int32.Parse(price);
                 weaponItem.AttackPoint = Int32.Parse(atkPoint);
                 weaponItem.Durability = Int32.Parse(durability);
-                weaponItem.Explain = explain;
+                weaponItem.Explain = weaponExplain;
                 weaponItem.WeaponName = weaponName;
                 weaponItem.Image = weaponImage;
                 wItems.Add(weaponItem);
@@ -193,6 +193,7 @@ public class csEquipageStore : MonoBehaviour
             {
                 String name = (String)itemInfo["name"];
                 String price = (String)itemInfo["price"];
+                String aromorExplain = (String)itemInfo["armorExplain"];
                 String defPoint = (String)itemInfo["armorDef"];
                 String armorName = (String)itemInfo["armorName"];
                 String armorImage = (String)itemInfo["armorImage"];
@@ -202,6 +203,7 @@ public class csEquipageStore : MonoBehaviour
                 armorItem.Price = Int32.Parse(price);
                 armorItem.Def = Int32.Parse(defPoint);
                 armorItem.ArmorName = armorName;
+                armorItem.Explain = aromorExplain;
                 armorItem.Image = armorImage;
                 aItems.Add(armorItem);
             }
@@ -210,6 +212,7 @@ public class csEquipageStore : MonoBehaviour
             {
                 String name = (String)itemInfo["name"];
                 String price = (String)itemInfo["price"];
+                String bootsExplain = (String)itemInfo["bootsExplain"];
                 String bootsSpd = (String)itemInfo["bootsSpd"];
                 String bootsName = (String)itemInfo["bootsName"];
                 String bootsImage = (String)itemInfo["bootsImage"];
@@ -218,6 +221,7 @@ public class csEquipageStore : MonoBehaviour
                 bootsItem.Name = name;
                 bootsItem.Price = Int32.Parse(price);
                 bootsItem.Spd = Int32.Parse(bootsSpd);
+                bootsItem.Explain = bootsExplain;
                 bootsItem.BootsName = bootsName;
                 bootsItem.Image = bootsImage;
                 bItems.Add(bootsItem);
@@ -258,8 +262,12 @@ public class csEquipageStore : MonoBehaviour
 
     void Update()
     {
+<<<<<<< HEAD
         playerGoldText.GetComponent<Text>().text = ": " + StateManager.Instance.playGold;
         StateManager.Instance.weaponItemGet = weaponPoolSet;
+=======
+        playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
+>>>>>>> origin/master
     }
 
     public void equipageWeapon()
@@ -432,7 +440,7 @@ public class csEquipageStore : MonoBehaviour
 
         string str;
         string str1 = item.Name;
-        string str2 = "";
+        string str2 = item.Explain;
         string str3 = "방어력: ";
         string str4 = item.Def.ToString();
         // 문자열 포맷을 지정하여 저장
@@ -493,7 +501,7 @@ public class csEquipageStore : MonoBehaviour
 
         string str;
         string str1 = item.Name;
-        string str2 = "";
+        string str2 = item.Explain;
         string str3 = "속도: ";
         string str4 = item.Spd.ToString();
         // 문자열 포맷을 지정하여 저장
