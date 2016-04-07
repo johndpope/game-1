@@ -262,12 +262,12 @@ public class csEquipageStore : MonoBehaviour
 
     void Update()
     {
-<<<<<<< HEAD
+
         playerGoldText.GetComponent<Text>().text = ": " + StateManager.Instance.playGold;
         StateManager.Instance.weaponItemGet = weaponPoolSet;
-=======
+
         playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
->>>>>>> origin/master
+
     }
 
     public void equipageWeapon()

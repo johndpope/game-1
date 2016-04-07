@@ -362,11 +362,9 @@ public class csitemManager : MonoBehaviour
         {
             BufScrollPoolSet[i].SetActive(false);          
         }
-<<<<<<< HEAD
-        
-=======
+
         scrollbar.SetActive(true);
->>>>>>> origin/master
+
     }
 
     public void onSkill()
