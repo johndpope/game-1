@@ -76,8 +76,6 @@ public class csdungeonManager : MonoBehaviour
         floorPoolSet[levelNum].transform.SetParent(levelgrid.transform);
         floorPoolSet[levelNum].transform.localScale = new Vector3(1, 1, 1);
 
-
-
         floorPoolSet[levelNum].GetComponent<Button>().onClick.AddListener(delegate { Floor(levelNum); });
 
         floorPoolSet[levelNum].SetActive(false);

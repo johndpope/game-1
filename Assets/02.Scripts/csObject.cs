@@ -42,8 +42,9 @@ public class csObject : MonoBehaviour
 
     //전투하는곳의 player위치(기즈모 포인트)
     public GameObject battlePlayerPos;
-    //전투하는곳의 Rock위치(기즈모 포인트)
-    public GameObject battleRockPos;
+    //전투하는곳의 Rock과 몬스터의 위치(기즈모 포인트)
+    public GameObject[] battlePos;
+    
 
     //맵에서 부딧친 돌의 GameObject를 저장하는 GameObject저장소
     GameObject mapRock;
@@ -61,6 +62,8 @@ public class csObject : MonoBehaviour
     public int moValue = 2; //몬스터 확률
     public int nValue = 3;  //꽝
     public int moneyValue = 5;  //돈
+
+    //public
 
     //무기확률5%, 포션5%, 스크롤(스킬,마법,버프)5%, 몬스터15%, 꽝10%, 돈50%
 
@@ -103,6 +106,7 @@ public class csObject : MonoBehaviour
         }
         if (collision.gameObject.tag == "Rock1")
         {
+           
             StateManager.Instance.playerPos = gameObject.transform.position;
             rockTransform = collision.gameObject.transform;
             breakRockPop.SetActive(true);
@@ -112,12 +116,13 @@ public class csObject : MonoBehaviour
         {
             num = 2;
             StartCoroutine("findObj");
-            Debug.Log("들어옴");
+            
         }
         if (collision.gameObject.tag == "Treasure")
         {
+            MeetMonster();
             open();
-            Debug.Log("들어옴");
+           
         }
 
         
@@ -148,7 +153,7 @@ public class csObject : MonoBehaviour
         breakRockPop.SetActive(false);
         battelCamera.enabled = true;
         gameObj.SetActive(true);
-        gameObj.transform.position = battleRockPos.transform.position;
+        gameObj.transform.position = battlePos[0].transform.position;
         gameObject.transform.position = battlePlayerPos.transform.position;
         gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         StateManager.Instance.timerIsActive = true;
@@ -218,7 +223,6 @@ public class csObject : MonoBehaviour
         }
 
     }
-
 
     private void GetScrollItem(int itemIndex, GameObject itemUseSet)
     {
@@ -317,15 +321,6 @@ public class csObject : MonoBehaviour
                 StateManager.Instance.potionItemBag[itemNum].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.potionNum[itemNum] + " 개";
 
                 break;
-            case 8:
-                //망가진 무기을 발견(꽝)
-                break;
-            case 9:
-                //낡은 무기 발견
-                break;
-            case 10:
-                //깨진 포션병을 발견
-                break;
         }
     }
 
@@ -337,7 +332,7 @@ public class csObject : MonoBehaviour
         }
         StateManager.Instance.bagSize++;
         int WeaponNum = Random.Range(0, 4);
-        if(WeaponNum==3)
+        if(WeaponNum == 3)
         {
             WeaponNum = 2;
         }
@@ -347,7 +342,27 @@ public class csObject : MonoBehaviour
                 //망가진 무기을 발견(꽝)
                 break;
             case 1:
-                //낡은 무기 발견
+                HMWeaponItem witem = (HMWeaponItem)StateManager.Instance.weaponItems[itemIndex];
+
+                weaponDurabilityText.GetComponent<Text>().text = "내구도: " + witem.Durability.ToString();
+                weaponNameText.GetComponent<Text>().text = witem.Name + " 공격력: " + witem.AttackPoint.ToString();
+
+                weaponImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(witem.Image, typeof(Sprite));
+
+                gameObj = Instantiate(WeaponUse) as GameObject;
+                gameObj.transform.SetParent(weaponGrid.transform);
+                gameObj.transform.localScale = new Vector3(1, 1, 1);
+
+                for (int wNum = 0; wNum < 5; wNum++)
+                {
+                    if (StateManager.Instance.weaponSpace[wNum] == null)
+                    {
+                        gameObj.name = witem.WeaponName + wNum;
+                        StateManager.Instance.weaponDurability[wNum] = witem.Durability;
+                        StateManager.Instance.weaponSpace[wNum] = gameObj;
+                        return;
+                    }
+                }
                 break;
             case 2:
                 HMWeaponItem item = (HMWeaponItem)StateManager.Instance.weaponItems[itemIndex];
@@ -378,5 +393,20 @@ public class csObject : MonoBehaviour
     private void GetPop()
     {
 
+    }
+
+    private void MeetMonster()
+    {
+        var level = (Level)StateManager.Instance.dungeonLevels[0/*StateManager.Instance.dungeonLevel*/];
+        int monsterNum = Random.Range(0, (level.Monster + 1));
+        for(int i=0; i < monsterNum; i++)
+        {
+            StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
+            StateManager.Instance.monster[i].SetActive(true);
+        }
+        battelCamera.enabled = true;
+
+        StateManager.Instance.timerIsActive = true;
+        StateManager.Instance.monsterBattle = true;
     }
 }

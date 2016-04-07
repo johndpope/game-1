@@ -598,7 +598,8 @@
       {
 		"level":"Lv1",
         "rock":2,
-        "boxs":2
+        "boxs":2,
+		"monsterV":2
       }
       ]
 }

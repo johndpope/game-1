@@ -72,6 +72,7 @@ public class csBattle : MonoBehaviour
         if (StateManager.Instance.timerIsActive == true)
         {
             timer.SetActive(true);
+
             if(timer.activeSelf == true)
             {
                 if (StateManager.Instance.objBlocked == true)
@@ -83,6 +84,14 @@ public class csBattle : MonoBehaviour
                     {
                         ObjBreak();
                     }
+                }
+                if(StateManager.Instance.monsterBattle==true)
+                {
+                    pTimer -= Time.deltaTime;
+                    pcc.value += Time.deltaTime / pTimer2;
+
+                    eTimer -= Time.deltaTime;
+                    ecc.value += Time.deltaTime / eTimer2;
                 }
 
                 //pTimer -= Time.deltaTime;
@@ -131,9 +140,18 @@ public class csBattle : MonoBehaviour
     }
     IEnumerator PlayPos()
     {
-        StateManager.Instance.weaponDurability[StateManager.Instance.wUse]--;
-        StateManager.Instance.dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
-        StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponDurabilityText").GetComponent<Text>().text = "내구도: " + StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
+        if(StateManager.Instance.weaponSpace[StateManager.Instance.wUse] != null)
+        {
+            StateManager.Instance.weaponDurability[StateManager.Instance.wUse]--;
+            StateManager.Instance.dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
+            StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponDurabilityText").GetComponent<Text>().text = "내구도: " + StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
+        }
+        else
+        {
+            StateManager.Instance.playHp -= 5;
+            Debug.Log(StateManager.Instance.playHp);
+        }
+       
         yield return new WaitForSeconds(1.0f);
         if(damRock != 2 && StateManager.Instance.objBlocked == true)
         {

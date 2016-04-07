@@ -62,16 +62,16 @@ public class Inven : MonoBehaviour
 
         if(Input.GetButtonDown("Jump"))
         {
-            if(StateManager.Instance.weaponDurability[wNum] == 0)
+            if(StateManager.Instance.weaponDurability[StateManager.Instance.wUse] == 0)
             {
                 dText.text = "0";
                 StateManager.Instance.bagSize--;
-                DestroyObject(StateManager.Instance.weaponSpace[wNum]);
+                DestroyObject(StateManager.Instance.weaponSpace[StateManager.Instance.wUse]);
             }
-            else if(StateManager.Instance.weaponDurability[wNum] > 0)
+            else if(StateManager.Instance.weaponDurability[StateManager.Instance.wUse] > 0)
             { 
-            StateManager.Instance.weaponDurability[wNum] -= 1;
-            dText.text = StateManager.Instance.weaponDurability[wNum].ToString();}
+            StateManager.Instance.weaponDurability[StateManager.Instance.wUse] -= 1;
+            dText.text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();}
         }
         
 

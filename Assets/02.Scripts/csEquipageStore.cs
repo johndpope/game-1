@@ -411,22 +411,10 @@ public class csEquipageStore : MonoBehaviour
         weaponPoolSet[itemIndex].transform.SetParent(gridPool.transform);
         weaponPoolSet[itemIndex].transform.localScale = new Vector3(1, 1, 1);
 
-        weaponPoolSet[itemIndex].name = "Weapon" + (10 * itemIndex + 10);
+        weaponPoolSet[itemIndex].name = item.WeaponName;
+
         weaponPoolSet[itemIndex].GetComponent<Button>().onClick.AddListener(delegate { onClickWeaponButton(itemIndex); });
-        if (itemIndex == 3)
-        {
-            weaponPoolSet[itemIndex].name = "Weapon" + 50;
-        }
-
-        if (itemIndex == 4)
-        {
-            weaponPoolSet[itemIndex].name = "Weapon" + 55;
-        }
-
-        if (itemIndex == 5)
-        {
-            weaponPoolSet[itemIndex].name = "Weapon" + 3;
-        }
+        
         weaponPoolSet[itemIndex].SetActive(false);
     }
 

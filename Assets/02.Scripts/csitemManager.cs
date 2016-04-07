@@ -276,7 +276,6 @@ public class csitemManager : MonoBehaviour
 
         scrollbar.SetActive(false);
 
-
         potionNum = new int[itemInfosP.Count];
         SkscrollNum = new int[itemInfosS.Count];
         MgscrollNum = new int[itemInfosM.Count];
@@ -324,7 +323,7 @@ public class csitemManager : MonoBehaviour
 
     void Update()
     {
-        goldText.text = "" + StateManager.Instance.playGold.ToString();
+        goldText.text = StateManager.Instance.playGold.ToString();
         StateManager.Instance.potionNum = potionNum;
         StateManager.Instance.SkscrollNum = SkscrollNum;
         StateManager.Instance.MgscrollNum = MgscrollNum;

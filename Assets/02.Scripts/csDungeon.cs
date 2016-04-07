@@ -50,6 +50,7 @@ class Level : HMItem
 {
     private int mRock;
     private int mBoxs;
+    private int mMonster;
 
     public int Rock
     {
@@ -60,6 +61,11 @@ class Level : HMItem
     {
         get { return mBoxs; }
         set { mBoxs = value; }
+    }
+    public int Monster
+    {
+        get { return mMonster; }
+        set { mMonster = value; }
     }
 }
 
@@ -117,10 +123,15 @@ public class csDungeon : MonoBehaviour
     ArrayList itemInfoMaps;
     ArrayList itemInfoLevel;
 
+    public GameObject slime;
+
+    GameObject monster;
+
     void LoadAssetfromJson()
     {
         nMaps = new ArrayList();
         nLevel = new ArrayList();
+
         Hashtable itemTable = (Hashtable)HMJson.objectFromJsonString(textAsset.text);
 
         foreach (String itemName in itemTable.Keys)
@@ -156,11 +167,13 @@ public class csDungeon : MonoBehaviour
                 String levelName = (String)itemInfo["level"];
                 String rocks = (String)itemInfo["rock"];
                 String boxs = (String)itemInfo["boxs"];
+                String monster = (String)itemInfo["monsterV"];
 
                 Level levelValue = new Level();
                 levelValue.Name = levelName;
                 levelValue.Rock = Int32.Parse(rocks);
                 levelValue.Boxs = Int32.Parse(boxs);
+                levelValue.Monster = Int32.Parse(monster);
 
                 nLevel.Add(levelValue);
             }
@@ -177,11 +190,24 @@ public class csDungeon : MonoBehaviour
         {
             return;
         }
-     
+        StateManager.Instance.dungeonLevels = nLevel;
+
         //mapObj = (Maps)nMaps[StateManager.Instance.dungeonMap];
         mapObj = (Maps)nMaps[0];
         //level = (Level)nLevel[StateManager.Instance.dungeonLevel];
         level = (Level)nLevel[0];
+
+        StateManager.Instance.monster = new GameObject[level.Monster];
+
+        for(int i=0; i < level.Monster; i++)
+        {
+            monster = Instantiate(slime) as GameObject;
+            monster.name = "slime"+i;
+            monster.transform.localPosition = new Vector3(0,0,0);
+            monster.SetActive(false);
+            StateManager.Instance.monster[i] = monster;
+        }
+      
 
         //래벨에 따른 돌의 겟수를 저장한다.
         levelRock = level.Rock;

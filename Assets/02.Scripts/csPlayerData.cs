@@ -33,9 +33,6 @@ public class csPlayerData : MonoBehaviour
   
     void Awake()
     {
-       
-
-        //dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
         useWeapon = StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>();
         weaponSpace = StateManager.Instance.weaponSpace;
 
@@ -126,10 +123,17 @@ public class csPlayerData : MonoBehaviour
         playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk + " + " + StateManager.Instance.playUseAtk;
         playerDefText.GetComponent<Text>().text = "" + StateManager.Instance.playDef + " + " + StateManager.Instance.playUseDef;
         playerSpdText.GetComponent<Text>().text = "" + StateManager.Instance.playSpd + " + " + StateManager.Instance.playUseSpd;
+
+        DestroyObject(GameObject.FindGameObjectWithTag("villageCanvas"));
     }
 
     void Update ()
     {
-        
+        playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
+
+        playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
+        playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk + " + " + StateManager.Instance.playUseAtk;
+        playerDefText.GetComponent<Text>().text = "" + StateManager.Instance.playDef + " + " + StateManager.Instance.playUseDef;
+        playerSpdText.GetComponent<Text>().text = "" + StateManager.Instance.playSpd + " + " + StateManager.Instance.playUseSpd;
     }
 }

@@ -27,11 +27,14 @@ public class StateManager : MonoBehaviour
 
     // 멤버 변수
    
-    //json에서 읽어온 데이터를 저장하는 아이템과 스크롤 ArryList
+    //json에서 읽어온 데이터를 저장하는 곳 아이템과 스크롤 ArryList
     public ArrayList potionItems;
     public ArrayList skillScrollItems;
     public ArrayList magicScrollItems;
     public ArrayList buffScrollItems;
+
+    //json에서 읽어온 데이터를 저장하는 던전레벨을 ArryList
+    public ArrayList dungeonLevels;
 
     public GameObject[] weaponItemGet;
 
@@ -87,10 +90,15 @@ public class StateManager : MonoBehaviour
 
     //길 막는 오브젝트와 전투 판단값
     public bool objBlocked;
+    //몬스터와 전투 판단값
+    public bool monsterBattle;
 
     public Vector3 playerPos;
 
     public GameObject dText;
+
+    //생성몬스터 저장 게임오브젝트 배열
+    public GameObject[] monster;
 
     //멤버 함수
     //public void SetState(int state)
