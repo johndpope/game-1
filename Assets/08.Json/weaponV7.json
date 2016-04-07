@@ -61,7 +61,7 @@
       "name":"갑옷",
       "armorDef":5,
       "price":100,
-      "Explain":"방어+5",
+      "armorExplain":"방어+5",
       "armorImage": "Armor/Armor01",
 	  "armorName":"Armor10"
       
@@ -70,7 +70,7 @@
       "name":"고굽갑옷",
       "armorDef":10,
       "price":300,
-      "Explain":"방어+10",
+      "armorExplain":"방어+10",
        "armorImage": "Armor/Armor02",
 	  "armorName":"Armor20"
     },
@@ -78,7 +78,7 @@
       "name":"취고굽갑옷",
       "armorDef":20,
       "price":500,
-      "Explain":"방어+20",
+      "armorExplain":"방어+20",
       "armorImage": "Armor/Armor03",
 	  "armorName":"Armor30"
     },
@@ -86,7 +86,7 @@
       "name":"장인의 갑옷",
       "armorDef":15,
       "price":200,
-      "Explain":"방어+15",
+      "armorExplain":"방어+15",
       "armorImage": "Armor/Armor04",
 	  "armorName":"Armor40"
       
@@ -95,7 +95,7 @@
       "name":"장인의고굽갑옷",
       "armorDef":25,
       "price":700,
-      "Explain":"방어+25",
+      "armorExplain":"방어+25",
       "armorImage": "Armor/Armor05",
 	  "armorName":"Armor50"
     },
@@ -103,7 +103,7 @@
       "name":"수퍼취고굽갑옷",
       "armorDef":50,
       "price":3000,
-      "Explain":"방어+50",
+      "armorExplain":"방어+50",
       "armorImage": "Armor/Armor06",
       "armorName":"Armor60"
     }
@@ -114,7 +114,7 @@
         "name":"부츠",
         "bootsSpd":1,
         "price":100,
-        "Explain":"속도+1",
+        "bootsExplain":"속도+1",
         "bootsImage":"Boots/Boots01",
 	"bootsName":"Boots10"
 		
@@ -123,7 +123,7 @@
         "name":"레아부츠",
         "bootsSpd":2,
         "price":200,
-        "Explain":"속도+2",
+        "bootsExplain":"속도+2",
         "bootsImage":"Boots/Boots02",
 	  "bootsName":"Boots20"
       },
@@ -131,7 +131,7 @@
         "name":"우니크부츠",
         "bootsSpd":3,
         "price":500,
-        "Explain":"속도+3",
+        "bootsExplain":"속도+3",
         "bootsImage":"Boots/Boots03",
 	"bootsName":"Boots30"
       },
@@ -139,7 +139,7 @@
         "name":"고대부츠",
         "bootsSpd":4,
         "price":700,
-        "Explain":"속도+4",
+        "bootsExplain":"속도+4",
         "bootsImage":"Boots/Boots04",
 	"bootsName":"Boots40"
       },
@@ -147,7 +147,7 @@
         "name":"고대레아부츠",
         "bootsSpd":5,
         "price":1000,
-        "Explain":"속도+5",
+        "bootsExplain":"속도+5",
         "bootsImage":"Boots/Boots05",
 	"bootsName":"Boots50"
       },
@@ -155,7 +155,7 @@
         "name":"고대우니크부츠",
         "bootsSpd":10,
         "price":2000,
-        "Explain":"속도+10",
+        "bootsExplain":"속도+10",
         "bootsImage":"Boots/Boots06",
 	"bootsName":"Boots60"
       }
@@ -275,18 +275,6 @@
 
     "buffScroll":[
       {
-        "name":"고대의치유서",
-        "hpUp_Mul":0.3,
-        "restoration":1,
-        "atkUp":0,
-        "defUp":0,
-        "spdUp":0,
-        "defDown":0,
-        "price":400,
-        "Explain":"체력,모든상태이상 회복.",
-        "buffScrollImage":"BufScroll/bufScroll_ancientHealScroll"
-      },
-      {
         "name":"힘의스크롤",
         "hpUp_Mul":0,
         "restoration":0,
@@ -346,6 +334,18 @@
         "price":250,
         "Explain":"방어력감소 되지만 공격력증가",
         "buffScrollImage":"BufScroll/bufScroll_berserkScroll"
+      },
+	  {
+        "name":"고대의치유서",
+        "hpUp_Mul":0.3,
+        "restoration":1,
+        "atkUp":0,
+        "defUp":0,
+        "spdUp":0,
+        "defDown":0,
+        "price":400,
+        "Explain":"체력,모든상태이상 회복.",
+        "buffScrollImage":"BufScroll/bufScroll_ancientHealScroll"
       }
     ],
 	  "map":[

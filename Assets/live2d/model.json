@@ -1,0 +1,13 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"model.moc",
+	"textures":[
+		"model.256/texture_00.png"
+	],
+	"expressions":[
+		{"name":"F00.exp.json","file":"embed://expressions/F00.exp.json.json"},
+		{"name":"F01.exp.json","file":"embed://expressions/F01.exp.json.json"}
+	],
+	"project_settings":"model.settings.json",
+	"name":"model"
+}
