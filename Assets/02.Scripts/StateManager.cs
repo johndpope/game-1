@@ -33,6 +33,8 @@ public class StateManager : MonoBehaviour
     public ArrayList magicScrollItems;
     public ArrayList buffScrollItems;
 
+    public GameObject[] weaponItemGet;
+
     //몇개나 구입했는지 저장하는 integer형 배열
     public int[] potionNum;
     public int[] SkscrollNum;
@@ -75,9 +77,20 @@ public class StateManager : MonoBehaviour
 
     //무기의 내구도를 저장하는 integer형 배열
     public int[] weaponDurability = new int[10];
+    public int wUse;
 
     public int dungeonMap;
     public int dungeonLevel;
+
+    //배틀 타이머 작동 bool값
+    public bool timerIsActive;
+
+    //길 막는 오브젝트와 전투 판단값
+    public bool objBlocked;
+
+    public Vector3 playerPos;
+
+    public GameObject dText;
 
     //멤버 함수
     //public void SetState(int state)

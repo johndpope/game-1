@@ -230,7 +230,6 @@ public class csDungeon : MonoBehaviour
 
         for (int i = 0; i < map.transform.childCount; ++i)
         {
-            Debug.Log(map.transform.childCount);
             if (map.transform.GetChild(i).tag == "Start")
             {
                 Transform point = map.transform.GetChild(i).transform.FindChild("startPoint");

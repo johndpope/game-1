@@ -25,17 +25,31 @@ public class csPlayerData : MonoBehaviour
     public GameObject playerSpdText;
     public GameObject playerGoldText;
 
+    public GameObject dText;
+
+    Image useWeapon;
 
     int i =0;
   
     void Awake()
     {
+       
+
+        //dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
+        useWeapon = StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>();
         weaponSpace = StateManager.Instance.weaponSpace;
 
         potionItemBag = StateManager.Instance.potionItemBag;
         SkScrollBag = StateManager.Instance.SkScrollBag;
         MgScrollBag = StateManager.Instance.MgScrollBag;
         BufScrollBag = StateManager.Instance.BufScrollBag;
+
+        StateManager.Instance.dText = dText;
+
+        if (useWeapon.enabled == true)
+        {
+            dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
+        }
 
         for (i = 0; i < weaponSpace.Length; i++)
         {
@@ -116,6 +130,6 @@ public class csPlayerData : MonoBehaviour
 
     void Update ()
     {
-	
-	}
+        
+    }
 }

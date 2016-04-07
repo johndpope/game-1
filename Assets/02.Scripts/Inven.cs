@@ -34,7 +34,6 @@ public class Inven : MonoBehaviour
 
     int d;
 
-    int wUse;
     int bUse;
     int aUse;
 
@@ -48,7 +47,6 @@ public class Inven : MonoBehaviour
         timestop = false;
         dText = durabilityText.GetComponent<Text>();
         uText = useText.GetComponent<Text>();
-        dText.text = StateManager.Instance.weaponDurability[wUse].ToString();
     }
 
     // Update is called once per frame
@@ -226,7 +224,7 @@ public class Inven : MonoBehaviour
             StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
             StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
             StateManager.Instance.playUseAtk = csUseEquip.attackPoint;
-            wUse = wNum;
+            StateManager.Instance.wUse = wNum;
         }
 
          else if(d > 0)
@@ -242,12 +240,12 @@ public class Inven : MonoBehaviour
         wNum = StateManager.Instance.bagNum;
         rPop.SetActive(false);
         dText.text = StateManager.Instance.weaponDurability[wNum].ToString();
-        DestroyObject(StateManager.Instance.weaponSpace[wUse]);
+        DestroyObject(StateManager.Instance.weaponSpace[StateManager.Instance.wUse]);
         StateManager.Instance.bagSize--;
         StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
         StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
         StateManager.Instance.playUseAtk = csUseEquip.attackPoint;
-        wUse = wNum;
+        StateManager.Instance.wUse = wNum;
     }
 
     private void armorSet()

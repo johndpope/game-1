@@ -114,7 +114,7 @@ public class csEquipageStore : MonoBehaviour
 
 
 
-    public GameObject[] weaponPoolSet = new GameObject[5];
+    public GameObject[] weaponPoolSet;
     public GameObject[] armorPoolSet = new GameObject[5];
     public GameObject[] bootPoolSet = new GameObject[5];
 
@@ -230,7 +230,11 @@ public class csEquipageStore : MonoBehaviour
     void Start()
     {
         LoadAssetfromJson();
- 
+
+        weaponPoolSet = new GameObject[itemInfos.Count];
+        armorPoolSet = new GameObject[itemInfosA.Count];
+        bootPoolSet = new GameObject[itemInfosB.Count];
+
         for (int i = 0; i < itemInfos.Count; i++)
         {
             this._setupWeapon(i);
@@ -255,6 +259,7 @@ public class csEquipageStore : MonoBehaviour
     void Update()
     {
         playerGoldText.GetComponent<Text>().text = ": " + StateManager.Instance.playGold;
+        StateManager.Instance.weaponItemGet = weaponPoolSet;
     }
 
     public void equipageWeapon()
@@ -371,7 +376,7 @@ public class csEquipageStore : MonoBehaviour
 
     }
 
-    private void _setupWeapon(int itemIndex)
+    public void _setupWeapon(int itemIndex)
     {
         HMWeaponItem item = (HMWeaponItem)wItems[itemIndex];
         

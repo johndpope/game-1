@@ -136,6 +136,7 @@ public class csitemManager : MonoBehaviour
     public GameObject itemUseGrid;  //아이템 그리드
     public GameObject skillUseGrid; //스킬 그리드
 
+    //아이템 인벤토리 셋팅
     public GameObject itemUseSetObj;
     public GameObject itemUseName;
     public GameObject itemUseExplain;
@@ -278,14 +279,11 @@ public class csitemManager : MonoBehaviour
         MgscrollNum = new int[itemInfosM.Count];
         BufscrollNum = new int[itemInfosB.Count];
 
-    
-
         potionItemBag = new GameObject[itemInfosP.Count];
         SkScrollBag = new GameObject[itemInfosS.Count];
         MgScrollBag = new GameObject[itemInfosM.Count];
         BufScrollBag = new GameObject[itemInfosB.Count];
 
-       
 
         potionPoolSet = new GameObject[itemInfosP.Count];
         SkScrollPoolSet = new GameObject[itemInfosS.Count];
@@ -361,7 +359,7 @@ public class csitemManager : MonoBehaviour
         {
             BufScrollPoolSet[i].SetActive(false);
         }
-
+        
     }
 
     public void onSkill()
