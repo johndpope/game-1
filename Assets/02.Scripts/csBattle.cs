@@ -17,7 +17,8 @@ public class csBattle : MonoBehaviour
     public GameObject atkbtn;
     public GameObject runbtn;
     public GameObject player;
-    
+    public GameObject player2D;
+
     public GameObject timer;
 
     public GameObject playPos;
@@ -47,7 +48,6 @@ public class csBattle : MonoBehaviour
             GameObject.Find("battleRock").SetActive(false);
             damRock = 0;
             StateManager.Instance.objBlocked = false;
-            player.transform.position = StateManager.Instance.playerPos;
             battelCamera.enabled = false;
             timer.SetActive(false);
         }
@@ -57,10 +57,10 @@ public class csBattle : MonoBehaviour
     {
         if (s == true)
         {
-            player.transform.Translate(0, 0, -0.2f);
-            if (player.transform.position.z <= -27.0f)
+            player2D.transform.Translate(0, 0, -0.2f);
+            if (player2D.transform.position.z <= -27.0f)
             {
-                player.transform.position = playPos.transform.position;
+                player2D.transform.position = playPos.transform.position;
                 s = false;
                 pcc.value = 0;
                 damRock++;
@@ -118,9 +118,9 @@ public class csBattle : MonoBehaviour
 
     private void ObjBreak()
     {
-        player.transform.Translate(0, 0, 0.2f);
+        player2D.transform.Translate(0, 0, 0.2f);
 
-        if(player.transform.position.z >= -21.0f)
+        if(player2D.transform.position.z >= -21.0f)
         {
             pTimer = 0;            
             StateManager.Instance.timerIsActive = false;

@@ -102,7 +102,7 @@ public class csObject : MonoBehaviour
             num = 1;
             StartCoroutine("findObj");
             mapRock = collision.gameObject;
-            MeetMonster();
+            //MeetMonster();
 
         }
         if (collision.gameObject.tag == "Rock1")
@@ -155,8 +155,6 @@ public class csObject : MonoBehaviour
         battelCamera.enabled = true;
         gameObj.SetActive(true);
         gameObj.transform.position = battlePos[0].transform.position;
-        gameObject.transform.position = battlePlayerPos.transform.position;
-        gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.objBlocked = true;
     }
@@ -407,8 +405,6 @@ public class csObject : MonoBehaviour
             StateManager.Instance.monster[i].SetActive(true);
         }
         battelCamera.enabled = true;
-        gameObject.transform.position = battlePlayerPos.transform.position;
-        gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
     }
