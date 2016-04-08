@@ -75,6 +75,7 @@ public class csBattle : MonoBehaviour
 
             if(timer.activeSelf == true)
             {
+                //돌과 싸울경우 시간 감소
                 if (StateManager.Instance.objBlocked == true)
                 {
                     pTimer -= Time.deltaTime;
@@ -85,6 +86,7 @@ public class csBattle : MonoBehaviour
                         ObjBreak();
                     }
                 }
+
                 if(StateManager.Instance.monsterBattle==true)
                 {
                     pTimer -= Time.deltaTime;
@@ -92,26 +94,15 @@ public class csBattle : MonoBehaviour
 
                     eTimer -= Time.deltaTime;
                     ecc.value += Time.deltaTime / eTimer2;
+
+                    if (pTimer <= 0)
+                    {
+                        pTimer = 0;
+                        atkbtn.SetActive(true);
+                        runbtn.SetActive(true);
+                        StateManager.Instance.timerIsActive = false;
+                    }
                 }
-
-                //pTimer -= Time.deltaTime;
-                //eTimer -= Time.deltaTime;
-
-                //pcc.value += Time.deltaTime / pTimer2;
-                //ecc.value += Time.deltaTime / eTimer2;
-
-                //if (pTimer <= 0)
-                //{
-                //    pTimer = 0;
-                //    atkbtn.SetActive(true);
-                //    runbtn.SetActive(true);
-                //    timerIsActive = false;
-                //}
-                //if (eTimer <= 0)
-                //{
-                //    ecc.value = 0;
-                //    eTimer = eTimer2;
-                //}
             }
         }
     }

@@ -102,6 +102,7 @@ public class csObject : MonoBehaviour
             num = 1;
             StartCoroutine("findObj");
             mapRock = collision.gameObject;
+            MeetMonster();
 
         }
         if (collision.gameObject.tag == "Rock1")
@@ -120,7 +121,7 @@ public class csObject : MonoBehaviour
         }
         if (collision.gameObject.tag == "Treasure")
         {
-            MeetMonster();
+           
             open();
            
         }
@@ -398,14 +399,16 @@ public class csObject : MonoBehaviour
     private void MeetMonster()
     {
         var level = (Level)StateManager.Instance.dungeonLevels[0/*StateManager.Instance.dungeonLevel*/];
-        int monsterNum = Random.Range(0, (level.Monster + 1));
+        int monsterNum = Random.Range(1, (level.Monster + 1));
+        Debug.Log(monsterNum + "몬스터 랜덤값");
         for(int i=0; i < monsterNum; i++)
         {
             StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
             StateManager.Instance.monster[i].SetActive(true);
         }
         battelCamera.enabled = true;
-
+        gameObject.transform.position = battlePlayerPos.transform.position;
+        gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
     }
