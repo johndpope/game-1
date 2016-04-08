@@ -1,0 +1,14 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"drake.moc",
+	"textures":[
+		"drake.512/texture_00.png"
+	],
+	"motions":{
+		"":[
+			{"file":"motion/drake_Idle.mtn"}
+		]
+	},
+	"project_settings":"drake.settings.json",
+	"name":"drake"
+}

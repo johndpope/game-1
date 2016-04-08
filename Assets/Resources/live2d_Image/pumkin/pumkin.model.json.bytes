@@ -1,0 +1,15 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"pumkin.moc",
+	"textures":[
+		"pumkin.512/texture_00.png"
+	],
+	"motions":{
+		"":[
+			{"file":"motion/pumkin_Attack.mtn"},
+			{"file":"motion/pumkin_Death.mtn"}
+		]
+	},
+	"project_settings":"pumkin.settings.json",
+	"name":""
+}
