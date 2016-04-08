@@ -653,5 +653,7 @@ public class csitemManager : MonoBehaviour
             popClose.SetActive(true);
         }
     }
+    //도구들은 아래로
+    //itemUseSet.transform.SetParent(skillUseGrid.transform);
 }
 
