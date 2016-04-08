@@ -102,7 +102,7 @@ public class csObject : MonoBehaviour
             num = 1;
             StartCoroutine("findObj");
             mapRock = collision.gameObject;
-            //MeetMonster();
+            MeetMonster();
 
         }
         if (collision.gameObject.tag == "Rock1")

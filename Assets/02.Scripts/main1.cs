@@ -15,11 +15,19 @@ public class main1 : MonoBehaviour
     private Live2DMotion motion;
     private MotionQueueManager motionManager;
 
+    public GameObject playerPos;
+    static bool attEnemyBool;
+
+    float enemySpd;
     // Use this for initialization
     void Start()
     {
-
+        playerPos = GameObject.Find("slime0");
+        attEnemyBool = false;
+        enemySpd = -0.1f;
         Live2D.init();
+
+
 
         live2DModel = Live2DModelUnity.loadModel(mocFile.bytes);
 
@@ -39,13 +47,22 @@ public class main1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (attEnemyBool == true)
         {
-            motion = Live2DMotion.loadMotion(mtnFiles[0].bytes);
+            playerPos.transform.Translate(0, 0, enemySpd);
+
+            motion = Live2DMotion.loadMotion(mtnFiles[1].bytes);
             motion.setLoop(true);
             motionManager.startMotion(motion, false);
-            Debug.Log("Fire1");
+
+            if (playerPos.transform.position.z <= -24.6f)
+            {
+                enemySpd = 0;
+                attEnemyBool = false;
+            }
         }
+
+
         if (Input.GetButtonDown("Fire2"))
         {
             motionManager.stopAllMotions();
@@ -69,5 +86,11 @@ public class main1 : MonoBehaviour
     void OnRenderObject()
     {
         live2DModel.draw();
+    }
+
+    public static void attEnemy()
+    {
+
+         attEnemyBool = true;
     }
 }

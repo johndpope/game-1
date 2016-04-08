@@ -14,8 +14,11 @@ public class csBattle : MonoBehaviour
 
     bool s;
   
-    public GameObject atkbtn;
-    public GameObject runbtn;
+    public GameObject atkBtn;
+    public GameObject skillBtn;
+    public GameObject itemBtn;
+
+    public GameObject runBtn;
     public GameObject player;
     public GameObject player2D;
 
@@ -86,9 +89,10 @@ public class csBattle : MonoBehaviour
                         ObjBreak();
                     }
                 }
-
+                //몬스터와 싸울경우
                 if(StateManager.Instance.monsterBattle==true)
                 {
+                   
                     pTimer -= Time.deltaTime;
                     pcc.value += Time.deltaTime / pTimer2;
 
@@ -98,9 +102,17 @@ public class csBattle : MonoBehaviour
                     if (pTimer <= 0)
                     {
                         pTimer = 0;
-                        atkbtn.SetActive(true);
-                        runbtn.SetActive(true);
+                        atkBtn.SetActive(true);
+                        skillBtn.SetActive(true);
+                        itemBtn.SetActive(true);
+                        runBtn.SetActive(true);
                         StateManager.Instance.timerIsActive = false;
+                    }
+
+                    if(eTimer <= 0)
+                    {
+                        StartCoroutine("Enemy");
+                        
                     }
                 }
             }
@@ -110,8 +122,8 @@ public class csBattle : MonoBehaviour
     public void atk()
     {
         pcc.value = 0;
-        atkbtn.SetActive(false);
-        runbtn.SetActive(false);
+        atkBtn.SetActive(false);
+        runBtn.SetActive(false);
         StateManager.Instance.timerIsActive = true;
         pTimer = pTimer2;
     }
@@ -149,5 +161,13 @@ public class csBattle : MonoBehaviour
             s = true;
         }
        
+    }
+
+    IEnumerator Enemy()
+    {
+        main1.attEnemy();
+        yield return new WaitForSeconds(1.0f);
+        ecc.value = 0;
+        eTimer = eTimer2;
     }
 }
