@@ -1,0 +1,20 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"lena01.moc",
+	"textures":[
+		"lena01.512/texture_00.png"
+	],
+	"motions":{
+		"":[
+			{"file":"motion/Atk.mtn"},
+			{"file":"motion/Gameover.mtn"},
+			{"file":"motion/Hit.mtn"},
+			{"file":"motion/Idle.mtn"},
+			{"file":"motion/J_Atk.mtn"},
+			{"file":"motion/Magic.mtn"},
+			{"file":"motion/Victory.mtn"}
+		]
+	},
+	"project_settings":"lena01.settings.json",
+	"name":""
+}

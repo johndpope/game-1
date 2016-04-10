@@ -24,8 +24,8 @@ public class live2d_setting : MonoBehaviour
     {
 
         Live2D.init();
-        //motion = Live2DMotion.loadMotion(mtnFiles[0].bytes);
-        //motion.setLoop(true);
+        motion = Live2DMotion.loadMotion(mtnFiles[0].bytes);
+        motion.setLoop(true);
  
         live2DModel = Live2DModelUnity.loadModel(mocFile.bytes);
         for (int i = 0; i < textures.Length; i++)
@@ -35,6 +35,8 @@ public class live2d_setting : MonoBehaviour
         motionManager = new MotionQueueManager();
       
         motionManager.startMotion(motion, false);
+        live2DModel.setParamFloat("PARAM_WEAPON01", 1.0f);
+        
 
     }
  
@@ -42,14 +44,18 @@ public class live2d_setting : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            motion = Live2DMotion.loadMotion(mtnFiles[0].bytes);
-            motion.setLoop(true);
+            
+            motion = Live2DMotion.loadMotion(mtnFiles[2].bytes);
+            //motion.setLoop(true);
             motionManager.startMotion(motion, false);
             Debug.Log("Fire1");
         }
         if (Input.GetButtonDown("Fire2"))
         {
-            motionManager.stopAllMotions();
+            motion = Live2DMotion.loadMotion(mtnFiles[1].bytes);
+            //motion.setLoop(true);
+            motionManager.startMotion(motion, false);
+           // motionManager.stopAllMotions();
             Debug.Log("Jump");
         }
 
@@ -62,7 +68,7 @@ public class live2d_setting : MonoBehaviour
 
         motionManager.updateParam(live2DModel);
         if (live2DModel == null) return;
-
+        live2DModel.setParamFloat("PARAM_WEAPON01", 1.0f);
         live2DModel.setMatrix(m3);
         live2DModel.update();
     }
