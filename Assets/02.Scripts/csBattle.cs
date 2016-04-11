@@ -4,7 +4,14 @@ using UnityEngine.UI;
 
 public class csBattle : MonoBehaviour 
 {
+    private ArrayList pItem;
+    private ArrayList sScroll;
+    private ArrayList mScroll;
+    private ArrayList bScroll;
 
+    SkillItem sItem;
+
+   
     public Scrollbar pcc;
     public GameObject[] eccObj = new GameObject[3];
     public Scrollbar[] ecc = new Scrollbar[3];
@@ -45,8 +52,26 @@ public class csBattle : MonoBehaviour
     public GameObject battleTextObj;
     Text battleText;
 
+    public GameObject itemPop;
+    public GameObject scrollPop;
+
+    public static float monsterDef;
+
+    bool nAtk;
+    bool sAtk;
+
+    public static int turn;
+    public static int defDownEnemy;
+    bool defDown;
+
     void Start()
     {
+        turn = 0;
+        pItem = StateManager.Instance.potionItems;
+        sScroll = StateManager.Instance.skillScrollItems;
+        mScroll = StateManager.Instance.magicScrollItems;
+        bScroll = StateManager.Instance.buffScrollItems;
+
         attEnemyBool = false;
         enemySpd = 0.1f;
         enemyro = 5.0f;
@@ -91,6 +116,37 @@ public class csBattle : MonoBehaviour
         }
 
         PlayerBattle();
+        if(StateManager.Instance.useItemBool == true)
+        {
+            if(StateManager.Instance.useItemName == "Skill")
+            {
+                scrollPop.SetActive(false);
+                touchEvent.SetActive(true);
+                sAtk = true;
+                StartCoroutine(BattleText());
+                StateManager.Instance.useItemBool = false;
+                Debug.Log("스킬이 눌림");
+            }
+
+            if (StateManager.Instance.useItemName == "Magic")
+            {
+                itemPop.SetActive(false);
+                touchEvent.SetActive(true);
+                Debug.Log("마법이 눌림");
+            }
+
+            if (StateManager.Instance.useItemName == "Buff")
+            {
+                itemPop.SetActive(false);
+                Debug.Log("버프이 눌림");
+            }
+
+            if (StateManager.Instance.useItemName == "Potion")
+            {
+                itemPop.SetActive(false);
+                Debug.Log("포션이 눌림");
+            }
+        }
     }
 
     public void TimerCut()
@@ -132,12 +188,12 @@ public class csBattle : MonoBehaviour
                     {
                         if (StateManager.Instance.monster[i] == null)
                         {
-                            i++;
-                            if(i >= StateManager.Instance.monsterNum)
-                            {
+                            //i++;
+                            //if(i >= StateManager.Instance.monsterNum)
+                            //{
                                 return;
-                            }
-                            Debug.Log(i + "              전투 끝");
+                            //}
+                            //Debug.Log(i + "              전투 끝");
                         }
                         eTimer[i] -= Time.deltaTime;
                         ecc[i].value += Time.deltaTime / (eTimer[i]*2);
@@ -173,13 +229,28 @@ public class csBattle : MonoBehaviour
     {
         pcc.value = 0;
         atkBtn.SetActive(false);
+        skillBtn.SetActive(false);
+        itemBtn.SetActive(false);
         runBtn.SetActive(false);
+        nAtk = true;
+        StartCoroutine(BattleText());
+        StateManager.Instance.normalAtk = true;
+        touchEvent.SetActive(true);       
+        pTimer = pTimer2;
+    }
 
+    public void Scroll()
+    {
+        pcc.value = 0;
+
+        atkBtn.SetActive(false);
+        skillBtn.SetActive(false);
+        itemBtn.SetActive(false);
+        runBtn.SetActive(false);
+        scrollPop.SetActive(true);
+        StateManager.Instance.scrollAtk = true;
         StartCoroutine(BattleText());
 
-        touchEvent.SetActive(true);
-
-       
         pTimer = pTimer2;
     }
 
@@ -252,10 +323,9 @@ public class csBattle : MonoBehaviour
         if (StateManager.Instance.playerBattleBool == true)
         {     
             if (player2D.transform.position.x + 2 >= StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.position.x)//터치로 넘버값 받아오기
-            { 
-                //player2D.transform.LookAt(StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.position);
-                //player2D.transform.rotation = new Quaternion(0, 270, 0, 0);
-                StartCoroutine(PlayerAtk());
+            {
+               
+                StartCoroutine(PlayerAtk());              
                 StateManager.Instance.playerBattleBool = false;
             }
 
@@ -277,44 +347,125 @@ public class csBattle : MonoBehaviour
             StateManager.Instance.weaponDurability[StateManager.Instance.wUse]--;
             StateManager.Instance.dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
             StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponDurabilityText").GetComponent<Text>().text = "내구도: " + StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
-            StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (StateManager.Instance.playAtk + StateManager.Instance.playUseAtk);
-            if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum]<=0)
+
+            if(StateManager.Instance.useItemAtkBool == true)
             {
-                eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
-                DestroyObject(StateManager.Instance.monster[StateManager.Instance.atkEnemyNum]);
+                Skill();
+            }
+            else
+            {
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+            }
+
+            for (int i = 0; i < StateManager.Instance.monsterNum; i++)
+            {
+                if (StateManager.Instance.monsterHp[i] <= 0)
+                {
+                    eccObj[i].SetActive(false);
+                    DestroyObject(StateManager.Instance.monster[i]);
+                }
             }
         }
         else
         {
-            StateManager.Instance.playHp -= 5;
-            StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (StateManager.Instance.playAtk + StateManager.Instance.playUseAtk);
-            if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
+            if (StateManager.Instance.useItemAtkBool == true)
             {
-                eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
-                DestroyObject(StateManager.Instance.monster[StateManager.Instance.atkEnemyNum]);
+                StateManager.Instance.playHp -= 5;
+                Skill();
             }
-            Debug.Log(StateManager.Instance.playHp);
+            else
+            {
+                StateManager.Instance.playHp -= 5;
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+            }
+            for (int i = 0; i < StateManager.Instance.monsterNum; i++)
+            {
+                if (StateManager.Instance.monsterHp[i] <= 0)
+                {
+                    eccObj[i].SetActive(false);
+                    DestroyObject(StateManager.Instance.monster[i]);
+                }
+            }
         }
-        //StateManager.Instance.playerBattleBool = false;
         yield return new WaitForSeconds(1.0f);
+        turn++;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
-        
-        Debug.Log("전투 끝");
-        Debug.Log(player2D.transform.rotation);
         player2D.transform.position = new Vector3(playPos.transform.position.x - 1.5f, playPos.transform.position.y, playPos.transform.position.z);
-        Debug.Log(player2D.transform.rotation);
         player2D.transform.LookAt(playPos.transform.position);
-        Debug.Log(player2D.transform.rotation);
         player2D.transform.rotation = new Quaternion(0,-0.5f, 0, 0.8f);
-        Debug.Log(player2D.transform.rotation);
     }
 
     IEnumerator BattleText()
     {
+        sItem = (SkillItem)sScroll[StateManager.Instance.useItemNum];
+
         battleTextObj.SetActive(true);
-        battleText.text = "일 반 공 격  할  \n 적 을  클 릭 하 세 요.";
+        if (nAtk == true)
+        {
+            battleText.text = "일 반 공 격  할  \n 적 을  클 릭 하 세 요.";
+        }
+        if(sAtk == true)
+        {
+            battleText.text = sItem.Name + " 할  \n 적 을  클 릭 하 세 요.";
+        }
         yield return new WaitForSeconds(1.0f);
+        nAtk = false;
+        sAtk = false;
         battleTextObj.SetActive(false);
+    }
+
+    private void Skill()
+    {
+        sItem = (SkillItem)sScroll[StateManager.Instance.useItemNum];
+        switch (StateManager.Instance.useItemNum)
+        {
+            case 0:
+                //강격
+                Debug.Log(sItem.Name);
+                int ca = Random.Range(0, 10);
+                if (ca == 5)
+                {
+                    StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (sItem.SpecialAbility * ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint)) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                }
+                else
+                {
+                    StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                }
+                StateManager.Instance.useItemAtkBool = false;
+                break;
+            case 1:
+                Debug.Log(sItem.Name);
+                //회전배기 광역
+                for (int i = 0; i < StateManager.Instance.monsterNum; i++)
+                {
+                    StateManager.Instance.monsterHp[i] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                }
+                StateManager.Instance.useItemAtkBool = false;
+
+                break;
+            case 2:
+                Debug.Log(sItem.Name);
+                //무모한돌진 슬로우
+                eTimer[StateManager.Instance.atkEnemyNum] += sItem.SpecialAbility;
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.position = battlePos[StateManager.Instance.atkEnemyNum].transform.position;
+                StateManager.Instance.useItemAtkBool = false;
+                break;
+
+            case 3:
+                Debug.Log(sItem.Name);
+                //가르기 방어감소
+                defDownEnemy = StateManager.Instance.atkEnemyNum;
+                monsterDef = StateManager.Instance.monsterDef[defDownEnemy];
+
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("defdown").GetComponent<SpriteRenderer>().enabled = true;
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("defdown").GetComponent<csDefDown>().enabled = true;
+
+                StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum] = StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum] * sItem.SpecialAbility;                
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                StateManager.Instance.useItemAtkBool = false;
+                break;
+        }
     }
 }

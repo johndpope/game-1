@@ -58,7 +58,21 @@ public class csText : MonoBehaviour
                     {
                         StateManager.Instance.atkEnemyNum = i;
                         particle = hitObj.transform.FindChild("ring").GetComponent<ParticleSystem>();
-                        hitObj.transform.FindChild("ring").GetComponent<ParticleSystem>().Play();
+                        particle.Play();
+                        battlePop.SetActive(true);
+                        gameObject.SetActive(false);
+                    }
+
+                    if(StateManager.Instance.useItemNum == 1)
+                    {
+                        for (int j = 0; j < StateManager.Instance.monsterNum; j++)
+                        {
+                            if(StateManager.Instance.monster[j] == null)
+                            {
+                                return;
+                            }
+                            StateManager.Instance.monster[j].transform.FindChild("ring").GetComponent<ParticleSystem>().Play();
+                        }
                         battlePop.SetActive(true);
                         gameObject.SetActive(false);
                     }
@@ -69,8 +83,30 @@ public class csText : MonoBehaviour
 
     public void battelYes()
     {
-        StateManager.Instance.playerBattleBool = true;
+        if(StateManager.Instance.normalAtk == true)
+        {
+            StateManager.Instance.playerBattleBool = true;
+        }
+        if (StateManager.Instance.normalAtk == true)
+        {
+            StateManager.Instance.useItemAtkBool = true;
+            StateManager.Instance.playerBattleBool = true;
+        }
+
+        particle.Stop();
         battlePop.SetActive(false);
+
+        if (StateManager.Instance.useItemNum == 1)
+        {
+            for (int j = 0; j < StateManager.Instance.monsterNum; j++)
+            {
+                if (StateManager.Instance.monster[j] == null)
+                {
+                    return;
+                }
+                StateManager.Instance.monster[j].transform.FindChild("ring").GetComponent<ParticleSystem>().Stop();
+            }
+        }
     }
     public void battelNo()
     {

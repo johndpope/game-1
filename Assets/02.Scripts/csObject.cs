@@ -406,6 +406,8 @@ public class csObject : MonoBehaviour
             StateManager.Instance.monster[i].SetActive(true);
             csBattle.eTimer[i]= Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
             StateManager.Instance.monsterHp[i] = slime.MonsterHp;
+            StateManager.Instance.monsterDef[i] = slime.MonsterDef;
+            StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
         }
         gameObject.SetActive(false);
         battelCamera.enabled = true;

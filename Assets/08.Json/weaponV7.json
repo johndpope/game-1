@@ -203,7 +203,7 @@
       {
         "name":"강격",
         "atk":1.5,
-	"specialAbility":2.0,
+		"specialAbility":2.0,
         "price":100,
         "Explain":"큰 피해를 줌.",
         "skillScrollImage":"SkScroll/skScroll_smash"
@@ -211,7 +211,7 @@
       {
         "name":"회전베기",
         "atk":0.9,
-	"specialAbility":0,
+		"specialAbility":0,
         "price":100,
         "Explain":"광역피해 줌.",
         "skillScrollImage":"SkScroll/skScroll_clive"
@@ -219,7 +219,7 @@
       {
         "name":"무자비한돌진",
         "atk":0.5,
-	"specialAbility":3.0,
+		"specialAbility":3.0,
         "price":150,
         "Explain":"피해와 기절.",
         "skillScrollImage":"SkScroll/skScroll_charge"
@@ -227,7 +227,7 @@
       {
         "name":"가르기",
         "atk":0.5,
-	"specialAbility":0.5,
+		"specialAbility":0.5,
         "price":200,
         "Explain":"피해와 방어력감소.",
         "skillScrollImage":"SkScroll/skScroll_cut"

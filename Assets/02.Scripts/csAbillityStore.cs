@@ -7,7 +7,7 @@ public class csAbillityStore : MonoBehaviour {
     public int firstHp = 20;
     public int firstAtk = 5;
     public int firstDef = 3;
-    public float firstSpd = 10.0f;
+    public float firstSpd = 3.0f;
     //능력치 강화로 얼마나 오르는지
     public int upNumHp;
     public int upNumAtk;

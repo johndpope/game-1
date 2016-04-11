@@ -33,7 +33,14 @@ public class csPlayerData : MonoBehaviour
   
     void Awake()
     {
-        useWeapon = StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>();
+        if(StateManager.Instance.weaponSpace[StateManager.Instance.wUse] !=null)
+        {
+            useWeapon = StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>();
+            if (useWeapon.enabled == true)
+            {
+                dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
+            }
+        }
         weaponSpace = StateManager.Instance.weaponSpace;
 
         potionItemBag = StateManager.Instance.potionItemBag;
@@ -43,10 +50,7 @@ public class csPlayerData : MonoBehaviour
 
         StateManager.Instance.dText = dText;
 
-        if (useWeapon.enabled == true)
-        {
-            dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
-        }
+        
 
         for (i = 0; i < weaponSpace.Length; i++)
         {

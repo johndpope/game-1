@@ -100,7 +100,10 @@ public class StateManager : MonoBehaviour
 
     //생성몬스터 저장 게임오브젝트 배열
     public GameObject[] monster;
-    public int[] monsterHp = new int[3];
+    public float[] monsterHp = new float[3];
+    public float[] monsterDef = new float[3];
+    public float[] monsterSpd = new float[3];
+
     public int monsterNum;
 
     public float playerPos = -31.0f;
@@ -110,17 +113,25 @@ public class StateManager : MonoBehaviour
     //{
     //    State = state;
     //}
-    public bool attEnemyBool;
+    //public bool attEnemyBool;
 
-    public bool enemyAtt;
+    //public bool enemyAtt;
 
     public bool playerBattleBool;
-
     public int atkEnemyNum;
+
+    public int useItemNum;
+    public bool useItemBool;
+    public bool useItemAtkBool;
+    public string useItemName;
+
+    public bool normalAtk;
+    public bool scrollAtk;
+
 
     public void attEnemy()
     {
-        attEnemyBool = true;
+        //attEnemyBool = true;
     }
 
 }
