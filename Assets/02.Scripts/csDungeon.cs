@@ -68,6 +68,40 @@ class Level : HMItem
         set { mMonster = value; }
     }
 }
+class Monster : HMItem
+{
+    private int mMonsterAtt;
+    private int mMonsterDef;
+    private int mMonsterMaxSpd;
+    private int mMonsterMinSpd;
+    private int mMonsterHp;
+
+    public int MonsterAtt
+    {
+        get { return mMonsterAtt; }
+        set { mMonsterAtt = value; }
+    }
+    public int MonsterDef
+    {
+        get { return mMonsterDef; }
+        set { mMonsterDef = value; }
+    }
+    public int MonsterMaxSpd
+    {
+        get { return mMonsterMaxSpd; }
+        set { mMonsterMaxSpd = value; }
+    }
+    public int MonsterMinSpd
+    {
+        get { return mMonsterMinSpd; }
+        set { mMonsterMinSpd = value; }
+    }
+    public int MonsterHp
+    {
+        get { return mMonsterHp; }
+        set { mMonsterHp = value; }
+    }
+}
 
 public class csDungeon : MonoBehaviour
 {
@@ -76,6 +110,7 @@ public class csDungeon : MonoBehaviour
 
     private ArrayList nMaps;
     private ArrayList nLevel;
+    private ArrayList nMonster;
 
     public TextAsset textAsset;
 
@@ -122,6 +157,7 @@ public class csDungeon : MonoBehaviour
 
     ArrayList itemInfoMaps;
     ArrayList itemInfoLevel;
+    ArrayList itemInfoMonster;
 
     public GameObject slime;
 
@@ -131,6 +167,7 @@ public class csDungeon : MonoBehaviour
     {
         nMaps = new ArrayList();
         nLevel = new ArrayList();
+        nMonster = new ArrayList();
 
         Hashtable itemTable = (Hashtable)HMJson.objectFromJsonString(textAsset.text);
 
@@ -138,6 +175,7 @@ public class csDungeon : MonoBehaviour
         {
             itemInfoMaps = (ArrayList)itemTable["map"];
             itemInfoLevel = (ArrayList)itemTable["Level"];
+            itemInfoMonster = (ArrayList)itemTable["Monster"];
 
             foreach (Hashtable itemInfo in itemInfoMaps)
             {
@@ -167,15 +205,35 @@ public class csDungeon : MonoBehaviour
                 String levelName = (String)itemInfo["level"];
                 String rocks = (String)itemInfo["rock"];
                 String boxs = (String)itemInfo["boxs"];
-                String monster = (String)itemInfo["monsterV"];
+                String monster = (String)itemInfo["monsterV"];               
 
                 Level levelValue = new Level();
                 levelValue.Name = levelName;
                 levelValue.Rock = Int32.Parse(rocks);
                 levelValue.Boxs = Int32.Parse(boxs);
                 levelValue.Monster = Int32.Parse(monster);
-
+             
                 nLevel.Add(levelValue);
+            }
+
+            foreach (Hashtable itemInfo in itemInfoMonster)
+            {
+                String name = (String)itemInfo["monsterName"];
+                String monsterAtt = (String)itemInfo["monsterAtt"];
+                String monsterDef = (String)itemInfo["monsterDef"];
+                String monsterMaxSpd = (String)itemInfo["monsterMaxSpd"];
+                String monsterMinSpd = (String)itemInfo["monsterMinSpd"];
+                String monsterHp = (String)itemInfo["monsterHp"];
+
+                Monster MonsterValue = new Monster();
+                MonsterValue.Name = name;
+                MonsterValue.MonsterAtt = Int32.Parse(monsterAtt);
+                MonsterValue.MonsterDef = Int32.Parse(monsterDef);
+                MonsterValue.MonsterMaxSpd = Int32.Parse(monsterMaxSpd);
+                MonsterValue.MonsterMinSpd = Int32.Parse(monsterMinSpd);
+                MonsterValue.MonsterHp = Int32.Parse(monsterHp);
+
+                nMonster.Add(MonsterValue);
             }
         }
     }
@@ -190,19 +248,23 @@ public class csDungeon : MonoBehaviour
         {
             return;
         }
-        StateManager.Instance.dungeonLevels = nLevel;
 
+        StateManager.Instance.dungeonLevels = nLevel;
+        StateManager.Instance.dungeonMonsters = nMonster;
+      
         //mapObj = (Maps)nMaps[StateManager.Instance.dungeonMap];
         mapObj = (Maps)nMaps[0];
         //level = (Level)nLevel[StateManager.Instance.dungeonLevel];
         level = (Level)nLevel[0];
+
+        Monster mon = (Monster)nMonster[0];
 
         StateManager.Instance.monster = new GameObject[level.Monster];
 
         for(int i=0; i < level.Monster; i++)
         {
             monster = Instantiate(slime) as GameObject;
-            monster.name = "slime"+i;
+            monster.name = mon.Name+ i;
             monster.transform.localPosition = new Vector3(0,0,0);
             monster.SetActive(false);
             StateManager.Instance.monster[i] = monster;

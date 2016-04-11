@@ -106,9 +106,7 @@ public class csObject : MonoBehaviour
 
         }
         if (collision.gameObject.tag == "Rock1")
-        {
-           
-            StateManager.Instance.playerPos = gameObject.transform.position;
+        { 
             rockTransform = collision.gameObject.transform;
             breakRockPop.SetActive(true);
         }
@@ -396,14 +394,20 @@ public class csObject : MonoBehaviour
 
     private void MeetMonster()
     {
+        Monster slime = (Monster)StateManager.Instance.dungeonMonsters[0];
         var level = (Level)StateManager.Instance.dungeonLevels[0/*StateManager.Instance.dungeonLevel*/];
-        int monsterNum = Random.Range(1, (level.Monster + 1));
-        Debug.Log(monsterNum + "몬스터 랜덤값");
-        for(int i=0; i < monsterNum; i++)
+        StateManager.Instance.monsterNum = Random.Range(3, (level.Monster + 1));
+        
+        Debug.Log(StateManager.Instance.monsterNum + "몬스터 랜덤값");
+
+        for(int i=0; i < StateManager.Instance.monsterNum; i++)
         {
             StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
             StateManager.Instance.monster[i].SetActive(true);
+            csBattle.eTimer[i]= Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
+            StateManager.Instance.monsterHp[i] = slime.MonsterHp;
         }
+        gameObject.SetActive(false);
         battelCamera.enabled = true;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;

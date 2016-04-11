@@ -4,10 +4,12 @@ using System.Collections;
 
 public class csText : MonoBehaviour
 {
-    Vector2[] touchPos = new Vector2[5];
-    Vector3 rayDir;
     public GameObject battleCameraObj;
     Camera battelCamera = new Camera();
+
+    public GameObject battlePop;
+    ParticleSystem particle;
+    GameObject pos;
     // Use this for initialization
     void Start()
     {
@@ -31,7 +33,7 @@ public class csText : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                Debug.Log("터치 되었습니다.");
+
             }
             else if (touch.phase == TouchPhase.Ended)
             {
@@ -47,11 +49,34 @@ public class csText : MonoBehaviour
         RaycastHit hitObj;
         if(Physics.Raycast(ray, out hitObj, Mathf.Infinity))
         {
-            if(hitObj.transform.tag.Equals("enemy"))
+            if (hitObj.transform.tag.Equals("enemy"))
             {
-                Debug.Log("몬스터 클릭됨");
+                Debug.Log("몬스터가 터지 되었습니다");
+                for (int i = 0; i < StateManager.Instance.monsterNum; i++)
+                {
+                    if (hitObj.transform.name == "Slime" + i)
+                    {
+                        StateManager.Instance.atkEnemyNum = i;
+                        particle = hitObj.transform.FindChild("ring").GetComponent<ParticleSystem>();
+                        hitObj.transform.FindChild("ring").GetComponent<ParticleSystem>().Play();
+                        battlePop.SetActive(true);
+                        gameObject.SetActive(false);
+                    }
+                }
             }
         }
+    }
+
+    public void battelYes()
+    {
+        StateManager.Instance.playerBattleBool = true;
+        battlePop.SetActive(false);
+    }
+    public void battelNo()
+    {
+        particle.Stop();
+        gameObject.SetActive(true);
+        battlePop.SetActive(false);
     }
 }
 

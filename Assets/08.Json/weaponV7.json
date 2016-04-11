@@ -599,9 +599,25 @@
 		"level":"Lv1",
         "rock":2,
         "boxs":2,
+		"monsterV":3
+      },
+	  {
+		"level":"Lv2",
+        "rock":2,
+        "boxs":2,
 		"monsterV":1
       }
-    ]
+    ],
+		"Monster":[
+	{
+		"monsterName":"Slime",
+		"monsterAtt":5,
+		"monsterDef":1,
+		"monsterMaxSpd":10,
+		"monsterMinSpd":7,
+		"monsterHp":10
+	}
+	]
 
 }
 

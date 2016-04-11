@@ -35,6 +35,7 @@ public class StateManager : MonoBehaviour
 
     //json에서 읽어온 데이터를 저장하는 던전레벨을 ArryList
     public ArrayList dungeonLevels;
+    public ArrayList dungeonMonsters;
 
     public GameObject[] weaponItemGet;
 
@@ -93,18 +94,34 @@ public class StateManager : MonoBehaviour
     //몬스터와 전투 판단값
     public bool monsterBattle;
 
-    public Vector3 playerPos;
+    //public Vector3 playerPos;
 
     public GameObject dText;
 
     //생성몬스터 저장 게임오브젝트 배열
     public GameObject[] monster;
+    public int[] monsterHp = new int[3];
+    public int monsterNum;
+
+    public float playerPos = -31.0f;
 
     //멤버 함수
     //public void SetState(int state)
     //{
     //    State = state;
     //}
+    public bool attEnemyBool;
+
+    public bool enemyAtt;
+
+    public bool playerBattleBool;
+
+    public int atkEnemyNum;
+
+    public void attEnemy()
+    {
+        attEnemyBool = true;
+    }
 
 }
 
