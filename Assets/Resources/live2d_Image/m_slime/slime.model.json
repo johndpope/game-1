@@ -1,0 +1,8 @@
+{
+	"type": "Live2D Model Setting",
+	"name": "slime",
+	"model": "slime.moc",
+	"textures": [
+		"slime.256/texture_00.png"
+	]
+}

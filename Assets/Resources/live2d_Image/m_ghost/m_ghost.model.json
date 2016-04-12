@@ -1,0 +1,16 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"m_ghost.moc",
+	"textures":[
+		"m_ghost.512/texture_00.png"
+	],
+	"motions":{
+		"":[
+			{"file":"motion/Atk.mtn"},
+			{"file":"motion/Death.mtn"},
+			{"file":"motion/Idle.mtn"}
+		]
+	},
+	"project_settings":"m_ghost.settings.json",
+	"name":"m_ghost"
+}

@@ -18,6 +18,8 @@ public class live2d_setting : MonoBehaviour
     public MotionQueueManager motionManager;
     public TextAsset modelJson;
 
+    public bool motionoff = false;
+
  
     // Use this for initialization
     void Start()
@@ -42,6 +44,13 @@ public class live2d_setting : MonoBehaviour
  
     void Update()
     {
+        if (motionoff == true)
+        {
+            motion = Live2DMotion.loadMotion(mtnFiles[0].bytes);
+            motion.setLoop(true);
+            motionManager.startMotion(motion, false);
+            motionoff = false;
+        }
         if (Input.GetButtonDown("Fire1"))
         {
             
@@ -49,6 +58,7 @@ public class live2d_setting : MonoBehaviour
             //motion.setLoop(true);
             motionManager.startMotion(motion, false);
             Debug.Log("Fire1");
+            //motionoff = true;
         }
         if (Input.GetButtonDown("Fire2"))
         {
@@ -57,6 +67,7 @@ public class live2d_setting : MonoBehaviour
             motionManager.startMotion(motion, false);
            // motionManager.stopAllMotions();
             Debug.Log("Jump");
+           // motionoff = true;
         }
 
         float modelWidth = live2DModel.getCanvasWidth();

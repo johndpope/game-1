@@ -1,0 +1,16 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"slime.moc",
+	"textures":[
+		"slime.256/texture_00.png"
+	],
+	"motions":{
+		"":[
+			{"file":"motions/Atk.mtn"},
+			{"file":"motions/Death.mtn"},
+			{"file":"motions/Idle.mtn"}
+		]
+	},
+	"project_settings":"slime.settings.json",
+	"name":"slime"
+}
