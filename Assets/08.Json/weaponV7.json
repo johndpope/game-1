@@ -239,7 +239,7 @@
         "name":"얼음화살",
         "atk":1.0,
         "spdDown":0.5,
-	"atkDown":0,
+		"atkDown":0,
         "price":200,
         "Explain":"피해와 감속.",
         "magicScrollImage":"MgScroll/mgScroll_iceArrow"
@@ -247,8 +247,8 @@
       {
         "name":"화염구",
         "atk":2.0,
-	"spdDown":0,
-	"atkDown":0,
+		"spdDown":0,
+		"atkDown":0,
         "price":250,
         "Explain":"큰 피해를 줌.",
         "magicScrollImage":"MgScroll/mgScroll_fireBall"
@@ -256,11 +256,11 @@
       {
         "name":"불기둥",
         "atk":1.2,
-	"spdDown":0,
-	"atkDown":0,
+		"spdDown":0,
+		"atkDown":0,
         "price":300,
         "Explain":"광역피해 줌.",
-	"magicScrollImage":"MgScroll/mgScroll_firePillar"
+		"magicScrollImage":"MgScroll/mgScroll_firePillar"
       },
       {
         "name":"대지의화살",

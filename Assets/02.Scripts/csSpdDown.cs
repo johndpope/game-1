@@ -1,26 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class csDefDown : MonoBehaviour
+public class csSpdDown : MonoBehaviour
 {
     int turn;
-    int defDownEnemy;
-    float monsterDef;
+    int spdDownEnemy;
+    float monsterSpd;
 
     // Use this for initialization
-    void Start()
+    void Start ()
     {
         turn = csBattle.turn;
-        defDownEnemy = csBattle.defDownEnemy;
-        monsterDef = csBattle.monsterDef;
+        spdDownEnemy = csBattle.spdDownEnemy;
+        monsterSpd = csBattle.monsterSpd;
         StartCoroutine(Down());
     }
 
     IEnumerator Down()
     {
         yield return new WaitForSeconds(20.0f);
-        StateManager.Instance.monsterDef[defDownEnemy] = csBattle.monsterDef;
+        StateManager.Instance.monsterSpd[spdDownEnemy] = monsterSpd;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        gameObject.GetComponent<csDefDown>().enabled = false;
+        gameObject.GetComponent<csSpdDown>().enabled = false;
     }
 }

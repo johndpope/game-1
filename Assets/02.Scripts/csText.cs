@@ -4,6 +4,11 @@ using System.Collections;
 
 public class csText : MonoBehaviour
 {
+    public GameObject atkBtn;
+    public GameObject skillBtn;
+    public GameObject itemBtn;
+    public GameObject runBtn;
+
     public GameObject battleCameraObj;
     Camera battelCamera = new Camera();
 
@@ -63,7 +68,7 @@ public class csText : MonoBehaviour
                         gameObject.SetActive(false);
                     }
 
-                    if(StateManager.Instance.useItemNum == 1)
+                    if(StateManager.Instance.useItemNum == 1 && StateManager.Instance.skillAtk.Equals(true))
                     {
                         for (int j = 0; j < StateManager.Instance.monsterNum; j++)
                         {
@@ -83,20 +88,7 @@ public class csText : MonoBehaviour
 
     public void battelYes()
     {
-        if(StateManager.Instance.normalAtk == true)
-        {
-            StateManager.Instance.playerBattleBool = true;
-        }
-        if (StateManager.Instance.normalAtk == true)
-        {
-            StateManager.Instance.useItemAtkBool = true;
-            StateManager.Instance.playerBattleBool = true;
-        }
-
-        particle.Stop();
-        battlePop.SetActive(false);
-
-        if (StateManager.Instance.useItemNum == 1)
+        if (StateManager.Instance.useItemNum == 1 && StateManager.Instance.skillAtk.Equals(true))
         {
             for (int j = 0; j < StateManager.Instance.monsterNum; j++)
             {
@@ -107,12 +99,55 @@ public class csText : MonoBehaviour
                 StateManager.Instance.monster[j].transform.FindChild("ring").GetComponent<ParticleSystem>().Stop();
             }
         }
+        if (StateManager.Instance.normalAtk.Equals(true))
+        {
+            StateManager.Instance.playerBattleBool = true;
+            StateManager.Instance.normalAtk = false;
+        }
+
+        if (StateManager.Instance.scrollAtk.Equals(true))
+        {
+            //StateManager.Instance.useItemAtkBool = true;
+            if (StateManager.Instance.skillAtk.Equals(true))
+            {
+                StateManager.Instance.playerBattleBool = true;
+                StateManager.Instance.scrollAtk = false;
+            }
+            if(StateManager.Instance.MagicAtk.Equals(true))
+            {
+                StateManager.Instance.MagicAtk = false;
+                StateManager.Instance.playerMagicBool = true;
+            }
+           
+        }
+
+        particle.Stop();
+        battlePop.SetActive(false);       
     }
+
     public void battelNo()
     {
+        if (StateManager.Instance.useItemNum == 1 && StateManager.Instance.skillAtk.Equals(true))
+        {
+            for (int j = 0; j < StateManager.Instance.monsterNum; j++)
+            {
+                if (StateManager.Instance.monster[j] == null)
+                {
+                    return;
+                }
+                StateManager.Instance.monster[j].transform.FindChild("ring").GetComponent<ParticleSystem>().Stop();
+            }
+        }
         particle.Stop();
         gameObject.SetActive(true);
         battlePop.SetActive(false);
+        atkBtn.SetActive(true);
+        skillBtn.SetActive(true);
+        itemBtn.SetActive(true);
+        runBtn.SetActive(true);
+        StateManager.Instance.normalAtk = false;
+        StateManager.Instance.scrollAtk = false;
+        StateManager.Instance.skillAtk = false;
     }
 }
 

@@ -118,16 +118,19 @@ public class StateManager : MonoBehaviour
     //public bool enemyAtt;
 
     public bool playerBattleBool;
+    public bool playerMagicBool;
     public int atkEnemyNum;
 
     public int useItemNum;
     public bool useItemBool;
-    public bool useItemAtkBool;
     public string useItemName;
 
     public bool normalAtk;
     public bool scrollAtk;
 
+    public bool skillAtk;
+    public bool MagicAtk;
+    public bool buffUse;
 
     public void attEnemy()
     {

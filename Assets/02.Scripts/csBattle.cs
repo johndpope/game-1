@@ -10,8 +10,9 @@ public class csBattle : MonoBehaviour
     private ArrayList bScroll;
 
     SkillItem sItem;
+    MagicItem mItem;
 
-   
+
     public Scrollbar pcc;
     public GameObject[] eccObj = new GameObject[3];
     public Scrollbar[] ecc = new Scrollbar[3];
@@ -56,13 +57,15 @@ public class csBattle : MonoBehaviour
     public GameObject scrollPop;
 
     public static float monsterDef;
+    public static float monsterSpd;
 
     bool nAtk;
     bool sAtk;
 
     public static int turn;
     public static int defDownEnemy;
-    bool defDown;
+    public static int spdDownEnemy;
+    // bool defDown;
 
     void Start()
     {
@@ -77,6 +80,7 @@ public class csBattle : MonoBehaviour
         enemyro = 5.0f;
 
         pTimer2 = pTimer;
+
         battelCamera = battleCameraObj.GetComponent<Camera>();
         battleText = battleTextObj.GetComponent<Text>();
     }
@@ -116,6 +120,7 @@ public class csBattle : MonoBehaviour
         }
 
         PlayerBattle();
+
         if(StateManager.Instance.useItemBool == true)
         {
             if(StateManager.Instance.useItemName == "Skill")
@@ -130,8 +135,11 @@ public class csBattle : MonoBehaviour
 
             if (StateManager.Instance.useItemName == "Magic")
             {
-                itemPop.SetActive(false);
+                scrollPop.SetActive(false);
                 touchEvent.SetActive(true);
+                sAtk = true;
+                StartCoroutine(BattleText());
+                StateManager.Instance.useItemBool = false;
                 Debug.Log("마법이 눌림");
             }
 
@@ -249,8 +257,6 @@ public class csBattle : MonoBehaviour
         runBtn.SetActive(false);
         scrollPop.SetActive(true);
         StateManager.Instance.scrollAtk = true;
-        StartCoroutine(BattleText());
-
         pTimer = pTimer2;
     }
 
@@ -309,7 +315,7 @@ public class csBattle : MonoBehaviour
     {
         if (StateManager.Instance.monster[num].name == slime.Name + num)
         {
-            eTimer[num] = Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
+            eTimer[num] = StateManager.Instance.monsterSpd[num]; //Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
             ecc[num].value = 0;
         }
         StateManager.Instance.monster[num].transform.position = battlePos[num].transform.position;
@@ -338,6 +344,20 @@ public class csBattle : MonoBehaviour
                 player2D.transform.rotation = Quaternion.Lerp(player2D.transform.rotation, Quaternion.LookRotation(dir1), enemyro * Time.deltaTime);
             }
         }
+        if(StateManager.Instance.playerMagicBool.Equals(true))
+        {
+            StartCoroutine(playerMagic());
+            StateManager.Instance.playerMagicBool = false;
+        }
+    }
+    
+
+    IEnumerator playerMagic()
+    {
+        Magic();
+        yield return new WaitForSeconds(1.5f);
+        StateManager.Instance.timerIsActive = true;
+        StateManager.Instance.monsterBattle = true;
     }
 
     IEnumerator PlayerAtk()
@@ -348,7 +368,7 @@ public class csBattle : MonoBehaviour
             StateManager.Instance.dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
             StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponDurabilityText").GetComponent<Text>().text = "내구도: " + StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
 
-            if(StateManager.Instance.useItemAtkBool == true)
+            if(StateManager.Instance.skillAtk.Equals(true))
             {
                 Skill();
             }
@@ -368,7 +388,7 @@ public class csBattle : MonoBehaviour
         }
         else
         {
-            if (StateManager.Instance.useItemAtkBool == true)
+            if (StateManager.Instance.skillAtk.Equals(true))
             {
                 StateManager.Instance.playHp -= 5;
                 Skill();
@@ -399,15 +419,16 @@ public class csBattle : MonoBehaviour
     IEnumerator BattleText()
     {
         sItem = (SkillItem)sScroll[StateManager.Instance.useItemNum];
-
-        battleTextObj.SetActive(true);
+        
         if (nAtk == true)
         {
             battleText.text = "일 반 공 격  할  \n 적 을  클 릭 하 세 요.";
+            battleTextObj.SetActive(true);
         }
         if(sAtk == true)
         {
             battleText.text = sItem.Name + " 할  \n 적 을  클 릭 하 세 요.";
+            battleTextObj.SetActive(true);
         }
         yield return new WaitForSeconds(1.0f);
         nAtk = false;
@@ -418,11 +439,13 @@ public class csBattle : MonoBehaviour
     private void Skill()
     {
         sItem = (SkillItem)sScroll[StateManager.Instance.useItemNum];
+        StateManager.Instance.skillAtk = false;
         switch (StateManager.Instance.useItemNum)
         {
             case 0:
                 //강격
                 Debug.Log(sItem.Name);
+                //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
                 int ca = Random.Range(0, 10);
                 if (ca == 5)
                 {
@@ -432,30 +455,53 @@ public class csBattle : MonoBehaviour
                 {
                     StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
                 }
-                StateManager.Instance.useItemAtkBool = false;
+
+                StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
+                if(StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]==0)
+                {
+                    DestroyObject(StateManager.Instance.SkScrollBag[StateManager.Instance.useItemNum]);
+                }
+                //StateManager.Instance.useItemAtkBool = false;
                 break;
             case 1:
                 Debug.Log(sItem.Name);
                 //회전배기 광역
+                //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
+
                 for (int i = 0; i < StateManager.Instance.monsterNum; i++)
                 {
                     StateManager.Instance.monsterHp[i] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
                 }
-                StateManager.Instance.useItemAtkBool = false;
+                StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
+                if (StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum] == 0)
+                {
+                    DestroyObject(StateManager.Instance.SkScrollBag[StateManager.Instance.useItemNum]);
+                }
+                //StateManager.Instance.useItemAtkBool = false;
 
                 break;
             case 2:
                 Debug.Log(sItem.Name);
-                //무모한돌진 슬로우
+                //무모한돌진 넉백과 적 시간 증가
+                //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
+
                 eTimer[StateManager.Instance.atkEnemyNum] += sItem.SpecialAbility;
                 StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
                 StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.position = battlePos[StateManager.Instance.atkEnemyNum].transform.position;
-                StateManager.Instance.useItemAtkBool = false;
+                
+                StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
+                if (StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum] == 0)
+                {
+                    DestroyObject(StateManager.Instance.SkScrollBag[StateManager.Instance.useItemNum]);
+                }
+                //StateManager.Instance.useItemAtkBool = false;
                 break;
 
             case 3:
                 Debug.Log(sItem.Name);
                 //가르기 방어감소
+                //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
+
                 defDownEnemy = StateManager.Instance.atkEnemyNum;
                 monsterDef = StateManager.Instance.monsterDef[defDownEnemy];
 
@@ -464,7 +510,97 @@ public class csBattle : MonoBehaviour
 
                 StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum] = StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum] * sItem.SpecialAbility;                
                 StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
-                StateManager.Instance.useItemAtkBool = false;
+
+                StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
+                if (StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum] == 0)
+                {
+                    DestroyObject(StateManager.Instance.SkScrollBag[StateManager.Instance.useItemNum]);
+                }
+                //StateManager.Instance.useItemAtkBool = false;
+                break;
+        }
+    }
+
+
+    private void Magic()
+    {
+        mItem = (MagicItem)mScroll[StateManager.Instance.useItemNum];
+        StateManager.Instance.MagicAtk = false;
+        switch (StateManager.Instance.useItemNum)
+        {
+            case 0:
+                //얼음화살 슬로우
+                //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
+                spdDownEnemy = StateManager.Instance.atkEnemyNum;
+                monsterSpd = StateManager.Instance.monsterSpd[spdDownEnemy];
+
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("spddown").GetComponent<SpriteRenderer>().enabled = true;
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("spddown").GetComponent<csSpdDown>().enabled = true;
+
+                StateManager.Instance.monsterSpd[StateManager.Instance.atkEnemyNum] = StateManager.Instance.monsterSpd[StateManager.Instance.atkEnemyNum] + (StateManager.Instance.monsterSpd[StateManager.Instance.atkEnemyNum] * mItem.SpdDownPoint);
+
+                if(eTimer[StateManager.Instance.atkEnemyNum] >= 0)
+                {
+                    eTimer[StateManager.Instance.atkEnemyNum] = StateManager.Instance.monsterSpd[StateManager.Instance.atkEnemyNum] - eTimer[StateManager.Instance.atkEnemyNum];
+                }
+
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum]--;
+                if (StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum] == 0)
+                {
+                    DestroyObject(StateManager.Instance.MgScrollBag[StateManager.Instance.useItemNum]);
+                }
+                break;
+            case 1:
+                Debug.Log(sItem.Name);
+                //불화살
+                //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
+
+                for (int i = 0; i < StateManager.Instance.monsterNum; i++)
+                {
+                    StateManager.Instance.monsterHp[i] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                }
+                StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
+                if (StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum] == 0)
+                {
+                    DestroyObject(StateManager.Instance.SkScrollBag[StateManager.Instance.useItemNum]);
+                }
+
+                break;
+            case 2:
+                Debug.Log(sItem.Name);
+                //불기둥
+                //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
+
+                eTimer[StateManager.Instance.atkEnemyNum] += sItem.SpecialAbility;
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.position = battlePos[StateManager.Instance.atkEnemyNum].transform.position;
+
+                StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
+                if (StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum] == 0)
+                {
+                    DestroyObject(StateManager.Instance.SkScrollBag[StateManager.Instance.useItemNum]);
+                }
+                break;
+
+            case 3:
+                Debug.Log(sItem.Name);
+                //대지의 화살
+                //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
+                defDownEnemy = StateManager.Instance.atkEnemyNum;
+                monsterDef = StateManager.Instance.monsterDef[defDownEnemy];
+
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("defdown").GetComponent<SpriteRenderer>().enabled = true;
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("defdown").GetComponent<csDefDown>().enabled = true;
+
+                StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum] = StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum] * sItem.SpecialAbility;
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+
+                StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
+                if (StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum] == 0)
+                {
+                    DestroyObject(StateManager.Instance.SkScrollBag[StateManager.Instance.useItemNum]);
+                }
                 break;
         }
     }
