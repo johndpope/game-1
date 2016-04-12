@@ -76,10 +76,14 @@ public class csStoreManager : MonoBehaviour
             case 0:
                 break;
             case 1:
+                //장비상점
                 maincamera.Translate(0, 0, z);
-                if (maincamera.position.z <= -3.5f)
+                //if (maincamera.position.z <= -3.5f)
+                if (maincamera.position.z <= 1.55f && maincamera.position.z >= 1.5f)
                 {
-                    maincamera.position = new Vector3(-14.9f, maincamera.position.y, -3.5f);
+                    //gizmo포인트 좌표
+                    //maincamera.position = new Vector3(-14.9f, maincamera.position.y, -3.5f);
+                    maincamera.position = new Vector3(0, maincamera.position.y, 1.5f);
                     Vector3 dir1_1 = target1_1.position - maincamera.position;
                     dir1_1.y = 0.0f; //높이                
                     dir1_1.Normalize(); // Normalize()백터3함수 x,z를  정규화
@@ -97,11 +101,13 @@ public class csStoreManager : MonoBehaviour
                 break;
             case 2:
                maincamera.Translate(0, 0, z);
-
-                if (maincamera.position.z <= 1.35f && maincamera.position.z >= 1.3f)
+                //능력치상점
+                //if (maincamera.position.z <= 1.35f && maincamera.position.z >= 1.3f)
+                if (maincamera.position.z <= 9.05f && maincamera.position.z >= 9.0f)
                 {
-                    maincamera.position = new Vector3(-11.5f, maincamera.position.y, 1.3f);
-
+                    //gizmo포인트 좌표
+                    //maincamera.position = new Vector3(-11.5f, maincamera.position.y, 1.3f);
+                    maincamera.position = new Vector3(-2.0f, maincamera.position.y, 9.0f);
                     Vector3 dir2_1 = target2_1.position - maincamera.position;
                     dir2_1.y = 0.0f; //높이                
                     dir2_1.Normalize(); // Normalize()백터3함수 x,z를  정규화
@@ -120,10 +126,13 @@ public class csStoreManager : MonoBehaviour
                 break;
             case 3:
                 maincamera.Translate(0, 0, z);
-
+                //아이템상점
                 if (maincamera.position.z <= -1.9f && maincamera.position.z >= -2.1f)
+                //if (maincamera.position.z <= -3.2f && maincamera.position.z >= -3.0f)
                 {
+                    //gizmo포인트 좌표
                     maincamera.position = new Vector3(-19.0f, maincamera.position.y, -2.0f);
+                    //maincamera.position = new Vector3(2.0f, maincamera.position.y, -3.0f);
 
                     Vector3 dir3_1 = target3_1.position - maincamera.position;
                     dir3_1.y = 0.0f; //높이                
@@ -142,9 +151,13 @@ public class csStoreManager : MonoBehaviour
 
             case 4:
                 maincamera.Translate(0, 0, z);
-                if (maincamera.position.z >= 6.6f)
+                //던전입구
+                //if (maincamera.position.z >= 6.6f)
+                if (maincamera.position.z >= -30.1f && maincamera.position.z <= -30.0f)
                 {
-                    maincamera.position = new Vector3(-18.8f, maincamera.position.y, 6.6f);
+                    //gizmo포인트 좌표
+                    //maincamera.position = new Vector3(-18.8f, maincamera.position.y, 6.6f);
+                    maincamera.position = new Vector3(-3.0f, maincamera.position.y, -30.0f);
 
                     Vector3 dir4_1 = target4_1.position - maincamera.position;
                     dir4_1.y = 0.0f; //높이                

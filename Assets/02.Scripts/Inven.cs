@@ -9,11 +9,20 @@ public class Inven : MonoBehaviour
     public GameObject _EqInven;
     public GameObject _buttons;
     public GameObject _close;
+    public GameObject _EmptyScroll; //빈 양피지
     public GameObject _WeaponScroll;
     public GameObject _ItemScroll;
     public GameObject _QuestScroll;
+   
+    //기술 스크롤들
     public GameObject _SkillScroll;
+    public GameObject _MagicScroll;
+    public GameObject _BuffScroll;
     public bool timestop;
+
+    public GameObject SkButton;
+    public GameObject MgButton;
+    public GameObject BuButton;
 
     public GameObject ynPop;
     public GameObject rPop;
@@ -81,7 +90,7 @@ public class Inven : MonoBehaviour
     {
         _EqInven.SetActive(true);
         timestop = true;
-        _WeaponScroll.SetActive(true);
+        _EmptyScroll.SetActive(true);
         _buttons.SetActive(true);
         _close.SetActive(true);
         if (timestop == true)
@@ -97,8 +106,11 @@ public class Inven : MonoBehaviour
         _close.SetActive(false);
         _WeaponScroll.SetActive(false);
         _SkillScroll.SetActive(false);
+        _MagicScroll.SetActive(false);
+        _BuffScroll.SetActive(false);
         _ItemScroll.SetActive(false);
         _QuestScroll.SetActive(false);
+        _EmptyScroll.SetActive(false);
         timestop = false;
         if (timestop == false)
         {
@@ -112,33 +124,93 @@ public class Inven : MonoBehaviour
     {
 
     }
+    //아이템버튼
     public void onItem()
     {
+        _EmptyScroll.SetActive(false);
         _SkillScroll.SetActive(false);
+        _MagicScroll.SetActive(false);
+        _BuffScroll.SetActive(false);
         _ItemScroll.SetActive(true);
         _QuestScroll.SetActive(false);
         _WeaponScroll.SetActive(false);
+        SkButton.SetActive(false);
+        MgButton.SetActive(false);
+        BuButton.SetActive(false);
     }
-    public void onSkill()
+    //기술들버튼
+    public void onScroll()
     {
-        _SkillScroll.SetActive(true);
+        _EmptyScroll.SetActive(true);
+        SkButton.SetActive(true);
+        MgButton.SetActive(true);
+        BuButton.SetActive(true);
+        _SkillScroll.SetActive(false);
+        _MagicScroll.SetActive(false);
+        _BuffScroll.SetActive(false);
         _ItemScroll.SetActive(false);
         _QuestScroll.SetActive(false);
         _WeaponScroll.SetActive(false);
     }
-    public void onQuest()
+    //기술버튼
+    public void onSkill()
+    {
+        _EmptyScroll.SetActive(false);
+        _SkillScroll.SetActive(true);
+        _MagicScroll.SetActive(false);
+        _BuffScroll.SetActive(false);
+        _ItemScroll.SetActive(false);
+        _QuestScroll.SetActive(false);
+        _WeaponScroll.SetActive(false);
+    }
+    ////마법버튼
+    public void onMagic()
     {
         _SkillScroll.SetActive(false);
+        _MagicScroll.SetActive(true);
+        _BuffScroll.SetActive(false);
+        _ItemScroll.SetActive(false);
+        _QuestScroll.SetActive(false);
+        _WeaponScroll.SetActive(false);
+    }
+    ////버프버튼
+    public void onBuff()
+    {
+
+        _SkillScroll.SetActive(false);
+        _MagicScroll.SetActive(false);
+        _BuffScroll.SetActive(true);
+        _ItemScroll.SetActive(false);
+        _QuestScroll.SetActive(false);
+        _WeaponScroll.SetActive(false);
+    }
+    //퀘스트버튼
+    public void onQuest()
+    {
+        _EmptyScroll.SetActive(false);
+        _SkillScroll.SetActive(false);
+        _MagicScroll.SetActive(false);
+        _BuffScroll.SetActive(false);
         _ItemScroll.SetActive(false);
         _QuestScroll.SetActive(true);
         _WeaponScroll.SetActive(false);
+        SkButton.SetActive(false);
+        MgButton.SetActive(false);
+        BuButton.SetActive(false);
     }
+    //장비버튼
     public void onWeapon()
     {
-        _WeaponScroll.SetActive(true);
+        _EmptyScroll.SetActive(false);
         _SkillScroll.SetActive(false);
+        _MagicScroll.SetActive(false);
+        _BuffScroll.SetActive(false);
         _ItemScroll.SetActive(false);
         _QuestScroll.SetActive(false);
+        _WeaponScroll.SetActive(true);
+        SkButton.SetActive(false);
+        MgButton.SetActive(false);
+        BuButton.SetActive(false);
     }
 
     public void useItem()

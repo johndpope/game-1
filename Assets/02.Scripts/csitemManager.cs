@@ -135,13 +135,14 @@ public class csitemManager : MonoBehaviour
     //아이템 구입시 인벤토리 셋팅 오브젝트
     public GameObject itemUseGrid;  //아이템 그리드
     public GameObject skillUseGrid; //스킬 그리드
+    public GameObject magicUseGrid; //마법 그리드
+    public GameObject buffUseGrid;  //버프 그리드
 
     //아이템 인벤토리 셋팅
     public GameObject itemUseSetObj;
     public GameObject itemUseName;
     public GameObject itemUseExplain;
     public GameObject itemUseImage;
-
 
     GameObject itemUse;
 
@@ -608,7 +609,7 @@ public class csitemManager : MonoBehaviour
                 itemUseImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
 
                 itemUseSet = Instantiate(itemUseSetObj) as GameObject;
-                itemUseSet.transform.SetParent(skillUseGrid.transform);
+                itemUseSet.transform.SetParent(magicUseGrid.transform);
                 itemUseSet.transform.localScale = new Vector3(1, 1, 1);
                 itemUseSet.name = "Magic" + itemIndex;
                 MgScrollBag[itemIndex] = itemUseSet;
@@ -638,7 +639,7 @@ public class csitemManager : MonoBehaviour
                 itemUseImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
 
                 itemUseSet = Instantiate(itemUseSetObj) as GameObject;
-                itemUseSet.transform.SetParent(skillUseGrid.transform);
+                itemUseSet.transform.SetParent(buffUseGrid.transform);
                 itemUseSet.transform.localScale = new Vector3(1, 1, 1);
                 itemUseSet.name = "Buff" + itemIndex;
                 BufScrollBag[itemIndex] = itemUseSet;
