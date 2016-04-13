@@ -616,6 +616,14 @@
 		"monsterMaxSpd":10,
 		"monsterMinSpd":7,
 		"monsterHp":10
+	},
+	{
+		"monsterName":"Mimic",
+		"monsterAtt":3,
+		"monsterDef":5,
+		"monsterMaxSpd":9,
+		"monsterMinSpd":6,
+		"monsterHp":20
 	}
 	]
 

@@ -54,8 +54,21 @@ public class csText : MonoBehaviour
         RaycastHit hitObj;
         if(Physics.Raycast(ray, out hitObj, Mathf.Infinity))
         {
+            if(hitObj.transform.tag.Equals("Player"))
+            {
+                Debug.Log("플레이어가 터치 되었습니다.");
+                particle = hitObj.transform.FindChild("ring").GetComponent<ParticleSystem>();
+                particle.Play();
+                battlePop.SetActive(true);
+                gameObject.SetActive(false);
+            }
+
             if (hitObj.transform.tag.Equals("enemy"))
             {
+                if (StateManager.Instance.buffUse.Equals(true))
+                {
+                    return;
+                }
                 Debug.Log("몬스터가 터지 되었습니다");
                 for (int i = 0; i < StateManager.Instance.monsterNum; i++)
                 {
@@ -81,6 +94,20 @@ public class csText : MonoBehaviour
                         battlePop.SetActive(true);
                         gameObject.SetActive(false);
                     }
+
+                    if(StateManager.Instance.useItemNum == 2 && StateManager.Instance.MagicAtk.Equals(true))
+                    {
+                        for (int j = 0; j < StateManager.Instance.monsterNum; j++)
+                        {
+                            if (StateManager.Instance.monster[j] == null)
+                            {
+                                return;
+                            }
+                            StateManager.Instance.monster[j].transform.FindChild("ring").GetComponent<ParticleSystem>().Play();
+                        }
+                        battlePop.SetActive(true);
+                        gameObject.SetActive(false);
+                    }
                 }
             }
         }
@@ -89,6 +116,17 @@ public class csText : MonoBehaviour
     public void battelYes()
     {
         if (StateManager.Instance.useItemNum == 1 && StateManager.Instance.skillAtk.Equals(true))
+        {
+            for (int j = 0; j < StateManager.Instance.monsterNum; j++)
+            {
+                if (StateManager.Instance.monster[j] == null)
+                {
+                    return;
+                }
+                StateManager.Instance.monster[j].transform.FindChild("ring").GetComponent<ParticleSystem>().Stop();
+            }
+        }
+        if (StateManager.Instance.useItemNum == 2 && StateManager.Instance.MagicAtk.Equals(true))
         {
             for (int j = 0; j < StateManager.Instance.monsterNum; j++)
             {
@@ -118,9 +156,13 @@ public class csText : MonoBehaviour
                 StateManager.Instance.MagicAtk = false;
                 StateManager.Instance.playerMagicBool = true;
             }
-           
-        }
+            if (StateManager.Instance.buffUse.Equals(true))
+            {
+                StateManager.Instance.buffUse = false;
+                StateManager.Instance.playerbuffBool = true;
+            }
 
+        }
         particle.Stop();
         battlePop.SetActive(false);       
     }
@@ -138,8 +180,21 @@ public class csText : MonoBehaviour
                 StateManager.Instance.monster[j].transform.FindChild("ring").GetComponent<ParticleSystem>().Stop();
             }
         }
+
+        if (StateManager.Instance.useItemNum == 2 && StateManager.Instance.MagicAtk.Equals(true))
+        {
+            for (int j = 0; j < StateManager.Instance.monsterNum; j++)
+            {
+                if (StateManager.Instance.monster[j] == null)
+                {
+                    return;
+                }
+                StateManager.Instance.monster[j].transform.FindChild("ring").GetComponent<ParticleSystem>().Stop();
+            }
+        }
+
         particle.Stop();
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
         battlePop.SetActive(false);
         atkBtn.SetActive(true);
         skillBtn.SetActive(true);
@@ -148,6 +203,8 @@ public class csText : MonoBehaviour
         StateManager.Instance.normalAtk = false;
         StateManager.Instance.scrollAtk = false;
         StateManager.Instance.skillAtk = false;
+        StateManager.Instance.MagicAtk = false;
+        StateManager.Instance.buffUse = false;
     }
 }
 

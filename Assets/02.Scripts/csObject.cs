@@ -395,6 +395,7 @@ public class csObject : MonoBehaviour
     private void MeetMonster()
     {
         Monster slime = (Monster)StateManager.Instance.dungeonMonsters[0];
+        Monster mimic = (Monster)StateManager.Instance.dungeonMonsters[1];
         var level = (Level)StateManager.Instance.dungeonLevels[0/*StateManager.Instance.dungeonLevel*/];
         StateManager.Instance.monsterNum = Random.Range(3, (level.Monster + 1));
         
@@ -406,6 +407,7 @@ public class csObject : MonoBehaviour
             StateManager.Instance.monster[i].SetActive(true);
             csBattle.eTimer[i]= Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
             StateManager.Instance.monsterHp[i] = slime.MonsterHp;
+            StateManager.Instance.monsterAtk[i] = slime.MonsterAtt;
             StateManager.Instance.monsterDef[i] = slime.MonsterDef;
             StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
         }

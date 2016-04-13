@@ -63,9 +63,9 @@ public class StateManager : MonoBehaviour
 
     //플레이어 어빌리티 데이터 저장하는 곳
     public int playGold;
-    public int playHp;
-    public int playAtk;
-    public int playDef;
+    public float playHp;
+    public float playAtk;
+    public float playDef;
     public float playSpd;
 
     //현재 착용중인 장비 능력치를 저장하는곳
@@ -101,6 +101,7 @@ public class StateManager : MonoBehaviour
     //생성몬스터 저장 게임오브젝트 배열
     public GameObject[] monster;
     public float[] monsterHp = new float[3];
+    public float[] monsterAtk = new float[3];
     public float[] monsterDef = new float[3];
     public float[] monsterSpd = new float[3];
 
@@ -119,6 +120,8 @@ public class StateManager : MonoBehaviour
 
     public bool playerBattleBool;
     public bool playerMagicBool;
+    public bool playerbuffBool;
+
     public int atkEnemyNum;
 
     public int useItemNum;

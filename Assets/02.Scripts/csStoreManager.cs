@@ -78,8 +78,8 @@ public class csStoreManager : MonoBehaviour
             case 1:
                 //장비상점
                 maincamera.Translate(0, 0, z);
-                //if (maincamera.position.z <= -3.5f)
-                if (maincamera.position.z <= 1.55f && maincamera.position.z >= 1.5f)
+                if (maincamera.position.z <= -3.5f)
+                //if (maincamera.position.z <= 1.55f && maincamera.position.z >= 1.5f)
                 {
                     //gizmo포인트 좌표
                     //maincamera.position = new Vector3(-14.9f, maincamera.position.y, -3.5f);
@@ -152,8 +152,8 @@ public class csStoreManager : MonoBehaviour
             case 4:
                 maincamera.Translate(0, 0, z);
                 //던전입구
-                //if (maincamera.position.z >= 6.6f)
-                if (maincamera.position.z >= -30.1f && maincamera.position.z <= -30.0f)
+                if (maincamera.position.z >= 6.6f)
+                //if (maincamera.position.z >= -30.1f && maincamera.position.z <= -30.0f)
                 {
                     //gizmo포인트 좌표
                     //maincamera.position = new Vector3(-18.8f, maincamera.position.y, 6.6f);

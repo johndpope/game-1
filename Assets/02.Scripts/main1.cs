@@ -29,12 +29,12 @@ public class main1 : MonoBehaviour
         {
             live2DModel.setTexture(i, textures[i]);
         }
-        //motion = Live2DMotion.loadMotion(mtnFiles[0].bytes);
-        //motion.setLoop(true);
+        motion = Live2DMotion.loadMotion(mtnFiles[0].bytes);
+        motion.setLoop(true);
        
         motionManager = new MotionQueueManager();
       
-        //motionManager.startMotion(motion, false);
+        motionManager.startMotion(motion, false);
 
     }
 
@@ -71,6 +71,11 @@ public class main1 : MonoBehaviour
                 motionManager.startMotion(motion, false);
                 break;
             case 1:
+                motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
+                motion.setLoop(true);
+                motionManager.startMotion(motion, false);
+                break;
+            case 2:
                 motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
                 motion.setLoop(true);
                 motionManager.startMotion(motion, false);

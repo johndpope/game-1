@@ -10,6 +10,8 @@ public class csPlayerData : MonoBehaviour
 
     public GameObject wGrid;
     public GameObject sGrid;
+    public GameObject mGrid;
+    public GameObject bGrid;
     public GameObject iGrid;
 
     GameObject[] weaponSpace;
@@ -101,7 +103,7 @@ public class csPlayerData : MonoBehaviour
             else if (MgScrollBag[i] != null)
             {
                 itemObj = MgScrollBag[i];
-                itemObj.transform.SetParent(sGrid.transform);
+                itemObj.transform.SetParent(mGrid.transform);
                 itemObj.transform.localScale = new Vector3(1, 1, 1);
             }
         }
@@ -115,7 +117,7 @@ public class csPlayerData : MonoBehaviour
             else if (BufScrollBag[i] != null)
             {
                 itemObj = BufScrollBag[i];
-                itemObj.transform.SetParent(sGrid.transform);
+                itemObj.transform.SetParent(bGrid.transform);
                 itemObj.transform.localScale = new Vector3(1, 1, 1);
             }
         }
