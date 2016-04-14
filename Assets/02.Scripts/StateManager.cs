@@ -124,6 +124,7 @@ public class StateManager : MonoBehaviour
     public bool playerBattleBool;
     public bool playerMagicBool;
     public bool playerbuffBool;
+    public bool playerPotionBool;
 
     public int atkEnemyNum;
 
@@ -133,11 +134,13 @@ public class StateManager : MonoBehaviour
 
     public bool normalAtk;
     public bool scrollAtk;
+    public bool potionUse;
 
     public bool skillAtk;
     public bool MagicAtk;
     public bool buffUse;
 
+ 
     public void attEnemy()
     {
         //attEnemyBool = true;

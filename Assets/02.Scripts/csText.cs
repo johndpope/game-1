@@ -65,7 +65,7 @@ public class csText : MonoBehaviour
 
             if (hitObj.transform.tag.Equals("enemy"))
             {
-                if (StateManager.Instance.buffUse.Equals(true))
+                if (StateManager.Instance.buffUse.Equals(true)|| StateManager.Instance.potionUse.Equals(true))
                 {
                     return;
                 }
@@ -80,8 +80,16 @@ public class csText : MonoBehaviour
                         battlePop.SetActive(true);
                         gameObject.SetActive(false);
                     }
+                    if (hitObj.transform.name == "Mimic" + i)
+                    {
+                        StateManager.Instance.atkEnemyNum = i;
+                        particle = hitObj.transform.FindChild("ring").GetComponent<ParticleSystem>();
+                        particle.Play();
+                        battlePop.SetActive(true);
+                        gameObject.SetActive(false);
+                    }
 
-                    if(StateManager.Instance.useItemNum == 1 && StateManager.Instance.skillAtk.Equals(true))
+                    if (StateManager.Instance.useItemNum == 1 && StateManager.Instance.skillAtk.Equals(true))
                     {
                         for (int j = 0; j < StateManager.Instance.monsterNum; j++)
                         {
@@ -163,6 +171,11 @@ public class csText : MonoBehaviour
             }
 
         }
+        if(StateManager.Instance.potionUse.Equals(true))
+        {
+            StateManager.Instance.playerPotionBool = true;
+            StateManager.Instance.potionUse = false;
+        }
         particle.Stop();
         battlePop.SetActive(false);       
     }
@@ -205,6 +218,7 @@ public class csText : MonoBehaviour
         StateManager.Instance.skillAtk = false;
         StateManager.Instance.MagicAtk = false;
         StateManager.Instance.buffUse = false;
+        StateManager.Instance.potionUse = false;
     }
 }
 

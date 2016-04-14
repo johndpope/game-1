@@ -430,7 +430,6 @@ public class csObject : MonoBehaviour
                     i++;
                     break;
             }
-            
         }
         gameObject.SetActive(false);
         battelCamera.enabled = true;
