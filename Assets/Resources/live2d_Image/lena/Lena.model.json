@@ -11,9 +11,10 @@
 			{"file":"motion/Idle.mtn"},
 			{"file":"motion/J_Atk.mtn"},
 			{"file":"motion/Magic.mtn"},
+			{"file":"motion/Move.mtn"},
 			{"file":"motion/Victory.mtn"}
 		]
 	},
 	"project_settings":"Lena.settings.json",
-	"name":"lena01"
+	"name":"m_mimic"
 }

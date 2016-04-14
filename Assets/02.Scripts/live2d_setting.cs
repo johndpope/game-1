@@ -37,9 +37,13 @@ public class live2d_setting : MonoBehaviour
         motionManager = new MotionQueueManager();
       
         motionManager.startMotion(motion, false);
-        live2DModel.setParamFloat("PARAM_WEAPON01", 1.0f);
-        
-
+        live2DModel.setPartsOpacity("PARTS_WEAPON01", 0);
+        live2DModel.setPartsOpacity("PARTS_WEAPON02", 0);
+        //live2DModel.setPartsOpacity("PARTS_WEAPON03", 0);
+        live2DModel.setPartsOpacity("PARTS_WEAPON04", 0);
+        live2DModel.setPartsOpacity("PARTS_WEAPON05", 0);
+        live2DModel.setPartsOpacity("PARTS_WEAPON06", 0);
+        //live2DModel.
     }
  
     void Update()
