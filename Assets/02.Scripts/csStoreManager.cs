@@ -38,6 +38,7 @@ public class csStoreManager : MonoBehaviour
     public GameObject eqShopButton;
     public GameObject abilShopButton;
     public GameObject dungeonButton;
+  
 
     public void onStartButton()
     {
@@ -104,6 +105,16 @@ public class csStoreManager : MonoBehaviour
         StartCoroutine("dungeonPop");
     }
 
+    public void onInvenButton()
+    {
+        abilityScroll.SetActive(false);
+        //equInven.SetActive(true);
+        itemMenu.SetActive(false);
+        dungeonMaun.SetActive(false);       
+        equipageMenu.SetActive(false);
+        equipageScroll.SetActive(false);       
+    }
+    
 
     IEnumerator equipageStorePop()
     {
