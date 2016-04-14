@@ -100,6 +100,9 @@ public class StateManager : MonoBehaviour
 
     //생성몬스터 저장 게임오브젝트 배열
     public GameObject[] monster;
+    public GameObject[] slime;
+    public GameObject[] mimic;
+
     public float[] monsterHp = new float[3];
     public float[] monsterAtk = new float[3];
     public float[] monsterDef = new float[3];

@@ -386,7 +386,7 @@ public class csBattle : MonoBehaviour
    
         }
         StateManager.Instance.monster[num].transform.FindChild("mo").GetComponent<main1>().ani(1);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.3f);
         enemyPos(num);
     }
 

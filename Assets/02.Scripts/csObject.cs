@@ -396,20 +396,41 @@ public class csObject : MonoBehaviour
     {
         Monster slime = (Monster)StateManager.Instance.dungeonMonsters[0];
         Monster mimic = (Monster)StateManager.Instance.dungeonMonsters[1];
+
         var level = (Level)StateManager.Instance.dungeonLevels[0/*StateManager.Instance.dungeonLevel*/];
         StateManager.Instance.monsterNum = Random.Range(3, (level.Monster + 1));
         
         Debug.Log(StateManager.Instance.monsterNum + "몬스터 랜덤값");
 
-        for(int i=0; i < StateManager.Instance.monsterNum; i++)
+        for(int i=0; i < StateManager.Instance.monsterNum;)
         {
-            StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
-            StateManager.Instance.monster[i].SetActive(true);
-            csBattle.eTimer[i]= Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
-            StateManager.Instance.monsterHp[i] = slime.MonsterHp;
-            StateManager.Instance.monsterAtk[i] = slime.MonsterAtt;
-            StateManager.Instance.monsterDef[i] = slime.MonsterDef;
-            StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+            int num = Random.Range(0, 2);
+            switch(num)
+            {
+                case 0:
+                    StateManager.Instance.monster[i] = StateManager.Instance.slime[i];
+                    StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
+                    StateManager.Instance.monster[i].SetActive(true);
+                    csBattle.eTimer[i] = Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
+                    StateManager.Instance.monsterHp[i] = slime.MonsterHp;
+                    StateManager.Instance.monsterAtk[i] = slime.MonsterAtt;
+                    StateManager.Instance.monsterDef[i] = slime.MonsterDef;
+                    StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+                    i++;
+                    break;
+                case 1:
+                    StateManager.Instance.monster[i] = StateManager.Instance.mimic[i];
+                    StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
+                    StateManager.Instance.monster[i].SetActive(true);
+                    csBattle.eTimer[i] = Random.Range(mimic.MonsterMinSpd, mimic.MonsterMaxSpd + 1);
+                    StateManager.Instance.monsterHp[i] = mimic.MonsterHp;
+                    StateManager.Instance.monsterAtk[i] = mimic.MonsterAtt;
+                    StateManager.Instance.monsterDef[i] = mimic.MonsterDef;
+                    StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+                    i++;
+                    break;
+            }
+            
         }
         gameObject.SetActive(false);
         battelCamera.enabled = true;

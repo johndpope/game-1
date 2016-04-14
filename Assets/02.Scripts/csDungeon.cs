@@ -160,6 +160,7 @@ public class csDungeon : MonoBehaviour
     ArrayList itemInfoMonster;
 
     public GameObject slime;
+    public GameObject mimic;
 
     GameObject monster;
 
@@ -260,16 +261,27 @@ public class csDungeon : MonoBehaviour
         Monster mon = (Monster)nMonster[0];
 
         StateManager.Instance.monster = new GameObject[level.Monster];
+        StateManager.Instance.slime = new GameObject[level.Monster];
+        StateManager.Instance.mimic = new GameObject[level.Monster];
 
-        for(int i=0; i < level.Monster; i++)
+        for (int i=0; i < level.Monster; i++)
         {
             monster = Instantiate(slime) as GameObject;
             monster.name = mon.Name+ i;
             monster.transform.localPosition = new Vector3(0,0,0);
             monster.SetActive(false);
-            StateManager.Instance.monster[i] = monster;
+            StateManager.Instance.slime[i] = monster;
         }
-      
+
+        Monster mimicV = (Monster)nMonster[1];
+        for (int i = 0; i < level.Monster; i++)
+        {
+            monster = Instantiate(mimic) as GameObject;
+            monster.name = mimicV.Name + i;
+            monster.transform.localPosition = new Vector3(0, 0, 0);
+            monster.SetActive(false);
+            StateManager.Instance.mimic[i] = monster;
+        }
 
         //래벨에 따른 돌의 겟수를 저장한다.
         levelRock = level.Rock;
