@@ -114,7 +114,7 @@ public class csObject : MonoBehaviour
         {
             mapRock = collision.gameObject;
             StartCoroutine(findObj(1,0,null));
-            //MeetMonster();
+            MeetMonster();
 
         }
         if (collision.gameObject.tag == "Rock1")
@@ -381,8 +381,10 @@ public class csObject : MonoBehaviour
         {
             WeaponNum = 2;
         }
+        Debug.Log(WeaponNum+"무기 번호");
         switch (itemIndex)
         {
+            
             case 0:
                 //망가진 무기을 발견(꽝)
                 StartCoroutine(findObj(8, 0, "망 가 진 \n 무 기 를  발 견 "));

@@ -116,7 +116,7 @@ public class csBattle : MonoBehaviour
 
     int monsterNum;
 
-    void Awake()
+    void OnEnable()
     {
         turn = 0;
         pItems = StateManager.Instance.potionItems;
@@ -134,7 +134,6 @@ public class csBattle : MonoBehaviour
         battleText = battleTextObj.GetComponent<Text>();
 
         monsterNum = StateManager.Instance.monsterNum;
-
     }
 	
 	void Update ()
@@ -161,7 +160,7 @@ public class csBattle : MonoBehaviour
             timer.SetActive(false);
             joystick.GetComponent<Image>().enabled = true;
             invenBtn.SetActive(true);
-            player2D.transform.position = playPos.transform.position;
+            player2D.transform.position = new Vector3(13.5f, 0, -30);
             gameObject.SetActive(false);
         }
 
@@ -288,10 +287,9 @@ public class csBattle : MonoBehaviour
             joystick.GetComponent<Image>().enabled = true;
             invenBtn.SetActive(true);
             StateManager.Instance.timerIsActive = false;
-            player2D.transform.position = playPos.transform.position;
+            player2D.transform.position = new Vector3(13.5f,0,-30);
             gameObject.SetActive(false);
         }
-        Debug.Log(monsterNum + "몬스터의 숫자자자자자자자");
     }
 
     public void TimerCut()
@@ -310,7 +308,7 @@ public class csBattle : MonoBehaviour
                 {
                     pTimer = pTimer / 2;
                     pTimer -= Time.deltaTime;
-                    pcc.value += Time.deltaTime / StateManager.Instance.playSpd;
+                    pcc.value += Time.deltaTime / pTimer;
 
                     if (pTimer <= 0 /*&& boom < 1*/)
                     {

@@ -129,7 +129,6 @@ public class csStoreManager : MonoBehaviour
         dungeonMaun.SetActive(false);       
         equipageMenu.SetActive(false);
         equipageScroll.SetActive(false);       
-<<<<<<< HEAD
     }
     
 
@@ -169,14 +168,13 @@ public class csStoreManager : MonoBehaviour
     {
         abilityScroll.SetActive(false);
         equInven.SetActive(false);
-        equipageScroll.SetActive(false);       
+        equipageScroll.SetActive(false);
         equipageMenu.SetActive(false);
         itemMenu.SetActive(false);
         yield return new WaitForSeconds(5.0f);
         dungeonMaun.SetActive(true);
     }
-=======
-    } 
+    
       
     IEnumerator startButtonPop()
     {
@@ -189,5 +187,4 @@ public class csStoreManager : MonoBehaviour
         invenButton.SetActive(true);
         dungeonButton.SetActive(true); 
     } 
->>>>>>> origin/master
 }
