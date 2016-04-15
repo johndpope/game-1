@@ -316,6 +316,8 @@ public class Inven : MonoBehaviour
             StateManager.Instance.playUseAtk = csUseEquip.attackPoint;
             StateManager.Instance.wUse = wNum;
             useWeapon.GetComponent<Image>().sprite = StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponImage").GetComponent<Image>().sprite;
+            StateManager.Instance.useWeapon = useWeapon.GetComponent<Image>().sprite;
+          
         }
 
          else if(d > 0)
@@ -336,6 +338,7 @@ public class Inven : MonoBehaviour
         StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
         StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
         useWeapon.GetComponent<Image>().sprite = StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponImage").GetComponent<Image>().sprite;
+        StateManager.Instance.useWeapon = useWeapon.GetComponent<Image>().sprite;
         StateManager.Instance.playUseAtk = csUseEquip.attackPoint;
         StateManager.Instance.wUse = wNum;
     }
@@ -351,6 +354,7 @@ public class Inven : MonoBehaviour
             StateManager.Instance.playUseDef = csUseEquip.defPoint;
 
             useArmor.GetComponent<Image>().sprite = StateManager.Instance.weaponSpace[aNum].transform.FindChild("armorImage").GetComponent<Image>().sprite;
+            StateManager.Instance.useArmor = useArmor.GetComponent<Image>().sprite;
 
             armorItemUse = true;
             aUse = aNum;
@@ -372,6 +376,7 @@ public class Inven : MonoBehaviour
             StateManager.Instance.weaponSpace[bNum].transform.FindChild("bootsUseIcon").GetComponentInChildren<Image>().enabled = true;
             StateManager.Instance.playUseSpd = csUseEquip.spdPoint;
             useBoots.GetComponent<Image>().sprite = StateManager.Instance.weaponSpace[bNum].transform.FindChild("bootsImage").GetComponent<Image>().sprite;
+            StateManager.Instance.useBoots = useBoots.GetComponent<Image>().sprite;
 
             bootsItemUse = true;
             bUse = bNum;

@@ -103,6 +103,9 @@ public class StateManager : MonoBehaviour
     public GameObject[] slime;
     public GameObject[] mimic;
 
+    public int slimeNum;
+    public int mimicNum;
+
     public float[] monsterHp = new float[3];
     public float[] monsterAtk = new float[3];
     public float[] monsterDef = new float[3];
@@ -140,6 +143,9 @@ public class StateManager : MonoBehaviour
     public bool MagicAtk;
     public bool buffUse;
 
+    public Sprite useWeapon;
+    public Sprite useArmor;
+    public Sprite useBoots;
 
     public void attEnemy()
     {

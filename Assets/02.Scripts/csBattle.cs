@@ -141,10 +141,24 @@ public class csBattle : MonoBehaviour
 
     int monsterNum;
 
+    public GameObject useWeapon;
 
+    Sprite useWeaponSpeite;
 
+    public GameObject weaponText;
+    Text weaponTextD;
+
+  
     void OnEnable()
     {
+
+        if (StateManager.Instance.useWeapon != null)
+        {
+            useWeapon.GetComponent<Image>().sprite = StateManager.Instance.useWeapon;
+        }
+       
+
+        weaponTextD = weaponText.GetComponent<Text>();
         playPopAtkText = playPopAtk.GetComponent<Text>();
         playPopDefText = playPopDef.GetComponent<Text>();
         playPopSpdText = playPopSpd.GetComponent<Text>();
@@ -184,9 +198,9 @@ public class csBattle : MonoBehaviour
         bItem = (BuffItem)bScroll[StateManager.Instance.useItemNum];
         pItem = (PotionItem)pItems[StateManager.Instance.useItemNum];
 
-       
-      
-        if(damRock == 2)
+        weaponTextD.text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
+
+        if (damRock == 2)
         {
             pcc.value = 0;
             StateManager.Instance.timerIsActive = false;
@@ -329,17 +343,35 @@ public class csBattle : MonoBehaviour
 
         if (monsterNum.Equals(0) && StateManager.Instance.monsterBattle.Equals(true))
         {
-            pop.SetActive(false);
-            battelCamera.enabled = false;
-            timer.SetActive(false);
-            joystick.GetComponent<Image>().enabled = true;
-            invenBtn.SetActive(true);
-            StateManager.Instance.timerIsActive = false;
-            player2D.transform.position = new Vector3(13.5f,0,-30);
-            gameObject.SetActive(false);
+            finish();
+           
         }
         TimerCut();
         
+    }
+
+    public void choiseBox(int num)
+    {
+
+    }
+
+
+    private void finish()
+    {
+        
+    }
+
+    public void finishYes()
+    {
+        pop.SetActive(false);
+        battelCamera.enabled = false;
+        timer.SetActive(false);
+        joystick.GetComponent<Image>().enabled = true;
+        invenBtn.SetActive(true);
+        StateManager.Instance.timerIsActive = false;
+        player2D.transform.position = new Vector3(13.5f, 0, -30);
+        StateManager.Instance.monsterNum = 0;
+        gameObject.SetActive(false);
     }
 
     IEnumerator playerData()
@@ -494,7 +526,7 @@ public class csBattle : MonoBehaviour
     }
     IEnumerator PlayPos()
     {
-        if(StateManager.Instance.weaponSpace[StateManager.Instance.wUse] != null)
+        if(StateManager.Instance.weaponSpace[StateManager.Instance.wUse] != null && StateManager.Instance.useWeapon != null)
         {
             StateManager.Instance.weaponDurability[StateManager.Instance.wUse]--;
             StateManager.Instance.dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
@@ -628,7 +660,7 @@ public class csBattle : MonoBehaviour
 
     IEnumerator PlayerAtk()
     {
-        if (StateManager.Instance.weaponSpace[StateManager.Instance.wUse] != null)
+        if (StateManager.Instance.weaponSpace[StateManager.Instance.wUse] != null &&  StateManager.Instance.useWeapon != null)
         {
             StateManager.Instance.weaponDurability[StateManager.Instance.wUse]--;
             StateManager.Instance.dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();

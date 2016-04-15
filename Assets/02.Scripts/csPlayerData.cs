@@ -29,13 +29,30 @@ public class csPlayerData : MonoBehaviour
 
     public GameObject dText;
 
+    public GameObject useWeapons;
+    public GameObject useArmors;
+    public GameObject useBoots;
+
     Image useWeapon;
 
     int i =0;
   
     void Awake()
     {
-        if(StateManager.Instance.weaponSpace[StateManager.Instance.wUse] !=null)
+        if(StateManager.Instance.useWeapon != null)
+        {
+            useWeapons.GetComponent<Image>().sprite = StateManager.Instance.useWeapon;
+        }
+        if (StateManager.Instance.useArmor != null)
+        {
+            useArmors.GetComponent<Image>().sprite = StateManager.Instance.useArmor;
+        }
+        if (StateManager.Instance.useBoots != null)
+        {
+            useBoots.GetComponent<Image>().sprite = StateManager.Instance.useBoots;
+        }
+
+        if (StateManager.Instance.weaponSpace[StateManager.Instance.wUse] !=null)
         {
             useWeapon = StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>();
             if (useWeapon.enabled == true)
@@ -51,8 +68,6 @@ public class csPlayerData : MonoBehaviour
         BufScrollBag = StateManager.Instance.BufScrollBag;
 
         StateManager.Instance.dText = dText;
-
-        
 
         for (i = 0; i < weaponSpace.Length; i++)
         {

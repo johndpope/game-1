@@ -470,6 +470,8 @@ public class csObject : MonoBehaviour
                     StateManager.Instance.monsterAtk[i] = slime.MonsterAtt;
                     StateManager.Instance.monsterDef[i] = slime.MonsterDef;
                     StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+                    StateManager.Instance.slimeNum++;
+                    Debug.Log("슬라임 숫자" + StateManager.Instance.slimeNum);
                     i++;
                     break;
                 case 1:
@@ -481,6 +483,8 @@ public class csObject : MonoBehaviour
                     StateManager.Instance.monsterAtk[i] = mimic.MonsterAtt;
                     StateManager.Instance.monsterDef[i] = mimic.MonsterDef;
                     StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+                    StateManager.Instance.mimicNum++;
+                    Debug.Log("미믹 숫자" + StateManager.Instance.mimicNum);
                     i++;
                     break;
             }
