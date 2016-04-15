@@ -29,7 +29,7 @@ public class csScroll : MonoBehaviour
             {
                 SkillItem item = (SkillItem)sScroll[i];
                 StateManager.Instance.useItemNum = i;
-                //StateManager.Instance.useItemBool = true;
+                StateManager.Instance.useItemBool = true;
                 StateManager.Instance.useItemName = "Skill";
                 StateManager.Instance.skillAtk = true;
                 Debug.Log(i); Debug.Log(item.Name);

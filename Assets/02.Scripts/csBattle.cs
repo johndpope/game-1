@@ -56,7 +56,6 @@ public class csBattle : MonoBehaviour
     private bool attEnemyBool;
     public float enemySpd;
     public float enemyro;
-    Monster slime;
 
     public GameObject touchEvent;
     //공격시 보이는 텍스트
@@ -132,14 +131,21 @@ public class csBattle : MonoBehaviour
         enemyro = 5.0f;
 
         pTimer = StateManager.Instance.playSpd;
-        eTimer = StateManager.Instance.monsterSpd;
+        //eTimer = StateManager.Instance.monsterSpd;
 
         battelCamera = battleCameraObj.GetComponent<Camera>();
         battleText = battleTextObj.GetComponent<Text>();
 
         monsterNum = StateManager.Instance.monsterNum;
         pTimer2 = pTimer;
-        eTimer2 = eTimer;
+        for(int i=0; i<StateManager.Instance.monsterNum;i++)
+        {
+            eTimer2[i] = eTimer[i];
+            Debug.Log(eTimer2[i]);
+            Debug.Log(eTimer[i]);
+        }
+      
+        
     }
 	
 	void Update ()
@@ -148,8 +154,6 @@ public class csBattle : MonoBehaviour
         mItem = (MagicItem)mScroll[StateManager.Instance.useItemNum];
         bItem = (BuffItem)bScroll[StateManager.Instance.useItemNum];
         pItem = (PotionItem)pItems[StateManager.Instance.useItemNum];
-
-        slime = (Monster)StateManager.Instance.dungeonMonsters[0];
 
         TimerCut();
       
@@ -353,8 +357,8 @@ public class csBattle : MonoBehaviour
                         {
                             eTimer[i] -= Time.deltaTime;
                             ecc[i].value += Time.deltaTime / eTimer2[i];
-                           // Debug.Log(eTimer[i] + "    " + "넘버" + i);
-
+                           Debug.Log(eTimer2[i] + "    " + "넘버" + i);
+                            Debug.Log(eTimer[i] + "    " + "넘버" + i);
 
                             if (eTimer[i] <= 0)
                             {
@@ -636,7 +640,7 @@ public class csBattle : MonoBehaviour
             battleText.text = sItem.Name + " 할  \n 적 을  클 릭 하 세 요.";
             battleTextObj.SetActive(true);
         }
-        if (sAtk.Equals(true))
+        if (mAtk.Equals(true))
         {
             battleText.text = mItem.Name + " 할  \n 적 을  클 릭 하 세 요.";
             battleTextObj.SetActive(true);
@@ -650,7 +654,7 @@ public class csBattle : MonoBehaviour
 
         if (pUse.Equals(true))
         {
-            battleText.text = bItem.Name + " 할  \n 캐 릭 터 를  클 릭 하 세 요.";
+            battleText.text = pItem.Name + " 할  \n 캐 릭 터 를  클 릭 하 세 요.";
             battleTextObj.SetActive(true);
         }
         yield return new WaitForSeconds(1.0f);

@@ -447,6 +447,7 @@ public class csObject : MonoBehaviour
 
     private void MeetMonster()
     {
+        gameObject.SetActive(false);
         Monster slime = (Monster)StateManager.Instance.dungeonMonsters[0];
         Monster mimic = (Monster)StateManager.Instance.dungeonMonsters[1];
 
@@ -485,7 +486,7 @@ public class csObject : MonoBehaviour
             }
         }
         battelM.SetActive(true);
-        //gameObject.SetActive(false);
+        
         battelCamera.enabled = true;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
