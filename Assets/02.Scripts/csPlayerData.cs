@@ -132,14 +132,4 @@ public class csPlayerData : MonoBehaviour
 
         DestroyObject(GameObject.FindGameObjectWithTag("villageCanvas"));
     }
-
-    void Update ()
-    {
-        playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
-
-        playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
-        playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk + " + " + StateManager.Instance.playUseAtk;
-        playerDefText.GetComponent<Text>().text = "" + StateManager.Instance.playDef + " + " + StateManager.Instance.playUseDef;
-        playerSpdText.GetComponent<Text>().text = "" + StateManager.Instance.playSpd + " + " + StateManager.Instance.playUseSpd;
-    }
 }

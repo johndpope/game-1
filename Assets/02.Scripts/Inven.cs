@@ -48,6 +48,12 @@ public class Inven : MonoBehaviour
 
     int changeNum;
 
+    public GameObject playerHpText;
+    public GameObject playerAtkText;
+    public GameObject playerDefText;
+    public GameObject playerSpdText;
+    public GameObject playerGoldText;
+
     void Start()
     {
 
@@ -56,6 +62,7 @@ public class Inven : MonoBehaviour
         timestop = false;
         dText = durabilityText.GetComponent<Text>();
         uText = useText.GetComponent<Text>();
+        StartCoroutine(playerData());
     }
 
     // Update is called once per frame
@@ -82,10 +89,21 @@ public class Inven : MonoBehaviour
             StateManager.Instance.weaponDurability[StateManager.Instance.wUse] -= 1;
             dText.text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();}
         }
+
         
 
     }
+    IEnumerator playerData()
+    {
+        playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
 
+        playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
+        playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk + " + " + StateManager.Instance.playUseAtk;
+        playerDefText.GetComponent<Text>().text = "" + StateManager.Instance.playDef + " + " + StateManager.Instance.playUseDef;
+        playerSpdText.GetComponent<Text>().text = "" + StateManager.Instance.playSpd + " + " + StateManager.Instance.playUseSpd;
+        yield return null;
+        StartCoroutine(playerData());
+    }
     public void onInven()//인벤토리 열기
     {
         _EqInven.SetActive(true);

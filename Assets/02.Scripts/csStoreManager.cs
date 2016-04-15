@@ -129,6 +129,53 @@ public class csStoreManager : MonoBehaviour
         dungeonMaun.SetActive(false);       
         equipageMenu.SetActive(false);
         equipageScroll.SetActive(false);       
+<<<<<<< HEAD
+    }
+    
+
+    IEnumerator equipageStorePop()
+    {
+        abilityScroll.SetActive(false);
+        equInven.SetActive(false);
+        itemMenu.SetActive(false);
+        dungeonMaun.SetActive(false);
+        yield return new WaitForSeconds(5.0f);        
+        equipageMenu.SetActive(true);
+        equipageScroll.SetActive(true);
+    }
+
+    IEnumerator abilityStorePop()
+    {
+        equipageMenu.SetActive(false);
+        equipageScroll.SetActive(false);
+        itemMenu.SetActive(false);
+        dungeonMaun.SetActive(false);
+        yield return new WaitForSeconds(5.0f);
+        equInven.SetActive(true);              
+        abilityScroll.SetActive(true);
+    
+    }
+    IEnumerator itemStorePop()
+    {
+        abilityScroll.SetActive(false);
+        equInven.SetActive(false);
+        equipageScroll.SetActive(false);
+        dungeonMaun.SetActive(false);
+        equipageMenu.SetActive(false);
+        yield return new WaitForSeconds(5.0f);            
+        itemMenu.SetActive(true);
+    }
+    IEnumerator dungeonPop()
+    {
+        abilityScroll.SetActive(false);
+        equInven.SetActive(false);
+        equipageScroll.SetActive(false);       
+        equipageMenu.SetActive(false);
+        itemMenu.SetActive(false);
+        yield return new WaitForSeconds(5.0f);
+        dungeonMaun.SetActive(true);
+    }
+=======
     } 
       
     IEnumerator startButtonPop()
@@ -142,4 +189,5 @@ public class csStoreManager : MonoBehaviour
         invenButton.SetActive(true);
         dungeonButton.SetActive(true); 
     } 
+>>>>>>> origin/master
 }
