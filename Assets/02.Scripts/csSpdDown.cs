@@ -20,6 +20,7 @@ public class csSpdDown : MonoBehaviour
     {
         yield return new WaitForSeconds(20.0f);
         StateManager.Instance.monsterSpd[spdDownEnemy] = monsterSpd;
+        csBattle.eTimer2[spdDownEnemy] = monsterSpd;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<csSpdDown>().enabled = false;
     }

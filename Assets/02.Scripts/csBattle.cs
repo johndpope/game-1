@@ -31,7 +31,7 @@ public class csBattle : MonoBehaviour
     public static float[] eTimer = new float[3];
 
     //float pTimer2;
-    float[] eTimer2 = new float[3];
+    public static float[] eTimer2 = new float[3];
 
     bool s;
   
@@ -132,11 +132,16 @@ public class csBattle : MonoBehaviour
         enemyro = 5.0f;
 
         pTimer = StateManager.Instance.playSpd;
+        eTimer = StateManager.Instance.monsterSpd;
 
         battelCamera = battleCameraObj.GetComponent<Camera>();
         battleText = battleTextObj.GetComponent<Text>();
 
         monsterNum = StateManager.Instance.monsterNum;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
         pTimer2 = pTimer;
         eTimer2 = eTimer;
     }
@@ -165,7 +170,7 @@ public class csBattle : MonoBehaviour
             timer.SetActive(false);
             joystick.GetComponent<Image>().enabled = true;
             invenBtn.SetActive(true);
-            player2D.transform.position = new Vector3(13.5f, 0, -30);
+            player2D.transform.position = new Vector3(13.5f,0,-30);
             gameObject.SetActive(false);
         }
 
@@ -313,7 +318,7 @@ public class csBattle : MonoBehaviour
                 {
                     pTimer = pTimer / 2;
                     pTimer -= Time.deltaTime;
-                    pcc.value += Time.deltaTime / pTimer;
+                    pcc.value += Time.deltaTime / StateManager.Instance.playSpd;
 
                     if (pTimer <= 0 /*&& boom < 1*/)
                     {
@@ -351,7 +356,7 @@ public class csBattle : MonoBehaviour
                         if (eccObj[i].activeSelf.Equals(true))
                         {
                             eTimer[i] -= Time.deltaTime;
-                            ecc[i].value += Time.deltaTime / eTimer[i];
+                            ecc[i].value += Time.deltaTime / eTimer2[i];
                            // Debug.Log(eTimer[i] + "    " + "넘버" + i);
 
 
@@ -394,7 +399,6 @@ public class csBattle : MonoBehaviour
         StartCoroutine(BattleText());
         StateManager.Instance.normalAtk = true;
         touchEvent.SetActive(true);
-        pTimer = pTimer2;      
     }
 
     public void Scroll()
@@ -482,7 +486,7 @@ public class csBattle : MonoBehaviour
     {
         //if (StateManager.Instance.monster[num].name == slime.Name + num)
         //{
-            eTimer[num] = StateManager.Instance.monsterSpd[num]; //Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
+            eTimer[num] = eTimer2[num]; //Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
         Debug.Log(eTimer[num]);
             ecc[num].value = 0;
         //}
@@ -533,7 +537,7 @@ public class csBattle : MonoBehaviour
     {
         Potion();
         yield return new WaitForSeconds(1.5f);
-        pTimer = StateManager.Instance.playSpd - playPotionSpd;
+        pTimer = pTimer2 - playPotionSpd;
         turn++;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
@@ -553,7 +557,7 @@ public class csBattle : MonoBehaviour
         }
         
         yield return new WaitForSeconds(1.5f);
-        pTimer = StateManager.Instance.playSpd - playPotionSpd;
+        pTimer = pTimer2 - playPotionSpd;
         turn++;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
@@ -563,7 +567,7 @@ public class csBattle : MonoBehaviour
     {
         Buff();
         yield return new WaitForSeconds(1.5f);
-        pTimer = StateManager.Instance.playSpd - playPotionSpd;
+        pTimer = pTimer2 - playPotionSpd;
         turn++;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
@@ -615,7 +619,7 @@ public class csBattle : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(1.0f);
-        pTimer = StateManager.Instance.playSpd - playPotionSpd;
+        pTimer = pTimer2 - playPotionSpd;
         turn++;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
@@ -760,8 +764,8 @@ public class csBattle : MonoBehaviour
                 StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("spddown").GetComponent<csSpdDown>().enabled = true;
 
                 StateManager.Instance.monsterSpd[StateManager.Instance.atkEnemyNum] = StateManager.Instance.monsterSpd[StateManager.Instance.atkEnemyNum] + (StateManager.Instance.monsterSpd[StateManager.Instance.atkEnemyNum] * mItem.SpdDownPoint);
-
-                if(eTimer[StateManager.Instance.atkEnemyNum] >= 0)
+                eTimer2[StateManager.Instance.atkEnemyNum] = StateManager.Instance.monsterSpd[StateManager.Instance.atkEnemyNum];
+                if (eTimer[StateManager.Instance.atkEnemyNum] >= 0)
                 {
                     eTimer[StateManager.Instance.atkEnemyNum] = StateManager.Instance.monsterSpd[StateManager.Instance.atkEnemyNum] - eTimer[StateManager.Instance.atkEnemyNum];
                 }
@@ -991,6 +995,7 @@ public class csBattle : MonoBehaviour
                 playPotionSpd = pItem.UpPoint;
                 spdPotionTurn = turn;
                 pTimer -= pItem.UpPoint;
+                pTimer2 -= pItem.UpPoint;
 
                 StateManager.Instance.potionNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.potionNum[StateManager.Instance.useItemNum] == 0)
