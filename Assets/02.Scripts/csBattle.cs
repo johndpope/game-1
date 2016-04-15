@@ -27,6 +27,7 @@ public class csBattle : MonoBehaviour
     public Scrollbar[] ecc = new Scrollbar[3];
 
     public float pTimer;
+    float pTimer2;
     public static float[] eTimer = new float[3];
 
     //float pTimer2;
@@ -116,6 +117,8 @@ public class csBattle : MonoBehaviour
 
     int monsterNum;
 
+
+
     void OnEnable()
     {
         turn = 0;
@@ -134,6 +137,7 @@ public class csBattle : MonoBehaviour
         battleText = battleTextObj.GetComponent<Text>();
 
         monsterNum = StateManager.Instance.monsterNum;
+        pTimer2 = pTimer;        
     }
 	
 	void Update ()
@@ -319,7 +323,8 @@ public class csBattle : MonoBehaviour
                 if(StateManager.Instance.monsterBattle==true)
                 {
                     pTimer -= Time.deltaTime;
-                    pcc.value += Time.deltaTime / pTimer;
+                    pcc.value += Time.deltaTime / pTimer2;
+                    //pcc.value += Time.deltaTime / pTimer;
 
                     if (pTimer <= 0)
                     {
@@ -387,7 +392,8 @@ public class csBattle : MonoBehaviour
         nAtk = true;
         StartCoroutine(BattleText());
         StateManager.Instance.normalAtk = true;
-        touchEvent.SetActive(true);       
+        touchEvent.SetActive(true);
+        pTimer = pTimer2;      
     }
 
     public void Scroll()
