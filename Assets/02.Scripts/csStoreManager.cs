@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 
 
-
 public class csStoreManager : MonoBehaviour
 {
 
@@ -45,16 +44,10 @@ public class csStoreManager : MonoBehaviour
         iTween.MoveTo(GameObject.Find("Main Camera"), iTween.Hash("x", -2.0f
                                             , "y", 6.0f
                                             , "z", 24.0f
-                                            , "time", 5.0f));
+                                            , "time", 4.0f));
         iTween.RotateTo(GameObject.Find("Main Camera"), iTween.Hash("x", 20                                         
-                                           , "time", 5.0f));
-        itemShopButton.SetActive(true);
-        eqShopButton.SetActive(true);
-        abilShopButton.SetActive(true);
-        invenButton.SetActive(true);
-        dungeonButton.SetActive(true);
-        title.SetActive(false);
-        startButton.SetActive(false);        
+                                           , "time", 4.0f));
+        StartCoroutine("startButtonPop");   
     }
 
     public void onEqShopButton()
@@ -62,11 +55,17 @@ public class csStoreManager : MonoBehaviour
         iTween.MoveTo(GameObject.Find("Main Camera"), iTween.Hash("x",-5.0f
                                     , "y", 1.0f
                                     , "z", 11.0f
-                                    , "time", 5.0f));
+                                    , "time", 2.0f                                    
+                                    ));
         iTween.RotateTo(GameObject.Find("Main Camera"), iTween.Hash("y", 270
                                    ,"x",0
-                                   , "time", 5.0f));
-        StartCoroutine("equipageStorePop");
+                                   , "time", 2.0f));
+        abilityScroll.SetActive(false);
+        equInven.SetActive(false);
+        itemMenu.SetActive(false);
+        dungeonMaun.SetActive(false);            
+        equipageMenu.SetActive(true);
+        equipageScroll.SetActive(true);
     }
 
     public void onAbilShopButton()
@@ -74,11 +73,17 @@ public class csStoreManager : MonoBehaviour
         iTween.MoveTo(GameObject.Find("Main Camera"), iTween.Hash("x", 1.0f
                             , "y", 1.0f
                             , "z", 9.0f
-                            , "time", 5.0f));
+                            , "time", 2.0f
+                            ));
         iTween.RotateTo(GameObject.Find("Main Camera"), iTween.Hash("y", 90
                                    , "x", 0
-                                   , "time", 5.0f));
-        StartCoroutine("abilityStorePop");
+                                   , "time", 2.0f));
+        equipageMenu.SetActive(false);
+        equipageScroll.SetActive(false);
+        itemMenu.SetActive(false);
+        dungeonMaun.SetActive(false);         
+        equInven.SetActive(true);
+        abilityScroll.SetActive(true);
     }
 
     public void onItemShopButton()
@@ -86,11 +91,17 @@ public class csStoreManager : MonoBehaviour
         iTween.MoveTo(GameObject.Find("Main Camera"), iTween.Hash("x", 2.0f
                     , "y", 1.0f
                     , "z", -3.0f
-                    , "time", 5.0f));
+                    , "time", 2.0f                                       
+                    ));
         iTween.RotateTo(GameObject.Find("Main Camera"), iTween.Hash("y", 120
                                    , "x", 0
-                                   , "time", 5.0f));
-        StartCoroutine("itemStorePop");
+                                   , "time", 2.0f));
+        abilityScroll.SetActive(false);
+        equInven.SetActive(false);
+        equipageScroll.SetActive(false);
+        dungeonMaun.SetActive(false);
+        equipageMenu.SetActive(false);                     
+        itemMenu.SetActive(true);
     }
 
     public void onDungeonButton()
@@ -98,21 +109,27 @@ public class csStoreManager : MonoBehaviour
         iTween.MoveTo(GameObject.Find("Main Camera"), iTween.Hash("x", -7.0f
             , "y", 2.5f
             , "z", -4.3f
-            , "time", 5.0f));
+            , "time", 2.0f           
+            ));
         iTween.RotateTo(GameObject.Find("Main Camera"), iTween.Hash("y", 180
                                    , "x", 0
-                                   , "time", 5.0f));
-        StartCoroutine("dungeonPop");
+                                   , "time", 2.0f));
+        abilityScroll.SetActive(false);
+        equInven.SetActive(false);
+        equipageScroll.SetActive(false);
+        equipageMenu.SetActive(false);
+        itemMenu.SetActive(false);        
+        dungeonMaun.SetActive(true);
     }
 
     public void onInvenButton()
     {
-        abilityScroll.SetActive(false);
-        //equInven.SetActive(true);
+        abilityScroll.SetActive(false);        
         itemMenu.SetActive(false);
         dungeonMaun.SetActive(false);       
         equipageMenu.SetActive(false);
         equipageScroll.SetActive(false);       
+<<<<<<< HEAD
     }
     
 
@@ -158,4 +175,19 @@ public class csStoreManager : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
         dungeonMaun.SetActive(true);
     }
+=======
+    } 
+      
+    IEnumerator startButtonPop()
+    {
+        title.SetActive(false);
+        startButton.SetActive(false);
+        yield return new WaitForSeconds(3.0f);
+        itemShopButton.SetActive(true);
+        eqShopButton.SetActive(true);
+        abilShopButton.SetActive(true);
+        invenButton.SetActive(true);
+        dungeonButton.SetActive(true); 
+    } 
+>>>>>>> origin/master
 }
