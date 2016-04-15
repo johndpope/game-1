@@ -253,10 +253,10 @@ public class csDungeon : MonoBehaviour
         StateManager.Instance.dungeonLevels = nLevel;
         StateManager.Instance.dungeonMonsters = nMonster;
       
-        //mapObj = (Maps)nMaps[StateManager.Instance.dungeonMap];
-        mapObj = (Maps)nMaps[0];
-        //level = (Level)nLevel[StateManager.Instance.dungeonLevel];
-        level = (Level)nLevel[0];
+        mapObj = (Maps)nMaps[StateManager.Instance.dungeonMap];
+        //mapObj = (Maps)nMaps[0];
+        level = (Level)nLevel[StateManager.Instance.dungeonLevel];
+        //level = (Level)nLevel[0];
 
         Monster mon = (Monster)nMonster[0];
 
@@ -314,12 +314,12 @@ public class csDungeon : MonoBehaviour
         room = new Transform[roomPool];
 
         //json데이터의 맵이름을 가져와서 찾는다.
-        map = GameObject.Find("4x4_1");
+        //map = GameObject.Find("4x4_1");
 
         //원래사용
-        //map = (GameObject)Resources.Load(mapObj.Name, typeof(GameObject));
-        //GameObject mapCap = Instantiate(map) as GameObject;
-        //mapCap.transform.position = new Vector3(0, 0, 0);
+        map = (GameObject)Resources.Load(mapObj.Name, typeof(GameObject));
+        GameObject mapCap = Instantiate(map) as GameObject;
+        mapCap.transform.position = new Vector3(0, 0, 0);
 
         int r = 1;
         int w = 1;

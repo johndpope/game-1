@@ -51,6 +51,7 @@ public class csdungeonManager : MonoBehaviour
 
         for (int i = 0; i < itemInfoLevel.Count; i++)
         {
+            Debug.Log(i);
             _setupFloor(i);
         }
     }
@@ -63,7 +64,7 @@ public class csdungeonManager : MonoBehaviour
     public void Floor(int level)
     {
 
-        //StateManager.Instance.dungeonMap= ;
+        StateManager.Instance.dungeonMap= level;
         StateManager.Instance.dungeonLevel = level;
         Application.LoadLevel(1);
     }
@@ -87,8 +88,8 @@ public class csdungeonManager : MonoBehaviour
         for (i = 0; i < 9; i++)
         {
             floorPoolSet[i].SetActive(true);
-            floorPoolSet[i+9].SetActive(false);
-            floorPoolSet[i+18].SetActive(false);
+            //floorPoolSet[i+9].SetActive(false);
+            //floorPoolSet[i+18].SetActive(false);
         }
         
     }

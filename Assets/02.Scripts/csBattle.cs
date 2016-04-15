@@ -10,6 +10,14 @@ public class csBattle : MonoBehaviour
     public GameObject defDown;
     public GameObject spdUp;
     public GameObject spdDown;
+    public GameObject origin;
+    public GameObject berserker;
+
+    public GameObject atkUpPop;
+    public GameObject defUpPop;
+    public GameObject spdUpPop;
+    public GameObject berserkerPop;
+    public GameObject originPop;
 
     private ArrayList pItems;
     private ArrayList sScroll;
@@ -89,9 +97,16 @@ public class csBattle : MonoBehaviour
 
     public static int turn;
 
-    public float playAtk;
-    public float playDef;
-    public float playSpd;
+    float playAtk;
+    float playDef;
+    float playSpd;
+
+    float playOriginAtk;
+    float playOriginDef;
+    float playOriginSpd;
+
+    float playBerserkerAtk;
+    float playBerserkerDef;
 
     int atkTurn;
     int defTurn;
@@ -114,12 +129,25 @@ public class csBattle : MonoBehaviour
     public GameObject defPotion;
     public GameObject spdPotion;
 
+    public GameObject pop;
+
+    public GameObject playPopAtk;
+    public GameObject playPopDef;
+    public GameObject playPopSpd;
+
+    Text playPopAtkText;
+    Text playPopDefText;
+    Text playPopSpdText;
+
     int monsterNum;
 
 
 
     void OnEnable()
     {
+        playPopAtkText = playPopAtk.GetComponent<Text>();
+        playPopDefText = playPopDef.GetComponent<Text>();
+        playPopSpdText = playPopSpd.GetComponent<Text>();
         turn = 0;
         pItems = StateManager.Instance.potionItems;
         sScroll = StateManager.Instance.skillScrollItems;
@@ -144,8 +172,9 @@ public class csBattle : MonoBehaviour
             Debug.Log(eTimer2[i]);
             Debug.Log(eTimer[i]);
         }
-      
-        
+
+        StartCoroutine(playerData());
+
     }
 	
 	void Update ()
@@ -155,7 +184,7 @@ public class csBattle : MonoBehaviour
         bItem = (BuffItem)bScroll[StateManager.Instance.useItemNum];
         pItem = (PotionItem)pItems[StateManager.Instance.useItemNum];
 
-        TimerCut();
+       
       
         if(damRock == 2)
         {
@@ -238,60 +267,69 @@ public class csBattle : MonoBehaviour
                 Debug.Log("포션이 눌림");
             }
         }
-        if (atkUp.activeSelf.Equals(true) && atkTurn + 3 == turn)
+        if (atkUp.activeSelf.Equals(true) && (atkTurn + 3) == turn)
         {
-            StateManager.Instance.playAtk = playAtk;
+            playAtk = 0;
             atkUp.SetActive(false);
+            atkUpPop.SetActive(false);
         }
 
-        if (defUp.activeSelf.Equals(true) && defTurn + 3 == turn)
+        if (defUp.activeSelf.Equals(true) && (defTurn + 3) == turn)
         {
-            StateManager.Instance.playDef = playDef;
+            playDef=0;
             defUp.SetActive(false);
+            defUpPop.SetActive(false);
         }
 
-        if (spdUp.activeSelf.Equals(true) && spdTurn + 3 == turn)
+        if (spdUp.activeSelf.Equals(true) && (spdTurn + 3) == turn)
         {
-            StateManager.Instance.playSpd = playSpd;
+            pTimer += playSpd;
+            pTimer2 += playSpd;
+            playSpd = 0;
             spdUp.SetActive(false);
+            spdUpPop.SetActive(false);
         }
 
-        if(atkUp.activeSelf.Equals(true)&& defUp.activeSelf.Equals(true) && spdUp.activeSelf.Equals(true) && originTurn + 2 == turn)
+        if(origin.activeSelf.Equals(true) && (originTurn + 2) == turn)
         {
-            StateManager.Instance.playAtk = playAtk;
-            atkUp.SetActive(false);
-            StateManager.Instance.playDef = playDef;
-            defUp.SetActive(false);
-            StateManager.Instance.playSpd = playSpd;
-            spdUp.SetActive(false);
+            pTimer2 += playOriginSpd;
+            pTimer += playOriginSpd;
+            playOriginAtk = 0;
+            playOriginDef = 0;
+            playOriginSpd = 0;
+            originPop.SetActive(false);
+            origin.SetActive(false);
         }
 
-        if (atkUp.activeSelf.Equals(true) && defDown.activeSelf.Equals(true) && berserkerTurn + 2 == turn)
+        if (berserker.activeSelf.Equals(true) && (berserkerTurn + 2) == turn)
         {
-            StateManager.Instance.playAtk = playAtk;
-            atkUp.SetActive(false);
-            StateManager.Instance.playDef = playDef;
-            defDown.SetActive(false);
+            playBerserkerAtk = 0;
+            playBerserkerDef = 0;
+            berserkerPop.SetActive(false);
+            berserker.SetActive(false);
         }
 
-        //if(atkPotion.activeSelf.Equals(true) && atkPotionTurn +2 == turn)
-        //{
-        //    atkPotion.SetActive(false);
-        //    playPotionAtk = 0;
-        //}
-        //if (defPotion.activeSelf.Equals(true) && defPotionTurn + 2 == turn)
-        //{
-        //    defPotion.SetActive(false);
-        //    playPotionDef = 0;
-        //}
-        //if (spdPotion.activeSelf.Equals(true) && spdPotionTurn + 2 == turn)
-        //{
-        //    spdPotion.SetActive(false);
-        //    playPotionSpd = 0;
-        //}
+        if(atkPotion.activeSelf.Equals(true) && atkPotionTurn +2 == turn)
+        {
+            atkPotion.SetActive(false);
+            playPotionAtk = 0;
+        }
+        if (defPotion.activeSelf.Equals(true) && defPotionTurn + 2 == turn)
+        {
+            defPotion.SetActive(false);
+            playPotionDef = 0;
+        }
+        if (spdPotion.activeSelf.Equals(true) && spdPotionTurn + 2 == turn)
+        {
+            spdPotion.SetActive(false);
+            pTimer2 += playPotionSpd;
+            pTimer += playPotionSpd;
+            playPotionSpd = 0;
+        }
 
         if (monsterNum.Equals(0) && StateManager.Instance.monsterBattle.Equals(true))
         {
+            pop.SetActive(false);
             battelCamera.enabled = false;
             timer.SetActive(false);
             joystick.GetComponent<Image>().enabled = true;
@@ -300,16 +338,30 @@ public class csBattle : MonoBehaviour
             player2D.transform.position = new Vector3(13.5f,0,-30);
             gameObject.SetActive(false);
         }
+        TimerCut();
+        
+    }
+
+    IEnumerator playerData()
+    {
+        //playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
+      
+        //playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
+        playPopAtkText.text = ": " + StateManager.Instance.playAtk + " + " + StateManager.Instance.playUseAtk + " + " + (playAtk+playBerserkerAtk+playOriginAtk)+" + " + playPotionAtk;
+        playPopDefText.text = ": " + StateManager.Instance.playDef + " + " + StateManager.Instance.playUseDef + " + " + (playDef - playBerserkerDef + playOriginAtk) + " + " + playPotionDef;
+        playPopSpdText.text = ": " + StateManager.Instance.playSpd + " - " + StateManager.Instance.playUseSpd + " - " + (playSpd  + playOriginSpd) + " - " + playPotionSpd;
+        yield return null;
+        StartCoroutine(playerData());
     }
 
     public void TimerCut()
     {
         if (StateManager.Instance.timerIsActive == true)
         {
-           
             timer.SetActive(true);
             joystick.GetComponent<Image>().enabled = false;
             invenBtn.SetActive(false);
+            pop.SetActive(true);
 
             if (timer.activeSelf == true)
             {
@@ -331,7 +383,8 @@ public class csBattle : MonoBehaviour
                     pTimer -= Time.deltaTime;
                     pcc.value += Time.deltaTime / pTimer2;
                     //pcc.value += Time.deltaTime / pTimer;
-
+                    //Debug.Log(pTimer + "    " + "넘버");
+                    //Debug.Log(pTimer2 + "    " + "넘버");
                     if (pTimer <= 0)
                     {
                         pTimer = 0;
@@ -357,8 +410,8 @@ public class csBattle : MonoBehaviour
                         {
                             eTimer[i] -= Time.deltaTime;
                             ecc[i].value += Time.deltaTime / eTimer2[i];
-                           Debug.Log(eTimer2[i] + "    " + "넘버" + i);
-                            Debug.Log(eTimer[i] + "    " + "넘버" + i);
+                           //Debug.Log(eTimer2[i] + "    " + "넘버" + i);
+                           // Debug.Log(eTimer[i] + "    " + "넘버" + i);
 
                             if (eTimer[i] <= 0)
                             {
@@ -465,14 +518,14 @@ public class csBattle : MonoBehaviour
     {
         //   if (StateManager.Instance.monster[num].name == slime.Name + num && ecc[num].value != 0)
         //  {
-        if (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef) <= 0)
+        if (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef + playDef + playOriginDef - playBerserkerDef) <= 0)
         {
             StateManager.Instance.playHp -= 1;
             Debug.Log(StateManager.Instance.playHp);
         }
         else
         {
-            StateManager.Instance.playHp -= (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef));
+            StateManager.Instance.playHp -= (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef + playDef));
             Debug.Log(StateManager.Instance.playHp);
         }
 
@@ -537,7 +590,7 @@ public class csBattle : MonoBehaviour
     {
         Potion();
         yield return new WaitForSeconds(1.5f);
-        pTimer = pTimer2 - playPotionSpd;
+        pTimer = pTimer2;
         turn++;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
@@ -557,7 +610,7 @@ public class csBattle : MonoBehaviour
         }
         
         yield return new WaitForSeconds(1.5f);
-        pTimer = pTimer2 - playPotionSpd;
+        pTimer = pTimer2;
         turn++;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
@@ -567,7 +620,7 @@ public class csBattle : MonoBehaviour
     {
         Buff();
         yield return new WaitForSeconds(1.5f);
-        pTimer = pTimer2 - playPotionSpd;
+        pTimer = pTimer2;
         turn++;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
@@ -587,7 +640,7 @@ public class csBattle : MonoBehaviour
             }
             else
             {
-                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playOriginAtk + playAtk + playBerserkerAtk) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
             }
 
             if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
@@ -608,7 +661,7 @@ public class csBattle : MonoBehaviour
             else
             {
                 StateManager.Instance.playHp -= 5;
-                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playOriginAtk + playAtk + playBerserkerAtk) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
             }
             if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
             {
@@ -619,7 +672,7 @@ public class csBattle : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(1.0f);
-        pTimer = pTimer2 - playPotionSpd;
+        pTimer = pTimer2;
         turn++;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
@@ -678,11 +731,11 @@ public class csBattle : MonoBehaviour
                 int ca = Random.Range(0, 10);
                 if (ca == 5)
                 {
-                    StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (sItem.SpecialAbility * ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk) * sItem.AttackUpPoint)) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                    StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (sItem.SpecialAbility * ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk+ playBerserkerAtk + playOriginAtk) * sItem.AttackUpPoint)) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
                 }
                 else
                 {
-                    StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                    StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk + playOriginAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
                 }
 
                 StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
@@ -699,7 +752,7 @@ public class csBattle : MonoBehaviour
 
                 for (int i = 0; i < StateManager.Instance.monsterNum; i++)
                 {
-                    StateManager.Instance.monsterHp[i] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[i];
+                    StateManager.Instance.monsterHp[i] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk+ playOriginAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[i];
                 }
                 StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum] == 0)
@@ -714,7 +767,7 @@ public class csBattle : MonoBehaviour
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
 
                 eTimer[StateManager.Instance.atkEnemyNum] += sItem.SpecialAbility;
-                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk + playOriginAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
                 StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.position = battlePos[StateManager.Instance.atkEnemyNum].transform.position;
                 
                 StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
@@ -737,7 +790,7 @@ public class csBattle : MonoBehaviour
                 StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("defdown").GetComponent<csDefDown>().enabled = true;
 
                 StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum] = StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum] * sItem.SpecialAbility;                
-                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk + playOriginAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
 
                 StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum] == 0)
@@ -770,7 +823,7 @@ public class csBattle : MonoBehaviour
                     eTimer[StateManager.Instance.atkEnemyNum] = StateManager.Instance.monsterSpd[StateManager.Instance.atkEnemyNum] - eTimer[StateManager.Instance.atkEnemyNum];
                 }
 
-                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk + playOriginAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
                 StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum] == 0)
                 {
@@ -781,7 +834,7 @@ public class csBattle : MonoBehaviour
                 //불화살
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
 
-                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk + playOriginAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
 
                 StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum] == 0)
@@ -796,7 +849,7 @@ public class csBattle : MonoBehaviour
 
                 for (int i = 0; i < StateManager.Instance.monsterNum; i++)
                 {
-                    StateManager.Instance.monsterHp[i] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[i];
+                    StateManager.Instance.monsterHp[i] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk + playOriginAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[i];
                 }
                 StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum] == 0)
@@ -814,7 +867,7 @@ public class csBattle : MonoBehaviour
                 StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("atkdown").GetComponent<csAtkDown>().enabled = true;
 
                 StateManager.Instance.monsterAtk[StateManager.Instance.atkEnemyNum] = StateManager.Instance.monsterAtk[StateManager.Instance.atkEnemyNum] * mItem.AtkDownPoint;
-                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
+                StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk + playOriginAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
 
                 StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum] == 0)
@@ -833,11 +886,10 @@ public class csBattle : MonoBehaviour
             case 0:
                 //힘의 스크롤
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
-                playAtk = StateManager.Instance.playAtk;
-                StateManager.Instance.playAtk += (StateManager.Instance.playAtk * bItem.AtkUp);
+                playAtk += (StateManager.Instance.playAtk * bItem.AtkUp);
                 atkUp.SetActive(true);
                 atkTurn = turn;
-
+                atkUpPop.SetActive(true);
                 StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum] == 0)
                 {
@@ -847,11 +899,10 @@ public class csBattle : MonoBehaviour
             case 1:
                 //인내의 스크롤
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
-                playDef = StateManager.Instance.playDef;
-                StateManager.Instance.playDef += (StateManager.Instance.playDef * bItem.DefUp);
+                playDef += (StateManager.Instance.playDef * bItem.DefUp);
                 defUp.SetActive(true);
                 defTurn = turn;
-
+                defUpPop.SetActive(true);
                 StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum] == 0)
                 {
@@ -861,12 +912,11 @@ public class csBattle : MonoBehaviour
             case 2:
                 //신속의 스크롤
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
-                playSpd = StateManager.Instance.playSpd;
-                StateManager.Instance.playSpd -= bItem.SpdUp;
+                playSpd += bItem.SpdUp;
                 spdUp.SetActive(true);
                 spdTurn = turn;
-                pTimer -= bItem.SpdUp;
-
+                pTimer2 -= bItem.SpdUp;
+                spdUpPop.SetActive(true);
                 StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum] == 0)
                 {
@@ -876,21 +926,16 @@ public class csBattle : MonoBehaviour
             case 3:
                 //기원의 서
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
-                playAtk = StateManager.Instance.playAtk;
-                StateManager.Instance.playAtk += (StateManager.Instance.playAtk * bItem.AtkUp);
-                atkUp.SetActive(true);
 
-                playDef = StateManager.Instance.playDef;
-                StateManager.Instance.playDef += (StateManager.Instance.playDef * bItem.DefUp);
-                defUp.SetActive(true);
+                playOriginAtk += (StateManager.Instance.playAtk * bItem.AtkUp);
+                playOriginDef += (StateManager.Instance.playDef * bItem.DefUp);
+                playOriginSpd += bItem.SpdUp;
 
-                playSpd = StateManager.Instance.playSpd;
-                StateManager.Instance.playSpd -= bItem.SpdUp;
-                spdUp.SetActive(true);
-                pTimer -= bItem.SpdUp;
+                pTimer2 -= bItem.SpdUp;
 
                 originTurn = turn;
-
+                origin.SetActive(true);
+                originPop.SetActive(true);
                 StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum] == 0)
                 {
@@ -901,15 +946,13 @@ public class csBattle : MonoBehaviour
                 //광폭의 서
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
 
-                playAtk = StateManager.Instance.playAtk;
-                StateManager.Instance.playAtk += (StateManager.Instance.playAtk * bItem.AtkUp);
-                atkUp.SetActive(true);
+                playBerserkerAtk += (StateManager.Instance.playAtk * bItem.AtkUp);
 
-                playDef = StateManager.Instance.playDef;
-                StateManager.Instance.playDef -= (StateManager.Instance.playDef * bItem.DefUp);
-                defDown.SetActive(true);
+                playBerserkerDef += (StateManager.Instance.playDef * bItem.DefUp);
 
                 berserkerTurn = turn;
+                berserker.SetActive(true);
+                berserkerPop.SetActive(true);
                 StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum] == 0)
                 {
@@ -994,7 +1037,6 @@ public class csBattle : MonoBehaviour
                 spdPotion.SetActive(true);
                 playPotionSpd = pItem.UpPoint;
                 spdPotionTurn = turn;
-                pTimer -= pItem.UpPoint;
                 pTimer2 -= pItem.UpPoint;
 
                 StateManager.Instance.potionNum[StateManager.Instance.useItemNum]--;
