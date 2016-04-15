@@ -137,7 +137,8 @@ public class csBattle : MonoBehaviour
         battleText = battleTextObj.GetComponent<Text>();
 
         monsterNum = StateManager.Instance.monsterNum;
-        pTimer2 = pTimer;        
+        pTimer2 = pTimer;
+        eTimer2 = eTimer;
     }
 	
 	void Update ()
