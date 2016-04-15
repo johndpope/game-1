@@ -347,9 +347,9 @@ public class csBattle : MonoBehaviour
         //playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
       
         //playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
-        playPopAtkText.text = ": " + StateManager.Instance.playAtk + " + " + StateManager.Instance.playUseAtk + " + " + (playAtk+playBerserkerAtk+playOriginAtk)+" + " + playPotionAtk;
-        playPopDefText.text = ": " + StateManager.Instance.playDef + " + " + StateManager.Instance.playUseDef + " + " + (playDef - playBerserkerDef + playOriginAtk) + " + " + playPotionDef;
-        playPopSpdText.text = ": " + StateManager.Instance.playSpd + " - " + StateManager.Instance.playUseSpd + " - " + (playSpd  + playOriginSpd) + " - " + playPotionSpd;
+        playPopAtkText.text = ": " + (StateManager.Instance.playAtk  + StateManager.Instance.playUseAtk  + (playAtk+playBerserkerAtk+playOriginAtk) + playPotionAtk);
+        playPopDefText.text = ": " + (StateManager.Instance.playDef  + StateManager.Instance.playUseDef  + (playDef - playBerserkerDef + playOriginAtk)  + playPotionDef);
+        playPopSpdText.text = ": " + (StateManager.Instance.playSpd  - StateManager.Instance.playUseSpd  - (playSpd  + playOriginSpd)  - playPotionSpd);
         yield return null;
         StartCoroutine(playerData());
     }

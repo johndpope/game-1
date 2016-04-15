@@ -14,7 +14,7 @@ public class StateManager : MonoBehaviour
             {
                 Debug.LogError("StateManager == null");
             }
-         
+
             return instance;
         }
     }
@@ -26,7 +26,7 @@ public class StateManager : MonoBehaviour
     }
 
     // 멤버 변수
-   
+
     //json에서 읽어온 데이터를 저장하는 곳 아이템과 스크롤 ArryList
     public ArrayList potionItems;
     public ArrayList skillScrollItems;
@@ -57,7 +57,7 @@ public class StateManager : MonoBehaviour
     public ArrayList bootItems;
     //구입과 사용한 장비를 저장하는 GameObject형 배열
     public GameObject[] weaponSpace = new GameObject[5];
-   
+
     //가방의 크기
     public int bagSize;
 
@@ -140,12 +140,29 @@ public class StateManager : MonoBehaviour
     public bool MagicAtk;
     public bool buffUse;
 
- 
+
     public void attEnemy()
     {
         //attEnemyBool = true;
     }
 
+
+    //void SaveData()
+    //{
+    //    for (int i = 0; i < potionNum.Length; i++)
+    //    {
+    //        PlayerPrefs.SetInt("dsdsd1" + i.ToString(), potionNum[i]);
+    //    }
+
+    //}
+
+    //void poit()
+    //{
+    //    for (int i = 0; i < potionNum.Length; i++)
+    //    {
+    //        PlayerPrefs.GetInt("dsdsd1" + i.ToString(), potionNum[i]);
+    //    }
+    //}
 }
 
 

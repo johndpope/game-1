@@ -54,6 +54,10 @@ public class Inven : MonoBehaviour
     public GameObject playerSpdText;
     public GameObject playerGoldText;
 
+    public GameObject useWeapon;
+    public GameObject useArmor;
+    public GameObject useBoots;
+
     void Start()
     {
 
@@ -76,23 +80,16 @@ public class Inven : MonoBehaviour
             csUseEquip.itemUsePopBool = false;
         }
 
-        if(Input.GetButtonDown("Jump"))
-        {
-            if(StateManager.Instance.weaponDurability[StateManager.Instance.wUse] == 0)
-            {
-                dText.text = "0";
-                StateManager.Instance.bagSize--;
-                DestroyObject(StateManager.Instance.weaponSpace[StateManager.Instance.wUse]);
-            }
-            else if(StateManager.Instance.weaponDurability[StateManager.Instance.wUse] > 0)
-            { 
-            StateManager.Instance.weaponDurability[StateManager.Instance.wUse] -= 1;
-            dText.text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();}
-        }
 
-        
-
+        //if (StateManager.Instance.weaponDurability[StateManager.Instance.wUse] == 0)
+        //{
+        //    dText.text = "0";
+        //    StateManager.Instance.bagSize--;
+        //    DestroyObject(StateManager.Instance.weaponSpace[StateManager.Instance.wUse]);
+        //    useWeapon.GetComponent<Image>().sprite = (Sprite)Resources.Load("Base1", typeof(Sprite));
+        //}
     }
+
     IEnumerator playerData()
     {
         playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
@@ -281,12 +278,14 @@ public class Inven : MonoBehaviour
         switch(changeNum)
         {
             case 1:
+                StateManager.Instance.bagSize--;
                 DestroyObject(StateManager.Instance.weaponSpace[aUse]);
                 armorItemUse = false;
                 armorSet();
                 changePop.SetActive(false);
                 break;
             case 2:
+                StateManager.Instance.bagSize--;
                 DestroyObject(StateManager.Instance.weaponSpace[bUse]);
                 bootsItemUse = false;
                 bootsSet();
@@ -304,8 +303,9 @@ public class Inven : MonoBehaviour
 
     private void weaponSet()
     {
-        
         wNum = StateManager.Instance.bagNum;
+
+        HMWeaponItem item = (HMWeaponItem)StateManager.Instance.weaponItems[wNum];
 
         if ( d == 0)
         {
@@ -315,6 +315,7 @@ public class Inven : MonoBehaviour
             StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
             StateManager.Instance.playUseAtk = csUseEquip.attackPoint;
             StateManager.Instance.wUse = wNum;
+            useWeapon.GetComponent<Image>().sprite = StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponImage").GetComponent<Image>().sprite;
         }
 
          else if(d > 0)
@@ -334,6 +335,7 @@ public class Inven : MonoBehaviour
         StateManager.Instance.bagSize--;
         StateManager.Instance.weaponSpace[wNum].GetComponent<Button>().enabled = false;
         StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
+        useWeapon.GetComponent<Image>().sprite = StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponImage").GetComponent<Image>().sprite;
         StateManager.Instance.playUseAtk = csUseEquip.attackPoint;
         StateManager.Instance.wUse = wNum;
     }
@@ -347,6 +349,9 @@ public class Inven : MonoBehaviour
             StateManager.Instance.weaponSpace[aNum].GetComponent<Button>().enabled = false;
             StateManager.Instance.weaponSpace[aNum].transform.FindChild("armorUseIcon").GetComponentInChildren<Image>().enabled = true;
             StateManager.Instance.playUseDef = csUseEquip.defPoint;
+
+            useArmor.GetComponent<Image>().sprite = StateManager.Instance.weaponSpace[aNum].transform.FindChild("armorImage").GetComponent<Image>().sprite;
+
             armorItemUse = true;
             aUse = aNum;
         }
@@ -366,6 +371,8 @@ public class Inven : MonoBehaviour
             StateManager.Instance.weaponSpace[bNum].GetComponent<Button>().enabled = false;
             StateManager.Instance.weaponSpace[bNum].transform.FindChild("bootsUseIcon").GetComponentInChildren<Image>().enabled = true;
             StateManager.Instance.playUseSpd = csUseEquip.spdPoint;
+            useBoots.GetComponent<Image>().sprite = StateManager.Instance.weaponSpace[bNum].transform.FindChild("bootsImage").GetComponent<Image>().sprite;
+
             bootsItemUse = true;
             bUse = bNum;
         }
