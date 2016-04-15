@@ -39,10 +39,12 @@ public class live2d_setting : MonoBehaviour
         motionManager.startMotion(motion, false);
         live2DModel.setPartsOpacity("PARTS_WEAPON01", 0);
         live2DModel.setPartsOpacity("PARTS_WEAPON02", 0);
-        //live2DModel.setPartsOpacity("PARTS_WEAPON03", 0);
+        live2DModel.setPartsOpacity("PARTS_WEAPON03", 0);
         live2DModel.setPartsOpacity("PARTS_WEAPON04", 0);
         live2DModel.setPartsOpacity("PARTS_WEAPON05", 0);
         live2DModel.setPartsOpacity("PARTS_WEAPON06", 0);
+
+
         //live2DModel.
     }
  
@@ -57,7 +59,7 @@ public class live2d_setting : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire1"))
         {
-            
+            op(1);
             motion = Live2DMotion.loadMotion(mtnFiles[2].bytes);
             //motion.setLoop(true);
             motionManager.startMotion(motion, false);
@@ -91,5 +93,10 @@ public class live2d_setting : MonoBehaviour
     void OnRenderObject()
     {
         live2DModel.draw();
+    }
+
+    private void op(int num)
+    {
+        live2DModel.setPartsOpacity("PARTS_WEAPON01", num);
     }
 }

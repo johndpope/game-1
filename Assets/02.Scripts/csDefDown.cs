@@ -18,6 +18,7 @@ public class csDefDown : MonoBehaviour
 
     IEnumerator Down()
     {
+
         yield return new WaitForSeconds(20.0f);
         StateManager.Instance.monsterDef[defDownEnemy] = csBattle.monsterDef;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;

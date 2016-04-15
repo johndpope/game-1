@@ -122,7 +122,7 @@ public class csStoreManager : MonoBehaviour
         equInven.SetActive(false);
         itemMenu.SetActive(false);
         dungeonMaun.SetActive(false);
-        yield return new WaitForSeconds(2.0f);        
+        yield return new WaitForSeconds(5.0f);        
         equipageMenu.SetActive(true);
         equipageScroll.SetActive(true);
     }
@@ -133,7 +133,7 @@ public class csStoreManager : MonoBehaviour
         equipageScroll.SetActive(false);
         itemMenu.SetActive(false);
         dungeonMaun.SetActive(false);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
         equInven.SetActive(true);              
         abilityScroll.SetActive(true);
     
@@ -145,7 +145,7 @@ public class csStoreManager : MonoBehaviour
         equipageScroll.SetActive(false);
         dungeonMaun.SetActive(false);
         equipageMenu.SetActive(false);
-        yield return new WaitForSeconds(2.0f);            
+        yield return new WaitForSeconds(5.0f);            
         itemMenu.SetActive(true);
     }
     IEnumerator dungeonPop()
@@ -155,7 +155,7 @@ public class csStoreManager : MonoBehaviour
         equipageScroll.SetActive(false);       
         equipageMenu.SetActive(false);
         itemMenu.SetActive(false);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
         dungeonMaun.SetActive(true);
     }
 }

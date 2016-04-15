@@ -597,9 +597,9 @@
 	   "Level":[
       {
 		"level":"Lv1",
-        "rock":2,
-        "boxs":2,
-		"monsterV":3
+        "rock":1,
+        "boxs":3,
+		"monsterV":1
       },
 	  {
 		"level":"Lv2",

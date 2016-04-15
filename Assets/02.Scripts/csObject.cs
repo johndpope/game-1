@@ -39,6 +39,8 @@ public class csObject : MonoBehaviour
 
     //돌의 위치값을 저장
     Transform rockTransform;
+    //보물 위치 값을 저장
+    Transform treasureTransform;
 
     //전투하는곳의 player위치(기즈모 포인트)
     public GameObject battlePlayerPos;
@@ -48,6 +50,8 @@ public class csObject : MonoBehaviour
 
     //맵에서 부딧친 돌의 GameObject를 저장하는 GameObject저장소
     GameObject mapRock;
+    //맵에서 부딧친 상자의 GameObject를 저장하는 GameObject저장소
+    GameObject mapTreasure;
     //전투에 사용될 돌을 생성하는 프리팹
     public GameObject battleRock;
     //전투에 사용되는 돌을 저장하는 클론
@@ -63,7 +67,7 @@ public class csObject : MonoBehaviour
     public int nValue = 3;  //꽝
     public int moneyValue = 5;  //돈
 
-    //public
+    public GameObject battelM;
 
     //무기확률5%, 포션5%, 스크롤(스킬,마법,버프)5%, 몬스터15%, 꽝10%, 돈50%
 
@@ -83,13 +87,22 @@ public class csObject : MonoBehaviour
 
     void Update()
     {
-        if (breakRockPop.activeSelf == true)
+        if (breakRockPop.activeSelf.Equals(true))
         {
             Vector3 dir = rockTransform.position - gameObject.transform.position;
             dir.y = 0.0f;
             if (dir.x < -3.0f || dir.x > 3.0f || dir.z < -3.0f || dir.z > 3.0f)
             {
                 breakRockPop.SetActive(false);
+            }
+        }
+        if (openTreasurePop.activeSelf.Equals(true))
+        {
+            Vector3 dir = treasureTransform.position - gameObject.transform.position;
+            dir.y = 0.0f;
+            if (dir.x < -3.0f || dir.x > 3.0f || dir.z < -3.0f || dir.z > 3.0f)
+            {
+                openTreasurePop.SetActive(false);
             }
         }
         //open();
@@ -99,10 +112,9 @@ public class csObject : MonoBehaviour
     {
         if (collision.gameObject.tag == "Rock1f")
         {
-            num = 1;
-            StartCoroutine("findObj");
             mapRock = collision.gameObject;
-            MeetMonster();
+            StartCoroutine(findObj(1,0,null));
+            //MeetMonster();
 
         }
         if (collision.gameObject.tag == "Rock1")
@@ -113,22 +125,21 @@ public class csObject : MonoBehaviour
 
         if (collision.gameObject.tag == "Treasuref")
         {
-            num = 2;
-            StartCoroutine("findObj");
-            
+            mapTreasure = collision.gameObject;
+            StartCoroutine(findObj(2,0, null));
+
         }
         if (collision.gameObject.tag == "Treasure")
         {
-           
-            open();
-           
+            treasureTransform = collision.gameObject.transform;
+            openTreasurePop.SetActive(true);           
         }
 
         
 
     }
   
-    IEnumerator findObj()
+    IEnumerator findObj(int num, int maony, string itemName)
     {
         switch(num)
         {
@@ -140,17 +151,47 @@ public class csObject : MonoBehaviour
                 fText.text = "정 면 에  상 자 를 \n 발 견 했 습 니 다.";
                 findText.SetActive(true);
                 break;
+            case 3:
+                fText.text = "상 자 가 \n텅  비 어 있 습 니 다.";
+                findText.SetActive(true);
+                break;
+            case 4:
+                fText.text = maony+" 골 드 를 \n발 견 하 였 습 니 다.";
+                findText.SetActive(true);
+                break;
+            case 5:
+                fText.text = "몬 스 터 가 \n나 타 났 다.";
+                findText.SetActive(true);
+                break;
+            case 6:
+                fText.text = itemName;
+                findText.SetActive(true);
+                break;
+            case 7:
+                fText.text = itemName;
+                findText.SetActive(true);
+                break;
+            case 8:
+                fText.text = itemName;
+                findText.SetActive(true);
+                break;
         }
         yield return new WaitForSeconds(1.5f);
         findText.SetActive(false);
+        if(num.Equals(5))
+        {
+            MeetMonster();
+        }
         num = 0;
     }
 
     public void breakRockYes()
     {
-        DestroyObject(mapRock);
+        mapRock.SetActive(false);
+        //DestroyObject(mapRock);
         breakRockPop.SetActive(false);
         battelCamera.enabled = true;
+        battelM.SetActive(true);
         gameObj.SetActive(true);
         gameObj.transform.position = battlePos[0].transform.position;
         StateManager.Instance.timerIsActive = true;
@@ -159,6 +200,7 @@ public class csObject : MonoBehaviour
     public void breakRockNo()
     {
         breakRockPop.SetActive(false);
+        openTreasurePop.SetActive(false);
     }
 
     public void open()
@@ -174,6 +216,7 @@ public class csObject : MonoBehaviour
                     int ten = Random.Range(1, 10);
                     StateManager.Instance.playGold += ten * 10;
                     Debug.Log(ten * 10);
+                    StartCoroutine(findObj(4, ten * 10, null));
                     break;
                 case 3:
                     int hundred = Random.Range(1, 2);
@@ -181,26 +224,27 @@ public class csObject : MonoBehaviour
                     StateManager.Instance.playGold += ten2 * 10;
                     StateManager.Instance.playGold += hundred * 100;
                     Debug.Log(hundred * 100);
+                    StartCoroutine(findObj(4, (ten2 * 10+ hundred * 100), null));
                     break;
             }
-            Debug.Log("돈" + TreasureNum);
+            Debug.Log("돈" + TreasureNum);         
         }
 
         if (TreasureNum > moneyValue && TreasureNum <= nValue + moneyValue)
         {
-
+            StartCoroutine(findObj(3,0, null));
             Debug.Log("꽝" + TreasureNum);
         }
 
         if (TreasureNum > nValue + moneyValue && TreasureNum <= nValue + moneyValue + moValue)
         {
-
+            StartCoroutine(findObj(5, 0, null));            
             Debug.Log("몬스터" + TreasureNum);
         }
 
         if (TreasureNum > nValue + moneyValue + moValue && TreasureNum <= nValue + moneyValue + moValue  + sValue)
         {
-            int itemNum = Random.Range(0, 6);
+            int itemNum = Random.Range(1, 6);
             GetScrollItem(itemNum, gameObj);
             Debug.Log("스크롤" + TreasureNum);
         }
@@ -218,7 +262,8 @@ public class csObject : MonoBehaviour
             GetWeapon(weaponSetObj, itemNum);
             Debug.Log("무기" + TreasureNum);
         }
-
+        mapTreasure.SetActive(false);
+        openTreasurePop.SetActive(false);
     }
 
     private void GetScrollItem(int itemIndex, GameObject itemUseSet)
@@ -227,9 +272,6 @@ public class csObject : MonoBehaviour
 
         switch (itemIndex)
         {
-            case 0:
-                //스크롤이 오래되서 부서짐
-                break;
             case 1:
                 //스킬
                 var sItem = (SkillItem)StateManager.Instance.skillScrollItems[itemNum];
@@ -247,9 +289,11 @@ public class csObject : MonoBehaviour
                 }
                 StateManager.Instance.SkscrollNum[itemNum]++;
                 StateManager.Instance.SkScrollBag[itemNum].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.SkscrollNum[itemNum] + " 개";
+                StartCoroutine(findObj(6, 0, sItem.Name+"\n 스 크 롤 을  발 견 "));
                 break;
             case 2:
                 //스크롤이 오래되서 부서짐
+                StartCoroutine(findObj(6, 0, "스 크 롤 이 \n오 래 되 서  부 서 짐"));
                 break;
             case 3:
                 MagicItem mItem = (MagicItem)StateManager.Instance.magicScrollItems[itemNum];
@@ -267,9 +311,11 @@ public class csObject : MonoBehaviour
                 }
                 StateManager.Instance.MgscrollNum[itemNum]++;
                 StateManager.Instance.MgScrollBag[itemNum].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.MgscrollNum[itemNum] + " 개";
+                StartCoroutine(findObj(6, 0, mItem.Name + "\n 스 크 롤 을  발 견 "));
                 break;
             case 4:
                 //스크롤이 오래되서 부서짐
+                StartCoroutine(findObj(6, 0, "스 크 롤 이 \n오 래 되 서  부 서 짐"));
                 break;
             case 5:
                 BuffItem bItem = (BuffItem)StateManager.Instance.buffScrollItems[itemNum];
@@ -288,9 +334,11 @@ public class csObject : MonoBehaviour
                 }
                 StateManager.Instance.BufscrollNum[itemNum]++;
                 StateManager.Instance.BufScrollBag[itemNum].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.BufscrollNum[itemNum] + " 개";
+                StartCoroutine(findObj(6, 0, bItem.Name + "\n 스 크 롤 을  발 견 "));
                 break;
             case 6:
                 //깨진 포션병을 발견
+                StartCoroutine(findObj(7, 0, "깨 진  포 션 병 을  발 견"));
                 break;
             case 7:
                 if(itemNum==1)
@@ -316,7 +364,7 @@ public class csObject : MonoBehaviour
 
                 StateManager.Instance.potionNum[itemNum]++;
                 StateManager.Instance.potionItemBag[itemNum].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.potionNum[itemNum] + " 개";
-
+                StartCoroutine(findObj(7, 0, item.Name + "\n 포 션 을  발 견 "));
                 break;
         }
     }
@@ -337,11 +385,12 @@ public class csObject : MonoBehaviour
         {
             case 0:
                 //망가진 무기을 발견(꽝)
+                StartCoroutine(findObj(8, 0, "망 가 진 \n 무 기 를  발 견 "));
                 break;
             case 1:
                 HMWeaponItem witem = (HMWeaponItem)StateManager.Instance.weaponItems[itemIndex];
 
-                weaponDurabilityText.GetComponent<Text>().text = "내구도: " + witem.Durability.ToString();
+                weaponDurabilityText.GetComponent<Text>().text = "내구도: " + (witem.Durability/2).ToString();
                 weaponNameText.GetComponent<Text>().text = witem.Name + " 공격력: " + witem.AttackPoint.ToString();
 
                 weaponImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(witem.Image, typeof(Sprite));
@@ -355,11 +404,12 @@ public class csObject : MonoBehaviour
                     if (StateManager.Instance.weaponSpace[wNum] == null)
                     {
                         gameObj.name = witem.WeaponName + wNum;
-                        StateManager.Instance.weaponDurability[wNum] = witem.Durability;
+                        StateManager.Instance.weaponDurability[wNum] = witem.Durability/2;
                         StateManager.Instance.weaponSpace[wNum] = gameObj;
                         return;
                     }
                 }
+                StartCoroutine(findObj(8, 0, witem.Name + " 내 구 도: " + (witem.Durability / 2).ToString()+"\n의 무 기  발 견"));
                 break;
             case 2:
                 HMWeaponItem item = (HMWeaponItem)StateManager.Instance.weaponItems[itemIndex];
@@ -383,6 +433,7 @@ public class csObject : MonoBehaviour
                         return;
                     }
                 }
+                StartCoroutine(findObj(8, 0, item.Name + " 내 구 도: " + item.Durability.ToString() + "\n의 무 기  발 견"));
                 break;
         }
     }
@@ -398,7 +449,7 @@ public class csObject : MonoBehaviour
         Monster mimic = (Monster)StateManager.Instance.dungeonMonsters[1];
 
         var level = (Level)StateManager.Instance.dungeonLevels[0/*StateManager.Instance.dungeonLevel*/];
-        StateManager.Instance.monsterNum = Random.Range(3, (level.Monster + 1));
+        StateManager.Instance.monsterNum = Random.Range(1, (level.Monster + 1));
         
         Debug.Log(StateManager.Instance.monsterNum + "몬스터 랜덤값");
 
@@ -431,7 +482,8 @@ public class csObject : MonoBehaviour
                     break;
             }
         }
-        gameObject.SetActive(false);
+        battelM.SetActive(true);
+        //gameObject.SetActive(false);
         battelCamera.enabled = true;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;

@@ -67,13 +67,13 @@ public class main1 : MonoBehaviour
             case 0:
                 motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
                 motion.setLoop(true);
-                Debug.Log(motion);
                 motionManager.startMotion(motion, false);
                 break;
             case 1:
                 motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
                 motion.setLoop(true);
                 motionManager.startMotion(motion, false);
+                
                 break;
             case 2:
                 motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
