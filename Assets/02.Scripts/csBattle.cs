@@ -478,7 +478,7 @@ public class csBattle : MonoBehaviour
 
         //}
         StateManager.Instance.monster[num].transform.FindChild("mo").GetComponent<main1>().ani(1);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
         enemyPos(num);
     }
 

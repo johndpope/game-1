@@ -13,6 +13,8 @@ public class csText : MonoBehaviour
     Camera battelCamera = new Camera();
 
     public GameObject battlePop;
+    public GameObject buffPop;
+
     ParticleSystem particle;
     GameObject pos;
     // Use this for initialization
@@ -59,7 +61,7 @@ public class csText : MonoBehaviour
                 Debug.Log("플레이어가 터치 되었습니다.");
                 particle = hitObj.transform.FindChild("ring").GetComponent<ParticleSystem>();
                 particle.Play();
-                battlePop.SetActive(true);
+                buffPop.SetActive(true);
                 gameObject.SetActive(false);
             }
 
@@ -177,6 +179,7 @@ public class csText : MonoBehaviour
             StateManager.Instance.potionUse = false;
         }
         particle.Stop();
+        buffPop.SetActive(false);
         battlePop.SetActive(false);       
     }
 
@@ -208,6 +211,7 @@ public class csText : MonoBehaviour
 
         particle.Stop();
         //gameObject.SetActive(true);
+        buffPop.SetActive(false);
         battlePop.SetActive(false);
         atkBtn.SetActive(true);
         skillBtn.SetActive(true);
