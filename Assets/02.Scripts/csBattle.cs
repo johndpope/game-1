@@ -138,10 +138,6 @@ public class csBattle : MonoBehaviour
         battleText = battleTextObj.GetComponent<Text>();
 
         monsterNum = StateManager.Instance.monsterNum;
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
         pTimer2 = pTimer;
         eTimer2 = eTimer;
     }
