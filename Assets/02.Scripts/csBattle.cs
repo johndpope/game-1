@@ -164,7 +164,7 @@ public class csBattle : MonoBehaviour
             timer.SetActive(false);
             joystick.GetComponent<Image>().enabled = true;
             invenBtn.SetActive(true);
-            player2D.transform.position = new Vector3(13.5f, 0, -30);
+            player2D.transform.position = new Vector3(13.5f,0,-30);
             gameObject.SetActive(false);
         }
 
@@ -312,7 +312,7 @@ public class csBattle : MonoBehaviour
                 {
                     pTimer = pTimer / 2;
                     pTimer -= Time.deltaTime;
-                    pcc.value += Time.deltaTime / pTimer;
+                    pcc.value += Time.deltaTime / StateManager.Instance.playSpd;
 
                     if (pTimer <= 0 /*&& boom < 1*/)
                     {
