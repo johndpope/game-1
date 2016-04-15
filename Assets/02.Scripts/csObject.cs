@@ -452,7 +452,7 @@ public class csObject : MonoBehaviour
         Monster mimic = (Monster)StateManager.Instance.dungeonMonsters[1];
 
         var level = (Level)StateManager.Instance.dungeonLevels[0/*StateManager.Instance.dungeonLevel*/];
-        StateManager.Instance.monsterNum = Random.Range(1, (level.Monster + 1));
+        StateManager.Instance.monsterNum = Random.Range(3, (level.Monster + 1));
         
         Debug.Log(StateManager.Instance.monsterNum + "몬스터 랜덤값");
 
