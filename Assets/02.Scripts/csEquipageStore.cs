@@ -264,7 +264,7 @@ public class csEquipageStore : MonoBehaviour
     {
 
         playerGoldText.GetComponent<Text>().text = ": " + StateManager.Instance.playGold;
-        StateManager.Instance.weaponItemGet = weaponPoolSet;
+        //StateManager.Instance.weaponItemGet = weaponPoolSet;
 
         playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
 

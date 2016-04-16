@@ -39,7 +39,7 @@ public class csPlayerData : MonoBehaviour
   
     void Awake()
     {
-        if(StateManager.Instance.useWeapon != null)
+        if (StateManager.Instance.useWeapon != null)
         {
             useWeapons.GetComponent<Image>().sprite = StateManager.Instance.useWeapon;
         }
@@ -144,7 +144,15 @@ public class csPlayerData : MonoBehaviour
         playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk + " + " + StateManager.Instance.playUseAtk;
         playerDefText.GetComponent<Text>().text = "" + StateManager.Instance.playDef + " + " + StateManager.Instance.playUseDef;
         playerSpdText.GetComponent<Text>().text = "" + StateManager.Instance.playSpd + " + " + StateManager.Instance.playUseSpd;
+        
 
-        DestroyObject(GameObject.FindGameObjectWithTag("villageCanvas"));
+        if (Application.loadedLevel == 1)
+        {
+            DestroyObject(GameObject.FindGameObjectWithTag("villageCanvas"));
+        }
+        if (Application.loadedLevel == 0)
+        {
+            DestroyObject(GameObject.FindGameObjectWithTag("Map"));
+        }
     }
 }

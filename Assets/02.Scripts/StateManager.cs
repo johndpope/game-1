@@ -4,7 +4,12 @@ using System.Collections;
 public class StateManager : MonoBehaviour
 {
     // 싱글턴 클래스를 구현한다.
-    private static StateManager instance; // private static 으로 선언 ( 중요 ).
+    static StateManager instance; // private static 으로 선언 ( 중요 ).
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     public static StateManager Instance  // public static 으로 선언 ( 중요 ).
     {
@@ -12,18 +17,22 @@ public class StateManager : MonoBehaviour
         {
             if (instance == null)
             {
-                Debug.LogError("StateManager == null");
+                // 현재 씬 내에서 GameManager 컴포넌트를 검색
+                instance = FindObjectOfType(typeof(StateManager)) as StateManager;
+
+                if (instance == null)
+                {
+                    // 현재 씬에 GameManager 컴포넌트가 없으면 새로 생성
+                    instance = new GameObject("Game Manager", typeof(StateManager)).GetComponent<StateManager>();
+                }
             }
+          
 
             return instance;
         }
     }
 
-    void Awake()
-    {
-        instance = this;
-        DontDestroyOnLoad(transform.gameObject);
-    }
+    
 
     // 멤버 변수
 
@@ -37,7 +46,7 @@ public class StateManager : MonoBehaviour
     public ArrayList dungeonLevels;
     public ArrayList dungeonMonsters;
 
-    public GameObject[] weaponItemGet;
+    //public GameObject[] weaponItemGet;
 
     //몇개나 구입했는지 저장하는 integer형 배열
     public int[] potionNum;
@@ -151,6 +160,8 @@ public class StateManager : MonoBehaviour
     {
         //attEnemyBool = true;
     }
+
+    public bool dunFinish;
 
 
     //void SaveData()

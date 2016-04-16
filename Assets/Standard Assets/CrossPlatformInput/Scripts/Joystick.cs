@@ -25,6 +25,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 		CrossPlatformInputManager.VirtualAxis m_HorizontalVirtualAxis; // Reference to the joystick in the cross platform input
 		CrossPlatformInputManager.VirtualAxis m_VerticalVirtualAxis; // Reference to the joystick in the cross platform input
 
+        public static int run;
+
 		void OnEnable()
 		{
 			CreateVirtualAxes();
@@ -41,8 +43,9 @@ namespace UnityStandardAssets.CrossPlatformInput
 			delta.y = -delta.y;
 			delta /= MovementRange;
 			if (m_UseX)
-			{
-				m_HorizontalVirtualAxis.Update(-delta.x);
+            {
+                run++;
+                m_HorizontalVirtualAxis.Update(-delta.x);
 			}
 
 			if (m_UseY)
@@ -62,7 +65,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 			{
 				m_HorizontalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(horizontalAxisName);
 				CrossPlatformInputManager.RegisterVirtualAxis(m_HorizontalVirtualAxis);
-			}
+               
+            }
 			if (m_UseY)
 			{
 				m_VerticalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(verticalAxisName);

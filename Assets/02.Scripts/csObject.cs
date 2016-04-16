@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityStandardAssets.Characters.ThirdPerson;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class csObject : MonoBehaviour
 {
@@ -126,11 +126,12 @@ public class csObject : MonoBehaviour
         }
         //open();
 
-        if(ThirdPersonUserControl.run.Equals(1000))
+        if(Joystick.run.Equals(500))
         {
             Debug.Log("300임 ㅋㅋㅋ");
-            ThirdPersonUserControl.run = 0;
+           
             MeetMonster();
+            Joystick.run = 0;
         }
     }
 

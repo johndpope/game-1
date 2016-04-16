@@ -164,6 +164,8 @@ public class csDungeon : MonoBehaviour
 
     GameObject monster;
 
+    public GameObject door;
+
     void LoadAssetfromJson()
     {
         nMaps = new ArrayList();
@@ -335,6 +337,14 @@ public class csDungeon : MonoBehaviour
                 Transform point = map.transform.GetChild(i).transform.FindChild("startPoint");
                 player.transform.position = point.position;
                 player.transform.rotation = point.rotation;
+            }
+            if (map.transform.GetChild(i).tag == "End")
+            {
+                Transform point = map.transform.GetChild(i).transform.FindChild("endPoint");
+                GameObject gameObj = Instantiate(door) as GameObject;
+                gameObj.transform.position = point.position;
+                gameObj.transform.localRotation = point.localRotation;
+
             }
 
             if (map.transform.GetChild(i).name == "rRoad_" + r && mapObj.RotationRoad !=0)
