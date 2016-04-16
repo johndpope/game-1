@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class csObject : MonoBehaviour
 {
@@ -71,9 +72,27 @@ public class csObject : MonoBehaviour
 
     //무기확률5%, 포션5%, 스크롤(스킬,마법,버프)5%, 몬스터15%, 꽝10%, 돈50%
 
+    public GameObject cBoxOpen;
+    public GameObject boxOpen1;
+    public GameObject boxOpen2;
+    public GameObject boxOpen3;
+
+    public GameObject getItem;
+    Sprite getItemImage;
+
+    public GameObject getItemTextObj;
+    Text getItemText;
+
+    public GameObject battleYesBtn;
+
+    public GameObject finishGold;
+
     int num;
     void Start()
     {
+        getItemText = getItemTextObj.GetComponent<Text>();
+        getItemImage = getItem.GetComponent<Image>().sprite;
+
         fText = findText.GetComponent<Text>();
         battelCamera = battleCameraObj.GetComponent<Camera>();
 
@@ -106,6 +125,13 @@ public class csObject : MonoBehaviour
             }
         }
         //open();
+
+        if(ThirdPersonUserControl.run.Equals(1000))
+        {
+            Debug.Log("300임 ㅋㅋㅋ");
+            ThirdPersonUserControl.run = 0;
+            MeetMonster();
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -114,7 +140,7 @@ public class csObject : MonoBehaviour
         {
             mapRock = collision.gameObject;
             StartCoroutine(findObj(1,0,null));
-            MeetMonster();
+            //MeetMonster();
 
         }
         if (collision.gameObject.tag == "Rock1")
@@ -289,7 +315,16 @@ public class csObject : MonoBehaviour
                 }
                 StateManager.Instance.SkscrollNum[itemNum]++;
                 StateManager.Instance.SkScrollBag[itemNum].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.SkscrollNum[itemNum] + " 개";
-                StartCoroutine(findObj(6, 0, sItem.Name+"\n 스 크 롤 을  발 견 "));
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(6, 0, sItem.Name + "\n 스 크 롤 을  발 견 "));
+                }
+                else if(cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItemText.text = "획득 아이템 \n: " + sItem.Name;
+                    getItemImage = (Sprite)Resources.Load(sItem.Image, typeof(Sprite));
+                }
+                
                 break;
             case 2:
                 //스크롤이 오래되서 부서짐
@@ -311,7 +346,16 @@ public class csObject : MonoBehaviour
                 }
                 StateManager.Instance.MgscrollNum[itemNum]++;
                 StateManager.Instance.MgScrollBag[itemNum].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.MgscrollNum[itemNum] + " 개";
-                StartCoroutine(findObj(6, 0, mItem.Name + "\n 스 크 롤 을  발 견 "));
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(6, 0, mItem.Name + "\n 스 크 롤 을  발 견 "));
+                }
+                else if (cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItemText.text = "획득 아이템 \n: " + mItem.Name;
+                    getItemImage = (Sprite)Resources.Load(mItem.Image, typeof(Sprite));
+                }
+                
                 break;
             case 4:
                 //스크롤이 오래되서 부서짐
@@ -334,7 +378,15 @@ public class csObject : MonoBehaviour
                 }
                 StateManager.Instance.BufscrollNum[itemNum]++;
                 StateManager.Instance.BufScrollBag[itemNum].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.BufscrollNum[itemNum] + " 개";
-                StartCoroutine(findObj(6, 0, bItem.Name + "\n 스 크 롤 을  발 견 "));
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(6, 0, bItem.Name + "\n 스 크 롤 을  발 견 "));
+                }
+                else if (cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItemText.text = "획득 아이템 \n: " + bItem.Name;
+                    getItemImage = (Sprite)Resources.Load(bItem.Image, typeof(Sprite));
+                }
                 break;
             case 6:
                 //깨진 포션병을 발견
@@ -364,7 +416,15 @@ public class csObject : MonoBehaviour
 
                 StateManager.Instance.potionNum[itemNum]++;
                 StateManager.Instance.potionItemBag[itemNum].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.potionNum[itemNum] + " 개";
-                StartCoroutine(findObj(7, 0, item.Name + "\n 포 션 을  발 견 "));
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(7, 0, item.Name + "\n 포 션 을  발 견 "));
+                }
+                else if (cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItemText.text = "획득 아이템 \n: " + item.Name;
+                    getItemImage = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+                }
                 break;
         }
     }
@@ -384,14 +444,25 @@ public class csObject : MonoBehaviour
         Debug.Log(WeaponNum+"무기 번호");
         switch (itemIndex)
         {
-            
             case 0:
                 //망가진 무기을 발견(꽝)
-                StartCoroutine(findObj(8, 0, "망 가 진 \n 무 기 를  발 견 "));
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(8, 0, "망 가 진 \n 무 기 를  발 견 "));
+                }
+                else if (cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItemText.text = "획득 아이템 \n: 망 가 진  무 기  발 견 ";
+                }
                 break;
             case 1:
                 HMWeaponItem witem = (HMWeaponItem)StateManager.Instance.weaponItems[itemIndex];
-
+                if (StateManager.Instance.bagSize == 5)
+                {
+                    getItemText.text = "획득 아이템 \n: 가방이 꽉 찼다.";
+                    return;
+                }
+                StateManager.Instance.bagSize++;
                 weaponDurabilityText.GetComponent<Text>().text = "내구도: " + (witem.Durability/2).ToString();
                 weaponNameText.GetComponent<Text>().text = witem.Name + " 공격력: " + witem.AttackPoint.ToString();
 
@@ -411,11 +482,23 @@ public class csObject : MonoBehaviour
                         return;
                     }
                 }
-                StartCoroutine(findObj(8, 0, witem.Name + " 내 구 도: " + (witem.Durability / 2).ToString()+"\n의 무 기  발 견"));
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(8, 0, witem.Name + " 내 구 도: " + (witem.Durability / 2).ToString() + "\n의 무 기  발 견"));
+                }
+                else if (cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItemText.text = "획득 아이템 \n: " + witem.Name + " 내 구 도: " + witem.Durability.ToString();
+                }
                 break;
             case 2:
                 HMWeaponItem item = (HMWeaponItem)StateManager.Instance.weaponItems[itemIndex];
-
+                if (StateManager.Instance.bagSize == 5)
+                {
+                    getItemText.text = "획득 아이템 \n: 가방이 꽉 찼다.";
+                    return;
+                }
+                StateManager.Instance.bagSize++;
                 weaponDurabilityText.GetComponent<Text>().text = "내구도: " + item.Durability.ToString();
                 weaponNameText.GetComponent<Text>().text = item.Name + " 공격력: " + item.AttackPoint.ToString();
 
@@ -435,19 +518,22 @@ public class csObject : MonoBehaviour
                         return;
                     }
                 }
-                StartCoroutine(findObj(8, 0, item.Name + " 내 구 도: " + item.Durability.ToString() + "\n의 무 기  발 견"));
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(8, 0, item.Name + " 내 구 도: " + item.Durability.ToString() + "\n의 무 기  발 견"));
+                }
+                else if (cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItemText.text = "획득 아이템 \n: " + item.Name + " 내 구 도: " + item.Durability.ToString();
+                }
                 break;
         }
     }
 
-    private void GetPop()
-    {
-
-    }
 
     private void MeetMonster()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         Monster slime = (Monster)StateManager.Instance.dungeonMonsters[0];
         Monster mimic = (Monster)StateManager.Instance.dungeonMonsters[1];
 
@@ -489,10 +575,98 @@ public class csObject : MonoBehaviour
                     break;
             }
         }
-        battelM.SetActive(true);
-        
+        battelM.SetActive(true);        
         battelCamera.enabled = true;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
+    }
+
+    public void openBattleBox(int num)
+    {
+        if (num.Equals(1))
+        {
+            cBoxOpen.SetActive(true);
+            cBoxOpen.transform.position = boxOpen1.transform.position;
+            boxOpen2.GetComponent<Button>().enabled = false;
+            boxOpen3.GetComponent<Button>().enabled = false;
+            boxOpen1.SetActive(false);
+            battleYesBtn.SetActive(true);
+        }
+
+        if (num.Equals(2))
+        {
+            cBoxOpen.SetActive(true);
+            cBoxOpen.transform.position = boxOpen2.transform.position;
+            boxOpen1.GetComponent<Button>().enabled = false;
+            boxOpen3.GetComponent<Button>().enabled = false;
+            boxOpen2.SetActive(false);
+            battleYesBtn.SetActive(true);
+        }
+
+        if (num.Equals(3))
+        {
+            cBoxOpen.SetActive(true);
+            cBoxOpen.transform.position = boxOpen3.transform.position;
+            boxOpen2.GetComponent<Button>().enabled = false;
+            boxOpen1.GetComponent<Button>().enabled = false;
+            boxOpen3.SetActive(false);
+            battleYesBtn.SetActive(true);
+        }
+
+        int TreasureNum = Random.Range(1, 130);
+
+        int wValue = 60;  //무기확률
+        int pValue = 10;  //포션(소모품)확률
+        int sValue = 10;  //스킬 마법 버프 스크롤 확률
+        int nValue = 30;  //꽝
+        int moneyValue = 20;  //돈
+
+        if (TreasureNum <= moneyValue)
+        {
+            int money = Random.Range(2, 4);
+            switch (money)
+            {
+                case 2:
+                    int ten = Random.Range(1, 10);
+                    StateManager.Instance.playGold += ten * 10;
+                    finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + " + ten * 10;
+
+                    break;
+                case 3:
+                    int hundred = Random.Range(1, 2);
+                    int ten2 = Random.Range(1, 10);
+                    StateManager.Instance.playGold += ten2 * 10;
+                    StateManager.Instance.playGold += hundred * 100;
+                    finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + " + ((ten2 * 10) + (hundred * 100));
+                    break;
+            }
+        }
+
+
+        if (TreasureNum > moneyValue && TreasureNum <= nValue + moneyValue)
+        {
+            Debug.Log("꽝" + TreasureNum);
+        }
+
+        if (TreasureNum > nValue + moneyValue && TreasureNum <= nValue + moneyValue + sValue)
+        {
+            int itemNum = Random.Range(1, 6);
+            GetScrollItem(itemNum, gameObj);
+            Debug.Log("스크롤" + TreasureNum);
+        }
+
+        if (TreasureNum > nValue + moneyValue  + sValue && TreasureNum <= nValue + moneyValue + sValue + pValue)
+        {
+            int itemNum = Random.Range(6, 8);
+            GetScrollItem(itemNum, gameObj);
+            Debug.Log("포션" + TreasureNum);
+        }
+
+        if (TreasureNum > nValue + moneyValue + sValue + pValue && TreasureNum <= nValue + moneyValue + sValue + pValue + wValue)
+        {
+            int itemNum = Random.Range(0, 4);
+            GetWeapon(weaponSetObj, itemNum);
+            Debug.Log("무기" + TreasureNum);
+        }
     }
 }

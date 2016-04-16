@@ -148,17 +148,33 @@ public class csBattle : MonoBehaviour
     public GameObject weaponText;
     Text weaponTextD;
 
-  
+    public GameObject finishPop;
+
+    public GameObject cBox;
+    public GameObject box1;
+    public GameObject box2;
+    public GameObject box3;
+
+    public static int monsterGold;
+
+
     void OnEnable()
     {
-
+        weaponTextD = weaponText.GetComponent<Text>();
         if (StateManager.Instance.useWeapon != null)
         {
             useWeapon.GetComponent<Image>().sprite = StateManager.Instance.useWeapon;
+            weaponTextD.text = "0";
         }
-       
+        monsterGold = 0;
+        cBox.SetActive(false);
+        box1.SetActive(true);
+        box1.GetComponent<Button>().enabled = true;
+        box2.SetActive(true);
+        box2.GetComponent<Button>().enabled = true;
+        box3.SetActive(true);
+        box3.GetComponent<Button>().enabled = true;
 
-        weaponTextD = weaponText.GetComponent<Text>();
         playPopAtkText = playPopAtk.GetComponent<Text>();
         playPopDefText = playPopDef.GetComponent<Text>();
         playPopSpdText = playPopSpd.GetComponent<Text>();
@@ -343,6 +359,14 @@ public class csBattle : MonoBehaviour
 
         if (monsterNum.Equals(0) && StateManager.Instance.monsterBattle.Equals(true))
         {
+            for(int i=0; i<3;i++)
+            {
+                eccObj[i].SetActive(true);
+                ecc[i].value = 0;
+            }
+            
+            StateManager.Instance.timerIsActive = false;
+            timer.SetActive(false);
             finish();
            
         }
@@ -350,25 +374,21 @@ public class csBattle : MonoBehaviour
         
     }
 
-    public void choiseBox(int num)
-    {
-
-    }
-
-
     private void finish()
     {
-        
+        monsterGold = (StateManager.Instance.slimeNum * 10)+ (StateManager.Instance.mimicNum * 15);
+        StateManager.Instance.slimeNum = 0;
+        StateManager.Instance.mimicNum = 0;
+        finishPop.SetActive(true);
     }
 
     public void finishYes()
     {
+        finishPop.SetActive(false);
         pop.SetActive(false);
         battelCamera.enabled = false;
-        timer.SetActive(false);
         joystick.GetComponent<Image>().enabled = true;
         invenBtn.SetActive(true);
-        StateManager.Instance.timerIsActive = false;
         player2D.transform.position = new Vector3(13.5f, 0, -30);
         StateManager.Instance.monsterNum = 0;
         gameObject.SetActive(false);
@@ -442,8 +462,8 @@ public class csBattle : MonoBehaviour
                         {
                             eTimer[i] -= Time.deltaTime;
                             ecc[i].value += Time.deltaTime / eTimer2[i];
-                           //Debug.Log(eTimer2[i] + "    " + "넘버" + i);
-                           // Debug.Log(eTimer[i] + "    " + "넘버" + i);
+                           Debug.Log(eTimer2[i] + "    " + "넘버" + i);
+                           Debug.Log(eTimer[i] + "    " + "넘버" + i);
 
                             if (eTimer[i] <= 0)
                             {

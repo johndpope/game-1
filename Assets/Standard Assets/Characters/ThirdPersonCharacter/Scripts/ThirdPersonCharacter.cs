@@ -30,17 +30,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		bool m_Crouching;
 
 
-		void Start()
-		{
-			m_Animator = GetComponent<Animator>();
-			m_Rigidbody = GetComponent<Rigidbody>();
-			m_Capsule = GetComponent<CapsuleCollider>();
-			m_CapsuleHeight = m_Capsule.height;
-			m_CapsuleCenter = m_Capsule.center;
+        void Start()
+        {
+            m_Animator = GetComponent<Animator>();
+            m_Rigidbody = GetComponent<Rigidbody>();
+            m_Capsule = GetComponent<CapsuleCollider>();
+            m_CapsuleHeight = m_Capsule.height;
+            m_CapsuleCenter = m_Capsule.center;
 
-			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-			m_OrigGroundCheckDistance = m_GroundCheckDistance;
-		}
+            m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            m_OrigGroundCheckDistance = m_GroundCheckDistance;
+        }
 
 
 		public void Move(Vector3 move, bool crouch, bool jump)
@@ -71,8 +71,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			ScaleCapsuleForCrouching(crouch);
 			PreventStandingInLowHeadroom();
 
-			// send input and other state parameters to the animator
-			UpdateAnimator(move);
+            // send input and other state parameters to the animator
+            UpdateAnimator(move);
 		}
 
 
