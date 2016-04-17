@@ -94,6 +94,8 @@ public class csBattle : MonoBehaviour
     bool mAtk;
     bool bSelf;
     bool pUse;
+    bool runFalse;
+    bool runTrue;
 
     public static int turn;
 
@@ -157,6 +159,21 @@ public class csBattle : MonoBehaviour
 
     public static int monsterGold;
 
+    public GameObject finishGold;
+
+    public GameObject poisonImage;
+    public GameObject bleedingImage;
+    public GameObject slowImage;
+
+    float poisonDamage;
+    float bleedingDamage;
+    float slowDamage;
+
+    int poisonTurn;
+    int bleedingTurn;
+    int slowTurn;
+
+
 
     void OnEnable()
     {
@@ -167,6 +184,7 @@ public class csBattle : MonoBehaviour
             weaponTextD.text = "0";
         }
         monsterGold = 0;
+
         cBox.SetActive(false);
         box1.SetActive(true);
         box1.GetComponent<Button>().enabled = true;
@@ -220,6 +238,7 @@ public class csBattle : MonoBehaviour
         {
             pcc.value = 0;
             StateManager.Instance.timerIsActive = false;
+            pop.SetActive(false);
             s = false;
             GameObject.Find("battleRock").transform.position = new Vector3(0, 0, 0);
             GameObject.Find("battleRock").SetActive(false);
@@ -363,8 +382,10 @@ public class csBattle : MonoBehaviour
             {
                 eccObj[i].SetActive(true);
                 ecc[i].value = 0;
+                StateManager.Instance.monster[i].transform.position = new Vector3(0, 0, 0);
+                StateManager.Instance.monster[i].SetActive(false);
             }
-            
+
             StateManager.Instance.timerIsActive = false;
             timer.SetActive(false);
             finish();
@@ -373,12 +394,15 @@ public class csBattle : MonoBehaviour
         TimerCut();
         
     }
-
     private void finish()
     {
-        monsterGold = (StateManager.Instance.slimeNum * 10)+ (StateManager.Instance.mimicNum * 15);
+        monsterGold = (StateManager.Instance.slimeNum * 10)+ (StateManager.Instance.mimicNum* 15)+(StateManager.Instance.mimic2Num* 100)+(StateManager.Instance.ghostNum* 80)+(StateManager.Instance.pumkinNum* 50)+(StateManager.Instance.dungeonLevel * 50);
+        finishGold.GetComponent<Text>().text = "획득 골드\n: " + monsterGold + " + " + 0;
         StateManager.Instance.slimeNum = 0;
         StateManager.Instance.mimicNum = 0;
+        StateManager.Instance.mimic2Num = 0;
+        StateManager.Instance.ghostNum = 0;
+        StateManager.Instance.pumkinNum = 0;
         finishPop.SetActive(true);
     }
 
@@ -396,6 +420,21 @@ public class csBattle : MonoBehaviour
 
     IEnumerator playerData()
     {
+        if(poisonImage.activeSelf.Equals(true) && (poisonTurn+1).Equals(turn))
+        {
+            poisonTurn++;
+            poisonDamage = StateManager.Instance.playHp * 0.1f;
+            if(poisonDamage < 0)
+            {
+                poisonDamage = 1;
+            }
+            StateManager.Instance.playHp -= (int)poisonDamage;
+            Debug.Log(StateManager.Instance.playHp + "독데미지 입은후");
+            if(poisonTurn.Equals(3))
+            {
+                poisonImage.SetActive(false);
+            }
+        }
         //playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
       
         //playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
@@ -449,21 +488,12 @@ public class csBattle : MonoBehaviour
 
                     for (int i = 0; i < StateManager.Instance.monsterNum; i++)
                     {
-                        //if (StateManager.Instance.monster[i] == null)
-                        //{
-                        //    i++;
-                        //    if(i >= StateManager.Instance.monsterNum)
-                        //    {
-                        //        return;
-                        //    }
-                        //    //Debug.Log(i + "              전투 끝");
-                        //}
                         if (eccObj[i].activeSelf.Equals(true))
                         {
                             eTimer[i] -= Time.deltaTime;
                             ecc[i].value += Time.deltaTime / eTimer2[i];
-                           Debug.Log(eTimer2[i] + "    " + "넘버" + i);
-                           Debug.Log(eTimer[i] + "    " + "넘버" + i);
+                           //Debug.Log(eTimer2[i] + "    " + "넘버" + i);
+                          // Debug.Log(eTimer[i] + "    " + "넘버" + i);
 
                             if (eTimer[i] <= 0)
                             {
@@ -492,6 +522,69 @@ public class csBattle : MonoBehaviour
             }
         }
     }
+    public void run()
+    {
+        pcc.value = 0;
+        runFalse = true;
+        atkBtn.SetActive(false);
+        skillBtn.SetActive(false);
+        itemBtn.SetActive(false);
+        runBtn.SetActive(false);
+        StartCoroutine(RunM());
+    }
+    IEnumerator RunM()
+    {
+        if (runFalse.Equals(true))
+        {
+            battleText.text = "도 주  중 입 니 다.";
+            battleTextObj.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(1.0f);
+        battleTextObj.SetActive(false);
+        int num = Random.Range(1, 10);
+        if (num.Equals(5))
+        {
+            battleText.text = "도 주 에  성 공 하 였 습 니 다.";
+            battleTextObj.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            battleTextObj.SetActive(false);
+            for (int i = 0; i < StateManager.Instance.monsterNum; i++)
+            {
+                eccObj[i].SetActive(true);
+                ecc[i].value = 0;
+                StateManager.Instance.monster[i].transform.position = new Vector3(0, 0, 0);
+                StateManager.Instance.monster[i].SetActive(false);
+            }
+
+            StateManager.Instance.timerIsActive = false;
+            timer.SetActive(false);
+            StateManager.Instance.slimeNum = 0;
+            StateManager.Instance.mimicNum = 0;
+            StateManager.Instance.mimic2Num = 0;
+            StateManager.Instance.ghostNum = 0;
+            StateManager.Instance.pumkinNum = 0;
+            pop.SetActive(false);
+            battelCamera.enabled = false;
+            joystick.GetComponent<Image>().enabled = true;
+            invenBtn.SetActive(true);
+            player2D.transform.position = new Vector3(13.5f, 0, -30);
+            StateManager.Instance.monsterNum = 0;
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            battleText.text = "도 주 에  실 패 하 였 습 니 다.";
+            battleTextObj.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            battleTextObj.SetActive(false);
+            pTimer = pTimer2;
+            turn++;
+            StateManager.Instance.timerIsActive = true;
+            StateManager.Instance.monsterBattle = true;
+        }
+
+    }
 
     public void atk()
     {
@@ -509,7 +602,6 @@ public class csBattle : MonoBehaviour
     public void Scroll()
     {
         pcc.value = 0;
-
         atkBtn.SetActive(false);
         skillBtn.SetActive(false);
         itemBtn.SetActive(false);
@@ -522,7 +614,6 @@ public class csBattle : MonoBehaviour
     public void PotionBtn()
     {
         pcc.value = 0;
-
         atkBtn.SetActive(false);
         skillBtn.SetActive(false);
         itemBtn.SetActive(false);
@@ -568,8 +659,17 @@ public class csBattle : MonoBehaviour
 
     IEnumerator EnemyAtt(int num)
     {
-        //   if (StateManager.Instance.monster[num].name == slime.Name + num && ecc[num].value != 0)
-        //  {
+        
+        if (StateManager.Instance.monster[num].name.Equals("Slime"))
+        {
+            int ran = Random.Range(4, 6);
+            if (ran.Equals(4))
+            {
+                poisonTurn = turn;
+                poisonImage.SetActive(true);
+            }
+        }
+
         if (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef + playDef + playOriginDef - playBerserkerDef) <= 0)
         {
             StateManager.Instance.playHp -= 1;
@@ -581,9 +681,9 @@ public class csBattle : MonoBehaviour
             Debug.Log(StateManager.Instance.playHp);
         }
 
-        //}
         StateManager.Instance.monster[num].transform.FindChild("mo").GetComponent<main1>().ani(1);
-        yield return new WaitForSeconds(1.0f);
+
+        yield return new WaitForSeconds(1.5f);
         enemyPos(num);
     }
 
@@ -599,7 +699,6 @@ public class csBattle : MonoBehaviour
         StateManager.Instance.monster[num].transform.FindChild("mo").GetComponent<main1>().ani(0);
         StateManager.Instance.monsterBattle = true;
     }
-
 
     private void PlayerBattle()
     {
@@ -655,10 +754,9 @@ public class csBattle : MonoBehaviour
 
         if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
         {
+            StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
             monsterNum--;
             eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
-            StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.position = new Vector3(0, 0, 0);
-            StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].SetActive(false);
         }
         
         yield return new WaitForSeconds(1.5f);
@@ -697,10 +795,9 @@ public class csBattle : MonoBehaviour
 
             if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
             {
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
                 eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
                 monsterNum--;
-                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.position = new Vector3(0, 0, 0);
-                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].SetActive(false);
             }
         }
         else
@@ -717,10 +814,9 @@ public class csBattle : MonoBehaviour
             }
             if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
             {
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
                 monsterNum--;
                 eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
-                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.position = new Vector3(0, 0, 0);
-                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].SetActive(false);
             }
         }
         yield return new WaitForSeconds(1.0f);
@@ -762,6 +858,7 @@ public class csBattle : MonoBehaviour
             battleText.text = pItem.Name + " 할  \n 캐 릭 터 를  클 릭 하 세 요.";
             battleTextObj.SetActive(true);
         }
+      
         yield return new WaitForSeconds(1.0f);
         nAtk = false;
         sAtk = false;

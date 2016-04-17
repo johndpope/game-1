@@ -599,7 +599,7 @@
 		"level":"Lv1",
         "rock":1,
         "boxs":3,
-		"monsterV":3
+		"monsterV":1
       },
 	  {
 		"level":"Lv2",
@@ -623,6 +623,30 @@
 		"monsterDef":5,
 		"monsterMaxSpd":9,
 		"monsterMinSpd":6,
+		"monsterHp":20
+	},
+	{
+		"monsterName":"Mimic2",
+		"monsterAtt":8,
+		"monsterDef":15,
+		"monsterMaxSpd":7,
+		"monsterMinSpd":6,
+		"monsterHp":50
+	},
+	{
+		"monsterName":"Ghost",
+		"monsterAtt":10,
+		"monsterDef":15,
+		"monsterMaxSpd":5,
+		"monsterMinSpd":5,
+		"monsterHp":30
+	},
+	{
+		"monsterName":"Pumkin",
+		"monsterAtt":6,
+		"monsterDef":6,
+		"monsterMaxSpd":9,
+		"monsterMinSpd":7,
 		"monsterHp":20
 	}
 	]

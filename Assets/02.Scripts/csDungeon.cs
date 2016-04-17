@@ -161,6 +161,9 @@ public class csDungeon : MonoBehaviour
 
     public GameObject slime;
     public GameObject mimic;
+    public GameObject mimic2;
+    public GameObject ghost;
+    public GameObject pumkin;
 
     GameObject monster;
 
@@ -260,29 +263,56 @@ public class csDungeon : MonoBehaviour
         level = (Level)nLevel[StateManager.Instance.dungeonLevel];
         //level = (Level)nLevel[0];
 
-        Monster mon = (Monster)nMonster[0];
-
         StateManager.Instance.monster = new GameObject[level.Monster];
         StateManager.Instance.slime = new GameObject[level.Monster];
         StateManager.Instance.mimic = new GameObject[level.Monster];
+        StateManager.Instance.mimic2 = new GameObject[level.Monster];
+        StateManager.Instance.ghost = new GameObject[level.Monster];
+        StateManager.Instance.pumkin = new GameObject[level.Monster];
 
-        for (int i=0; i < level.Monster; i++)
+        if (0 <= StateManager.Instance.dungeonLevel && 4 >= StateManager.Instance.dungeonLevel)
         {
-            monster = Instantiate(slime) as GameObject;
-            monster.name = mon.Name+ i;
-            monster.transform.localPosition = new Vector3(0,0,0);
-            monster.SetActive(false);
-            StateManager.Instance.slime[i] = monster;
+            Slime(level.Monster);
+            //Mimic(level.Monster);
+            //Mimic2(level.Monster);
         }
 
-        Monster mimicV = (Monster)nMonster[1];
-        for (int i = 0; i < level.Monster; i++)
+        if (5 <= StateManager.Instance.dungeonLevel && 8 >= StateManager.Instance.dungeonLevel)
         {
-            monster = Instantiate(mimic) as GameObject;
-            monster.name = mimicV.Name + i;
-            monster.transform.localPosition = new Vector3(0, 0, 0);
-            monster.SetActive(false);
-            StateManager.Instance.mimic[i] = monster;
+            Slime(level.Monster);
+            Mimic(level.Monster);
+            Mimic2(level.Monster);
+        }
+        //보스전
+        if (StateManager.Instance.dungeonLevel.Equals(9))
+        {
+            Slime(level.Monster);
+        }
+        //11~19 던전
+        if (10 <= StateManager.Instance.dungeonLevel && 18 >= StateManager.Instance.dungeonLevel)
+        {
+            Ghost(level.Monster);
+            Pumkin(level.Monster);
+            Mimic(level.Monster);
+            Mimic2(level.Monster);
+        }
+        //20보스전
+        if (StateManager.Instance.dungeonLevel.Equals(19))
+        {
+            Ghost(level.Monster);
+        }
+        //21~29 던전
+        if (20 <= StateManager.Instance.dungeonLevel && 28 >= StateManager.Instance.dungeonLevel)
+        {
+            Ghost(level.Monster);
+            Pumkin(level.Monster);
+            Mimic(level.Monster);
+            Mimic2(level.Monster);
+        }
+        //30보스전
+        if (StateManager.Instance.dungeonLevel.Equals(29))
+        {
+            Ghost(level.Monster);
         }
 
         //래벨에 따른 돌의 겟수를 저장한다.
@@ -385,16 +415,75 @@ public class csDungeon : MonoBehaviour
                 room[rm - 1] = map.transform.GetChild(i);
                 rm++;
             }
-
-           
-        }
-
-
-        
+        }       
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    private void Slime(int num)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            Monster mon = (Monster)nMonster[0];
+            monster = Instantiate(slime) as GameObject;
+            monster.name = mon.Name;
+            monster.transform.localPosition = new Vector3(0, 0, 0);
+            monster.SetActive(false);
+            StateManager.Instance.slime[i] = monster;
+        }
+    }
+
+    private void Mimic(int num)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            Monster mimicV = (Monster)nMonster[1];
+            monster = Instantiate(mimic) as GameObject;
+            monster.name = mimicV.Name;
+            monster.transform.localPosition = new Vector3(0, 0, 0);
+            monster.SetActive(false);
+            StateManager.Instance.mimic[i] = monster;
+        }
+    }
+    private void Mimic2(int num)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            Monster mimic2N = (Monster)nMonster[2];
+            monster = Instantiate(mimic2) as GameObject;
+            monster.name = mimic2N.Name;
+            monster.transform.localPosition = new Vector3(0, 0, 0);
+            monster.SetActive(false);
+            StateManager.Instance.mimic2[i] = monster;
+        }
+    }
+
+    private void Ghost(int num)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            Monster ghostN = (Monster)nMonster[3];
+            monster = Instantiate(ghost) as GameObject;
+            monster.name = ghostN.Name;
+            monster.transform.localPosition = new Vector3(0, 0, 0);
+            monster.SetActive(false);
+            StateManager.Instance.ghost[i] = monster;
+        }
+    }
+
+    private void Pumkin(int num)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            Monster pumkinN = (Monster)nMonster[4];
+            monster = Instantiate(pumkin) as GameObject;
+            monster.name = pumkinN.Name;
+            monster.transform.localPosition = new Vector3(0, 0, 0);
+            monster.SetActive(false);
+            StateManager.Instance.pumkin[i] = monster;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
     {
 
         if (Application.loadedLevel == 0)
@@ -419,8 +508,8 @@ public class csDungeon : MonoBehaviour
         if (levelRock > 0)
         {
             int num = UnityEngine.Random.Range(0, 4);
-            
-            switch(num)
+
+            switch (num)
             {
                 case 0:
                     int rRoadNum = UnityEngine.Random.Range(1, (mapObj.RotationRoad + 1));

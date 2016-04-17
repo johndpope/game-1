@@ -325,6 +325,7 @@ public class csitemManager : MonoBehaviour
     void Update()
     {
         goldText.text = StateManager.Instance.playGold.ToString();
+
         StateManager.Instance.potionNum = potionNum;
         StateManager.Instance.SkscrollNum = SkscrollNum;
         StateManager.Instance.MgscrollNum = MgscrollNum;

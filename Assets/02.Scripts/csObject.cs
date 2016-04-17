@@ -126,7 +126,7 @@ public class csObject : MonoBehaviour
         }
         //open();
 
-        if(Joystick.run.Equals(500))
+        if(Joystick.run.Equals(30))
         {
             Debug.Log("300임 ㅋㅋㅋ");
            
@@ -224,6 +224,7 @@ public class csObject : MonoBehaviour
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.objBlocked = true;
     }
+
     public void breakRockNo()
     {
         breakRockPop.SetActive(false);
@@ -535,55 +536,234 @@ public class csObject : MonoBehaviour
     private void MeetMonster()
     {
         //gameObject.SetActive(false);
-        Monster slime = (Monster)StateManager.Instance.dungeonMonsters[0];
-        Monster mimic = (Monster)StateManager.Instance.dungeonMonsters[1];
-
         var level = (Level)StateManager.Instance.dungeonLevels[0/*StateManager.Instance.dungeonLevel*/];
         StateManager.Instance.monsterNum = Random.Range(1, (level.Monster + 1));
         
         Debug.Log(StateManager.Instance.monsterNum + "몬스터 랜덤값");
-
-        for(int i=0; i < StateManager.Instance.monsterNum;)
+        
+        for (int i=0; i < StateManager.Instance.monsterNum;)
         {
-            int num = Random.Range(0, 2);
-            switch(num)
+            //몬스터 레벨 1~5
+            if (0 <= StateManager.Instance.dungeonLevel && 4 >= StateManager.Instance.dungeonLevel)
             {
-                case 0:
-                    StateManager.Instance.monster[i] = StateManager.Instance.slime[i];
-                    StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
-                    StateManager.Instance.monster[i].SetActive(true);
-                    csBattle.eTimer[i] = Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
-                    StateManager.Instance.monsterHp[i] = slime.MonsterHp;
-                    StateManager.Instance.monsterAtk[i] = slime.MonsterAtt;
-                    StateManager.Instance.monsterDef[i] = slime.MonsterDef;
-                    StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
-                    StateManager.Instance.slimeNum++;
-                    Debug.Log("슬라임 숫자" + StateManager.Instance.slimeNum);
-                    i++;
-                    break;
-                case 1:
-                    StateManager.Instance.monster[i] = StateManager.Instance.mimic[i];
-                    StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
-                    StateManager.Instance.monster[i].SetActive(true);
-                    csBattle.eTimer[i] = Random.Range(mimic.MonsterMinSpd, mimic.MonsterMaxSpd + 1);
-                    StateManager.Instance.monsterHp[i] = mimic.MonsterHp;
-                    StateManager.Instance.monsterAtk[i] = mimic.MonsterAtt;
-                    StateManager.Instance.monsterDef[i] = mimic.MonsterDef;
-                    StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
-                    StateManager.Instance.mimicNum++;
-                    Debug.Log("미믹 숫자" + StateManager.Instance.mimicNum);
-                    i++;
-                    break;
+                int num = Random.Range(0, 1);
+
+                switch (num)
+                {
+                    case 0:
+                        Slime(i);
+                        i++;
+                        break;
+                    case 1:
+                        Mimic(i);
+                        i++;
+                        break;
+                    case 2:
+                        Mimic2(i);
+                        i++;
+                        break;
+                }
             }
+            //몬스터 레벨 6~9
+            if (5 <= StateManager.Instance.dungeonLevel && 8 >= StateManager.Instance.dungeonLevel)
+            {
+                int num = Random.Range(0, 3);
+
+                switch (num)
+                {
+                    case 0:
+                        Slime(i);
+                        i++;
+                        break;
+                    case 1:
+                        Mimic(i);
+                        i++;
+                        break;
+                    case 2:
+                        Mimic2(i);
+                        i++;
+                        break;
+                }
+            }
+            //보스전
+            if (StateManager.Instance.dungeonLevel.Equals(9))
+            {
+                int num = Random.Range(0, 2);
+                switch (num)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        Slime(i);
+                        i++;
+                        break;
+                }
+            }
+            //11~19 던전
+            if (10 <= StateManager.Instance.dungeonLevel && 18 >= StateManager.Instance.dungeonLevel)
+            {
+                int num = Random.Range(0, 4);
+
+                switch (num)
+                {
+                    case 0:
+                        Ghost(i);
+                        i++;
+                        break;
+                    case 1:
+                        Pumkin(i);
+                        i++;
+                        break;
+                    case 2:
+                        Mimic(i);
+                        i++;
+                        break;
+                    case 3:
+                        Mimic2(i);
+                        i++;
+                        break;
+                }
+            }
+            //20보스전
+            if (StateManager.Instance.dungeonLevel.Equals(19))
+            {
+                int num = Random.Range(0, 2);
+                switch (num)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        Ghost(i);
+                        i++;
+                        break;
+                }
+            }
+            //21~29 던전
+            if (20 <= StateManager.Instance.dungeonLevel && 28 >= StateManager.Instance.dungeonLevel)
+            {
+                int num = Random.Range(0, 4);
+
+                switch (num)
+                {
+                    case 0:
+                        Ghost(i);
+                        i++;
+                        break;
+                    case 1:
+                        Pumkin(i);
+                        i++;
+                        break;
+                    case 2:
+                        Mimic(i);
+                        i++;
+                        break;
+                    case 3:
+                        Mimic2(i);
+                        i++;
+                        break;
+                }
+            }
+            //30보스전
+            if (StateManager.Instance.dungeonLevel.Equals(29))
+            {
+                int num = Random.Range(0, 2);
+                switch (num)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        Ghost(i);
+                        i++;
+                        break;
+                }
+            }
+
         }
+
         battelM.SetActive(true);        
         battelCamera.enabled = true;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
     }
 
+    public void Slime(int i)
+    {
+       
+        Monster slime = (Monster)StateManager.Instance.dungeonMonsters[0];
+        StateManager.Instance.monster[i] = StateManager.Instance.slime[i];
+        StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
+        StateManager.Instance.monster[i].SetActive(true);
+        csBattle.eTimer[i] = Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
+        StateManager.Instance.monsterHp[i] = slime.MonsterHp + (slime.MonsterHp * StateManager.Instance.dungeonLevel * 0.2f);
+        StateManager.Instance.monsterAtk[i] = slime.MonsterAtt;
+        StateManager.Instance.monsterDef[i] = slime.MonsterDef;
+        StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+        StateManager.Instance.slimeNum++;
+        Debug.Log("슬라임 숫자" + StateManager.Instance.slimeNum);
+    }
+
+    public void Mimic(int i)
+    {
+        Monster mimic = (Monster)StateManager.Instance.dungeonMonsters[1];
+        StateManager.Instance.monster[i] = StateManager.Instance.mimic[i];
+        StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
+        StateManager.Instance.monster[i].SetActive(true);
+        csBattle.eTimer[i] = Random.Range(mimic.MonsterMinSpd, mimic.MonsterMaxSpd + 1);
+        StateManager.Instance.monsterHp[i] = mimic.MonsterHp;
+        StateManager.Instance.monsterAtk[i] = mimic.MonsterAtt;
+        StateManager.Instance.monsterDef[i] = mimic.MonsterDef;
+        StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+        StateManager.Instance.mimicNum++;
+        Debug.Log("미믹 숫자" + StateManager.Instance.mimicNum);
+    }
+
+    public void Mimic2(int i)
+    {
+        Monster mimic2 = (Monster)StateManager.Instance.dungeonMonsters[2];
+        StateManager.Instance.monster[i] = StateManager.Instance.mimic2[i];
+        StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
+        StateManager.Instance.monster[i].SetActive(true);
+        csBattle.eTimer[i] = Random.Range(mimic2.MonsterMinSpd, mimic2.MonsterMaxSpd + 1);
+        StateManager.Instance.monsterHp[i] = mimic2.MonsterHp;
+        StateManager.Instance.monsterAtk[i] = mimic2.MonsterAtt;
+        StateManager.Instance.monsterDef[i] = mimic2.MonsterDef;
+        StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+        StateManager.Instance.mimic2Num++;
+    }
+
+    public void Ghost(int i)
+    {
+        Monster ghost = (Monster)StateManager.Instance.dungeonMonsters[3];
+
+        StateManager.Instance.monster[i] = StateManager.Instance.ghost[i];
+        StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
+        StateManager.Instance.monster[i].SetActive(true);
+        csBattle.eTimer[i] = Random.Range(ghost.MonsterMinSpd, ghost.MonsterMaxSpd + 1);
+        StateManager.Instance.monsterHp[i] = ghost.MonsterHp;
+        StateManager.Instance.monsterAtk[i] = ghost.MonsterAtt;
+        StateManager.Instance.monsterDef[i] = ghost.MonsterDef;
+        StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+        StateManager.Instance.ghostNum++;
+    }
+
+    public void Pumkin(int i)
+    {
+        Monster pumkin = (Monster)StateManager.Instance.dungeonMonsters[4];
+        StateManager.Instance.monster[i] = StateManager.Instance.pumkin[i];
+        StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
+        StateManager.Instance.monster[i].SetActive(true);
+        csBattle.eTimer[i] = Random.Range(pumkin.MonsterMinSpd, pumkin.MonsterMaxSpd + 1);
+        StateManager.Instance.monsterHp[i] = pumkin.MonsterHp;
+        StateManager.Instance.monsterAtk[i] = pumkin.MonsterAtt;
+        StateManager.Instance.monsterDef[i] = pumkin.MonsterDef;
+        StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+        StateManager.Instance.pumkinNum++;
+    }
+
     public void openBattleBox(int num)
     {
+        bool open = false;
+
         if (num.Equals(1))
         {
             cBoxOpen.SetActive(true);
@@ -592,6 +772,7 @@ public class csObject : MonoBehaviour
             boxOpen3.GetComponent<Button>().enabled = false;
             boxOpen1.SetActive(false);
             battleYesBtn.SetActive(true);
+            open = true;
         }
 
         if (num.Equals(2))
@@ -602,6 +783,7 @@ public class csObject : MonoBehaviour
             boxOpen3.GetComponent<Button>().enabled = false;
             boxOpen2.SetActive(false);
             battleYesBtn.SetActive(true);
+            open = true;
         }
 
         if (num.Equals(3))
@@ -612,62 +794,67 @@ public class csObject : MonoBehaviour
             boxOpen1.GetComponent<Button>().enabled = false;
             boxOpen3.SetActive(false);
             battleYesBtn.SetActive(true);
+            open = true;
         }
 
-        int TreasureNum = Random.Range(1, 130);
-
-        int wValue = 60;  //무기확률
-        int pValue = 10;  //포션(소모품)확률
-        int sValue = 10;  //스킬 마법 버프 스크롤 확률
-        int nValue = 30;  //꽝
-        int moneyValue = 20;  //돈
-
-        if (TreasureNum <= moneyValue)
+        if (open == true)
         {
-            int money = Random.Range(2, 4);
-            switch (money)
+
+
+            int TreasureNum = Random.Range(1, 130);
+
+            int wValue = 10;  //무기확률
+            int pValue = 10;  //포션(소모품)확률
+            int sValue = 10;  //스킬 마법 버프 스크롤 확률
+            int nValue = 30;  //꽝
+            int moneyValue = 70;  //돈
+
+            if (TreasureNum <= moneyValue)
             {
-                case 2:
-                    int ten = Random.Range(1, 10);
-                    StateManager.Instance.playGold += ten * 10;
-                    finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + " + ten * 10;
-
-                    break;
-                case 3:
-                    int hundred = Random.Range(1, 2);
-                    int ten2 = Random.Range(1, 10);
-                    StateManager.Instance.playGold += ten2 * 10;
-                    StateManager.Instance.playGold += hundred * 100;
-                    finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + " + ((ten2 * 10) + (hundred * 100));
-                    break;
+                int money = Random.Range(2, 4);
+                switch (money)
+                {
+                    case 2:
+                        int ten = Random.Range(1, 10);
+                        StateManager.Instance.playGold += ten * 10;
+                        finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + " + ten * 10;
+                        break;
+                    case 3:
+                        int hundred = Random.Range(1, 2);
+                        int ten2 = Random.Range(1, 10);
+                        StateManager.Instance.playGold += ten2 * 10;
+                        StateManager.Instance.playGold += hundred * 100;
+                        finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + " + ((ten2 * 10) + (hundred * 100));
+                        break;
+                }
             }
-        }
 
 
-        if (TreasureNum > moneyValue && TreasureNum <= nValue + moneyValue)
-        {
-            Debug.Log("꽝" + TreasureNum);
-        }
+            if (TreasureNum > moneyValue && TreasureNum <= nValue + moneyValue)
+            {
+                Debug.Log("꽝" + TreasureNum);
+            }
 
-        if (TreasureNum > nValue + moneyValue && TreasureNum <= nValue + moneyValue + sValue)
-        {
-            int itemNum = Random.Range(1, 6);
-            GetScrollItem(itemNum, gameObj);
-            Debug.Log("스크롤" + TreasureNum);
-        }
+            if (TreasureNum > nValue + moneyValue && TreasureNum <= nValue + moneyValue + sValue)
+            {
+                int itemNum = Random.Range(1, 6);
+                GetScrollItem(itemNum, gameObj);
+                Debug.Log("스크롤" + TreasureNum);
+            }
 
-        if (TreasureNum > nValue + moneyValue  + sValue && TreasureNum <= nValue + moneyValue + sValue + pValue)
-        {
-            int itemNum = Random.Range(6, 8);
-            GetScrollItem(itemNum, gameObj);
-            Debug.Log("포션" + TreasureNum);
-        }
+            if (TreasureNum > nValue + moneyValue + sValue && TreasureNum <= nValue + moneyValue + sValue + pValue)
+            {
+                int itemNum = Random.Range(6, 8);
+                GetScrollItem(itemNum, gameObj);
+                Debug.Log("포션" + TreasureNum);
+            }
 
-        if (TreasureNum > nValue + moneyValue + sValue + pValue && TreasureNum <= nValue + moneyValue + sValue + pValue + wValue)
-        {
-            int itemNum = Random.Range(0, 4);
-            GetWeapon(weaponSetObj, itemNum);
-            Debug.Log("무기" + TreasureNum);
+            if (TreasureNum > nValue + moneyValue + sValue + pValue && TreasureNum <= nValue + moneyValue + sValue + pValue + wValue)
+            {
+                int itemNum = Random.Range(0, 4);
+                GetWeapon(weaponSetObj, itemNum);
+                Debug.Log("무기" + TreasureNum);
+            }
         }
     }
 }
