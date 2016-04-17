@@ -146,7 +146,7 @@ public class csEquipageStore : MonoBehaviour
     ArrayList itemInfos;
     ArrayList itemInfosA;
     ArrayList itemInfosB;
-    public int playerGold;
+
     public GameObject playerGoldText;
     Sprite d;
 
@@ -251,9 +251,7 @@ public class csEquipageStore : MonoBehaviour
         {
             this._setupBoots(i);
         }
-        playerGold += 900;
-        StateManager.Instance.playGold = playerGold;
-
+       
         StateManager.Instance.weaponItems = wItems;
         StateManager.Instance.armorItems = aItems;
         StateManager.Instance.bootItems = bItems;

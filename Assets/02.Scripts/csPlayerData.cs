@@ -37,8 +37,9 @@ public class csPlayerData : MonoBehaviour
 
     int i =0;
   
-    void Awake()
+    void Start()
     {
+       
         if (StateManager.Instance.useWeapon != null)
         {
             useWeapons.GetComponent<Image>().sprite = StateManager.Instance.useWeapon;
@@ -52,7 +53,7 @@ public class csPlayerData : MonoBehaviour
             useBoots.GetComponent<Image>().sprite = StateManager.Instance.useBoots;
         }
 
-        if (StateManager.Instance.weaponSpace[StateManager.Instance.wUse] !=null)
+        if (StateManager.Instance.weaponSpace[StateManager.Instance.wUse] !=null && StateManager.Instance.useWeapon != null)
         {
             useWeapon = StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>();
             if (useWeapon.enabled == true)

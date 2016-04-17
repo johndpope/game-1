@@ -37,8 +37,20 @@ public class csStoreManager : MonoBehaviour
     public GameObject eqShopButton;
     public GameObject abilShopButton;
     public GameObject dungeonButton;
-  
 
+    public void Exit()
+    {
+        StartCoroutine(Save());
+        
+        
+        Debug.Log("Quit()");
+    }
+    IEnumerator Save()
+    {
+        GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
+        yield return new WaitForSeconds(5.0f);
+        Application.Quit();
+    }
     public void onStartButton()
     {
         iTween.MoveTo(GameObject.Find("Main Camera"), iTween.Hash("x", -2.0f
@@ -47,7 +59,9 @@ public class csStoreManager : MonoBehaviour
                                             , "time", 4.0f));
         iTween.RotateTo(GameObject.Find("Main Camera"), iTween.Hash("x", 20                                         
                                            , "time", 4.0f));
-        StartCoroutine("startButtonPop");   
+        StartCoroutine("startButtonPop");
+        StateManager.Instance.startButton = true;
+        StateManager.Instance.firstGame = true;
     }
 
     public void onEqShopButton()

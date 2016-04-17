@@ -317,7 +317,6 @@ public class Inven : MonoBehaviour
             StateManager.Instance.wUse = wNum;
             useWeapon.GetComponent<Image>().sprite = StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponImage").GetComponent<Image>().sprite;
             StateManager.Instance.useWeapon = useWeapon.GetComponent<Image>().sprite;
-          
         }
 
          else if(d > 0)

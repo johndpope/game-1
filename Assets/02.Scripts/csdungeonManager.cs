@@ -51,7 +51,6 @@ public class csdungeonManager : MonoBehaviour
 
         for (int i = 0; i < itemInfoLevel.Count; i++)
         {
-            Debug.Log(i);
             _setupFloor(i);
         }
     }

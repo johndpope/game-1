@@ -91,7 +91,7 @@ public class csObject : MonoBehaviour
     void Start()
     {
         getItemText = getItemTextObj.GetComponent<Text>();
-        getItemImage = getItem.GetComponent<Image>().sprite;
+       
 
         fText = findText.GetComponent<Text>();
         battelCamera = battleCameraObj.GetComponent<Camera>();
@@ -287,7 +287,7 @@ public class csObject : MonoBehaviour
 
         if (TreasureNum > nValue + moneyValue + moValue + sValue + pValue && TreasureNum <= nValue + moneyValue + moValue + sValue + pValue + wValue)
         {
-            int itemNum = Random.Range(0, 4);
+            int itemNum = Random.Range(0, 3);
             GetWeapon(weaponSetObj, itemNum);
             Debug.Log("무기" + TreasureNum);
         }
@@ -326,7 +326,7 @@ public class csObject : MonoBehaviour
                 else if(cBoxOpen.activeSelf.Equals(true))
                 {
                     getItemText.text = "획득 아이템 \n: " + sItem.Name;
-                    getItemImage = (Sprite)Resources.Load(sItem.Image, typeof(Sprite));
+                    getItem.GetComponent<Image>().sprite = (Sprite)Resources.Load(sItem.Image, typeof(Sprite));
                 }
                 
                 break;
@@ -364,7 +364,7 @@ public class csObject : MonoBehaviour
                 else if (cBoxOpen.activeSelf.Equals(true))
                 {
                     getItemText.text = "획득 아이템 \n: " + mItem.Name;
-                    getItemImage = (Sprite)Resources.Load(mItem.Image, typeof(Sprite));
+                    getItem.GetComponent<Image>().sprite = (Sprite)Resources.Load(mItem.Image, typeof(Sprite));
                 }
                 
                 break;
@@ -403,7 +403,7 @@ public class csObject : MonoBehaviour
                 else if (cBoxOpen.activeSelf.Equals(true))
                 {
                     getItemText.text = "획득 아이템 \n: " + bItem.Name;
-                    getItemImage = (Sprite)Resources.Load(bItem.Image, typeof(Sprite));
+                    getItem.GetComponent<Image>().sprite = (Sprite)Resources.Load(bItem.Image, typeof(Sprite));
                 }
                 break;
             case 6:
@@ -441,6 +441,7 @@ public class csObject : MonoBehaviour
 
                 StateManager.Instance.potionNum[itemNum]++;
                 StateManager.Instance.potionItemBag[itemNum].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.potionNum[itemNum] + " 개";
+
                 if (cBoxOpen.activeSelf.Equals(false))
                 {
                     StartCoroutine(findObj(7, 0, item.Name + "\n 포 션 을  발 견 "));
@@ -448,7 +449,7 @@ public class csObject : MonoBehaviour
                 else if (cBoxOpen.activeSelf.Equals(true))
                 {
                     getItemText.text = "획득 아이템 \n: " + item.Name;
-                    getItemImage = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+                    getItem.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
                 }
                 break;
         }
@@ -456,16 +457,12 @@ public class csObject : MonoBehaviour
 
     private void GetWeapon(GameObject gameObj, int itemIndex)
     {
-        if (StateManager.Instance.bagSize == 5)
-        {
-            return;
-        }
-        StateManager.Instance.bagSize++;
         int WeaponNum = Random.Range(0, 4);
         if(WeaponNum == 3)
         {
             WeaponNum = 2;
         }
+
         Debug.Log(WeaponNum+"무기 번호");
         switch (itemIndex)
         {
@@ -481,12 +478,22 @@ public class csObject : MonoBehaviour
                 }
                 break;
             case 1:
-                HMWeaponItem witem = (HMWeaponItem)StateManager.Instance.weaponItems[itemIndex];
+                HMWeaponItem witem = (HMWeaponItem)StateManager.Instance.weaponItems[WeaponNum];
                 if (StateManager.Instance.bagSize == 5)
                 {
                     getItemText.text = "획득 아이템 \n: 가방이 꽉 찼다.";
                     return;
                 }
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(8, 0, witem.Name + " 내 구 도: " + (witem.Durability / 2).ToString() + "\n의 무 기  발 견"));
+                }
+                else if (cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItemText.text = "획득 아이템 \n: " + witem.Name + "\n 내 구 도: " + witem.Durability.ToString();
+                    getItem.GetComponent<Image>().sprite = (Sprite)Resources.Load(witem.Image, typeof(Sprite));
+                }
+
                 StateManager.Instance.bagSize++;
                 weaponDurabilityText.GetComponent<Text>().text = "내구도: " + (witem.Durability/2).ToString();
                 weaponNameText.GetComponent<Text>().text = witem.Name + " 공격력: " + witem.AttackPoint.ToString();
@@ -507,21 +514,25 @@ public class csObject : MonoBehaviour
                         return;
                     }
                 }
-                if (cBoxOpen.activeSelf.Equals(false))
-                {
-                    StartCoroutine(findObj(8, 0, witem.Name + " 내 구 도: " + (witem.Durability / 2).ToString() + "\n의 무 기  발 견"));
-                }
-                else if (cBoxOpen.activeSelf.Equals(true))
-                {
-                    getItemText.text = "획득 아이템 \n: " + witem.Name + " 내 구 도: " + witem.Durability.ToString();
-                }
+
+               
                 break;
             case 2:
-                HMWeaponItem item = (HMWeaponItem)StateManager.Instance.weaponItems[itemIndex];
+                HMWeaponItem item = (HMWeaponItem)StateManager.Instance.weaponItems[WeaponNum];
+
                 if (StateManager.Instance.bagSize == 5)
                 {
                     getItemText.text = "획득 아이템 \n: 가방이 꽉 찼다.";
                     return;
+                }
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(8, 0, item.Name + " 내 구 도: " + item.Durability.ToString() + "\n의 무 기  발 견"));
+                }
+                else if (cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItem.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+                    getItemText.text = "획득 아이템 \n: " + item.Name + "\n 내 구 도: " + item.Durability.ToString();
                 }
                 StateManager.Instance.bagSize++;
                 weaponDurabilityText.GetComponent<Text>().text = "내구도: " + item.Durability.ToString();
@@ -543,14 +554,7 @@ public class csObject : MonoBehaviour
                         return;
                     }
                 }
-                if (cBoxOpen.activeSelf.Equals(false))
-                {
-                    StartCoroutine(findObj(8, 0, item.Name + " 내 구 도: " + item.Durability.ToString() + "\n의 무 기  발 견"));
-                }
-                else if (cBoxOpen.activeSelf.Equals(true))
-                {
-                    getItemText.text = "획득 아이템 \n: " + item.Name + " 내 구 도: " + item.Durability.ToString();
-                }
+               
                 break;
         }
     }
@@ -840,15 +844,15 @@ public class csObject : MonoBehaviour
                 switch (money)
                 {
                     case 2:
-                        int ten = Random.Range(1, 10);
+                        int ten = Random.Range(1, 7);
                         StateManager.Instance.playGold += ten * 10;
                         finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + " + ten * 10;
                         break;
                     case 3:
                         int hundred = Random.Range(1, 2);
-                        int ten2 = Random.Range(1, 10);
+                        int ten2 = Random.Range(1, 7);
                         StateManager.Instance.playGold += ten2 * 10;
-                        StateManager.Instance.playGold += hundred * 100;
+                        StateManager.Instance.playGold += hundred * 50;
                         finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + " + ((ten2 * 10) + (hundred * 100));
                         break;
                 }
@@ -880,7 +884,7 @@ public class csObject : MonoBehaviour
             if (TreasureNum > nValue + moneyValue + sValue + pValue && TreasureNum <= nValue + moneyValue + sValue + pValue + wValue)
             {
                 finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + ";
-                int itemNum = Random.Range(0, 4);
+                int itemNum = Random.Range(0, 3);
                 GetWeapon(weaponSetObj, itemNum);
                 Debug.Log("무기" + TreasureNum);
             }

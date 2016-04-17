@@ -271,7 +271,7 @@ public class csitemManager : MonoBehaviour
 
     }
 
-    void Start()
+    void Awake()
     {
         LoadAssetfromJson();
 
@@ -281,6 +281,11 @@ public class csitemManager : MonoBehaviour
         SkscrollNum = new int[itemInfosS.Count];
         MgscrollNum = new int[itemInfosM.Count];
         BufscrollNum = new int[itemInfosB.Count];
+
+        StateManager.Instance.potionNum = potionNum;
+        StateManager.Instance.SkscrollNum = SkscrollNum;
+        StateManager.Instance.MgscrollNum = MgscrollNum;
+        StateManager.Instance.BufscrollNum = BufscrollNum;
 
         potionItemBag = new GameObject[itemInfosP.Count];
         SkScrollBag = new GameObject[itemInfosS.Count];

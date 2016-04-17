@@ -25,7 +25,9 @@ public class live2d_setting : MonoBehaviour
     {
 
         Live2D.init();
+
         motion = Live2DMotion.loadMotion(mtnFiles[0].bytes);
+
         motion.setLoop(true);
  
         live2DModel = Live2DModelUnity.loadModel(mocFile.bytes);
@@ -36,6 +38,7 @@ public class live2d_setting : MonoBehaviour
         motionManager = new MotionQueueManager();
       
         motionManager.startMotion(motion, false);
+
         live2DModel.setPartsOpacity("PARTS_WEAPON01", 0);
         live2DModel.setPartsOpacity("PARTS_WEAPON02", 0);
         live2DModel.setPartsOpacity("PARTS_WEAPON03", 0);
@@ -47,24 +50,23 @@ public class live2d_setting : MonoBehaviour
     void Update()
     {
        
-        if (Input.GetButtonDown("Fire1"))
-        {
-            op(1);
-            motion = Live2DMotion.loadMotion(mtnFiles[2].bytes);
-            //motion.setLoop(true);
-            motionManager.startMotion(motion, false);
-            Debug.Log("Fire1");
-            //motionoff = true;
-        }
-        if (Input.GetButtonDown("Fire2"))
-        {
-            motion = Live2DMotion.loadMotion(mtnFiles[1].bytes);
-            //motion.setLoop(true);
-            motionManager.startMotion(motion, false);
-           // motionManager.stopAllMotions();
-            Debug.Log("Jump");
-           // motionoff = true;
-        }
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    motion = Live2DMotion.loadMotion(mtnFiles[2].bytes);
+        //    //motion.setLoop(true);
+        //    motionManager.startMotion(motion, false);
+        //    Debug.Log("Fire1");
+        //    //motionoff = true;
+        //}
+        //if (Input.GetButtonDown("Fire2"))
+        //{
+        //    motion = Live2DMotion.loadMotion(mtnFiles[1].bytes);
+        //    //motion.setLoop(true);
+        //    motionManager.startMotion(motion, false);
+        //   // motionManager.stopAllMotions();
+        //    Debug.Log("Jump");
+        //   // motionoff = true;
+        //}
 
         float modelWidth = live2DModel.getCanvasWidth();
         Matrix4x4 m1 = Matrix4x4.Ortho(
@@ -83,7 +85,9 @@ public class live2d_setting : MonoBehaviour
     void OnRenderObject()
     {
         live2DModel.draw();
+
         var partList = live2DModel.getModelImpl().getPartsDataList();
+
         foreach (var item in partList)
         {
             live2DModel.setPartsOpacity(item.getPartsDataID().ToString(), modelOpacity);
@@ -99,14 +103,81 @@ public class live2d_setting : MonoBehaviour
                 return;
             if (item.getPartsDataID().ToString() == "PARTS_WEAPON06")
                 return;
-
         }
     }
 
-    private void op(int num)
+    public void Weapon(int num)
     {
-        live2DModel.setPartsOpacity("PARTS_WEAPON01", num);
-        
-       
+        switch(num)
+        {
+            case 0:
+                live2DModel.setPartsOpacity("PARTS_WEAPON01", 1);
+                break;
+            case 1:
+                live2DModel.setPartsOpacity("PARTS_WEAPON02", 1);
+                break;
+            case 2:
+                live2DModel.setPartsOpacity("PARTS_WEAPON03", 1);
+                break;
+            case 3:
+                live2DModel.setPartsOpacity("PARTS_WEAPON04", 1);
+                break;
+            case 4:
+                live2DModel.setPartsOpacity("PARTS_WEAPON05", 1);
+                break;
+            case 5:
+                live2DModel.setPartsOpacity("PARTS_WEAPON06", 1);
+                break;
+            case 6:
+                live2DModel.setPartsOpacity("PARTS_WEAPON01", 0);
+                live2DModel.setPartsOpacity("PARTS_WEAPON02", 0);
+                live2DModel.setPartsOpacity("PARTS_WEAPON03", 0);
+                live2DModel.setPartsOpacity("PARTS_WEAPON04", 0);
+                live2DModel.setPartsOpacity("PARTS_WEAPON05", 0);
+                live2DModel.setPartsOpacity("PARTS_WEAPON06", 0);
+                break;
+        }
+    }
+
+    public void Ani(int num)
+    {
+        switch (num)
+        {
+            case 0:
+                motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
+                motion.setLoop(true);
+                motionManager.startMotion(motion, false);
+                break;
+            case 1:
+                motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
+                motion.setLoop(true);
+                motionManager.startMotion(motion, false);
+                break;
+            case 2:
+                motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
+                motion.setLoop(true);
+                motionManager.startMotion(motion, false);
+                break;
+            case 3:
+                motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
+                motion.setLoop(true);
+                motionManager.startMotion(motion, false);
+                break;
+            case 4:
+                motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
+                motion.setLoop(true);
+                motionManager.startMotion(motion, false);
+                break;
+            case 5:
+                motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
+                motion.setLoop(true);
+                motionManager.startMotion(motion, false);
+                break;
+            case 6:
+                motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
+                motionManager.startMotion(motion, false);
+                break;
+        }
+
     }
 }

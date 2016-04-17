@@ -170,6 +170,9 @@ public class StateManager : MonoBehaviour
 
     public bool dunFinish;
 
+    public bool startButton;
+
+    public bool firstGame;
 
     //void SaveData()
     //{
