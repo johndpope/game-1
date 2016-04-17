@@ -78,7 +78,7 @@ class HMArmorItem : HMItem
 
 class HMBootsItem : HMItem
 {
-    private int mSpd;
+    private float mSpd;
     private string mBootsName;
 
     public string BootsName
@@ -86,7 +86,7 @@ class HMBootsItem : HMItem
         get { return mBootsName; }
         set { mBootsName = value; }
     }
-    public int Spd
+    public float Spd
     {
         get { return mSpd; }
         set { mSpd = value; }
@@ -220,7 +220,7 @@ public class csEquipageStore : MonoBehaviour
                 HMBootsItem bootsItem = new HMBootsItem();
                 bootsItem.Name = name;
                 bootsItem.Price = Int32.Parse(price);
-                bootsItem.Spd = Int32.Parse(bootsSpd);
+                bootsItem.Spd = float.Parse(bootsSpd);
                 bootsItem.Explain = bootsExplain;
                 bootsItem.BootsName = bootsName;
                 bootsItem.Image = bootsImage;

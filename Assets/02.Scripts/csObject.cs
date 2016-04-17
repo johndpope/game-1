@@ -318,6 +318,7 @@ public class csObject : MonoBehaviour
                 }
                 StateManager.Instance.SkscrollNum[itemNum]++;
                 StateManager.Instance.SkScrollBag[itemNum].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.SkscrollNum[itemNum] + " 개";
+
                 if (cBoxOpen.activeSelf.Equals(false))
                 {
                     StartCoroutine(findObj(6, 0, sItem.Name + "\n 스 크 롤 을  발 견 "));
@@ -330,8 +331,15 @@ public class csObject : MonoBehaviour
                 
                 break;
             case 2:
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(6, 0, "스 크 롤 이 \n오 래 되 서  부 서 짐"));
+                }
+                else if (cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItemText.text = "획득 아이템 \n: 없 음";
+                }
                 //스크롤이 오래되서 부서짐
-                StartCoroutine(findObj(6, 0, "스 크 롤 이 \n오 래 되 서  부 서 짐"));
                 break;
             case 3:
                 MagicItem mItem = (MagicItem)StateManager.Instance.magicScrollItems[itemNum];
@@ -362,7 +370,14 @@ public class csObject : MonoBehaviour
                 break;
             case 4:
                 //스크롤이 오래되서 부서짐
-                StartCoroutine(findObj(6, 0, "스 크 롤 이 \n오 래 되 서  부 서 짐"));
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(6, 0, "스 크 롤 이 \n오 래 되 서  부 서 짐"));
+                }
+                else if (cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItemText.text = "획득 아이템 \n: 없 음";
+                }
                 break;
             case 5:
                 BuffItem bItem = (BuffItem)StateManager.Instance.buffScrollItems[itemNum];
@@ -393,7 +408,14 @@ public class csObject : MonoBehaviour
                 break;
             case 6:
                 //깨진 포션병을 발견
-                StartCoroutine(findObj(7, 0, "깨 진  포 션 병 을  발 견"));
+                if (cBoxOpen.activeSelf.Equals(false))
+                {
+                    StartCoroutine(findObj(7, 0, "깨 진  포 션 병 을  발 견"));
+                }
+                else if (cBoxOpen.activeSelf.Equals(true))
+                {
+                    getItemText.text = "획득 아이템 \n: 없 음";
+                }
                 break;
             case 7:
                 if(itemNum==1)
@@ -455,7 +477,7 @@ public class csObject : MonoBehaviour
                 }
                 else if (cBoxOpen.activeSelf.Equals(true))
                 {
-                    getItemText.text = "획득 아이템 \n: 망 가 진  무 기  발 견 ";
+                    getItemText.text = "획득 아이템 \n: 망가진 무기 발견 ";
                 }
                 break;
             case 1:
@@ -538,7 +560,7 @@ public class csObject : MonoBehaviour
     {
         //gameObject.SetActive(false);
         var level = (Level)StateManager.Instance.dungeonLevels[0/*StateManager.Instance.dungeonLevel*/];
-        StateManager.Instance.monsterNum = Random.Range(3, (level.Monster + 1));
+        StateManager.Instance.monsterNum = Random.Range(1, (level.Monster + 1));
         
         Debug.Log(StateManager.Instance.monsterNum + "몬스터 랜덤값");
         
@@ -835,11 +857,13 @@ public class csObject : MonoBehaviour
 
             if (TreasureNum > moneyValue && TreasureNum <= nValue + moneyValue)
             {
+                finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + ";
                 Debug.Log("꽝" + TreasureNum);
             }
 
             if (TreasureNum > nValue + moneyValue && TreasureNum <= nValue + moneyValue + sValue)
             {
+                finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + ";
                 int itemNum = Random.Range(1, 6);
                 GetScrollItem(itemNum, gameObj);
                 Debug.Log("스크롤" + TreasureNum);
@@ -847,6 +871,7 @@ public class csObject : MonoBehaviour
 
             if (TreasureNum > nValue + moneyValue + sValue && TreasureNum <= nValue + moneyValue + sValue + pValue)
             {
+                finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + ";
                 int itemNum = Random.Range(6, 8);
                 GetScrollItem(itemNum, gameObj);
                 Debug.Log("포션" + TreasureNum);
@@ -854,6 +879,7 @@ public class csObject : MonoBehaviour
 
             if (TreasureNum > nValue + moneyValue + sValue + pValue && TreasureNum <= nValue + moneyValue + sValue + pValue + wValue)
             {
+                finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + ";
                 int itemNum = Random.Range(0, 4);
                 GetWeapon(weaponSetObj, itemNum);
                 Debug.Log("무기" + TreasureNum);

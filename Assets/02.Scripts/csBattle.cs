@@ -180,8 +180,12 @@ public class csBattle : MonoBehaviour
     public GameObject fireBall;
     public GameObject iceBall;
     public GameObject earthBall;
+    public GameObject flameStrike;
 
     Quaternion[] enemy = new Quaternion[3];
+
+    public GameObject magicPos;
+    public GameObject magicPosFlameStrike;
 
     void OnEnable()
     {
@@ -262,7 +266,7 @@ public class csBattle : MonoBehaviour
             timer.SetActive(false);
             joystick.GetComponent<Image>().enabled = true;
             invenBtn.SetActive(true);
-            player2D.transform.position = new Vector3(13.5f,0,-30);
+            player2D.transform.position = new Vector3(11.5f,0,-30);
             gameObject.SetActive(false);
         }
 
@@ -396,14 +400,14 @@ public class csBattle : MonoBehaviour
             {
                 eccObj[i].SetActive(true);
                 ecc[i].value = 0;
+                StateManager.Instance.monster[i].transform.FindChild("mo").GetComponent<main1>().ani(0);
                 StateManager.Instance.monster[i].transform.position = new Vector3(0, 0, 0);
                 StateManager.Instance.monster[i].SetActive(false);
             }
 
             StateManager.Instance.timerIsActive = false;
             timer.SetActive(false);
-            finish();
-           
+            finish();         
         }
         TimerCut();
         
@@ -428,14 +432,14 @@ public class csBattle : MonoBehaviour
         battelCamera.enabled = false;
         joystick.GetComponent<Image>().enabled = true;
         invenBtn.SetActive(true);
-        player2D.transform.position = new Vector3(13.5f, 0, -30);
+        player2D.transform.position = new Vector3(11.5f, 0, -30);
         StateManager.Instance.monsterNum = 0;
         gameObject.SetActive(false);
     }
 
     IEnumerator playerData()
     {
-        if(poisonImage.activeSelf.Equals(true) && (poisonTurn+1).Equals(turn))
+        if (poisonImage.activeSelf.Equals(true) && (poisonTurn+1).Equals(turn))
         {
             poisonTurn++;
             poisonNum++;
@@ -826,20 +830,28 @@ public class csBattle : MonoBehaviour
 
     IEnumerator playerMagic()
     {
-        Magic();
+        StartCoroutine(Magic());
 
-        yield return new WaitForSeconds(2.0f);
         for (int i = 0; i < StateManager.Instance.monsterNum; i++)
         {
-            StateManager.Instance.monster[i].GetComponent<BoxCollider>().enabled = true;
+
+            if (StateManager.Instance.monster[i].GetComponent<BoxCollider>().Equals(false))
+            {
+                Debug.Log("들어옴");
+                StateManager.Instance.monster[i].GetComponent<BoxCollider>().enabled = true;
+            }
         }
-        if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
-        {
-            StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
-            monsterNum--;
-            eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
-        }
+       
+            if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
+            {
+                Debug.Log("들어옴");
+
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
+                monsterNum--;
+                eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
+            }
         
+
         yield return new WaitForSeconds(1.5f);
         pTimer = pTimer2;
         turn++;
@@ -905,7 +917,7 @@ public class csBattle : MonoBehaviour
         turn++;
         StateManager.Instance.timerIsActive = true;
         StateManager.Instance.monsterBattle = true;
-        player2D.transform.position = new Vector3(playPos.transform.position.x - 1.5f, playPos.transform.position.y, playPos.transform.position.z);
+        player2D.transform.position = new Vector3(11.5f, 0, -30);
         player2D.transform.LookAt(playPos.transform.position);
         player2D.transform.rotation = new Quaternion(0,-0.5f, 0, 0.8f);
     }
@@ -1032,7 +1044,7 @@ public class csBattle : MonoBehaviour
         }
     }
 
-    private void Magic()
+    IEnumerator Magic()
     {
         StateManager.Instance.MagicAtk = false;
         switch (StateManager.Instance.useItemNum)
@@ -1040,6 +1052,18 @@ public class csBattle : MonoBehaviour
             case 0:
                 //얼음화살 슬로우
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
+                for (int i = 0; i < StateManager.Instance.monsterNum; i++)
+                {
+                    StateManager.Instance.monster[i].GetComponent<BoxCollider>().enabled = false;
+                }
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].GetComponent<BoxCollider>().enabled = true;
+
+                GameObject ice = Instantiate(iceBall) as GameObject;
+                ice.transform.position = magicPos.transform.position;
+                ice.transform.rotation = enemy[StateManager.Instance.atkEnemyNum];
+                //ice.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                yield return new WaitForSeconds(2.0f);
+
                 spdDownEnemy = StateManager.Instance.atkEnemyNum;
                 monsterSpd = StateManager.Instance.monsterSpd[spdDownEnemy];
 
@@ -1070,10 +1094,11 @@ public class csBattle : MonoBehaviour
                 StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].GetComponent<BoxCollider>().enabled = true;
 
                 GameObject fire = Instantiate(fireBall) as GameObject;
-                fire.transform.position = playPos.transform.position;
+                fire.transform.position = magicPos.transform.position;
                 fire.transform.rotation = enemy[StateManager.Instance.atkEnemyNum];
                 //fire.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-               
+                yield return new WaitForSeconds(2.0f);
+
                 StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk + playOriginAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
 
                 StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum]--;
@@ -1086,11 +1111,26 @@ public class csBattle : MonoBehaviour
             case 2:
                 //불기둥
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
+                GameObject strike = Instantiate(flameStrike) as GameObject;
+                strike.transform.position = magicPosFlameStrike.transform.position;
+                strike.transform.rotation = enemy[StateManager.Instance.atkEnemyNum];
+                //fire.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                yield return new WaitForSeconds(2.0f);
 
                 for (int i = 0; i < StateManager.Instance.monsterNum; i++)
                 {
                     StateManager.Instance.monsterHp[i] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk + playOriginAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[i];
+
+                    if (StateManager.Instance.monsterHp[i] <= 0)
+                    {
+                        Debug.Log("들어옴");
+
+                        StateManager.Instance.monster[i].transform.FindChild("mo").GetComponent<main1>().ani(2);
+                        monsterNum--;
+                        eccObj[i].SetActive(false);
+                    }
                 }
+
                 StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum] == 0)
                 {
@@ -1102,6 +1142,18 @@ public class csBattle : MonoBehaviour
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
                 atkDownEnemy = StateManager.Instance.atkEnemyNum;
                 monsterAtk = StateManager.Instance.monsterAtk[atkDownEnemy];
+
+                for (int i = 0; i < StateManager.Instance.monsterNum; i++)
+                {
+                    StateManager.Instance.monster[i].GetComponent<BoxCollider>().enabled = false;
+                }
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].GetComponent<BoxCollider>().enabled = true;
+
+                GameObject earth = Instantiate(earthBall) as GameObject;
+                earth.transform.position = magicPos.transform.position;
+                earth.transform.rotation = enemy[StateManager.Instance.atkEnemyNum];
+                //earth.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                yield return new WaitForSeconds(2.0f);
 
                 StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("atkdown").GetComponent<SpriteRenderer>().enabled = true;
                 StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("atkdown").GetComponent<csAtkDown>().enabled = true;

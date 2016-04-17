@@ -11,7 +11,7 @@ public class csUseEquip : MonoBehaviour
 
     public static int attackPoint;
     public static int defPoint;
-    public static int spdPoint;
+    public static float spdPoint;
 
 
     private ArrayList wItems;
