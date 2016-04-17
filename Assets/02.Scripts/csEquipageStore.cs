@@ -274,7 +274,7 @@ public class csEquipageStore : MonoBehaviour
     {
         equipageNum = 1;
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 7; i++)
         {
             weaponPoolSet[i].SetActive(true);
             armorPoolSet[i].SetActive(false);
@@ -286,7 +286,7 @@ public class csEquipageStore : MonoBehaviour
     public void equipageArmor()
     {
         equipageNum = 2;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 7; i++)
         {
             armorPoolSet[i].SetActive(true);
             bootPoolSet[i].SetActive(false);
@@ -296,7 +296,7 @@ public class csEquipageStore : MonoBehaviour
     public void equipageBoot()
     {
         equipageNum = 3;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 7; i++)
         {
             armorPoolSet[i].SetActive(false);
             bootPoolSet[i].SetActive(true);

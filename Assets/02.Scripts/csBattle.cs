@@ -173,10 +173,22 @@ public class csBattle : MonoBehaviour
     int bleedingTurn;
     int slowTurn;
 
+    int poisonNum;
+    int bleedingNum;
+    int slowNum;
 
+    public GameObject fireBall;
+    public GameObject iceBall;
+    public GameObject earthBall;
+
+    Quaternion[] enemy = new Quaternion[3];
 
     void OnEnable()
     {
+        enemy[0] = new Quaternion(0, 0.7f, 0, 0.7f);
+        enemy[1] = new Quaternion(0, 0.8f, 0, 0.6f);
+        enemy[2] = new Quaternion(0, 0.6f, 0, 0.8f);
+
         weaponTextD = weaponText.GetComponent<Text>();
         if (StateManager.Instance.useWeapon != null)
         {
@@ -184,6 +196,9 @@ public class csBattle : MonoBehaviour
             weaponTextD.text = "0";
         }
         monsterGold = 0;
+        poisonNum = 0;
+        bleedingNum = 0;
+        slowNum = 0;
 
         cBox.SetActive(false);
         box1.SetActive(true);
@@ -214,7 +229,7 @@ public class csBattle : MonoBehaviour
 
         monsterNum = StateManager.Instance.monsterNum;
         pTimer2 = pTimer;
-        for(int i=0; i<StateManager.Instance.monsterNum;i++)
+        for (int i = 0; i < StateManager.Instance.monsterNum; i++)
         {
             eTimer2[i] = eTimer[i];
             Debug.Log(eTimer2[i]);
@@ -222,7 +237,6 @@ public class csBattle : MonoBehaviour
         }
 
         StartCoroutine(playerData());
-
     }
 	
 	void Update ()
@@ -378,7 +392,7 @@ public class csBattle : MonoBehaviour
 
         if (monsterNum.Equals(0) && StateManager.Instance.monsterBattle.Equals(true))
         {
-            for(int i=0; i<3;i++)
+            for(int i=0; i<StateManager.Instance.monsterNum;i++)
             {
                 eccObj[i].SetActive(true);
                 ecc[i].value = 0;
@@ -397,17 +411,18 @@ public class csBattle : MonoBehaviour
     private void finish()
     {
         monsterGold = (StateManager.Instance.slimeNum * 10)+ (StateManager.Instance.mimicNum* 15)+(StateManager.Instance.mimic2Num* 100)+(StateManager.Instance.ghostNum* 80)+(StateManager.Instance.pumkinNum* 50)+(StateManager.Instance.dungeonLevel * 50);
-        finishGold.GetComponent<Text>().text = "획득 골드\n: " + monsterGold + " + " + 0;
-        StateManager.Instance.slimeNum = 0;
-        StateManager.Instance.mimicNum = 0;
-        StateManager.Instance.mimic2Num = 0;
-        StateManager.Instance.ghostNum = 0;
-        StateManager.Instance.pumkinNum = 0;
+        //finishGold.GetComponent<Text>().text = "획득 골드\n: " + monsterGold + " + " + 0;
+        
         finishPop.SetActive(true);
     }
 
     public void finishYes()
     {
+        StateManager.Instance.slimeNum = 0;
+        StateManager.Instance.mimicNum = 0;
+        StateManager.Instance.mimic2Num = 0;
+        StateManager.Instance.ghostNum = 0;
+        StateManager.Instance.pumkinNum = 0;
         finishPop.SetActive(false);
         pop.SetActive(false);
         battelCamera.enabled = false;
@@ -423,6 +438,7 @@ public class csBattle : MonoBehaviour
         if(poisonImage.activeSelf.Equals(true) && (poisonTurn+1).Equals(turn))
         {
             poisonTurn++;
+            poisonNum++;
             poisonDamage = StateManager.Instance.playHp * 0.1f;
             if(poisonDamage < 0)
             {
@@ -430,13 +446,47 @@ public class csBattle : MonoBehaviour
             }
             StateManager.Instance.playHp -= (int)poisonDamage;
             Debug.Log(StateManager.Instance.playHp + "독데미지 입은후");
-            if(poisonTurn.Equals(3))
+            if(poisonNum.Equals(3))
             {
+                poisonNum = 0;
                 poisonImage.SetActive(false);
             }
         }
+
+        if (bleedingImage.activeSelf.Equals(true) && (bleedingTurn + 1).Equals(turn))
+        {
+            bleedingTurn++;
+            bleedingNum++;
+            bleedingDamage = StateManager.Instance.playHp * 0.2f;
+            if (bleedingDamage < 0)
+            {
+                bleedingDamage = 1;
+            }
+            StateManager.Instance.playHp -= (int)bleedingDamage;
+            Debug.Log(StateManager.Instance.playHp + "출혈 데미지 입은후");
+            if (poisonNum.Equals(3))
+            {
+                bleedingNum = 0;
+                bleedingImage.SetActive(false);
+            }
+        }
+
+        if (slowImage.activeSelf.Equals(true) && (bleedingTurn + 1).Equals(turn))
+        {
+            slowTurn++;
+            slowNum++;
+            slowDamage += 4;
+           
+            pTimer += slowDamage;
+
+            if (slowNum.Equals(3))
+            {
+                slowDamage = 0;
+                slowImage.SetActive(false);
+            }
+        }
         //playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
-      
+
         //playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
         playPopAtkText.text = ": " + (StateManager.Instance.playAtk  + StateManager.Instance.playUseAtk  + (playAtk+playBerserkerAtk+playOriginAtk) + playPotionAtk);
         playPopDefText.text = ": " + (StateManager.Instance.playDef  + StateManager.Instance.playUseDef  + (playDef - playBerserkerDef + playOriginAtk)  + playPotionDef);
@@ -454,14 +504,13 @@ public class csBattle : MonoBehaviour
             invenBtn.SetActive(false);
             pop.SetActive(true);
 
-            if (timer.activeSelf == true)
+            if (timer.activeSelf.Equals(true))
             {
                 //돌과 싸울경우 시간 감소
                 if (StateManager.Instance.objBlocked == true)
                 {
-                    pTimer = pTimer / 2;
                     pTimer -= Time.deltaTime;
-                    pcc.value += Time.deltaTime / StateManager.Instance.playSpd;
+                    pcc.value += Time.deltaTime / pTimer2;
 
                     if (pTimer <= 0 /*&& boom < 1*/)
                     {
@@ -662,11 +711,39 @@ public class csBattle : MonoBehaviour
         
         if (StateManager.Instance.monster[num].name.Equals("Slime"))
         {
-            int ran = Random.Range(4, 6);
+            int ran = Random.Range(1, 10);
             if (ran.Equals(4))
             {
                 poisonTurn = turn;
                 poisonImage.SetActive(true);
+            }
+        }
+        if(StateManager.Instance.monster[num].name.Equals("Mimic")|| StateManager.Instance.monster[num].name.Equals("Mimic2"))
+        {
+            int ran = Random.Range(1, 10);
+            if (ran.Equals(4))
+            {
+                bleedingTurn = turn;
+                bleedingImage.SetActive(true);
+            }
+        }
+
+        if (StateManager.Instance.monster[num].name.Equals("Ghost"))
+        {
+            int ran = Random.Range(1, 10);
+            if (ran.Equals(4))
+            {
+                slowTurn = turn;
+                slowImage.SetActive(true);
+            }
+        }
+
+        if (StateManager.Instance.monster[num].name.Equals("Pumkin"))
+        {
+            int ran = Random.Range(1, 10);
+            if (ran.Equals(4))
+            {
+                StateManager.Instance.playHp -= (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef + playDef));
             }
         }
 
@@ -751,7 +828,11 @@ public class csBattle : MonoBehaviour
     {
         Magic();
 
-
+        yield return new WaitForSeconds(2.0f);
+        for (int i = 0; i < StateManager.Instance.monsterNum; i++)
+        {
+            StateManager.Instance.monster[i].GetComponent<BoxCollider>().enabled = true;
+        }
         if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
         {
             StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
@@ -982,7 +1063,17 @@ public class csBattle : MonoBehaviour
             case 1:
                 //불화살
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
+                for(int i=0; i<StateManager.Instance.monsterNum; i++)
+                {
+                    StateManager.Instance.monster[i].GetComponent<BoxCollider>().enabled = false;
+                }
+                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].GetComponent<BoxCollider>().enabled = true;
 
+                GameObject fire = Instantiate(fireBall) as GameObject;
+                fire.transform.position = playPos.transform.position;
+                fire.transform.rotation = enemy[StateManager.Instance.atkEnemyNum];
+                //fire.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+               
                 StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk + playOriginAtk) * mItem.AttactPoint) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
 
                 StateManager.Instance.MgscrollNum[StateManager.Instance.useItemNum]--;
@@ -1112,8 +1203,14 @@ public class csBattle : MonoBehaviour
                 //고대의치유서
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
                 //회복 이펙트를 확실히 넣을것
-
-                StateManager.Instance.playHp += (StateManager.Instance.playHp * bItem.HpUp_Mul);
+                if(StateManager.Instance.playHpMax < (StateManager.Instance.playHp += (StateManager.Instance.playHp * bItem.HpUp_Mul)))
+                {
+                    StateManager.Instance.playHp = StateManager.Instance.playHpMax;
+                }
+                else
+                {
+                    StateManager.Instance.playHp += (StateManager.Instance.playHp * bItem.HpUp_Mul);
+                }
 
                 StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.BufscrollNum[StateManager.Instance.useItemNum] == 0)
@@ -1132,7 +1229,14 @@ public class csBattle : MonoBehaviour
             case 0:
                 //하 회 물
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
-                StateManager.Instance.playHp += pItem.UpPoint;
+                if(StateManager.Instance.playHpMax < (StateManager.Instance.playHp += pItem.UpPoint))
+                {
+                    StateManager.Instance.playHp = StateManager.Instance.playHpMax;
+                }
+                else
+                {
+                    StateManager.Instance.playHp += pItem.UpPoint;
+                }
 
                 StateManager.Instance.potionNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.potionNum[StateManager.Instance.useItemNum] == 0)
@@ -1143,7 +1247,14 @@ public class csBattle : MonoBehaviour
             case 1:
                 //상 회 물
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
-                StateManager.Instance.playHp += pItem.UpPoint;
+                if (StateManager.Instance.playHpMax < (StateManager.Instance.playHp += pItem.UpPoint))
+                {
+                    StateManager.Instance.playHp = StateManager.Instance.playHpMax;
+                }
+                else
+                {
+                    StateManager.Instance.playHp += pItem.UpPoint;
+                }
 
                 StateManager.Instance.potionNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.potionNum[StateManager.Instance.useItemNum] == 0)
@@ -1154,7 +1265,6 @@ public class csBattle : MonoBehaviour
             case 2:
                 //공 증 물
                 //코루틴으로 이펙트 넣을것  StartCoroutine(이펙트 함수명(StateManager.Instance.useItemNum))
-
                 atkPotion.SetActive(true);
                 playPotionAtk = pItem.UpPoint;
                 atkPotionTurn = turn;

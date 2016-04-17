@@ -106,56 +106,64 @@
       "armorExplain":"방어+50",
       "armorImage": "Armor/Armor06",
       "armorName":"Armor60"
+    },
+	{
+      "name":"전설의 갑옷",
+      "armorDef":150,
+      "price":10000,
+      "armorExplain":"방어+150",
+      "armorImage": "Armor/Armor07",
+      "armorName":"Armor70"
     }
     ],
 
     "boots": [
       {
         "name":"부츠",
-        "bootsSpd":1,
+        "bootsSpd":0.5,
         "price":100,
-        "bootsExplain":"속도+1",
+        "bootsExplain":"속도 -0.5",
         "bootsImage":"Boots/Boots01",
 	"bootsName":"Boots10"
 		
       },
       {
         "name":"레아부츠",
-        "bootsSpd":2,
-        "price":200,
-        "bootsExplain":"속도+2",
+        "bootsSpd":1.5,
+        "price":300,
+        "bootsExplain":"속도 -1.5",
         "bootsImage":"Boots/Boots02",
 	  "bootsName":"Boots20"
       },
       {
         "name":"우니크부츠",
-        "bootsSpd":3,
+        "bootsSpd":2,
         "price":500,
-        "bootsExplain":"속도+3",
+        "bootsExplain":"속도 -2",
         "bootsImage":"Boots/Boots03",
 	"bootsName":"Boots30"
       },
       {
         "name":"고대부츠",
-        "bootsSpd":4,
-        "price":700,
-        "bootsExplain":"속도+4",
+        "bootsSpd":3,
+        "price":800,
+        "bootsExplain":"속도 -3",
         "bootsImage":"Boots/Boots04",
 	"bootsName":"Boots40"
       },
       {
         "name":"고대레아부츠",
-        "bootsSpd":5,
-        "price":1000,
-        "bootsExplain":"속도+5",
+        "bootsSpd":4.5,
+        "price":1200,
+        "bootsExplain":"속도 -4.5",
         "bootsImage":"Boots/Boots05",
 	"bootsName":"Boots50"
       },
       {
         "name":"고대우니크부츠",
-        "bootsSpd":10,
-        "price":2000,
-        "bootsExplain":"속도+10",
+        "bootsSpd":6,
+        "price":3000,
+        "bootsExplain":"속도 -6",
         "bootsImage":"Boots/Boots06",
 	"bootsName":"Boots60"
       }
@@ -599,7 +607,7 @@
 		"level":"Lv1",
         "rock":1,
         "boxs":3,
-		"monsterV":1
+		"monsterV":3
       },
 	  {
 		"level":"Lv2",

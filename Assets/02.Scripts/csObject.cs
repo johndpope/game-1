@@ -106,6 +106,7 @@ public class csObject : MonoBehaviour
 
     void Update()
     {
+
         if (breakRockPop.activeSelf.Equals(true))
         {
             Vector3 dir = rockTransform.position - gameObject.transform.position;
@@ -537,7 +538,7 @@ public class csObject : MonoBehaviour
     {
         //gameObject.SetActive(false);
         var level = (Level)StateManager.Instance.dungeonLevels[0/*StateManager.Instance.dungeonLevel*/];
-        StateManager.Instance.monsterNum = Random.Range(1, (level.Monster + 1));
+        StateManager.Instance.monsterNum = Random.Range(3, (level.Monster + 1));
         
         Debug.Log(StateManager.Instance.monsterNum + "몬스터 랜덤값");
         
@@ -691,6 +692,7 @@ public class csObject : MonoBehaviour
        
         Monster slime = (Monster)StateManager.Instance.dungeonMonsters[0];
         StateManager.Instance.monster[i] = StateManager.Instance.slime[i];
+        StateManager.Instance.monster[i].name = slime.Name + i;
         StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
         StateManager.Instance.monster[i].SetActive(true);
         csBattle.eTimer[i] = Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
@@ -706,6 +708,7 @@ public class csObject : MonoBehaviour
     {
         Monster mimic = (Monster)StateManager.Instance.dungeonMonsters[1];
         StateManager.Instance.monster[i] = StateManager.Instance.mimic[i];
+        StateManager.Instance.monster[i].name = mimic.Name + i;
         StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
         StateManager.Instance.monster[i].SetActive(true);
         csBattle.eTimer[i] = Random.Range(mimic.MonsterMinSpd, mimic.MonsterMaxSpd + 1);
@@ -721,6 +724,7 @@ public class csObject : MonoBehaviour
     {
         Monster mimic2 = (Monster)StateManager.Instance.dungeonMonsters[2];
         StateManager.Instance.monster[i] = StateManager.Instance.mimic2[i];
+        StateManager.Instance.monster[i].name = mimic2.Name + i;
         StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
         StateManager.Instance.monster[i].SetActive(true);
         csBattle.eTimer[i] = Random.Range(mimic2.MonsterMinSpd, mimic2.MonsterMaxSpd + 1);
@@ -734,8 +738,8 @@ public class csObject : MonoBehaviour
     public void Ghost(int i)
     {
         Monster ghost = (Monster)StateManager.Instance.dungeonMonsters[3];
-
         StateManager.Instance.monster[i] = StateManager.Instance.ghost[i];
+        StateManager.Instance.monster[i].name = ghost.Name + i;
         StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
         StateManager.Instance.monster[i].SetActive(true);
         csBattle.eTimer[i] = Random.Range(ghost.MonsterMinSpd, ghost.MonsterMaxSpd + 1);
@@ -750,6 +754,7 @@ public class csObject : MonoBehaviour
     {
         Monster pumkin = (Monster)StateManager.Instance.dungeonMonsters[4];
         StateManager.Instance.monster[i] = StateManager.Instance.pumkin[i];
+        StateManager.Instance.monster[i].name = pumkin.Name + i;
         StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
         StateManager.Instance.monster[i].SetActive(true);
         csBattle.eTimer[i] = Random.Range(pumkin.MonsterMinSpd, pumkin.MonsterMaxSpd + 1);
@@ -799,8 +804,6 @@ public class csObject : MonoBehaviour
 
         if (open == true)
         {
-
-
             int TreasureNum = Random.Range(1, 130);
 
             int wValue = 10;  //무기확률

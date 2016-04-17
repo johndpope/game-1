@@ -77,7 +77,6 @@ public class main1 : MonoBehaviour
                 break;
             case 2:
                 motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
-                motion.setLoop(true);
                 motionManager.startMotion(motion, false);
                 break;
         }

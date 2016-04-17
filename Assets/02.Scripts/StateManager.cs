@@ -73,6 +73,7 @@ public class StateManager : MonoBehaviour
     //플레이어 어빌리티 데이터 저장하는 곳
     public int playGold;
     public float playHp;
+    public float playHpMax;
     public float playAtk;
     public float playDef;
     public float playSpd;
