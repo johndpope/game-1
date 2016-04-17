@@ -6,10 +6,11 @@
 	],
 	"motions":{
 		"":[
-			{"file":"motion/pumkin_Attack.mtn"},
-			{"file":"motion/pumkin_Death.mtn"}
+			{"file":"motion/Atk.mtn"},
+			{"file":"motion/Death.mtn"},
+			{"file":"motion/Idle.mtn"}
 		]
 	},
 	"project_settings":"pumkin.settings.json",
-	"name":""
+	"name":"pumkin"
 }

@@ -1,10 +1,4 @@
 {
-	"inspector_window": {
-		"y": 100,
-		"width": 400,
-		"height": 640,
-		"x": 500
-	},
 	"canvas_window": {
 		"scaleY": 1,
 		"top": 1,
@@ -15,12 +9,18 @@
 		"left": -1,
 		"transparent": false,
 		"y": 100,
-		"bgColorA": 0,
 		"right": 1,
-		"bgColorR": 1,
+		"bgColorA": 0,
 		"x": 930,
+		"bgColorR": 1,
 		"bgColorG": 1,
-		"bgColorB": 1,
-		"scaleX": 1
+		"scaleX": 1,
+		"bgColorB": 1
+	},
+	"inspector_window": {
+		"y": 91,
+		"width": 400,
+		"height": 640,
+		"x": 856
 	}
 }

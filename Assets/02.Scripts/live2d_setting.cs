@@ -16,11 +16,10 @@ public class live2d_setting : MonoBehaviour
 
     public Live2DMotion motion;
     public MotionQueueManager motionManager;
-    public TextAsset modelJson;
 
-    public bool motionoff = false;
+    [Range(0.0f, 1.0f)]
+    public float modelOpacity = 1.0f;
 
- 
     // Use this for initialization
     void Start()
     {
@@ -43,20 +42,11 @@ public class live2d_setting : MonoBehaviour
         live2DModel.setPartsOpacity("PARTS_WEAPON04", 0);
         live2DModel.setPartsOpacity("PARTS_WEAPON05", 0);
         live2DModel.setPartsOpacity("PARTS_WEAPON06", 0);
-
-
-        //live2DModel.
     }
  
     void Update()
     {
-        if (motionoff == true)
-        {
-            motion = Live2DMotion.loadMotion(mtnFiles[0].bytes);
-            motion.setLoop(true);
-            motionManager.startMotion(motion, false);
-            motionoff = false;
-        }
+       
         if (Input.GetButtonDown("Fire1"))
         {
             op(1);
@@ -85,7 +75,7 @@ public class live2d_setting : MonoBehaviour
 
         motionManager.updateParam(live2DModel);
         if (live2DModel == null) return;
-        live2DModel.setParamFloat("PARAM_WEAPON01", 1.0f);
+        //live2DModel.setParamFloat("PARAM_WEAPON01", 1.0f);
         live2DModel.setMatrix(m3);
         live2DModel.update();
     }
@@ -93,10 +83,30 @@ public class live2d_setting : MonoBehaviour
     void OnRenderObject()
     {
         live2DModel.draw();
+        var partList = live2DModel.getModelImpl().getPartsDataList();
+        foreach (var item in partList)
+        {
+            live2DModel.setPartsOpacity(item.getPartsDataID().ToString(), modelOpacity);
+            if (item.getPartsDataID().ToString() == "PARTS_WEAPON01")
+                return;
+            if (item.getPartsDataID().ToString() == "PARTS_WEAPON02")
+                return;
+            if (item.getPartsDataID().ToString() == "PARTS_WEAPON03")
+                return;
+            if (item.getPartsDataID().ToString() == "PARTS_WEAPON04")
+                return;
+            if (item.getPartsDataID().ToString() == "PARTS_WEAPON05")
+                return;
+            if (item.getPartsDataID().ToString() == "PARTS_WEAPON06")
+                return;
+
+        }
     }
 
     private void op(int num)
     {
         live2DModel.setPartsOpacity("PARTS_WEAPON01", num);
+        
+       
     }
 }
