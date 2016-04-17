@@ -1,0 +1,8 @@
+{
+	"type": "Live2D Model Setting",
+	"name": "golem",
+	"model": "golem.moc",
+	"textures": [
+		"golem.512/texture_00.png"
+	]
+}
