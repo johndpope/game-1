@@ -11,7 +11,7 @@
     },
     {
       "name":"20방검",
-      "weaponATK":5,
+      "weaponATK":8,
       "weaponPrice":200,
       "weaponDurability":20,
 	  "weaponExplain":"20번 일반 공격 가능",

@@ -132,6 +132,18 @@ public class csSaveLord : MonoBehaviour
             {
                 Weapon(0);
             }
+            if (playUseAtk.Equals(8))
+            {
+                Weapon(0);
+            }
+            if (playUseAtk.Equals(5))
+            {
+                Weapon(0);
+            }
+            if (playUseAtk.Equals(5))
+            {
+                Weapon(0);
+            }
         }
     }
 
