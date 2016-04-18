@@ -90,6 +90,30 @@ public class csText : MonoBehaviour
                         battlePop.SetActive(true);
                         gameObject.SetActive(false);
                     }
+                    if (hitObj.transform.name == "Mimic2" + i)
+                    {
+                        StateManager.Instance.atkEnemyNum = i;
+                        particle = hitObj.transform.FindChild("ring").GetComponent<ParticleSystem>();
+                        particle.Play();
+                        battlePop.SetActive(true);
+                        gameObject.SetActive(false);
+                    }
+                    if (hitObj.transform.name == "Ghost" + i)
+                    {
+                        StateManager.Instance.atkEnemyNum = i;
+                        particle = hitObj.transform.FindChild("ring").GetComponent<ParticleSystem>();
+                        particle.Play();
+                        battlePop.SetActive(true);
+                        gameObject.SetActive(false);
+                    }
+                    if (hitObj.transform.name == "Pumkin" + i)
+                    {
+                        StateManager.Instance.atkEnemyNum = i;
+                        particle = hitObj.transform.FindChild("ring").GetComponent<ParticleSystem>();
+                        particle.Play();
+                        battlePop.SetActive(true);
+                        gameObject.SetActive(false);
+                    }
 
                     if (StateManager.Instance.useItemNum == 1 && StateManager.Instance.skillAtk.Equals(true))
                     {
