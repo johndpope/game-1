@@ -145,12 +145,14 @@ public class StateManager : MonoBehaviour
     public GameObject[] mimic2;
     public GameObject[] ghost;
     public GameObject[] pumkin;
+    public GameObject[] drake;
 
     public int slimeNum;
     public int mimicNum;
     public int mimic2Num;
     public int ghostNum;
     public int pumkinNum;
+    public int drakeNum;
 
     public float[] monsterHp = new float[3];
     public float[] monsterAtk = new float[3];

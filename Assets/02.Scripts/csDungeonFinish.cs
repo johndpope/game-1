@@ -20,7 +20,7 @@ public class csDungeonFinish : MonoBehaviour
         StateManager.Instance.dungeonMap++;
         StateManager.Instance.dungeonLevel++;
         GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
-        //finishPop.SetActive(false);
+        finishPop.SetActive(false);
         Application.LoadLevel(1);
     }
 
