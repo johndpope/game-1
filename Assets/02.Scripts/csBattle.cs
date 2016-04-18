@@ -284,7 +284,7 @@ public class csBattle : MonoBehaviour
         bScroll = StateManager.Instance.buffScrollItems;
 
         attEnemyBool = false;
-        enemySpd = 0.1f;
+        enemySpd = 0.3f;
         enemyro = 5.0f;
 
         pTimer = StateManager.Instance.playSpd;
@@ -643,8 +643,8 @@ public class csBattle : MonoBehaviour
                 //돌과 싸울경우 시간 감소
                 if (StateManager.Instance.objBlocked == true)
                 {
-                    pTimer -= Time.deltaTime;
-                    pcc.value += Time.deltaTime / pTimer2;
+                    pTimer -= Time.deltaTime * 10;
+                    pcc.value += Time.deltaTime * 10 / pTimer2;
 
                     if (pTimer <= 0 /*&& boom < 1*/)
                     {

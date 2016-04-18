@@ -607,9 +607,9 @@ public class csDungeon : MonoBehaviour
     public void Treasure(Transform[] road, int num, int random, string roadName)
     {
 
-        if (road[num].name == roadName + (random) && randomSetTreasure != num)
+        if (road[num].name == roadName + (num+1))
         {     
-            randomSetTreasure = num;
+            //randomSetTreasure = num;
       
             if (levelTreasure > 0)
             {

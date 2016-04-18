@@ -75,7 +75,7 @@ public class csSaveLord : MonoBehaviour
                 GameObject itemUseSet = Instantiate(itemUseSetObj) as GameObject;
                 itemUseSet.transform.SetParent(skillUseGrid.transform);
                 itemUseSet.transform.localScale = new Vector3(1, 1, 1);
-                itemUseSet.name = "Potion" + i;
+                itemUseSet.name = "Skill" + i;
 
                 StateManager.Instance.SkScrollBag[i] = itemUseSet;
                 StateManager.Instance.SkScrollBag[i].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.SkscrollNum[i] + " 개";
@@ -95,7 +95,7 @@ public class csSaveLord : MonoBehaviour
                 GameObject itemUseSet = Instantiate(itemUseSetObj) as GameObject;
                 itemUseSet.transform.SetParent(magicUseGrid.transform);
                 itemUseSet.transform.localScale = new Vector3(1, 1, 1);
-                itemUseSet.name = "Potion" + i;
+                itemUseSet.name = "Magic" + i;
 
                 StateManager.Instance.MgScrollBag[i] = itemUseSet;
                 StateManager.Instance.MgScrollBag[i].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.MgscrollNum[i] + " 개";
@@ -115,7 +115,7 @@ public class csSaveLord : MonoBehaviour
                 GameObject itemUseSet = Instantiate(itemUseSetObj) as GameObject;
                 itemUseSet.transform.SetParent(magicUseGrid.transform);
                 itemUseSet.transform.localScale = new Vector3(1, 1, 1);
-                itemUseSet.name = "Potion" + i;
+                itemUseSet.name = "Buff" + i;
 
                 StateManager.Instance.BufScrollBag[i] = itemUseSet;
                 StateManager.Instance.BufScrollBag[i].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.BufscrollNum[i] + " 개";
