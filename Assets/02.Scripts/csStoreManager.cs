@@ -38,6 +38,11 @@ public class csStoreManager : MonoBehaviour
     public GameObject abilShopButton;
     public GameObject dungeonButton;
 
+    //옵션버튼
+    public GameObject optionButton;
+    public GameObject optionCloseButton;
+    public GameObject optionUI;
+
     public void Exit()
     {
         StartCoroutine(Save());       
@@ -143,8 +148,17 @@ public class csStoreManager : MonoBehaviour
         equipageMenu.SetActive(false);
         equipageScroll.SetActive(false);       
     }
-    
 
+    public void onOptionbutton()
+    {
+        optionUI.SetActive(true);
+    }
+
+    public void onOptionClosebutton()
+    {
+        optionUI.SetActive(false);
+    }
+    
     IEnumerator equipageStorePop()
     {
         abilityScroll.SetActive(false);
