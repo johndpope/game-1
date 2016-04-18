@@ -495,11 +495,9 @@ public class csBattle : MonoBehaviour
             //게임 오버 띠우고
             gameOverText.SetActive(true);
             yield return new WaitForSeconds(1.5f);
-<<<<<<< HEAD
-            gameOverText.SetActive(false);
-=======
 
->>>>>>> origin/master
+            gameOverText.SetActive(false);
+
             if (StateManager.Instance.potionNum[0] > 0 || StateManager.Instance.potionNum[1] > 0)
             {
                 //포션 사용 해서 다시 할건지?
