@@ -21,7 +21,23 @@ public class csSaveLord : MonoBehaviour
     Text itemUseNameText;
     Text itemUseExplainText;
 
-   public void lord()
+
+
+    public GameObject WeaponUse;
+    public GameObject weaponNameText;
+    public GameObject weaponDurabilityText;
+    public GameObject weaponImage;
+
+    public GameObject armorUse;
+    public GameObject armorNameText;
+    public GameObject armorImage;
+
+    public GameObject bootsUse;
+    public GameObject bootsNameText;
+    public GameObject bootsImage;
+
+
+    public void lord()
     {
         itemUseNameText = itemUseName.GetComponent<Text>();
         itemUseExplainText = itemUseExplain.GetComponent<Text>();
