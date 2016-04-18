@@ -491,7 +491,7 @@ public class csBattle : MonoBehaviour
             playerD = false;
             player2D.transform.position = new Vector3(18, 0, -30);
             player2D.transform.FindChild("Lena").GetComponent<live2d_setting>().Ani(6);
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(1.5f);
             //게임 오버 띠우고
             yield return new WaitForSeconds(1.5f);
             if (StateManager.Instance.potionNum[0] > 0 || StateManager.Instance.potionNum[1] > 0)
