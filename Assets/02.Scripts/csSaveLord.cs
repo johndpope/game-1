@@ -21,7 +21,23 @@ public class csSaveLord : MonoBehaviour
     Text itemUseNameText;
     Text itemUseExplainText;
 
-   public void lord()
+    public GameObject grid;
+
+    public GameObject WeaponUse;
+    public GameObject weaponNameText;
+    public GameObject weaponDurabilityText;
+    public GameObject weaponImage;
+
+    public GameObject armorUse;
+    public GameObject armorNameText;
+    public GameObject armorImage;
+
+    public GameObject bootsUse;
+    public GameObject bootsNameText;
+    public GameObject bootsImage;
+
+
+    public void lord()
     {
         itemUseNameText = itemUseName.GetComponent<Text>();
         itemUseExplainText = itemUseExplain.GetComponent<Text>();
@@ -114,7 +130,39 @@ public class csSaveLord : MonoBehaviour
         {
             if(playUseAtk.Equals(5))
             {
+                Weapon(0);
+            }
+        }
+    }
 
+    private void Weapon(int num)
+    {
+        if (StateManager.Instance.bagSize == 5)
+        {
+            return;
+        }
+        StateManager.Instance.bagSize++;
+
+        HMWeaponItem item = (HMWeaponItem)StateManager.Instance.weaponItems[num];
+
+        weaponDurabilityText.GetComponent<Text>().text = "내구도: " + item.Durability.ToString();
+        weaponNameText.GetComponent<Text>().text = item.Name + " 공격력: " + item.AttackPoint.ToString();
+
+        weaponImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+
+        GameObject gameObj = Instantiate(WeaponUse) as GameObject;
+        gameObj.transform.SetParent(grid.transform);
+        gameObj.transform.localScale = new Vector3(1, 1, 1);
+
+
+        for (int wNum = 0; wNum < 5; wNum++)
+        {
+            if (StateManager.Instance.weaponSpace[wNum] == null)
+            {
+                gameObj.name = item.Name + wNum;
+                StateManager.Instance.weaponDurability[wNum] = item.Durability;
+                StateManager.Instance.weaponSpace[wNum] = gameObj;
+                return;
             }
         }
     }

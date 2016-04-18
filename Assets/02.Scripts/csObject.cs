@@ -126,7 +126,7 @@ public class csObject : MonoBehaviour
             }
         }
 
-        if(Joystick.run.Equals(500))
+        if(Joystick.run.Equals(100))
         {
             Debug.Log("300임 ㅋㅋㅋ");
            
@@ -718,11 +718,10 @@ public class csObject : MonoBehaviour
         StateManager.Instance.monster[i].SetActive(true);
         csBattle.eTimer[i] = Random.Range(slime.MonsterMinSpd, slime.MonsterMaxSpd + 1);
         StateManager.Instance.monsterHp[i] = slime.MonsterHp + (slime.MonsterHp * StateManager.Instance.dungeonLevel * 0.2f);
-        StateManager.Instance.monsterAtk[i] = slime.MonsterAtt;
-        StateManager.Instance.monsterDef[i] = slime.MonsterDef;
+        StateManager.Instance.monsterAtk[i] = slime.MonsterAtt + (slime.MonsterAtt * StateManager.Instance.dungeonLevel * 0.2f);
+        StateManager.Instance.monsterDef[i] = slime.MonsterDef + (slime.MonsterDef * StateManager.Instance.dungeonLevel * 0.2f);
         StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
         StateManager.Instance.slimeNum++;
-        Debug.Log("슬라임 숫자" + StateManager.Instance.slimeNum);
     }
 
     public void Mimic(int i)
@@ -733,12 +732,11 @@ public class csObject : MonoBehaviour
         StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
         StateManager.Instance.monster[i].SetActive(true);
         csBattle.eTimer[i] = Random.Range(mimic.MonsterMinSpd, mimic.MonsterMaxSpd + 1);
-        StateManager.Instance.monsterHp[i] = mimic.MonsterHp;
-        StateManager.Instance.monsterAtk[i] = mimic.MonsterAtt;
-        StateManager.Instance.monsterDef[i] = mimic.MonsterDef;
+        StateManager.Instance.monsterHp[i] = mimic.MonsterHp + (mimic.MonsterHp * StateManager.Instance.dungeonLevel * 0.2f);
+        StateManager.Instance.monsterAtk[i] = mimic.MonsterAtt + (mimic.MonsterAtt * StateManager.Instance.dungeonLevel * 0.2f);
+        StateManager.Instance.monsterDef[i] = mimic.MonsterDef + (mimic.MonsterDef * StateManager.Instance.dungeonLevel * 0.2f);
         StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
         StateManager.Instance.mimicNum++;
-        Debug.Log("미믹 숫자" + StateManager.Instance.mimicNum);
     }
 
     public void Mimic2(int i)
@@ -749,9 +747,9 @@ public class csObject : MonoBehaviour
         StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
         StateManager.Instance.monster[i].SetActive(true);
         csBattle.eTimer[i] = Random.Range(mimic2.MonsterMinSpd, mimic2.MonsterMaxSpd + 1);
-        StateManager.Instance.monsterHp[i] = mimic2.MonsterHp;
-        StateManager.Instance.monsterAtk[i] = mimic2.MonsterAtt;
-        StateManager.Instance.monsterDef[i] = mimic2.MonsterDef;
+        StateManager.Instance.monsterHp[i] = mimic2.MonsterHp + (mimic2.MonsterHp * (StateManager.Instance.dungeonLevel - 4) * 0.2f);
+        StateManager.Instance.monsterAtk[i] = mimic2.MonsterAtt + (mimic2.MonsterAtt * (StateManager.Instance.dungeonLevel - 4) * 0.2f);
+        StateManager.Instance.monsterDef[i] = mimic2.MonsterDef + (mimic2.MonsterDef * (StateManager.Instance.dungeonLevel - 4) * 0.2f);
         StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
         StateManager.Instance.mimic2Num++;
     }
@@ -764,10 +762,10 @@ public class csObject : MonoBehaviour
         StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
         StateManager.Instance.monster[i].SetActive(true);
         csBattle.eTimer[i] = Random.Range(ghost.MonsterMinSpd, ghost.MonsterMaxSpd + 1);
-        StateManager.Instance.monsterHp[i] = ghost.MonsterHp;
-        StateManager.Instance.monsterAtk[i] = ghost.MonsterAtt;
-        StateManager.Instance.monsterDef[i] = ghost.MonsterDef;
-        StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+        StateManager.Instance.monsterHp[i] = ghost.MonsterHp + (ghost.MonsterHp * (StateManager.Instance.dungeonLevel - 10) * 0.2f);
+        StateManager.Instance.monsterAtk[i] = ghost.MonsterAtt + (ghost.MonsterHp * (StateManager.Instance.dungeonLevel - 10) * 0.2f);
+        StateManager.Instance.monsterDef[i] = ghost.MonsterDef + (ghost.MonsterHp * (StateManager.Instance.dungeonLevel - 10) * 0.2f);
+        StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i] + (ghost.MonsterHp * (StateManager.Instance.dungeonLevel - 10) * 0.2f);
         StateManager.Instance.ghostNum++;
     }
 
@@ -779,9 +777,9 @@ public class csObject : MonoBehaviour
         StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
         StateManager.Instance.monster[i].SetActive(true);
         csBattle.eTimer[i] = Random.Range(pumkin.MonsterMinSpd, pumkin.MonsterMaxSpd + 1);
-        StateManager.Instance.monsterHp[i] = pumkin.MonsterHp;
-        StateManager.Instance.monsterAtk[i] = pumkin.MonsterAtt;
-        StateManager.Instance.monsterDef[i] = pumkin.MonsterDef;
+        StateManager.Instance.monsterHp[i] = pumkin.MonsterHp + (pumkin.MonsterHp * (StateManager.Instance.dungeonLevel - 10) * 0.2f); ;
+        StateManager.Instance.monsterAtk[i] = pumkin.MonsterAtt + (pumkin.MonsterAtt * (StateManager.Instance.dungeonLevel - 10) * 0.2f); ;
+        StateManager.Instance.monsterDef[i] = pumkin.MonsterDef + (pumkin.MonsterDef * (StateManager.Instance.dungeonLevel - 10) * 0.2f); ;
         StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
         StateManager.Instance.pumkinNum++;
     }

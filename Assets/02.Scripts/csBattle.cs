@@ -302,7 +302,7 @@ public class csBattle : MonoBehaviour
             Debug.Log(eTimer[i]);
         }
 
-        player2D.transform.position = new Vector3(11.5f, 0, -30);
+        player2D.transform.position = new Vector3(12.5f, 0, -30);
         player2D.transform.rotation = new Quaternion(0, -0.7f, 0, 0.7f);
 
         StartCoroutine(playerData());
@@ -333,7 +333,7 @@ public class csBattle : MonoBehaviour
             timer.SetActive(false);
             joystick.GetComponent<Image>().enabled = true;
             invenBtn.SetActive(true);
-            player2D.transform.position = new Vector3(11.5f,0,-30);
+            player2D.transform.position = new Vector3(12.5f,0,-30);
             player2D.transform.rotation = new Quaternion(0, -0.7f, 0, 0.7f);
             gameObject.SetActive(false);
         }
@@ -561,7 +561,7 @@ public class csBattle : MonoBehaviour
         battelCamera.enabled = false;
         joystick.GetComponent<Image>().enabled = true;
         invenBtn.SetActive(true);
-        player2D.transform.position = new Vector3(11.5f, 0, -30);
+        player2D.transform.position = new Vector3(12.5f, 0, -30);
         player2D.transform.rotation = new Quaternion(0, -0.7f, 0, 0.7f);
         StateManager.Instance.monsterNum = 0;
         gameObject.SetActive(false);
@@ -751,7 +751,7 @@ public class csBattle : MonoBehaviour
             battelCamera.enabled = false;
             joystick.GetComponent<Image>().enabled = true;
             invenBtn.SetActive(true);
-            player2D.transform.position = new Vector3(11.5f, 0, -30);
+            player2D.transform.position = new Vector3(12.5f, 0, -30);
             player2D.transform.rotation = new Quaternion(0, -0.7f, 0, 0.7f);
             StateManager.Instance.monsterNum = 0;
             gameObject.SetActive(false);
