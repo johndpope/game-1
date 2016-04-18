@@ -93,6 +93,13 @@ public class Inven : MonoBehaviour
 
     IEnumerator playerData()
     {
+        if (StateManager.Instance.weaponDurability[StateManager.Instance.wUse].Equals(0) && StateManager.Instance.useWeapon != null)
+        {
+            StateManager.Instance.useWeapon = null;
+            StateManager.Instance.playUseAtk = 0;
+            DestroyObject(StateManager.Instance.weaponSpace[StateManager.Instance.wUse]);
+            StateManager.Instance.bagSize--;
+        }
         playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
 
         playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;

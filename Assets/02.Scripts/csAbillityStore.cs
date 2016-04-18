@@ -61,7 +61,7 @@ public class csAbillityStore : MonoBehaviour {
         //상태창 능력치 표시
         if (StateManager.Instance.firstGame.Equals(false))
         {
-            StateManager.Instance.playGold = 900;
+            StateManager.Instance.playGold = 9000;
 
             playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
 
