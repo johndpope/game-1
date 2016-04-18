@@ -751,7 +751,7 @@ public class csBattle : MonoBehaviour
             battelCamera.enabled = false;
             joystick.GetComponent<Image>().enabled = true;
             invenBtn.SetActive(true);
-            player2D.transform.position = new Vector3(13.5f, 0, -30);
+            player2D.transform.position = new Vector3(11.5f, 0, -30);
             player2D.transform.rotation = new Quaternion(0, -0.7f, 0, 0.7f);
             StateManager.Instance.monsterNum = 0;
             gameObject.SetActive(false);

@@ -125,9 +125,8 @@ public class csObject : MonoBehaviour
                 openTreasurePop.SetActive(false);
             }
         }
-        //open();
 
-        if(Joystick.run.Equals(30))
+        if(Joystick.run.Equals(500))
         {
             Debug.Log("300임 ㅋㅋㅋ");
            
@@ -563,7 +562,7 @@ public class csObject : MonoBehaviour
     private void MeetMonster()
     {
         //gameObject.SetActive(false);
-        var level = (Level)StateManager.Instance.dungeonLevels[0/*StateManager.Instance.dungeonLevel*/];
+        var level = (Level)StateManager.Instance.dungeonLevels[StateManager.Instance.dungeonLevel];
         StateManager.Instance.monsterNum = Random.Range(1, (level.Monster + 1));
         
         Debug.Log(StateManager.Instance.monsterNum + "몬스터 랜덤값");
@@ -573,7 +572,7 @@ public class csObject : MonoBehaviour
             //몬스터 레벨 1~5
             if (0 <= StateManager.Instance.dungeonLevel && 4 >= StateManager.Instance.dungeonLevel)
             {
-                int num = Random.Range(0, 1);
+                int num = Random.Range(0, 2);
 
                 switch (num)
                 {
@@ -583,10 +582,6 @@ public class csObject : MonoBehaviour
                         break;
                     case 1:
                         Mimic(i);
-                        i++;
-                        break;
-                    case 2:
-                        Mimic2(i);
                         i++;
                         break;
                 }

@@ -8,6 +8,31 @@ public class StateManager : MonoBehaviour
 
     void Awake()
     {
+        firstGameNum = PlayerPrefs.GetInt("firstGame");
+
+        if (firstGameNum.Equals(1))
+        {
+            firstGame = true;
+        }
+
+        playGold = PlayerPrefs.GetInt("playGold");
+        playHp = PlayerPrefs.GetFloat("playHp");
+        playHpMax = PlayerPrefs.GetFloat("playHpMax");
+        playAtk = PlayerPrefs.GetFloat("playAtk");
+        playDef = PlayerPrefs.GetFloat("playDef");
+        playSpd = PlayerPrefs.GetFloat("playSpd");
+
+        bagSize = PlayerPrefs.GetInt("bagSize");
+
+        cntHp = PlayerPrefs.GetInt("cntHp");
+        cntAtk= PlayerPrefs.GetInt("cntAtk");
+        cntDef= PlayerPrefs.GetInt("cntDef");
+        cntSpd= PlayerPrefs.GetInt("cntSpd");
+
+        playUseAtk = PlayerPrefs.GetInt("playUseAtk");
+        playUseDef = PlayerPrefs.GetInt("playUseDef");
+        playUseSpd = PlayerPrefs.GetFloat("playUseSpd");
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -77,6 +102,11 @@ public class StateManager : MonoBehaviour
     public float playAtk;
     public float playDef;
     public float playSpd;
+
+    public int cntHp;
+    public int cntAtk;
+    public int cntDef;
+    public int cntSpd;
 
     //현재 착용중인 장비 능력치를 저장하는곳
     public int playUseAtk;
@@ -173,6 +203,7 @@ public class StateManager : MonoBehaviour
     public bool startButton;
 
     public bool firstGame;
+    public int firstGameNum;
 
     //void SaveData()
     //{

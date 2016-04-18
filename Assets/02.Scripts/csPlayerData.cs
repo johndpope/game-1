@@ -74,7 +74,6 @@ public class csPlayerData : MonoBehaviour
         {
             if (weaponSpace[i] == null)
             {
-                Debug.Log("들어옴" + i);
             }
             else if (weaponSpace[i] != null)
             {

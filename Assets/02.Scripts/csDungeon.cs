@@ -278,7 +278,7 @@ public class csDungeon : MonoBehaviour
         if (0 <= StateManager.Instance.dungeonLevel && 4 >= StateManager.Instance.dungeonLevel)
         {
             Slime(level.Monster);
-            //Mimic(level.Monster);
+            Mimic(level.Monster);
             //Mimic2(level.Monster);
         }
 
@@ -384,7 +384,6 @@ public class csDungeon : MonoBehaviour
 
             if (map.transform.GetChild(i).name == "rRoad_" + r && mapObj.RotationRoad !=0)
             {
-                Debug.Log("들어옴 플레이어");
                 rRoad[r - 1] = map.transform.GetChild(i);
                 r++;
             }
@@ -608,10 +607,10 @@ public class csDungeon : MonoBehaviour
     public void Treasure(Transform[] road, int num, int random, string roadName)
     {
 
-        if (road[num].name == roadName + (random) && randomSetTreasure != random)
-        {
-            randomSetTreasure = random;
-
+        if (road[num].name == roadName + (random) && randomSetTreasure != num)
+        {     
+            randomSetTreasure = num;
+      
             if (levelTreasure > 0)
             {
                 GameObject gameObj = Instantiate(treasure) as GameObject;

@@ -65,6 +65,7 @@ public class csStoreManager : MonoBehaviour
         StartCoroutine("startButtonPop");
         StateManager.Instance.startButton = true;
         StateManager.Instance.firstGame = true;
+        StateManager.Instance.firstGameNum = 1;
         GameObject.Find("Manager").GetComponent<csSaveLord>().lord();
     }
 

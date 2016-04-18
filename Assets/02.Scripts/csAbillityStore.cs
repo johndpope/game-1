@@ -44,6 +44,11 @@ public class csAbillityStore : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        cntHp = StateManager.Instance.cntHp;
+        cntAtk = StateManager.Instance.cntAtk;
+        cntDef = StateManager.Instance.cntDef;
+        cntSpd = StateManager.Instance.cntSpd;
+
         goldHpText.GetComponent<Text>().text = (cntHp * 100) + 100 + "골드";
         goldAtkText.GetComponent<Text>().text = (cntAtk * 100) + 100 + "골드";
         goldDefText.GetComponent<Text>().text = (cntDef * 100) + 100 + "골드";
@@ -71,6 +76,11 @@ public class csAbillityStore : MonoBehaviour {
         playerSpdText.GetComponent<Text>().text = "" + StateManager.Instance.playSpd + " + " + StateManager.Instance.playUseSpd;
 
         StateManager.Instance.playHpMax = StateManager.Instance.playHp;
+
+        StateManager.Instance.cntHp = cntHp;
+        StateManager.Instance.cntAtk = cntAtk;
+        StateManager.Instance.cntDef = cntDef;
+        StateManager.Instance.cntSpd = cntSpd;
     }
     public void up_Hp()
     {

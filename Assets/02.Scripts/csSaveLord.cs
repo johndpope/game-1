@@ -105,6 +105,18 @@ public class csSaveLord : MonoBehaviour
                 StateManager.Instance.BufScrollBag[i].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.BufscrollNum[i] + " 개";
             }
         }
+
+        int playUseAtk = PlayerPrefs.GetInt("playUseAtk");
+        int  playUseDef = PlayerPrefs.GetInt("playUseDef");
+        float playUseSpd = PlayerPrefs.GetFloat("playUseSpd");
+
+        if (playUseAtk !=0)
+        {
+            if(playUseAtk.Equals(5))
+            {
+
+            }
+        }
     }
 
 
@@ -133,5 +145,25 @@ public class csSaveLord : MonoBehaviour
         PlayerPrefs.SetInt("buff5", StateManager.Instance.BufscrollNum[4]);
         PlayerPrefs.SetInt("buff6", StateManager.Instance.BufscrollNum[5]);
 
-    }
+        PlayerPrefs.SetInt("playGold", StateManager.Instance.playGold);
+        PlayerPrefs.SetFloat("playHp", StateManager.Instance.playHp);
+        PlayerPrefs.SetFloat("playHpMax", StateManager.Instance.playHpMax);
+        PlayerPrefs.SetFloat("playAtk", StateManager.Instance.playAtk);
+        PlayerPrefs.SetFloat("playDef", StateManager.Instance.playDef);
+        PlayerPrefs.SetFloat("playSpd", StateManager.Instance.playSpd);
+
+        PlayerPrefs.SetInt("bagSize", StateManager.Instance.bagSize);
+
+        PlayerPrefs.SetInt("firstGame", StateManager.Instance.firstGameNum);
+
+        PlayerPrefs.SetInt("cntHp", StateManager.Instance.cntHp);
+        PlayerPrefs.SetInt("cntAtk", StateManager.Instance.cntAtk);
+        PlayerPrefs.SetInt("cntDef", StateManager.Instance.cntDef);
+        PlayerPrefs.SetInt("cntSpd", StateManager.Instance.cntSpd);
+
+        PlayerPrefs.SetInt("playUseAtk", StateManager.Instance.playUseAtk);
+        PlayerPrefs.SetInt("playUseDef", StateManager.Instance.playUseDef);
+        PlayerPrefs.SetFloat("playUseSpd", StateManager.Instance.playUseSpd);
+
+}
 }
