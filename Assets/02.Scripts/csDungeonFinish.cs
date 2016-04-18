@@ -9,10 +9,18 @@ public class csDungeonFinish : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
-        {
-            //finishPop.SetActive(true);
+        {            
+            //StartCoroutine("clear");
             village();
         }
+    }
+
+    IEnumerator clear()
+    {
+        //clear 라는 오브젝트 찾아서 켜기?
+        GameObject.Find("Clear").SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        GameObject.Find("Clear").SetActive(false);
     }
 
     public void nextLaval()

@@ -613,55 +613,55 @@
     ],
 	   "Level":[
       {
-		"level":"Lv4_1",
+		"level":"Lv1",
         "rock":1,
         "boxs":3,
 		"monsterV":1
       },
 	  {
-		"level":"Lv4_2",
+		"level":"Lv2",
         "rock":2,
         "boxs":2,
 		"monsterV":1
       },
       	  {
-		"level":"Lv4_3",
+		"level":"Lv3",
         "rock":2,
         "boxs":4,
 		"monsterV":1
       },
       	  {
-		"level":"Lv4_4",
+		"level":"Lv4",
         "rock":3,
         "boxs":2,
 		"monsterV":1
       },
       	  {
-		"level":"Lv4_5",
+		"level":"Lv5",
         "rock":3,
         "boxs":3,
 		"monsterV":1
       },
           	  {
-		"level":"Lv4_6",
+		"level":"Lv6",
         "rock":2,
         "boxs":2,
 		"monsterV":2
       },
           	  {
-		"level":"Lv4_7",
+		"level":"Lv7",
         "rock":3,
         "boxs":2,
 		"monsterV":2
       },
           	  {
-		"level":"Lv4_8",
+		"level":"Lv8",
         "rock":3,
         "boxs":3,
 		"monsterV":2
       },
                 	  {
-		"level":"Lv4_9",
+		"level":"Lv9",
         "rock":3,
         "boxs":2,
 		"monsterV":3
@@ -673,109 +673,109 @@
 		"monsterV":1
       },
                 	  {
-		"level":"Lv5_1",
+		"level":"Lv11",
         "rock":4,
         "boxs":4,
 		"monsterV":1
       },
                       	  {
-		"level":"Lv5_2",
+		"level":"Lv12",
         "rock":4,
         "boxs":2,
 		"monsterV":1
       },
                       	  {
-		"level":"Lv5_3",
+		"level":"Lv13",
         "rock":5,
         "boxs":2,
 		"monsterV":1
       },
                       	  {
-		"level":"Lv5_4",
+		"level":"Lv14",
         "rock":5,
         "boxs":1,
 		"monsterV":2
       },
                       	  {
-		"level":"Lv5_5",
+		"level":"Lv15",
         "rock":4,
         "boxs":3,
 		"monsterV":2
       },
                       	  {
-		"level":"Lv5_6",
+		"level":"Lv16",
         "rock":4,
         "boxs":2,
 		"monsterV":2
       },
                       	  {
-		"level":"Lv5_7",
+		"level":"Lv17",
         "rock":3,
         "boxs":5,
 		"monsterV":2
       },
                       	  {
-		"level":"Lv5_8",
+		"level":"Lv18",
         "rock":6,
         "boxs":0,
 		"monsterV":2
       },
                       	  {
-		"level":"Lv5_9",
+		"level":"Lv19",
         "rock":5,
         "boxs":2,
 		"monsterV":3
       },
                       	  {
-		"level":"Lv6_1",
+		"level":"Lv21",
         "rock":5,
         "boxs":3,
 		"monsterV":1
       },
               	  {
-		"level":"Lv6_2",
+		"level":"Lv22",
         "rock":5,
         "boxs":6,
 		"monsterV":2
       },
                     	  {
-		"level":"Lv6_3",
+		"level":"Lv23",
         "rock":7,
         "boxs":2,
 		"monsterV":2
       },
                     	  {
-		"level":"Lv6_4",
+		"level":"Lv24",
         "rock":8,
         "boxs":0,
 		"monsterV":2
       },
                     	  {
-		"level":"Lv6_5",
+		"level":"Lv25",
         "rock":7,
         "boxs":0,
 		"monsterV":2
       },
                     	  {
-		"level":"Lv6_6",
+		"level":"Lv26",
         "rock":7,
         "boxs":1,
 		"monsterV":2
       },
                     	  {
-		"level":"Lv6_7",
+		"level":"Lv27",
         "rock":9,
         "boxs":0,
 		"monsterV":3
       },
                     	  {
-		"level":"Lv6_8",
+		"level":"Lv28",
         "rock":9,
         "boxs":1,
 		"monsterV":3
       },
                     	  {
-		"level":"Lv6_9",
+		"level":"Lv29",
         "rock":10,
         "boxs":2,
 		"monsterV":3
