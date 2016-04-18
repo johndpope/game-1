@@ -11,7 +11,7 @@
     },
     {
       "name":"20방검",
-      "weaponATK":5,
+      "weaponATK":8,
       "weaponPrice":200,
       "weaponDurability":20,
 	  "weaponExplain":"20번 일반 공격 가능",
@@ -439,7 +439,7 @@
        "tRoad_":5
       },
       {
-       "mapName":"5x5/5x5_1",
+       "mapName":"5x5_1",
        "wRoad_":1,
        "hRoad_":6,
        "rRoad_":8,
@@ -448,7 +448,7 @@
        "tRoad_":4
       },
       {
-       "mapName":"5x5/5x5_2",
+       "mapName":"5x5_2",
        "wRoad_":1,
        "hRoad_":3,
        "rRoad_":13,
@@ -457,7 +457,7 @@
        "tRoad_":5
       },
       {
-       "mapName":"5x5/5x5_3",
+       "mapName":"5x5_3",
        "wRoad_":10,
        "hRoad_":1,
        "rRoad_":7,
@@ -466,7 +466,7 @@
        "tRoad_":4
       },
       {
-       "mapName":"5x5/5x5_4",
+       "mapName":"5x5_4",
        "wRoad_":2,
        "hRoad_":4,
        "rRoad_":10,
@@ -475,7 +475,7 @@
        "tRoad_":6
       },
       {
-       "mapName":"5x5/5x5_5",
+       "mapName":"5x5_5",
        "wRoad_":5,
        "hRoad_":0,
        "rRoad_":6,
@@ -484,7 +484,7 @@
        "tRoad_":10
       },
       {
-       "mapName":"5x5/5x5_6",
+       "mapName":"5x5_6",
        "wRoad_":8,
        "hRoad_":2,
        "rRoad_":9,
@@ -493,7 +493,7 @@
        "tRoad_":5
       },
       {
-       "mapName":"5x5/5x5_7",
+       "mapName":"5x5_7",
        "wRoad_":4,
        "hRoad_":2,
        "rRoad_":8,
@@ -502,7 +502,7 @@
        "tRoad_":5
       },
       {
-       "mapName":"5x5/5x5_8",
+       "mapName":"5x5_8",
        "wRoad_":7,
        "hRoad_":4,
        "rRoad_":8,
@@ -511,7 +511,7 @@
        "tRoad_":2
       },
       {
-       "mapName":"5x5/5x5_9",
+       "mapName":"5x5_9",
        "wRoad_":2,
        "hRoad_":5,
        "rRoad_":11,
@@ -520,7 +520,7 @@
        "tRoad_":5
       },
       {
-       "mapName":"6x6/6x6_1",
+       "mapName":"6x6_1",
        "wRoad_":8,
        "hRoad_":2,
        "rRoad_":18,
@@ -529,7 +529,7 @@
        "tRoad_":5
       },
       {
-       "mapName":"6x6/6x6_2",
+       "mapName":"6x6_2",
        "wRoad_":9,
        "hRoad_":0,
        "rRoad_":14,
@@ -538,7 +538,7 @@
        "tRoad_":6
       },
       {
-       "mapName":"6x6/6x6_3",
+       "mapName":"6x6_3",
        "wRoad_":18,
        "hRoad_":2,
        "rRoad_":10,
@@ -547,7 +547,7 @@
        "tRoad_":2
       },
       {
-       "mapName":"6x6/6x6_4",
+       "mapName":"6x6_4",
        "wRoad_":2,
        "hRoad_":8,
        "rRoad_":16,
@@ -556,7 +556,7 @@
        "tRoad_":9
       },
       {
-       "mapName":"6x6/6x6_5",
+       "mapName":"6x6_5",
        "wRoad_":3,
        "hRoad_":0,
        "rRoad_":31,
@@ -565,7 +565,7 @@
        "tRoad_":2
       },
       {
-       "mapName":"6x6/6x6_6",
+       "mapName":"6x6_6",
        "wRoad_":10,
        "hRoad_":5,
        "rRoad_":12,
@@ -574,7 +574,7 @@
        "tRoad_":5
       },
       {
-       "mapName":"6x6/6x6_7",
+       "mapName":"6x6_7",
        "wRoad_":2,
        "hRoad_":5,
        "rRoad_":16,
@@ -583,7 +583,7 @@
        "tRoad_":9
       },
       {
-       "mapName":"6x6/6x6_8",
+       "mapName":"6x6_8",
        "wRoad_":5,
        "hRoad_":5,
        "rRoad_":16,
@@ -592,7 +592,7 @@
        "tRoad_":8
       },
       {
-       "mapName":"6x6/6x6_9",
+       "mapName":"6x6_9",
        "wRoad_":3,
        "hRoad_":7,
        "rRoad_":15,
@@ -614,158 +614,7 @@
         "rock":2,
         "boxs":2,
 		"monsterV":1
-      },
-      	  {
-		"level":"Lv3",
-        "rock":2,
-        "boxs":4,
-		"monsterV":1
-      },
-      	  {
-		"level":"Lv4",
-        "rock":3,
-        "boxs":2,
-		"monsterV":1
-      },
-      	  {
-		"level":"Lv5",
-        "rock":3,
-        "boxs":3,
-		"monsterV":1
-      },
-          	  {
-		"level":"Lv6",
-        "rock":2,
-        "boxs":2,
-		"monsterV":2
-      },
-          	  {
-		"level":"Lv7",
-        "rock":3,
-        "boxs":2,
-		"monsterV":2
-      },
-          	  {
-		"level":"Lv8",
-        "rock":3,
-        "boxs":3,
-		"monsterV":2
-      },
-                	  {
-		"level":"Lv9",
-        "rock":3,
-        "boxs":2,
-		"monsterV":3
-      },
-                	  {
-		"level":"Lv10",
-        "rock":4,
-        "boxs":4,
-		"monsterV":1
-      },
-                      	  {
-		"level":"Lv11",
-        "rock":4,
-        "boxs":2,
-		"monsterV":1
-      },
-                      	  {
-		"level":"Lv12",
-        "rock":5,
-        "boxs":2,
-		"monsterV":1
-      },
-                      	  {
-		"level":"Lv13",
-        "rock":5,
-        "boxs":1,
-		"monsterV":2
-      },
-                      	  {
-		"level":"Lv14",
-        "rock":4,
-        "boxs":3,
-		"monsterV":2
-      },
-                      	  {
-		"level":"Lv15",
-        "rock":4,
-        "boxs":2,
-		"monsterV":2
-      },
-                      	  {
-		"level":"Lv16",
-        "rock":3,
-        "boxs":5,
-		"monsterV":2
-      },
-                      	  {
-		"level":"Lv17",
-        "rock":6,
-        "boxs":0,
-		"monsterV":2
-      },
-                      	  {
-		"level":"Lv18",
-        "rock":5,
-        "boxs":2,
-		"monsterV":3
-      },
-                      	  {
-		"level":"Lv19",
-        "rock":5,
-        "boxs":3,
-		"monsterV":1
-      },
-              	  {
-		"level":"Lv20",
-        "rock":5,
-        "boxs":6,
-		"monsterV":2
-      },
-                    	  {
-		"level":"Lv21",
-        "rock":7,
-        "boxs":2,
-		"monsterV":2
-      },
-                    	  {
-		"level":"Lv22",
-        "rock":8,
-        "boxs":0,
-		"monsterV":2
-      },
-                    	  {
-		"level":"Lv23",
-        "rock":7,
-        "boxs":0,
-		"monsterV":2
-      },
-                    	  {
-		"level":"Lv24",
-        "rock":7,
-        "boxs":1,
-		"monsterV":2
-      },
-                    	  {
-		"level":"Lv25",
-        "rock":9,
-        "boxs":0,
-		"monsterV":3
-      },
-                    	  {
-		"level":"Lv26",
-        "rock":9,
-        "boxs":1,
-		"monsterV":3
-      },
-                    	  {
-		"level":"Lv27",
-        "rock":10,
-        "boxs":2,
-		"monsterV":3
       }
-     
     ],
 		"Monster":[
 	{
