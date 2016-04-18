@@ -50,6 +50,33 @@ public class live2d_setting : MonoBehaviour
  
     void Update()
     {
+<<<<<<< HEAD
+=======
+
+        
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            op(1);
+            motion = Live2DMotion.loadMotion(mtnFiles[2].bytes);
+            //motion.setLoop(true);
+            
+            motionManager.startMotion(motion, false);
+            Debug.Log("Fire1");
+            //motionoff = true;
+        }
+        if (Input.GetButtonDown("Fire2"))
+        {
+            motion = Live2DMotion.loadMotion(mtnFiles[1].bytes);
+            //motion.setLoop(true);
+            motionManager.startMotion(motion, false);
+           // motionManager.stopAllMotions();
+            Debug.Log("Jump");
+           // motionoff = true;
+        }
+
+       
+>>>>>>> origin/master
         //if (Input.GetButtonDown("Fire1"))
         //{
         //    motion = Live2DMotion.loadMotion(mtnFiles[2].bytes);
@@ -67,6 +94,10 @@ public class live2d_setting : MonoBehaviour
         //    Debug.Log("Jump");
         //   // motionoff = true;
         //}
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 
         float modelWidth = live2DModel.getCanvasWidth();
         Matrix4x4 m1 = Matrix4x4.Ortho(
@@ -105,6 +136,10 @@ public class live2d_setting : MonoBehaviour
                 return;
             if (item.getPartsDataID().ToString() == "PARTS_WEAPON06")
                 return;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
         }
     }
 
@@ -138,6 +173,10 @@ public class live2d_setting : MonoBehaviour
                 live2DModel.setPartsOpacity("PARTS_WEAPON05", 0);
                 live2DModel.setPartsOpacity("PARTS_WEAPON06", 0);
                 break;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
         }
             }
 

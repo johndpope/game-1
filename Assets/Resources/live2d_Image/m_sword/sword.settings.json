@@ -1,9 +1,9 @@
 {
 	"canvas_window": {
 		"scaleY": 1,
-		"top": 0.6875,
+		"top": 1,
 		"width": 600,
-		"bottom": -0.6875,
+		"bottom": -1,
 		"height": 600,
 		"displayState": "normal",
 		"left": -1,

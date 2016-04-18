@@ -1,0 +1,18 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"drake.moc",
+	"textures":[
+		"drake.512/texture_00.png"
+	],
+	"motions":{
+		"":[
+			{"file":"motion/Atk.mtn"},
+			{"file":"motion/Death.mtn"},
+			{"file":"motion/Def.mtn"},
+			{"file":"motion/Idle.mtn"},
+			{"file":"motion/J_Atk.mtn"}
+		]
+	},
+	"project_settings":"drake.settings.json",
+	"name":"drake"
+}
