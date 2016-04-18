@@ -1,0 +1,16 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"sword.moc",
+	"textures":[
+		"sword.512/texture_00.png"
+	],
+	"motions":{
+		"":[
+			{"file":"motion/Atk.mtn"},
+			{"file":"motion/Death.mtn"},
+			{"file":"motion/Idle.mtn"}
+		]
+	},
+	"project_settings":"sword.settings.json",
+	"name":"sword"
+}
