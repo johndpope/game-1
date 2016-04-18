@@ -205,22 +205,7 @@ public class StateManager : MonoBehaviour
     public bool firstGame;
     public int firstGameNum;
 
-    //void SaveData()
-    //{
-    //    for (int i = 0; i < potionNum.Length; i++)
-    //    {
-    //        PlayerPrefs.SetInt("dsdsd1" + i.ToString(), potionNum[i]);
-    //    }
-
-    //}
-
-    //void poit()
-    //{
-    //    for (int i = 0; i < potionNum.Length; i++)
-    //    {
-    //        PlayerPrefs.GetInt("dsdsd1" + i.ToString(), potionNum[i]);
-    //    }
-    //}
+   
 }
 
 

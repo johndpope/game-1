@@ -122,42 +122,48 @@ public class csSaveLord : MonoBehaviour
             }
         }
 
-        int playUseAtk = PlayerPrefs.GetInt("playUseAtk");
-        int  playUseDef = PlayerPrefs.GetInt("playUseDef");
-        float playUseSpd = PlayerPrefs.GetFloat("playUseSpd");
+        StateManager.Instance.playUseAtk = PlayerPrefs.GetInt("playUseAtk");
+        StateManager.Instance.playUseDef = PlayerPrefs.GetInt("playUseDef");
+        StateManager.Instance.playUseSpd = PlayerPrefs.GetFloat("playUseSpd");
 
-        if (playUseAtk !=0)
+        StateManager.Instance.wUse = PlayerPrefs.GetInt("wUse");
+
+        StateManager.Instance.weaponDurability[StateManager.Instance.wUse] = PlayerPrefs.GetInt("weaponDurability");
+
+        if (StateManager.Instance.playUseAtk !=0)
         {
-            if(playUseAtk.Equals(5))
+            if(StateManager.Instance.playUseAtk.Equals(5))
             {
                 Weapon(0);
             }
-            if (playUseAtk.Equals(8))
+            if (StateManager.Instance.playUseAtk.Equals(8))
             {
-                Weapon(0);
+                Weapon(1);
             }
-            if (playUseAtk.Equals(5))
+            if (StateManager.Instance.playUseAtk.Equals(10))
             {
-                Weapon(0);
+                Weapon(2);
             }
-            if (playUseAtk.Equals(5))
+            if (StateManager.Instance.playUseAtk.Equals(20))
             {
-                Weapon(0);
+                Weapon(3);
+            }
+            if (StateManager.Instance.playUseAtk.Equals(30))
+            {
+                Weapon(4);
+            }
+            if (StateManager.Instance.playUseAtk.Equals(500))
+            {
+                Weapon(5);
             }
         }
     }
 
     private void Weapon(int num)
     {
-        if (StateManager.Instance.bagSize == 5)
-        {
-            return;
-        }
-        StateManager.Instance.bagSize++;
-
         HMWeaponItem item = (HMWeaponItem)StateManager.Instance.weaponItems[num];
 
-        weaponDurabilityText.GetComponent<Text>().text = "내구도: " + item.Durability.ToString();
+        weaponDurabilityText.GetComponent<Text>().text = "내구도: " + StateManager.Instance.weaponDurability[StateManager.Instance.wUse];
         weaponNameText.GetComponent<Text>().text = item.Name + " 공격력: " + item.AttackPoint.ToString();
 
         weaponImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
@@ -225,5 +231,7 @@ public class csSaveLord : MonoBehaviour
         PlayerPrefs.SetInt("playUseDef", StateManager.Instance.playUseDef);
         PlayerPrefs.SetFloat("playUseSpd", StateManager.Instance.playUseSpd);
 
-}
+        PlayerPrefs.SetInt("wUse", StateManager.Instance.wUse);
+        PlayerPrefs.SetInt("weaponDurability", StateManager.Instance.weaponDurability[StateManager.Instance.wUse]);
+    }
 }

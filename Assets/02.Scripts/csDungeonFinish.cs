@@ -19,6 +19,7 @@ public class csDungeonFinish : MonoBehaviour
     {
         StateManager.Instance.dungeonMap++;
         StateManager.Instance.dungeonLevel++;
+        GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
         //finishPop.SetActive(false);
         Application.LoadLevel(1);
     }
@@ -26,6 +27,7 @@ public class csDungeonFinish : MonoBehaviour
     public void village()
     {
         //finishPop.SetActive(false);
+        GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
         StateManager.Instance.dunFinish = true;
         Application.LoadLevel(0);
     }

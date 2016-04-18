@@ -501,6 +501,7 @@ public class csBattle : MonoBehaviour
             }
             else
             {
+                GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
                 Application.LoadLevel(0);
             }
         }
@@ -540,6 +541,7 @@ public class csBattle : MonoBehaviour
 
     public void renewalGameNo()
     {
+        GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
         Application.LoadLevel(0);
     }
 
@@ -1018,6 +1020,13 @@ public class csBattle : MonoBehaviour
                 player2D.transform.FindChild("Lena").GetComponent<live2d_setting>().Ani(2);
                 yield return new WaitForSeconds(0.5f);
                 StartCoroutine(Skill());
+                if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
+                {
+                    StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
+                    eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
+                    eTimer[StateManager.Instance.atkEnemyNum] = eTimer2[StateManager.Instance.atkEnemyNum];
+                    monsterNum--;
+                }
             }
             else
             {
@@ -1026,13 +1035,13 @@ public class csBattle : MonoBehaviour
                 GameObject AtkEff = Instantiate(playerAtk) as GameObject;
                 AtkEff.transform.position = new Vector3(player2D.transform.position.x + 3, 2, player2D.transform.position.z);
                 StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playOriginAtk + playAtk + playBerserkerAtk) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
-            }
-
-            if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
-            {
-                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
-                eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
-                monsterNum--;
+                if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
+                {
+                    StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
+                    eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
+                    eTimer[StateManager.Instance.atkEnemyNum] = eTimer2[StateManager.Instance.atkEnemyNum];
+                    monsterNum--;
+                }
             }
         }
         else
@@ -1043,6 +1052,14 @@ public class csBattle : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 StateManager.Instance.playHp -= 5;
                 StartCoroutine(Skill());
+
+                if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
+                {
+                    StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
+                    eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
+                    eTimer[StateManager.Instance.atkEnemyNum] = eTimer2[StateManager.Instance.atkEnemyNum];
+                    monsterNum--;
+                }
             }
             else
             {
@@ -1052,12 +1069,14 @@ public class csBattle : MonoBehaviour
                 AtkEff.transform.position = new Vector3(player2D.transform.position.x + 3, 2, player2D.transform.position.z);
                 StateManager.Instance.playHp -= 5;
                 StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playOriginAtk + playAtk + playBerserkerAtk) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
-            }
-            if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
-            {
-                StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
-                monsterNum--;
-                eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
+
+                if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
+                {
+                    StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
+                    eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
+                    eTimer[StateManager.Instance.atkEnemyNum] = eTimer2[StateManager.Instance.atkEnemyNum];
+                    monsterNum--;
+                }
             }
         }
         

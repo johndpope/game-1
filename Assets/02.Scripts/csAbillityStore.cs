@@ -82,6 +82,7 @@ public class csAbillityStore : MonoBehaviour {
         StateManager.Instance.cntDef = cntDef;
         StateManager.Instance.cntSpd = cntSpd;
     }
+
     public void up_Hp()
     {
         if (cntHp >= 20)
@@ -100,7 +101,6 @@ public class csAbillityStore : MonoBehaviour {
         //playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
         if (cntHp >= 20)
             goldHpText.GetComponent<Text>().text = "최고 달성";
-
     }
 
     public void up_Atk()

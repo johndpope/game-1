@@ -851,7 +851,6 @@ public class csObject : MonoBehaviour
                 }
             }
 
-
             if (TreasureNum > moneyValue && TreasureNum <= nValue + moneyValue)
             {
                 finishGold.GetComponent<Text>().text = "획득 골드\n: " + csBattle.monsterGold + " + ";
