@@ -493,7 +493,9 @@ public class csBattle : MonoBehaviour
             player2D.transform.FindChild("Lena").GetComponent<live2d_setting>().Ani(6);
             yield return new WaitForSeconds(1.5f);
             //게임 오버 띠우고
+            gameOverText.SetActive(true);
             yield return new WaitForSeconds(1.5f);
+            gameOverText.SetActive(false);
             if (StateManager.Instance.potionNum[0] > 0 || StateManager.Instance.potionNum[1] > 0)
             {
                 //포션 사용 해서 다시 할건지?
