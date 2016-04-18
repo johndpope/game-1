@@ -494,6 +494,7 @@ public class csBattle : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             //게임 오버 띠우고
             yield return new WaitForSeconds(1.5f);
+
             if (StateManager.Instance.potionNum[0] > 0 || StateManager.Instance.potionNum[1] > 0)
             {
                 //포션 사용 해서 다시 할건지?

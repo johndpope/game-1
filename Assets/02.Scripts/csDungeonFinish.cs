@@ -10,8 +10,8 @@ public class csDungeonFinish : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            //finishPop.SetActive(true);
-            village();
+            finishPop.SetActive(true);
+            //village();
         }
     }
 
@@ -20,13 +20,13 @@ public class csDungeonFinish : MonoBehaviour
         StateManager.Instance.dungeonMap++;
         StateManager.Instance.dungeonLevel++;
         GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
-        //finishPop.SetActive(false);
+        finishPop.SetActive(false);
         Application.LoadLevel(1);
     }
 
     public void village()
     {
-        //finishPop.SetActive(false);
+        finishPop.SetActive(false);
         GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
         StateManager.Instance.dunFinish = true;
         Application.LoadLevel(0);
