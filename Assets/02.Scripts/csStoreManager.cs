@@ -37,6 +37,7 @@ public class csStoreManager : MonoBehaviour
     public GameObject eqShopButton;
     public GameObject abilShopButton;
     public GameObject dungeonButton;
+    public GameObject invenCloseButton;
 
     //옵션버튼
     public GameObject optionButton;
@@ -147,7 +148,20 @@ public class csStoreManager : MonoBehaviour
         itemMenu.SetActive(false);
         dungeonMaun.SetActive(false);       
         equipageMenu.SetActive(false);
-        equipageScroll.SetActive(false);       
+        equipageScroll.SetActive(false);
+        itemShopButton.SetActive(false);
+        eqShopButton.SetActive(false);
+        abilShopButton.SetActive(false);
+        invenButton.SetActive(false);
+        dungeonButton.SetActive(false);
+    }
+    public void onInvenCloseButton()
+    {
+        itemShopButton.SetActive(true);
+        eqShopButton.SetActive(true);
+        abilShopButton.SetActive(true);
+        invenButton.SetActive(true);
+        dungeonButton.SetActive(true);
     }
 
     public void onOptionbutton()
