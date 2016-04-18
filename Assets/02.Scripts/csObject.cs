@@ -126,7 +126,7 @@ public class csObject : MonoBehaviour
             }
         }
 
-        if(Joystick.run.Equals(100))
+        if(Joystick.run.Equals(300))
         {
             Debug.Log("300임 ㅋㅋㅋ");
            
