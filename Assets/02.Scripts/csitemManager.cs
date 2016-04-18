@@ -292,6 +292,10 @@ public class csitemManager : MonoBehaviour
         MgScrollBag = new GameObject[itemInfosM.Count];
         BufScrollBag = new GameObject[itemInfosB.Count];
 
+        StateManager.Instance.potionItemBag = potionItemBag;
+        StateManager.Instance.SkScrollBag = SkScrollBag;
+        StateManager.Instance.MgScrollBag = MgScrollBag;
+        StateManager.Instance.BufScrollBag = BufScrollBag;
 
         potionPoolSet = new GameObject[itemInfosP.Count];
         SkScrollPoolSet = new GameObject[itemInfosS.Count];
@@ -330,16 +334,14 @@ public class csitemManager : MonoBehaviour
     void Update()
     {
         goldText.text = StateManager.Instance.playGold.ToString();
-
-        StateManager.Instance.potionNum = potionNum;
-        StateManager.Instance.SkscrollNum = SkscrollNum;
-        StateManager.Instance.MgscrollNum = MgscrollNum;
-        StateManager.Instance.BufscrollNum = BufscrollNum;
-
-        StateManager.Instance.potionItemBag = potionItemBag;
-        StateManager.Instance.SkScrollBag = SkScrollBag;
-        StateManager.Instance.MgScrollBag = MgScrollBag;
-        StateManager.Instance.BufScrollBag = BufScrollBag;
+        potionNum = StateManager.Instance.potionNum;
+        SkscrollNum = StateManager.Instance.SkscrollNum;
+        MgscrollNum = StateManager.Instance.MgscrollNum;
+        BufscrollNum = StateManager.Instance.BufscrollNum;
+        for (int i = 0; i < StateManager.Instance.potionNum.Length; i++)
+        {
+            potionPoolSet[i].transform.FindChild("Scrollcnt").GetComponent<Text>().text = "보 유 갯 수:" + potionNum[i] + " 개";
+        }
     }
 
     public void offPopClose()

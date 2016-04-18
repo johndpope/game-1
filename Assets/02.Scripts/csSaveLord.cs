@@ -14,21 +14,21 @@ public class csSaveLord : MonoBehaviour
     public GameObject itemUseName;
     public GameObject itemUseExplain;
     public GameObject itemUseImage;
+   
 
     GameObject itemUse;
 
     Text itemUseNameText;
     Text itemUseExplainText;
 
-    void Start()
+   public void lord()
     {
         itemUseNameText = itemUseName.GetComponent<Text>();
         itemUseExplainText = itemUseExplain.GetComponent<Text>();
 
-        Debug.Log(StateManager.Instance.potionNum.Length);
         for (int i = 0; i < StateManager.Instance.potionNum.Length; i++)
-        {
-            StateManager.Instance.potionNum[i] = PlayerPrefs.GetInt("potion" + i.ToString());            
+        {            
+            StateManager.Instance.potionNum[i] = PlayerPrefs.GetInt("potion" + (i+1).ToString(), 0);
             PotionItem item = (PotionItem)StateManager.Instance.potionItems[i];
             if (StateManager.Instance.potionNum[i] > 0)
             {
@@ -42,49 +42,96 @@ public class csSaveLord : MonoBehaviour
                 itemUseSet.name = "Potion" + i;
 
                 StateManager.Instance.potionItemBag[i] = itemUseSet;
-                GameObject.Find("Potion" + i).transform.FindChild("Scrollcnt").GetComponent<Text>().text = "보 유 갯 수:" + StateManager.Instance.potionNum[i] + " 개";
                 StateManager.Instance.potionItemBag[i].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.potionNum[i] + " 개";
             }
         }
 
         for (int i = 0; i < StateManager.Instance.SkscrollNum.Length; i++)
         {
-            PlayerPrefs.GetInt("skill" + i.ToString(), StateManager.Instance.SkscrollNum[i]);
+            StateManager.Instance.SkscrollNum[i] = PlayerPrefs.GetInt("skill" + (i + 1).ToString(), 0);
+            SkillItem item = (SkillItem)StateManager.Instance.skillScrollItems[i];
+            if (StateManager.Instance.SkscrollNum[i] > 0)
+            {
+                itemUseNameText.text = "이 름: " + item.Name;
+                itemUseExplainText.text = "설 명: " + item.Explain;
+                itemUseImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+
+                GameObject itemUseSet = Instantiate(itemUseSetObj) as GameObject;
+                itemUseSet.transform.SetParent(skillUseGrid.transform);
+                itemUseSet.transform.localScale = new Vector3(1, 1, 1);
+                itemUseSet.name = "Potion" + i;
+
+                StateManager.Instance.SkScrollBag[i] = itemUseSet;
+                StateManager.Instance.SkScrollBag[i].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.SkscrollNum[i] + " 개";
+            }
         }
 
         for (int i = 0; i < StateManager.Instance.MgscrollNum.Length; i++)
         {
-            PlayerPrefs.GetInt("magic" + i.ToString(), StateManager.Instance.MgscrollNum[i]);
+            StateManager.Instance.MgscrollNum[i] = PlayerPrefs.GetInt("magic" + (i + 1).ToString(), 0);
+            MagicItem item = (MagicItem)StateManager.Instance.magicScrollItems[i];
+            if (StateManager.Instance.MgscrollNum[i] > 0)
+            {
+                itemUseNameText.text = "이 름: " + item.Name;
+                itemUseExplainText.text = "설 명: " + item.Explain;
+                itemUseImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+
+                GameObject itemUseSet = Instantiate(itemUseSetObj) as GameObject;
+                itemUseSet.transform.SetParent(magicUseGrid.transform);
+                itemUseSet.transform.localScale = new Vector3(1, 1, 1);
+                itemUseSet.name = "Potion" + i;
+
+                StateManager.Instance.MgScrollBag[i] = itemUseSet;
+                StateManager.Instance.MgScrollBag[i].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.MgscrollNum[i] + " 개";
+            }
         }
 
         for (int i = 0; i < StateManager.Instance.BufscrollNum.Length; i++)
         {
-            PlayerPrefs.GetInt("potion" + i.ToString(), StateManager.Instance.BufscrollNum[i]);
+            StateManager.Instance.BufscrollNum[i] = PlayerPrefs.GetInt("buff" + (i + 1).ToString(), 0);
+            BuffItem item = (BuffItem)StateManager.Instance.buffScrollItems[i];
+            if (StateManager.Instance.BufscrollNum[i] > 0)
+            {
+                itemUseNameText.text = "이 름: " + item.Name;
+                itemUseExplainText.text = "설 명: " + item.Explain;
+                itemUseImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+
+                GameObject itemUseSet = Instantiate(itemUseSetObj) as GameObject;
+                itemUseSet.transform.SetParent(magicUseGrid.transform);
+                itemUseSet.transform.localScale = new Vector3(1, 1, 1);
+                itemUseSet.name = "Potion" + i;
+
+                StateManager.Instance.BufScrollBag[i] = itemUseSet;
+                StateManager.Instance.BufScrollBag[i].transform.FindChild("ScrollUseCut").GetComponent<Text>().text = "보 유" + "\n" + StateManager.Instance.BufscrollNum[i] + " 개";
+            }
         }
     }
 
 
     public void SaveData()
     {
-        for (int i = 0; i < StateManager.Instance.potionNum.Length; i++)
-        {
-            Debug.Log(StateManager.Instance.potionNum[i]);
-            PlayerPrefs.SetInt("potion" + i.ToString(), StateManager.Instance.potionNum[i]);
-        }
+        PlayerPrefs.SetInt("potion1", StateManager.Instance.potionNum[0]);
+        PlayerPrefs.SetInt("potion2", StateManager.Instance.potionNum[1]);
+        PlayerPrefs.SetInt("potion3", StateManager.Instance.potionNum[2]);
+        PlayerPrefs.SetInt("potion4", StateManager.Instance.potionNum[3]);
+        PlayerPrefs.SetInt("potion5", StateManager.Instance.potionNum[4]);
 
-        for (int i = 0; i < StateManager.Instance.SkscrollNum.Length; i++)
-        {
-            PlayerPrefs.SetInt("skill" + i.ToString(), StateManager.Instance.SkscrollNum[i]);
-        }
+        PlayerPrefs.SetInt("skill1", StateManager.Instance.SkscrollNum[0]);
+        PlayerPrefs.SetInt("skill2", StateManager.Instance.SkscrollNum[1]);
+        PlayerPrefs.SetInt("skill3", StateManager.Instance.SkscrollNum[2]);
+        PlayerPrefs.SetInt("skill4", StateManager.Instance.SkscrollNum[3]);
 
-        for (int i = 0; i < StateManager.Instance.MgscrollNum.Length; i++)
-        {
-            PlayerPrefs.SetInt("magic" + i.ToString(), StateManager.Instance.MgscrollNum[i]);
-        }
+        PlayerPrefs.SetInt("magic1", StateManager.Instance.MgscrollNum[0]);
+        PlayerPrefs.SetInt("magic2", StateManager.Instance.MgscrollNum[1]);
+        PlayerPrefs.SetInt("magic3", StateManager.Instance.MgscrollNum[2]);
+        PlayerPrefs.SetInt("magic4", StateManager.Instance.MgscrollNum[3]);
 
-        for (int i = 0; i < StateManager.Instance.BufscrollNum.Length; i++)
-        {
-            PlayerPrefs.SetInt("potion" + i.ToString(), StateManager.Instance.BufscrollNum[i]);
-        }
+        PlayerPrefs.SetInt("buff1", StateManager.Instance.BufscrollNum[0]);
+        PlayerPrefs.SetInt("buff2", StateManager.Instance.BufscrollNum[1]);
+        PlayerPrefs.SetInt("buff3", StateManager.Instance.BufscrollNum[2]);
+        PlayerPrefs.SetInt("buff4", StateManager.Instance.BufscrollNum[3]);
+        PlayerPrefs.SetInt("buff5", StateManager.Instance.BufscrollNum[4]);
+        PlayerPrefs.SetInt("buff6", StateManager.Instance.BufscrollNum[5]);
+
     }
 }

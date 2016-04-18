@@ -40,15 +40,13 @@ public class csStoreManager : MonoBehaviour
 
     public void Exit()
     {
-        StartCoroutine(Save());
-        
-        
+        StartCoroutine(Save());       
         Debug.Log("Quit()");
     }
     IEnumerator Save()
     {
         GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(3.0f);
         Application.Quit();
     }
     public void onStartButton()
@@ -62,6 +60,7 @@ public class csStoreManager : MonoBehaviour
         StartCoroutine("startButtonPop");
         StateManager.Instance.startButton = true;
         StateManager.Instance.firstGame = true;
+        GameObject.Find("Manager").GetComponent<csSaveLord>().lord();
     }
 
     public void onEqShopButton()

@@ -62,7 +62,6 @@ public class csdungeonManager : MonoBehaviour
 
     public void Floor(int level)
     {
-
         StateManager.Instance.dungeonMap= level;
         StateManager.Instance.dungeonLevel = level;
         Application.LoadLevel(1);

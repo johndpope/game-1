@@ -72,6 +72,7 @@ public class Inven : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
         d = Int32.Parse(dText.text);
 
         if (csUseEquip.itemUsePopBool == true)
