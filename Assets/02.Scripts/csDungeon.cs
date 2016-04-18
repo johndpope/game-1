@@ -169,6 +169,11 @@ public class csDungeon : MonoBehaviour
 
     public GameObject door;
 
+    //옵션버튼
+    public GameObject optionButton;
+    public GameObject optionCloseButton;
+    public GameObject optionUI;
+
     void LoadAssetfromJson()
     {
         nMaps = new ArrayList();
@@ -570,6 +575,16 @@ public class csDungeon : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void onOptionbutton()
+    {
+        optionUI.SetActive(true);
+    }
+
+    public void onOptionClosebutton()
+    {
+        optionUI.SetActive(false);
     }
 
     public void Rocks(Transform[] road,int num, int random, string roadName)
