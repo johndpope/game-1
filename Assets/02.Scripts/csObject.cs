@@ -610,14 +610,13 @@ public class csObject : MonoBehaviour
             //보스전
             if (StateManager.Instance.dungeonLevel.Equals(9))
             {
-                int num = Random.Range(0, 2);
+                int num = Random.Range(1, 2);
                 switch (num)
                 {
                     case 0:
                         break;
                     case 1:
-                        Slime(i);
-                        i++;
+                        Drake(i);
                         break;
                 }
             }

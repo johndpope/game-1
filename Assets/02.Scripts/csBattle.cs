@@ -495,6 +495,7 @@ public class csBattle : MonoBehaviour
             //게임 오버 띠우고
             gameOverText.SetActive(true);
             yield return new WaitForSeconds(1.5f);
+
             gameOverText.SetActive(false);
 
             if (StateManager.Instance.potionNum[0] > 0 || StateManager.Instance.potionNum[1] > 0)

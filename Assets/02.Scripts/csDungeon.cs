@@ -164,6 +164,7 @@ public class csDungeon : MonoBehaviour
     public GameObject mimic2;
     public GameObject ghost;
     public GameObject pumkin;
+    public GameObject drake;
 
     GameObject monster;
 
@@ -274,6 +275,7 @@ public class csDungeon : MonoBehaviour
         StateManager.Instance.mimic2 = new GameObject[level.Monster];
         StateManager.Instance.ghost = new GameObject[level.Monster];
         StateManager.Instance.pumkin = new GameObject[level.Monster];
+        StateManager.Instance.drake = new GameObject[level.Monster];
 
         if (0 <= StateManager.Instance.dungeonLevel && 4 >= StateManager.Instance.dungeonLevel)
         {
@@ -291,7 +293,7 @@ public class csDungeon : MonoBehaviour
         //보스전
         if (StateManager.Instance.dungeonLevel.Equals(9))
         {
-            Slime(level.Monster);
+            Drake(level.Monster);
         }
         //11~19 던전
         if (10 <= StateManager.Instance.dungeonLevel && 18 >= StateManager.Instance.dungeonLevel)
@@ -390,14 +392,12 @@ public class csDungeon : MonoBehaviour
 
             else if (map.transform.GetChild(i).name == "wRoad_" + w && mapObj.WidthRoad != 0)
             {
-                Debug.Log("들어옴 플레이어");
                 wRoad[w - 1] = map.transform.GetChild(i);
                 w++;
             }
 
             else if (map.transform.GetChild(i).name == "hRoad_" + h && mapObj.HeightRoad != 0)
             {
-                Debug.Log("들어옴 플레이어");
                 hRoad[h - 1] = map.transform.GetChild(i);
                 h++;
             }
@@ -483,6 +483,19 @@ public class csDungeon : MonoBehaviour
             monster.transform.localPosition = new Vector3(0, 0, 0);
             monster.SetActive(false);
             StateManager.Instance.pumkin[i] = monster;
+        }
+    }
+
+    private void Drake(int num)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            Monster drakeN = (Monster)nMonster[5];
+            monster = Instantiate(drake) as GameObject;
+            monster.name = drakeN.Name;
+            monster.transform.localPosition = new Vector3(0, 0, 0);
+            monster.SetActive(false);
+            StateManager.Instance.drake[i] = monster;
         }
     }
 
