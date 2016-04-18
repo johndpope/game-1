@@ -158,17 +158,14 @@ public class live2d_setting : MonoBehaviour
                 break;
             case 1:
                 motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
-                motion.setLoop(true);
                 motionManager.startMotion(motion, false);
                 break;
             case 2:
                 motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
-                motion.setLoop(true);
                 motionManager.startMotion(motion, false);
                 break;
             case 3:
                 motion = Live2DMotion.loadMotion(mtnFiles[num].bytes);
-                motion.setLoop(true);
                 motionManager.startMotion(motion, false);
                 break;
             case 4:

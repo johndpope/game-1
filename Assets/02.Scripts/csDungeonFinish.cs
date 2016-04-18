@@ -10,8 +10,8 @@ public class csDungeonFinish : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            finishPop.SetActive(true);
-            //village();
+            //finishPop.SetActive(true);
+            village();
         }
     }
 
@@ -26,7 +26,7 @@ public class csDungeonFinish : MonoBehaviour
 
     public void village()
     {
-        finishPop.SetActive(false);
+        //finishPop.SetActive(false);
         GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
         StateManager.Instance.dunFinish = true;
         Application.LoadLevel(0);

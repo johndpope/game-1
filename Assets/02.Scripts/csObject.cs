@@ -777,12 +777,28 @@ public class csObject : MonoBehaviour
         StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
         StateManager.Instance.monster[i].SetActive(true);
         csBattle.eTimer[i] = Random.Range(pumkin.MonsterMinSpd, pumkin.MonsterMaxSpd + 1);
-        StateManager.Instance.monsterHp[i] = pumkin.MonsterHp + (pumkin.MonsterHp * (StateManager.Instance.dungeonLevel - 10) * 0.2f); ;
-        StateManager.Instance.monsterAtk[i] = pumkin.MonsterAtt + (pumkin.MonsterAtt * (StateManager.Instance.dungeonLevel - 10) * 0.2f); ;
-        StateManager.Instance.monsterDef[i] = pumkin.MonsterDef + (pumkin.MonsterDef * (StateManager.Instance.dungeonLevel - 10) * 0.2f); ;
+        StateManager.Instance.monsterHp[i] = pumkin.MonsterHp + (pumkin.MonsterHp * (StateManager.Instance.dungeonLevel - 10) * 0.2f);
+        StateManager.Instance.monsterAtk[i] = pumkin.MonsterAtt + (pumkin.MonsterAtt * (StateManager.Instance.dungeonLevel - 10) * 0.2f);
+        StateManager.Instance.monsterDef[i] = pumkin.MonsterDef + (pumkin.MonsterDef * (StateManager.Instance.dungeonLevel - 10) * 0.2f);
         StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
         StateManager.Instance.pumkinNum++;
     }
+
+    public void Drake(int i)
+    {
+        Monster drake = (Monster)StateManager.Instance.dungeonMonsters[5];
+        StateManager.Instance.monster[i] = StateManager.Instance.drake[i];
+        StateManager.Instance.monster[i].name = drake.Name + i;
+        StateManager.Instance.monster[i].transform.position = battlePos[i].transform.position;
+        StateManager.Instance.monster[i].SetActive(true);
+        csBattle.eTimer[i] = Random.Range(drake.MonsterMinSpd, drake.MonsterMaxSpd + 1);
+        StateManager.Instance.monsterHp[i] = drake.MonsterHp;
+        StateManager.Instance.monsterAtk[i] = drake.MonsterAtt;
+        StateManager.Instance.monsterDef[i] = drake.MonsterDef;
+        StateManager.Instance.monsterSpd[i] = csBattle.eTimer[i];
+        StateManager.Instance.drakeNum++;
+    }
+
 
     public void openBattleBox(int num)
     {

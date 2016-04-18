@@ -807,6 +807,14 @@
 		"monsterMaxSpd":9,
 		"monsterMinSpd":7,
 		"monsterHp":20
+	},
+	{
+		"monsterName":"Drake",
+		"monsterAtt":10,
+		"monsterDef":15,
+		"monsterMaxSpd":8,
+		"monsterMinSpd":6,
+		"monsterHp":200
 	}
 	]
 
