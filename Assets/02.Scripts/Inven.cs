@@ -100,10 +100,18 @@ public class Inven : MonoBehaviour
             DestroyObject(StateManager.Instance.weaponSpace[StateManager.Instance.wUse]);
             StateManager.Instance.bagSize--;
         }
-        useWeapon.GetComponent<Image>().sprite = StateManager.Instance.useWeapon;
-        dText.text = StateManager.Instance.weaponDurability[wNum].ToString();
+        if (StateManager.Instance.useWeapon != null)
+        {
+            useWeapon.GetComponent<Image>().sprite = StateManager.Instance.useWeapon;
+            dText.text = StateManager.Instance.weaponDurability[wNum].ToString();
+        }
+        if (StateManager.Instance.useArmor != null)
+        { useArmor.GetComponent<Image>().sprite = StateManager.Instance.useArmor; }
+        if (StateManager.Instance.useBoots != null)
+        { useBoots.GetComponent<Image>().sprite = StateManager.Instance.useBoots; }
 
-        playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
+
+            playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
 
         playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
         playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk + " + " + StateManager.Instance.playUseAtk;
@@ -362,7 +370,7 @@ public class Inven : MonoBehaviour
             StateManager.Instance.weaponSpace[aNum].GetComponent<Button>().enabled = false;
             StateManager.Instance.weaponSpace[aNum].transform.FindChild("armorUseIcon").GetComponentInChildren<Image>().enabled = true;
             StateManager.Instance.playUseDef = csUseEquip.defPoint;
-
+            StateManager.Instance.aUse = aNum;
             useArmor.GetComponent<Image>().sprite = StateManager.Instance.weaponSpace[aNum].transform.FindChild("armorImage").GetComponent<Image>().sprite;
             StateManager.Instance.useArmor = useArmor.GetComponent<Image>().sprite;
 
@@ -387,7 +395,7 @@ public class Inven : MonoBehaviour
             StateManager.Instance.playUseSpd = csUseEquip.spdPoint;
             useBoots.GetComponent<Image>().sprite = StateManager.Instance.weaponSpace[bNum].transform.FindChild("bootsImage").GetComponent<Image>().sprite;
             StateManager.Instance.useBoots = useBoots.GetComponent<Image>().sprite;
-
+            StateManager.Instance.bUse = bNum;
             bootsItemUse = true;
             bUse = bNum;
         }

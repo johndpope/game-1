@@ -124,9 +124,11 @@ public class csSaveLord : MonoBehaviour
 
         StateManager.Instance.playUseAtk = PlayerPrefs.GetInt("playUseAtk");
         StateManager.Instance.playUseDef = PlayerPrefs.GetInt("playUseDef");
-        StateManager.Instance.playUseSpd = PlayerPrefs.GetFloat("playUseSpd");
+        //StateManager.Instance.playUseSpd = PlayerPrefs.GetFloat("playUseSpd");
 
         StateManager.Instance.wUse = PlayerPrefs.GetInt("wUse");
+        StateManager.Instance.aUse = PlayerPrefs.GetInt("aUse");
+        //StateManager.Instance.bUse = PlayerPrefs.GetInt("bUse");
 
         StateManager.Instance.weaponDurability[StateManager.Instance.wUse] = PlayerPrefs.GetInt("weaponDurability");
 
@@ -157,6 +159,113 @@ public class csSaveLord : MonoBehaviour
                 Weapon(5);
             }
         }
+        if (StateManager.Instance.playDef != 0)
+        {
+            if (StateManager.Instance.playUseDef.Equals(5))
+            {
+                Armor(0);
+            }
+            if (StateManager.Instance.playUseDef.Equals(10))
+            {
+                Armor(1);
+            }
+            if (StateManager.Instance.playUseDef.Equals(20))
+            {
+                Armor(2);
+            }
+            if (StateManager.Instance.playUseDef.Equals(15))
+            {
+                Armor(3);
+            }
+            if (StateManager.Instance.playUseDef.Equals(25))
+            {
+                Armor(4);
+            }
+            if (StateManager.Instance.playUseDef.Equals(50))
+            {
+                Armor(5);
+            }
+            if (StateManager.Instance.playUseDef.Equals(150))
+            {
+                Armor(6);
+            }
+        }
+
+        //if (StateManager.Instance.playSpd != 0)
+        //{
+        //    if (StateManager.Instance.playUseSpd.Equals(0.5))
+        //    {
+        //        Boots(0);
+        //    }
+        //    if (StateManager.Instance.playUseSpd.Equals(1.5))
+        //    {
+        //        Boots(1);
+        //    }
+        //    if (StateManager.Instance.playUseSpd.Equals(2))
+        //    {
+        //        Boots(2);
+        //    }
+        //    if (StateManager.Instance.playUseSpd.Equals(3))
+        //    {
+        //        Boots(3);
+        //    }
+        //    if (StateManager.Instance.playUseSpd.Equals(4.5))
+        //    {
+        //        Boots(4);
+        //    }
+        //    if (StateManager.Instance.playSpd.Equals(6))
+        //    {
+        //        Boots(5);
+        //    }
+            
+        //}
+    }
+    //private void Boots(int num)
+    //{
+    //    HMBootsItem item = (HMBootsItem)StateManager.Instance.bootItems[num];
+
+    //    bootsNameText.GetComponent<Text>().text = item.Name + "\n" + " 속도: " + item.Spd.ToString();
+    //    bootsImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+
+    //    GameObject gameObj = Instantiate(bootsUse) as GameObject;
+    //    gameObj.transform.SetParent(grid.transform);
+    //    gameObj.transform.localScale = new Vector3(1, 1, 1);
+
+    //    StateManager.Instance.useBoots = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+
+    //    for (int wNum = 0; wNum < 5; wNum++)
+    //    {
+    //        if (StateManager.Instance.weaponSpace[wNum] == null)
+    //        {
+    //            gameObj.name = item.Name + wNum;
+    //            StateManager.Instance.weaponSpace[wNum] = gameObj;
+    //            StateManager.Instance.weaponSpace[wNum].transform.FindChild("bootsUseIcon").GetComponentInChildren<Image>().enabled = true;
+    //            return;
+    //        }
+    //    }
+    //}
+
+    private void Armor(int num)
+    {
+        HMArmorItem item = (HMArmorItem)StateManager.Instance.armorItems[num];
+
+        armorNameText.GetComponent<Text>().text = item.Name + "\n" + " 방어력: " + item.Def.ToString();
+        armorImage.GetComponent<Image>().sprite = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+
+        GameObject gameObj = Instantiate(armorUse) as GameObject;
+        gameObj.transform.SetParent(grid.transform);
+        gameObj.transform.localScale = new Vector3(1, 1, 1);
+        StateManager.Instance.useArmor = (Sprite)Resources.Load(item.Image, typeof(Sprite));
+        for (int wNum = 0; wNum < 5; wNum++)
+        {
+            if (StateManager.Instance.weaponSpace[wNum] == null)
+            {
+                gameObj.name = item.Name + wNum;
+                StateManager.Instance.weaponSpace[wNum] = gameObj;
+                StateManager.Instance.weaponSpace[wNum].transform.FindChild("armorUseIcon").GetComponentInChildren<Image>().enabled = true;
+                return;
+            }
+        }
     }
 
     private void Weapon(int num)
@@ -171,7 +280,6 @@ public class csSaveLord : MonoBehaviour
         GameObject gameObj = Instantiate(WeaponUse) as GameObject;
         gameObj.transform.SetParent(grid.transform);
         gameObj.transform.localScale = new Vector3(1, 1, 1);
-        //StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
         StateManager.Instance.useWeapon = (Sprite)Resources.Load(item.Image, typeof(Sprite));
 
         for (int wNum = 0; wNum < 5; wNum++)
@@ -181,6 +289,8 @@ public class csSaveLord : MonoBehaviour
                 gameObj.name = item.Name + wNum;
                 StateManager.Instance.weaponDurability[wNum] = item.Durability;
                 StateManager.Instance.weaponSpace[wNum] = gameObj;
+                StateManager.Instance.weaponSpace[wNum].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
+
                 return;
             }
         }
@@ -230,9 +340,12 @@ public class csSaveLord : MonoBehaviour
 
         PlayerPrefs.SetInt("playUseAtk", StateManager.Instance.playUseAtk);
         PlayerPrefs.SetInt("playUseDef", StateManager.Instance.playUseDef);
-        PlayerPrefs.SetFloat("playUseSpd", StateManager.Instance.playUseSpd);
+        //PlayerPrefs.SetFloat("playUseSpd", StateManager.Instance.playUseSpd);
 
         PlayerPrefs.SetInt("wUse", StateManager.Instance.wUse);
+        PlayerPrefs.SetInt("aUse", StateManager.Instance.aUse);
+        //PlayerPrefs.SetInt("bUse", StateManager.Instance.bUse);
+
         PlayerPrefs.SetInt("weaponDurability", StateManager.Instance.weaponDurability[StateManager.Instance.wUse]);
     }
 }

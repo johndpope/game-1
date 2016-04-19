@@ -9,15 +9,15 @@ public class StateManager : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        firstGameNum = PlayerPrefs.GetInt("firstGame");
         if (firstGameNum.Equals(0))
         {
+            playGold = 500;
             return;
         }
         //firstGameNum = PlayerPrefs.GetInt("firstGame");
         if (startButton.Equals(false))
         {
-            firstGameNum = PlayerPrefs.GetInt("firstGame");
-
             if (firstGameNum.Equals(1))
             {
                 firstGame = true;
@@ -129,6 +129,8 @@ public class StateManager : MonoBehaviour
     //무기의 내구도를 저장하는 integer형 배열
     public int[] weaponDurability = new int[10];
     public int wUse;
+    public int aUse;
+    public int bUse;
 
     public int dungeonMap;
     public int dungeonLevel;

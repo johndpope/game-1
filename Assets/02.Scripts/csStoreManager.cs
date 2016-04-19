@@ -89,7 +89,7 @@ public class csStoreManager : MonoBehaviour
     IEnumerator Save()
     {
         GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         Application.Quit();
     }
     public void onStartButton()
