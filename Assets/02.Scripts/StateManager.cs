@@ -8,31 +8,32 @@ public class StateManager : MonoBehaviour
 
     void Awake()
     {
-        firstGameNum = PlayerPrefs.GetInt("firstGame");
-
-        if (firstGameNum.Equals(1))
+        if (startButton.Equals(false))
         {
-            firstGame = true;
+            firstGameNum = PlayerPrefs.GetInt("firstGame");
+            if (firstGameNum.Equals(1))
+            {
+                firstGame = true;
+            }
+
+            playGold = PlayerPrefs.GetInt("playGold");
+            playHp = PlayerPrefs.GetFloat("playHp");
+            playHpMax = PlayerPrefs.GetFloat("playHpMax");
+            playAtk = PlayerPrefs.GetFloat("playAtk");
+            playDef = PlayerPrefs.GetFloat("playDef");
+            playSpd = PlayerPrefs.GetFloat("playSpd");
+
+            bagSize = PlayerPrefs.GetInt("bagSize");
+
+            cntHp = PlayerPrefs.GetInt("cntHp");
+            cntAtk = PlayerPrefs.GetInt("cntAtk");
+            cntDef = PlayerPrefs.GetInt("cntDef");
+            cntSpd = PlayerPrefs.GetInt("cntSpd");
+
+            playUseAtk = PlayerPrefs.GetInt("playUseAtk");
+            playUseDef = PlayerPrefs.GetInt("playUseDef");
+            playUseSpd = PlayerPrefs.GetFloat("playUseSpd");
         }
-
-        playGold = PlayerPrefs.GetInt("playGold");
-        playHp = PlayerPrefs.GetFloat("playHp");
-        playHpMax = PlayerPrefs.GetFloat("playHpMax");
-        playAtk = PlayerPrefs.GetFloat("playAtk");
-        playDef = PlayerPrefs.GetFloat("playDef");
-        playSpd = PlayerPrefs.GetFloat("playSpd");
-
-        bagSize = PlayerPrefs.GetInt("bagSize");
-
-        cntHp = PlayerPrefs.GetInt("cntHp");
-        cntAtk= PlayerPrefs.GetInt("cntAtk");
-        cntDef= PlayerPrefs.GetInt("cntDef");
-        cntSpd= PlayerPrefs.GetInt("cntSpd");
-
-        playUseAtk = PlayerPrefs.GetInt("playUseAtk");
-        playUseDef = PlayerPrefs.GetInt("playUseDef");
-        playUseSpd = PlayerPrefs.GetFloat("playUseSpd");
-
         DontDestroyOnLoad(gameObject);
     }
 

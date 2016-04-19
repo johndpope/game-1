@@ -367,7 +367,6 @@ public class csEquipageStore : MonoBehaviour
         gameObj.transform.SetParent(grid.transform);
         gameObj.transform.localScale = new Vector3(1, 1, 1);
 
-
         for (wNum = 0; wNum < 5; wNum++)
         {
             if (StateManager.Instance.weaponSpace[wNum] == null)

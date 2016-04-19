@@ -85,6 +85,11 @@ public class csStoreManager : MonoBehaviour
     }
     public void onStartButton()
     {
+        if (StateManager.Instance.startButton.Equals(false))
+        {
+            GameObject.Find("Manager").GetComponent<csSaveLord>().lord();
+        }
+       
         iTween.MoveTo(GameObject.Find("Main Camera"), iTween.Hash("x", -2.0f
                                             , "y", 6.0f
                                             , "z", 24.0f
@@ -95,7 +100,7 @@ public class csStoreManager : MonoBehaviour
         StateManager.Instance.startButton = true;
         StateManager.Instance.firstGame = true;
         StateManager.Instance.firstGameNum = 1;
-        GameObject.Find("Manager").GetComponent<csSaveLord>().lord();
+       
     }
 
     public void onEqShopButton()
