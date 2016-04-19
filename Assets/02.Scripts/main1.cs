@@ -19,7 +19,7 @@ public class main1 : MonoBehaviour
 
     int num;
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
         Live2D.init();
 

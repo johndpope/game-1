@@ -281,7 +281,9 @@ public class csDungeon : MonoBehaviour
         {
             Slime(level.Monster);
             Mimic(level.Monster);
-            //Mimic2(level.Monster);
+            Mimic2(level.Monster);
+            Ghost(level.Monster);
+            Pumkin(level.Monster);
         }
 
         if (5 <= StateManager.Instance.dungeonLevel && 8 >= StateManager.Instance.dungeonLevel)

@@ -61,7 +61,7 @@ public class csAbillityStore : MonoBehaviour {
         //상태창 능력치 표시
         if (StateManager.Instance.firstGame.Equals(false))
         {
-            StateManager.Instance.playGold = 9000;
+            StateManager.Instance.playGold = 90000;
 
             playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
 
@@ -69,6 +69,7 @@ public class csAbillityStore : MonoBehaviour {
             StateManager.Instance.playAtk = firstAtk;
             StateManager.Instance.playDef = firstDef;
             StateManager.Instance.playSpd = firstSpd;
+            //StateManager.Instance.firstGameNum = 1;
         }
         playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;
         playerAtkText.GetComponent<Text>().text = "" + StateManager.Instance.playAtk + " + " + StateManager.Instance.playUseAtk;

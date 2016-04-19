@@ -171,7 +171,7 @@ public class csSaveLord : MonoBehaviour
         GameObject gameObj = Instantiate(WeaponUse) as GameObject;
         gameObj.transform.SetParent(grid.transform);
         gameObj.transform.localScale = new Vector3(1, 1, 1);
-        StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
+        //StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponUseIcon").GetComponentInChildren<Image>().enabled = true;
         StateManager.Instance.useWeapon = (Sprite)Resources.Load(item.Image, typeof(Sprite));
 
         for (int wNum = 0; wNum < 5; wNum++)

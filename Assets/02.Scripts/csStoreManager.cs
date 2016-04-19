@@ -62,6 +62,7 @@ public class csStoreManager : MonoBehaviour
             logo.SetActive(false);
             optionButton.SetActive(true);
         }
+        startButton.SetActive(true);
     }
     IEnumerator logos()
     {
@@ -108,7 +109,6 @@ public class csStoreManager : MonoBehaviour
         StateManager.Instance.startButton = true;
         StateManager.Instance.firstGame = true;
         StateManager.Instance.firstGameNum = 1;
-       
     }
 
     public void onEqShopButton()

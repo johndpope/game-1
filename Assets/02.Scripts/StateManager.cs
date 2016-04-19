@@ -8,9 +8,16 @@ public class StateManager : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+        if (firstGameNum.Equals(0))
+        {
+            return;
+        }
+        //firstGameNum = PlayerPrefs.GetInt("firstGame");
         if (startButton.Equals(false))
         {
             firstGameNum = PlayerPrefs.GetInt("firstGame");
+
             if (firstGameNum.Equals(1))
             {
                 firstGame = true;
@@ -34,7 +41,6 @@ public class StateManager : MonoBehaviour
             playUseDef = PlayerPrefs.GetInt("playUseDef");
             playUseSpd = PlayerPrefs.GetFloat("playUseSpd");
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     public static StateManager Instance  // public static 으로 선언 ( 중요 ).

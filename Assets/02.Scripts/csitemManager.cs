@@ -271,7 +271,7 @@ public class csitemManager : MonoBehaviour
 
     }
 
-    void Awake()
+    void Start()
     {
         LoadAssetfromJson();
 

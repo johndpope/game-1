@@ -202,11 +202,21 @@ public class csBattle : MonoBehaviour
     public GameObject dashArk;
     public GameObject crossAtk;
 
+    public Scrollbar hpBar;
+    public GameObject hpBarObj;
+    public float pTimerHp;
+    float pTimer2Hp;
+
     void OnEnable()
     {
-        
-        player2D.transform.FindChild("Lena").GetComponent<live2d_setting>().Ani(0);
+        pTimer2Hp = StateManager.Instance.playHpMax - (StateManager.Instance.playHpMax - StateManager.Instance.playHp);
+        pTimerHp = pTimer2Hp;
 
+       
+        hpBar.size -= (StateManager.Instance.playHpMax - StateManager.Instance.playHp) / pTimer2Hp;
+
+        player2D.transform.FindChild("Lena").GetComponent<live2d_setting>().Ani(0);
+        hpBarObj.SetActive(true);
         enemy[0] = new Quaternion(0, 0.8f, 0, 0.6f);
         enemy[1] = new Quaternion(0, 0.7f, 0, 0.7f);
         enemy[2] = new Quaternion(0, 0.6f, 0, 0.8f);
@@ -304,7 +314,7 @@ public class csBattle : MonoBehaviour
 
         player2D.transform.position = new Vector3(12.5f, 0, -30);
         player2D.transform.rotation = new Quaternion(0, -0.7f, 0, 0.7f);
-
+        
         StartCoroutine(playerData());
     }
 	
@@ -321,6 +331,7 @@ public class csBattle : MonoBehaviour
 
         if (damRock == 2)
         {
+            hpBarObj.SetActive(false);
             pcc.value = 0;
             StateManager.Instance.timerIsActive = false;
             pop.SetActive(false);
@@ -336,6 +347,7 @@ public class csBattle : MonoBehaviour
             player2D.transform.position = new Vector3(12.5f,0,-30);
             player2D.transform.rotation = new Quaternion(0, -0.7f, 0, 0.7f);
             gameObject.SetActive(false);
+           
         }
 
         if (s == true)
@@ -479,7 +491,8 @@ public class csBattle : MonoBehaviour
 
     IEnumerator finishC()
     {
-        if(playerFinish.Equals(true))
+        hpBarObj.SetActive(false);
+        if (playerFinish.Equals(true))
         {
             StateManager.Instance.monsterBattle = false;
             yield return new WaitForSeconds(1.5f);
@@ -557,6 +570,7 @@ public class csBattle : MonoBehaviour
 
     public void finishYes()
     {
+        hpBarObj.SetActive(false);
         StateManager.Instance.slimeNum = 0;
         StateManager.Instance.mimicNum = 0;
         StateManager.Instance.mimic2Num = 0;
@@ -585,6 +599,8 @@ public class csBattle : MonoBehaviour
                 poisonDamage = 1;
             }
             StateManager.Instance.playHp -= (int)poisonDamage;
+            pTimerHp -= (int)poisonDamage;
+            hpBar.size -= (int)poisonDamage / pTimer2Hp;
             Debug.Log(StateManager.Instance.playHp + "독데미지 입은후");
             if(poisonNum.Equals(3))
             {
@@ -604,6 +620,8 @@ public class csBattle : MonoBehaviour
             }
             StateManager.Instance.playHp -= (int)bleedingDamage;
             Debug.Log(StateManager.Instance.playHp + "출혈 데미지 입은후");
+            pTimerHp -= (int)bleedingDamage;
+            hpBar.size -= (int)bleedingDamage / pTimer2Hp;
             if (poisonNum.Equals(3))
             {
                 bleedingNum = 0;
@@ -747,6 +765,8 @@ public class csBattle : MonoBehaviour
             }
 
             StateManager.Instance.timerIsActive = false;
+
+            hpBarObj.SetActive(false);
             timer.SetActive(false);
             StateManager.Instance.slimeNum = 0;
             StateManager.Instance.mimicNum = 0;
@@ -839,6 +859,8 @@ public class csBattle : MonoBehaviour
         else
         {
             StateManager.Instance.playHp -= 5;
+            pTimerHp -= 5;
+            hpBar.size -= 5 / pTimer2Hp;
             player2D.transform.FindChild("Lena").GetComponent<live2d_setting>().Ani(2);
             yield return new WaitForSeconds(1.5f);
             Debug.Log(StateManager.Instance.playHp);
@@ -857,8 +879,8 @@ public class csBattle : MonoBehaviour
         
         if (StateManager.Instance.monster[num].name.Equals("Slime"))
         {
-            int ran = Random.Range(1, 10);
-            if (ran.Equals(4))
+            int ran = Random.Range(1, 3);
+            if (ran.Equals(2))
             {
                 poisonTurn = turn;
                 poisonImage.SetActive(true);
@@ -866,8 +888,8 @@ public class csBattle : MonoBehaviour
         }
         if(StateManager.Instance.monster[num].name.Equals("Mimic")|| StateManager.Instance.monster[num].name.Equals("Mimic2"))
         {
-            int ran = Random.Range(1, 10);
-            if (ran.Equals(4))
+            int ran = Random.Range(1, 3);
+            if (ran.Equals(2))
             {
                 bleedingTurn = turn;
                 bleedingImage.SetActive(true);
@@ -876,8 +898,8 @@ public class csBattle : MonoBehaviour
 
         if (StateManager.Instance.monster[num].name.Equals("Ghost"))
         {
-            int ran = Random.Range(1, 10);
-            if (ran.Equals(4))
+            int ran = Random.Range(1, 3);
+            if (ran.Equals(2))
             {
                 slowTurn = turn;
                 slowImage.SetActive(true);
@@ -886,25 +908,32 @@ public class csBattle : MonoBehaviour
 
         if (StateManager.Instance.monster[num].name.Equals("Pumkin"))
         {
-            int ran = Random.Range(1, 10);
-            if (ran.Equals(4))
+            int ran = Random.Range(1, 3);
+            if (ran.Equals(2))
             {
                 StateManager.Instance.playHp -= (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef + playDef));
+                pTimerHp -= (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef + playDef));
+                hpBar.size -= (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef + playDef)) / pTimer2Hp;
             }
         }
 
         if (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef + playDef + playOriginDef - playBerserkerDef) <= 0)
         {
             StateManager.Instance.playHp -= 1;
+            pTimerHp -= 1;
+            hpBar.size -= 1 / pTimer2Hp;
             Debug.Log(StateManager.Instance.playHp);
         }
         else
         {
             StateManager.Instance.playHp -= (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef + playDef));
+            pTimerHp -= (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef + playDef));
+            hpBar.size -= (StateManager.Instance.monsterAtk[num] - (StateManager.Instance.playDef + playPotionDef + playDef)) / pTimer2Hp;
             Debug.Log(StateManager.Instance.playHp);
         }
 
         StateManager.Instance.monster[num].transform.FindChild("mo").GetComponent<main1>().ani(1);
+
         yield return new WaitForSeconds(0.5f);
         GameObject enemyEff = Instantiate(enemyAtk) as GameObject;
         enemyEff.transform.position = new Vector3(StateManager.Instance.monster[num].transform.position.x-1, 1, StateManager.Instance.monster[num].transform.position.z);
@@ -1053,6 +1082,8 @@ public class csBattle : MonoBehaviour
                 player2D.transform.FindChild("Lena").GetComponent<live2d_setting>().Ani(2);
                 yield return new WaitForSeconds(0.5f);
                 StateManager.Instance.playHp -= 5;
+                pTimerHp -= 5;
+                hpBar.size -= 5 / pTimer2Hp;
                 StartCoroutine(Skill());
 
               
@@ -1064,6 +1095,8 @@ public class csBattle : MonoBehaviour
                 GameObject AtkEff = Instantiate(playerAtk) as GameObject;
                 AtkEff.transform.position = new Vector3(player2D.transform.position.x + 3, 2, player2D.transform.position.z);
                 StateManager.Instance.playHp -= 5;
+                pTimerHp -= 5;
+                hpBar.size -= 5 / pTimer2Hp;
                 StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] -= (StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playOriginAtk + playAtk + playBerserkerAtk) - StateManager.Instance.monsterDef[StateManager.Instance.atkEnemyNum];
 
                 if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
@@ -1520,10 +1553,12 @@ public class csBattle : MonoBehaviour
                 if(StateManager.Instance.playHpMax < (StateManager.Instance.playHp += pItem.UpPoint))
                 {
                     StateManager.Instance.playHp = StateManager.Instance.playHpMax;
+                    hpBar.size += pTimerHp / pTimer2Hp;
                 }
                 else
                 {
                     StateManager.Instance.playHp += pItem.UpPoint;
+                    hpBar.size += pTimerHp / pTimer2Hp;
                 }
 
                 StateManager.Instance.potionNum[StateManager.Instance.useItemNum]--;
@@ -1538,10 +1573,12 @@ public class csBattle : MonoBehaviour
                 if (StateManager.Instance.playHpMax < (StateManager.Instance.playHp += pItem.UpPoint))
                 {
                     StateManager.Instance.playHp = StateManager.Instance.playHpMax;
+                    hpBar.size += pTimerHp / pTimer2Hp;
                 }
                 else
                 {
                     StateManager.Instance.playHp += pItem.UpPoint;
+                    hpBar.size += pTimerHp / pTimer2Hp;
                 }
 
                 StateManager.Instance.potionNum[StateManager.Instance.useItemNum]--;
