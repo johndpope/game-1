@@ -4,23 +4,25 @@ using System.Collections;
 public class csDungeonFinish : MonoBehaviour
 {
     public GameObject finishPop;
-    public GameObject state;
+    public GameObject cleras;
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "door")
         {            
-            //StartCoroutine("clear");
-            village();
+            StartCoroutine("clear");
+            //village();
         }
     }
 
     IEnumerator clear()
     {
         //clear 라는 오브젝트 찾아서 켜기?
-        GameObject.Find("Clear").SetActive(true);
+        cleras.SetActive(true);
         yield return new WaitForSeconds(2.0f);
-        GameObject.Find("Clear").SetActive(false);
+        cleras.SetActive(false);
+        yield return new WaitForSeconds(1.0f);
+        village();
     }
 
     public void nextLaval()
@@ -28,7 +30,7 @@ public class csDungeonFinish : MonoBehaviour
         StateManager.Instance.dungeonMap++;
         StateManager.Instance.dungeonLevel++;
         GameObject.Find("Manager").GetComponent<csSaveLord>().SaveData();
-        finishPop.SetActive(false);
+        //finishPop.SetActive(false);
         Application.LoadLevel(1);
     }
 

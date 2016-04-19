@@ -161,8 +161,11 @@ public class csObject : MonoBehaviour
             treasureTransform = collision.gameObject.transform;
             openTreasurePop.SetActive(true);           
         }
+        if (collision.gameObject.tag == "Boss")
+        {
+            MeetMonster();
+        }
 
-        
 
     }
   

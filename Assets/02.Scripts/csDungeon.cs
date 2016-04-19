@@ -367,56 +367,56 @@ public class csDungeon : MonoBehaviour
         int t = 1;
         int rm = 1;
 
-        for (int i = 0; i < map.transform.childCount; ++i)
+        for (int i = 0; i < mapCap.transform.childCount; ++i)
         {
-            if (map.transform.GetChild(i).tag == "Start")
+            if (mapCap.transform.GetChild(i).tag == "Start")
             {
-                Transform point = map.transform.GetChild(i).transform.FindChild("startPoint");
+                Transform point = mapCap.transform.GetChild(i).transform.FindChild("startPoint");
                 player.transform.position = point.position;
                 player.transform.rotation = point.rotation;
             }
-            if (map.transform.GetChild(i).tag == "End")
+
+            if (mapCap.transform.GetChild(i).tag == "End")
             {
-                Transform point = map.transform.GetChild(i).transform.FindChild("endPoint");
+                Transform point = mapCap.transform.GetChild(i).transform.FindChild("endPoint");
                 GameObject gameObj = Instantiate(door) as GameObject;
                 gameObj.transform.position = point.position;
                 gameObj.transform.localRotation = point.localRotation;
-
             }
 
-            if (map.transform.GetChild(i).name == "rRoad_" + r && mapObj.RotationRoad !=0)
+            if (mapCap.transform.GetChild(i).name == "rRoad_" + r && mapObj.RotationRoad !=0)
             {
-                rRoad[r - 1] = map.transform.GetChild(i);
+                rRoad[r - 1] = mapCap.transform.GetChild(i);
                 r++;
             }
 
-            else if (map.transform.GetChild(i).name == "wRoad_" + w && mapObj.WidthRoad != 0)
+            else if (mapCap.transform.GetChild(i).name == "wRoad_" + w && mapObj.WidthRoad != 0)
             {
-                wRoad[w - 1] = map.transform.GetChild(i);
+                wRoad[w - 1] = mapCap.transform.GetChild(i);
                 w++;
             }
 
-            else if (map.transform.GetChild(i).name == "hRoad_" + h && mapObj.HeightRoad != 0)
+            else if (mapCap.transform.GetChild(i).name == "hRoad_" + h && mapObj.HeightRoad != 0)
             {
-                hRoad[h - 1] = map.transform.GetChild(i);
+                hRoad[h - 1] = mapCap.transform.GetChild(i);
                 h++;
             }
 
-            else if (map.transform.GetChild(i).name == "tRoad_" + t && mapObj.TcrossRoad != 0)
+            else if (mapCap.transform.GetChild(i).name == "tRoad_" + t && mapObj.TcrossRoad != 0)
             {
-                tRoad[t - 1] = map.transform.GetChild(i);
+                tRoad[t - 1] = mapCap.transform.GetChild(i);
                 t++;
             }
 
-            else if (map.transform.GetChild(i).name == "cRoad_" + c && mapObj.CrossRoad != 0)
+            else if (mapCap.transform.GetChild(i).name == "cRoad_" + c && mapObj.CrossRoad != 0)
             {
-                cRoad[c - 1] = map.transform.GetChild(i);
+                cRoad[c - 1] = mapCap.transform.GetChild(i);
                 c++;
             }
 
-            else if (map.transform.GetChild(i).name == "room_" + rm && mapObj.Room != 0)
+            else if (mapCap.transform.GetChild(i).name == "room_" + rm && mapObj.Room != 0)
             {
-                room[rm - 1] = map.transform.GetChild(i);
+                room[rm - 1] = mapCap.transform.GetChild(i);
                 rm++;
             }
         }       

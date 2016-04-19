@@ -830,6 +830,8 @@ public class csBattle : MonoBehaviour
     {
         if(StateManager.Instance.weaponSpace[StateManager.Instance.wUse] != null && StateManager.Instance.useWeapon != null)
         {
+            player2D.transform.FindChild("Lena").GetComponent<live2d_setting>().Ani(2);
+            yield return new WaitForSeconds(1.5f);
             StateManager.Instance.weaponDurability[StateManager.Instance.wUse]--;
             StateManager.Instance.dText.GetComponent<Text>().text = StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
             StateManager.Instance.weaponSpace[StateManager.Instance.wUse].transform.FindChild("weaponDurabilityText").GetComponent<Text>().text = "내구도: " + StateManager.Instance.weaponDurability[StateManager.Instance.wUse].ToString();
@@ -837,6 +839,8 @@ public class csBattle : MonoBehaviour
         else
         {
             StateManager.Instance.playHp -= 5;
+            player2D.transform.FindChild("Lena").GetComponent<live2d_setting>().Ani(2);
+            yield return new WaitForSeconds(1.5f);
             Debug.Log(StateManager.Instance.playHp);
         }
        
