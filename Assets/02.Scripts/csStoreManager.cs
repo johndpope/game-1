@@ -44,6 +44,22 @@ public class csStoreManager : MonoBehaviour
     public GameObject optionCloseButton;
     public GameObject optionUI;
 
+    //종료버튼
+    public GameObject QuitButton;
+    public GameObject QuitButton_no;
+    public GameObject black;
+
+    public void onQuitbutton()
+    {
+        black.SetActive(true);
+    }
+
+    public void onQuitbutton_no()
+    {
+        black.SetActive(false);
+    }
+
+
     public void Exit()
     {
         StartCoroutine(Save());       
