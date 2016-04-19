@@ -1028,13 +1028,7 @@ public class csBattle : MonoBehaviour
                 player2D.transform.FindChild("Lena").GetComponent<live2d_setting>().Ani(2);
                 yield return new WaitForSeconds(0.5f);
                 StartCoroutine(Skill());
-                if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
-                {
-                    StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
-                    eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
-                    eTimer[StateManager.Instance.atkEnemyNum] = eTimer2[StateManager.Instance.atkEnemyNum];
-                    monsterNum--;
-                }
+                
             }
             else
             {
@@ -1061,13 +1055,7 @@ public class csBattle : MonoBehaviour
                 StateManager.Instance.playHp -= 5;
                 StartCoroutine(Skill());
 
-                if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
-                {
-                    StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
-                    eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
-                    eTimer[StateManager.Instance.atkEnemyNum] = eTimer2[StateManager.Instance.atkEnemyNum];
-                    monsterNum--;
-                }
+              
             }
             else
             {
@@ -1166,6 +1154,13 @@ public class csBattle : MonoBehaviour
                 {
                     DestroyObject(StateManager.Instance.SkScrollBag[StateManager.Instance.useItemNum]);
                 }
+                if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
+                {
+                    StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
+                    eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
+                    eTimer[StateManager.Instance.atkEnemyNum] = eTimer2[StateManager.Instance.atkEnemyNum];
+                    monsterNum--;
+                }
                 break;
             case 1:
                 Debug.Log(sItem.Name);
@@ -1179,6 +1174,14 @@ public class csBattle : MonoBehaviour
                 for (int i = 0; i < StateManager.Instance.monsterNum; i++)
                 {
                     StateManager.Instance.monsterHp[i] -= ((StateManager.Instance.playAtk + StateManager.Instance.playUseAtk + playPotionAtk + playAtk + playBerserkerAtk+ playOriginAtk) * sItem.AttackUpPoint) - StateManager.Instance.monsterDef[i];
+                    if (StateManager.Instance.monsterHp[i] <= 0)
+                    {
+                        Debug.Log("들어옴");
+                        StateManager.Instance.monster[i].transform.FindChild("mo").GetComponent<main1>().ani(2);
+                        monsterNum--;
+                        eccObj[i].SetActive(false);
+                        eTimer[i] = eTimer2[i];
+                    }
                 }
                 StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum]--;
                 if (StateManager.Instance.SkscrollNum[StateManager.Instance.useItemNum] == 0)
@@ -1202,6 +1205,13 @@ public class csBattle : MonoBehaviour
                     DestroyObject(StateManager.Instance.SkScrollBag[StateManager.Instance.useItemNum]);
                 }
                 //StateManager.Instance.useItemAtkBool = false;
+                if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
+                {
+                    StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
+                    eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
+                    eTimer[StateManager.Instance.atkEnemyNum] = eTimer2[StateManager.Instance.atkEnemyNum];
+                    monsterNum--;
+                }
                 break;
 
             case 3:
@@ -1227,6 +1237,13 @@ public class csBattle : MonoBehaviour
                     DestroyObject(StateManager.Instance.SkScrollBag[StateManager.Instance.useItemNum]);
                 }
                 //StateManager.Instance.useItemAtkBool = false;
+                if (StateManager.Instance.monsterHp[StateManager.Instance.atkEnemyNum] <= 0)
+                {
+                    StateManager.Instance.monster[StateManager.Instance.atkEnemyNum].transform.FindChild("mo").GetComponent<main1>().ani(2);
+                    eccObj[StateManager.Instance.atkEnemyNum].SetActive(false);
+                    eTimer[StateManager.Instance.atkEnemyNum] = eTimer2[StateManager.Instance.atkEnemyNum];
+                    monsterNum--;
+                }
                 break;
         }
     }

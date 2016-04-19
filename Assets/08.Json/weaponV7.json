@@ -438,15 +438,7 @@
        "cRoad_":1,
        "tRoad_":5
       },
-	  {
-       "mapName":"4x4/BossRoom",
-       "wRoad_":5,
-       "hRoad_":0,
-       "rRoad_":4,
-       "room_":0,
-       "cRoad_":0,
-       "tRoad_":0
-      },
+	 
       {
        "mapName":"5x5/5x5_1",
        "wRoad_":1,
@@ -665,12 +657,6 @@
         "rock":3,
         "boxs":2,
 		"monsterV":3
-      },
-	  	  {
-		"level":"BossRoom",
-        "rock":0,
-        "boxs":0,
-		"monsterV":1
       },
                 	  {
 		"level":"Lv11",

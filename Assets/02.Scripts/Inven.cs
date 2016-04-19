@@ -100,6 +100,9 @@ public class Inven : MonoBehaviour
             DestroyObject(StateManager.Instance.weaponSpace[StateManager.Instance.wUse]);
             StateManager.Instance.bagSize--;
         }
+        useWeapon.GetComponent<Image>().sprite = StateManager.Instance.useWeapon;
+        dText.text = StateManager.Instance.weaponDurability[wNum].ToString();
+
         playerGoldText.GetComponent<Text>().text = "" + StateManager.Instance.playGold;
 
         playerHpText.GetComponent<Text>().text = "" + StateManager.Instance.playHp;

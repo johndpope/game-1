@@ -126,10 +126,8 @@ public class csObject : MonoBehaviour
             }
         }
 
-        if(Joystick.run.Equals(300))
+        if(Joystick.run.Equals(400))
         {
-            Debug.Log("300임 ㅋㅋㅋ");
-           
             MeetMonster();
             Joystick.run = 0;
         }
@@ -141,6 +139,7 @@ public class csObject : MonoBehaviour
         {
             mapRock = collision.gameObject;
             StartCoroutine(findObj(1,0,null));
+            Joystick.run -= 100;
             //MeetMonster();
 
         }
@@ -153,6 +152,7 @@ public class csObject : MonoBehaviour
         if (collision.gameObject.tag == "Treasuref")
         {
             mapTreasure = collision.gameObject;
+            Joystick.run -= 100;
             StartCoroutine(findObj(2,0, null));
 
         }

@@ -85,22 +85,22 @@ public class csdungeonManager : MonoBehaviour
     public void firstFloor()
     {
         int i = 0;
-        for (i = 0; i < 10; i++)
+        for (i = 0; i < 9; i++)
         {
             floorPoolSet[i].SetActive(true);
-            floorPoolSet[i+10].SetActive(false);
-            floorPoolSet[i+19].SetActive(false);
+            floorPoolSet[i+9].SetActive(false);
+            floorPoolSet[i+18].SetActive(false);
         }
         
     }
     public void secondFloor()
     {
         int i = 0;
-        for (i = 0; i <10; i++)
+        for (i = 0; i <9; i++)
         {
             floorPoolSet[i].SetActive(false);
-            floorPoolSet[i + 10].SetActive(true);
-            floorPoolSet[i + 19].SetActive(false);
+            floorPoolSet[i + 9].SetActive(true);
+            floorPoolSet[i + 18].SetActive(false);
         }
     }
     public void thirdFloor()
@@ -109,8 +109,8 @@ public class csdungeonManager : MonoBehaviour
         for (i = 0; i < 9; i++)
         {
             floorPoolSet[i].SetActive(false);
-            floorPoolSet[i + 10].SetActive(false);
-            floorPoolSet[i + 19].SetActive(true);
+            floorPoolSet[i + 9].SetActive(false);
+            floorPoolSet[i + 18].SetActive(true);
         }
     }
 }
