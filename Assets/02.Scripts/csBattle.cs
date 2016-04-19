@@ -331,6 +331,7 @@ public class csBattle : MonoBehaviour
 
         if (damRock == 2)
         {
+            hpBar.size = 1;
             hpBarObj.SetActive(false);
             pcc.value = 0;
             StateManager.Instance.timerIsActive = false;
@@ -491,6 +492,7 @@ public class csBattle : MonoBehaviour
 
     IEnumerator finishC()
     {
+        hpBar.size = 1;
         hpBarObj.SetActive(false);
         if (playerFinish.Equals(true))
         {
@@ -765,7 +767,7 @@ public class csBattle : MonoBehaviour
             }
 
             StateManager.Instance.timerIsActive = false;
-
+            hpBar.size = 1;
             hpBarObj.SetActive(false);
             timer.SetActive(false);
             StateManager.Instance.slimeNum = 0;
