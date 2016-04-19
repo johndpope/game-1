@@ -49,6 +49,19 @@ public class csStoreManager : MonoBehaviour
     public GameObject QuitButton_no;
     public GameObject black;
 
+    public GameObject logo;
+
+    void Start()
+    {
+        StartCoroutine("logos");
+    }
+    IEnumerator logos()
+    {
+        yield return new WaitForSeconds(3.0f);
+        logo.SetActive(false);
+        optionButton.SetActive(true);
+    }
+
     public void onQuitbutton()
     {
         black.SetActive(true);
@@ -58,7 +71,6 @@ public class csStoreManager : MonoBehaviour
     {
         black.SetActive(false);
     }
-
 
     public void Exit()
     {
